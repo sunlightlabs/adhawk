@@ -1,0 +1,3 @@
+*.pyo
+*.pyc
+local_settings.py
