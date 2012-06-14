@@ -119,11 +119,11 @@ class MediaTypeModelTest(TestCase):
         "http://www.youtube.com")
         self.assertEquals(only_media_type_in_database.scraper_added, True)
 
-#class SourceModelTest(TestCase):
-#    def test_creating_a_new_Source_and_saving_it_to_the_database(self):
-#        # TODO: Create a new Source object 
-#        self.fail('todo: finish '+self.id())
-#
+class SourceModelTest(TestCase):
+    def test_creating_a_new_Source_and_saving_it_to_the_database(self):
+        # TODO: Create a new Source object 
+        self.fail('todo: finish '+self.id())
+
 #class StanceModelTest(TestCase):
 #    def test_creating_a_new_Stance_and_saving_it_to_the_database(self):
 #        # TODO: Create a new Stance object 
