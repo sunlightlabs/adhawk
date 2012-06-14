@@ -146,6 +146,13 @@ class SourceModelTest(TestCase):
         self.assertEquals(only_source_in_database.main_url,
         "http://www.factcheck.org")
         self.assertEquals(only_source_in_database.scraper_added, True)
+    def test_creating_a_new_Source_with_default_values(self):
+        # create a new MediaType, not specifying defaulted fields
+        source = Source()
+        source.main_url = "http://www.youtube.com"
+        
+        # assert that defaults are correct
+        self.assertEquals(source.scraper_added,False)
 
 #class StanceModelTest(TestCase):
 #    def test_creating_a_new_Stance_and_saving_it_to_the_database(self):
