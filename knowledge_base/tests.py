@@ -121,8 +121,24 @@ class MediaTypeModelTest(TestCase):
 
 class SourceModelTest(TestCase):
     def test_creating_a_new_Source_and_saving_it_to_the_database(self):
-        # TODO: Create a new Source object 
-        self.fail('todo: finish '+self.id())
+        # create a new Source
+        source = Source()
+        source.main_url = "http://www.factcheck.org"
+        source.scraper_added = True
+        
+        # check that we can save it
+        source.save()
+
+        # check that we can find it
+        all_sources_in_database = MediaType.objects.all()
+        self.assertEquals(len(all_sources_in_database),1)
+        only_source_in_database = all_sources_in_database[0]
+        self.assertEquals(only_source_in_database, source)
+
+        # check that its attributes have been saved
+        self.assertEquals(only_source_in_database.main_url,
+        "http://www.factcheck.org")
+        self.assertEquals(only_source_in_database.scraper_added, True)
 
 #class StanceModelTest(TestCase):
 #    def test_creating_a_new_Stance_and_saving_it_to_the_database(self):
