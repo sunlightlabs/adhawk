@@ -83,11 +83,11 @@ from knowledge_base.models import MediaType,Source
 #        # TODO: Create a new IssueCategory object 
 #        self.fail('todo: finish '+self.id())
 #
-#class MarketModelTest(TestCase):
-#    def test_creating_a_new_Market_and_saving_it_to_the_database(self):
-#        # TODO: Create a new Market object 
-#        self.fail('todo: finish '+self.id())
-#
+class MarketModelTest(TestCase):
+    def test_creating_a_new_Market_and_saving_it_to_the_database(self):
+        # TODO: Create a new Market object 
+        self.fail('todo: finish '+self.id())
+
 #class MediaModelTest(TestCase):
 #    def test_creating_a_new_Media_and_saving_it_to_the_database(self):
 #        # TODO: Create a new Media object 
