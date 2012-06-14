@@ -3,7 +3,12 @@ from django.db import models
 # Create your models here.
 
 class Market(models.Model):
-    pass
+    MARKET_TYPE_CHOICES = (('A','Area'),
+            ('C','County'),
+            ('S','State'),
+            ('N','Nationwide'),
+            )
+    
 
 class MediaType(models.Model):
     main_url = models.URLField(max_length=50)
