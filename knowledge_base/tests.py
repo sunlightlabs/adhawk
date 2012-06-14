@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from knowledge_base.models import MediaType,Source
+from knowledge_base.models import Market,MediaType,Source
 
 #class AdModelTest(TestCase):
 #    def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
@@ -85,8 +85,7 @@ from knowledge_base.models import MediaType,Source
 #
 class MarketModelTest(TestCase):
     def test_creating_a_new_Market_and_saving_it_to_the_database(self):
-        # TODO: Create a new Market object 
-        self.fail('todo: finish '+self.id())
+        market = Market()
 
 #class MediaModelTest(TestCase):
 #    def test_creating_a_new_Media_and_saving_it_to_the_database(self):
