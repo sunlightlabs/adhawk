@@ -3,4 +3,4 @@ from django.db import models
 # Create your models here.
 
 class MediaType(models.Model):
-    pass
+    main_url = models.URLField(max_length=50)
