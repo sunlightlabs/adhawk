@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from knowledge_base import Ad
+from knowledge_base import MediaType
 
 class AdModelTest(TestCase):
     def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
