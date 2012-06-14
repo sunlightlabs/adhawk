@@ -84,6 +84,13 @@ from knowledge_base.models import Market,MediaType,Source
 #        self.fail('todo: finish '+self.id())
 #
 class MarketModelTest(TestCase):
+    def test_market_type_choices(self):
+        choices = (('A','Area'), 
+                ('C','County'),
+                ('S','State'),
+                ('N','Nationwide'),
+                )
+        self.assertEquals(Market.MARKET_TYPE_CHOICES,choices)
     def test_creating_a_new_Market_and_saving_it_to_the_database(self):
         # create a new Market object
         market = Market()
