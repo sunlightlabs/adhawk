@@ -8,6 +8,7 @@ class Market(models.Model):
             ('S','State'),
             ('N','Nationwide'),
             )
+    market_type = models.CharField(max_length=1,choices=MARKET_TYPE_CHOICES)
     
 
 class MediaType(models.Model):
