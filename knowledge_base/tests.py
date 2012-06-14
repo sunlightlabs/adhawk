@@ -130,7 +130,7 @@ class SourceModelTest(TestCase):
         source.save()
 
         # check that we can find it
-        all_sources_in_database = MediaType.objects.all()
+        all_sources_in_database = Source.objects.all()
         self.assertEquals(len(all_sources_in_database),1)
         only_source_in_database = all_sources_in_database[0]
         self.assertEquals(only_source_in_database, source)
