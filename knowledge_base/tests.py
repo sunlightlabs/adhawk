@@ -85,7 +85,13 @@ from knowledge_base.models import Market,MediaType,Source
 #
 class MarketModelTest(TestCase):
     def test_creating_a_new_Market_and_saving_it_to_the_database(self):
+        # create a new Market object
         market = Market()
+        market.market_type = 'A'
+
+        # check that we can save it
+        market.save()
+
 
 #class MediaModelTest(TestCase):
 #    def test_creating_a_new_Media_and_saving_it_to_the_database(self):
