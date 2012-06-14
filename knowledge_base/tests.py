@@ -88,9 +88,21 @@ class MarketModelTest(TestCase):
         # create a new Market object
         market = Market()
         market.market_type = 'A'
+        market.name = 'New New York'
 
         # check that we can save it
         market.save()
+
+        # check that we can find it
+        all_markets_in_database = Market.objects.all()
+        self.assertEquals(len(all_markets_in_database),1)
+        only_market_in_database = all_markets_in_database[0]
+        self.assertEquals(only_market_in_database, market)
+
+        # check that its attributes have been saved
+        self.assertEquals(only_market_in_database.market_type,"A")
+        self.assertEquals(only_market_in_database.name, "New New York")
+
 
 
 #class MediaModelTest(TestCase):
