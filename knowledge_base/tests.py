@@ -118,6 +118,13 @@ class MediaTypeModelTest(TestCase):
         self.assertEquals(only_media_type_in_database.main_url,
         "http://www.youtube.com")
         self.assertEquals(only_media_type_in_database.scraper_added, True)
+    def test_creating_a_new_MediaType_with_default_values(self):
+        # create a new MediaType, not specifying defaulted fields
+        media_type = MediaType()
+        media_type.main_url = "http://www.youtube.com"
+        
+        # assert that defaults are correct
+        self.assertEquals(media_type.scraper_added,False)
 
 class SourceModelTest(TestCase):
     def test_creating_a_new_Source_and_saving_it_to_the_database(self):
