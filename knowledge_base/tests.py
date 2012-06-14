@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from knowledge_base import *
+from knowledge_base import Ad
 
 class AdModelTest(TestCase):
     def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
@@ -81,7 +81,7 @@ class IssueModelTest(TestCase):
 class IssueCategoryModelTest(TestCase):
     def test_creating_a_new_IssueCategory_and_saving_it_to_the_database(self):
         # TODO: Create a new IssueCategory object 
-        self.fail('todo: finish '+self.id(i))
+        self.fail('todo: finish '+self.id())
 
 class MarketModelTest(TestCase):
     def test_creating_a_new_Market_and_saving_it_to_the_database(self):
@@ -100,8 +100,24 @@ class MediaProfileModelTest(TestCase):
 
 class MediaTypeModelTest(TestCase):
     def test_creating_a_new_MediaType_and_saving_it_to_the_database(self):
-        # TODO: Create a new MediaType object 
-        self.fail('todo: finish '+self.id())
+        # create a new MediaType
+        media_type = MediaType()
+        media_type.main_url = "http://www.youtube.com"
+        media_type.scraper_added = True
+        
+        # check that we can save it
+        media_type.save()
+
+        # check that we can find it
+        all_media_types_in_database = MediaType.objects.all()
+        self.assertEquals(len(all_media_types_in_database),1)
+        only_media_type_in_database = all_media_types_in_database[0]
+        self.assertEquals(only_media_type_in_database, media_type)
+
+        # check that its attributes have been saved
+        self.assertEquals(only_media_type_in_database.main_url,
+        "http://www.youtube.com")
+        self.assertEquals(only_media_type_in_database.scraper_added, True)
 
 class SourceModelTest(TestCase):
     def test_creating_a_new_Source_and_saving_it_to_the_database(self):
