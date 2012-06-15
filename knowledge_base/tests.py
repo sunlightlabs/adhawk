@@ -535,7 +535,34 @@ class TagModelTest(TestCase):
         # check that we get an exception if we try to save this abomination
         self.assertRaises(Exception,tag.save)
 
+    def test_adding_Tag_with_associated_issue(self):
+        # create a new Issue object
+        issue = Issue()
+        issue.name = 'Three cent titanium tax increase'
+        ISSUE_DESCRIPTION = "The three cent titanium tax increase is a proposal designed to offset the cost of environmental damage of titanium manufacturing"
+        issue.description = ISSUE_DESCRIPTION
 
+        # Save the Issue object
+        issue.save()
 
+        # Create a new Tag object 
+        tag = Tag()
+        tag.name = "titanium"
+        
+        # save the Tag
+        tag.save()
 
+        # add an issue
+        tag.issues.add(issue)
 
+        # make sure we can find it
+        all_tags_in_database = Tag.objects.all()
+        self.assertEquals(len(all_tags_in_database),1)
+        only_tag_in_database = all_tags_in_database[0]
+        self.assertEquals(only_tag_in_database, tag)
+
+        # check that its attributes have been saved
+        tags_issues_in_database = only_tag_in_database.issues.all()
+        self.assertEquals(len(tags_issues_in_database),1)
+        tags_only_issue_in_database = tags_issues_in_database[0]
+        self.assertEquals(tags_only_issue_in_database,issue)
