@@ -4,8 +4,14 @@ from django.db import models
 
 class CommitteeDesignation(models.Model):
     code = models.CharField(max_length=1)
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
+
+class CommitteeType(models.Model):
+    code = models.CharField(max_length=1)
+    name = models.CharField(max_length=50)
+    description = models.CharField(max_length=500)
+
 
 class CoverageType(models.Model):
     name = models.CharField(max_length=50)
