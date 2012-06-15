@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from knowledge_base.models import CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,CoverageType,BroadcastType,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,MediaType,Source
+from knowledge_base.models import CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,CoverageType,BroadcastType,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,MediaType,Source,Stance
 
 #class AdModelTest(TestCase):
 #    def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
@@ -456,11 +456,38 @@ class SourceModelTest(TestCase):
         # assert that defaults are correct
         self.assertEquals(source.scraper_added,False)
 
-#class StanceModelTest(TestCase):
-#    def test_creating_a_new_Stance_and_saving_it_to_the_database(self):
-#        # TODO: Create a new Stance object 
-#        self.fail('todo: finish '+self.id())
-#
+class StanceModelTest(TestCase):
+    def test_creating_a_new_Stance_and_saving_it_to_the_database(self):
+        # Create a new Issue object
+        issue = Issue()
+        issue.name = 'Three cent titanium tax increase'
+        ISSUE_DESCRIPTION = "The three cent titanium tax increase is a proposal designed to offset the cost of environmental damage of titanium manufacturing"
+        issue.description = ISSUE_DESCRIPTION
+
+        # Save the Issue object
+        issue.save()
+
+        # Create a new Stance object 
+        stance = Stance()
+        name = 'opposes'
+        descripton = 'explicity opposes the issue'
+        issue = Issue.objects.get(name="Three cent titanium tax increase")
+        
+        # save it
+        stance.save()
+
+        # make sure we can find it
+        all_stances_in_database = Stance.objects.all()
+        self.assertEquals(len(all_stances_in_database),1)
+        only_stance_in_database = all_stances_in_database[0]
+        self.assertEquals(only_stance_in_database, stance)
+
+        # check that its attributes have been saved
+        self.assertEquals(only_stance_in_database.name,'opposes')
+        self.assertEquals(only_stance_in_database.description, 
+                'explicitly opposes the issue')
+        self.assertEquals(only_stance_in_database.issue,issue)
+
 #class TagModelTest(TestCase):
 #    def test_creating_a_new_Tag_and_saving_it_to_the_database(self):
 #        # TODO: Create a new Tag object 
