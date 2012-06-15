@@ -49,6 +49,39 @@ class BroadcastTypeModelTest(TestCase):
 #        self.fail('todo: finish '+self.id())
 #
 class CommitteeDesignationModelTest(TestCase):
+    def test_creating_a_new_Market_and_saving_it_to_the_database(self):
+        # create a new Market object
+        committee_designation = CommitteeDesignation()
+        committee_designation.code = 'D'
+        committee_designation.name = 'LEADERSHIP PAC'
+        committee_designation.description = """A PAC formed by a candidate. 
+                Leadership PACs help fund other candidates' campaigns in order 
+                to gain clout for that candidate. They are often used in bids 
+                for leadership posts or committee chairmanship."""
+
+        # check that we can save it
+        committee_designation.save()
+
+        # check that we can find it
+        all_committee_designations_in_database = CommitteeDesignation.objects.all()
+        self.assertEquals(len(all_committee_designations_in_database),1)
+        only_committee_designation_in_database = all_committee_designations_in_database[0]
+        self.assertEquals(only_committee_designation_in_database, committee_designation)
+
+        # check that its attributes have been saved
+        self.assertEquals(only_committee_designation_in_database.code,"D")
+        self.assertEquals(only_committee_designation_in_database.name,
+                "LEADERSHIP PAC")
+        self.assertEquals(only_committee_designation_in_database.description, 
+                """A PAC formed by a candidate. Leadership PACs help fund other 
+                candidates' campaigns in order to gain clout for that candidate. 
+                They are often used in bids for leadership posts or committee 
+                chairmanship.""")
+
+    #def test_entering_a_bad_committee_designation_type(self):
+        # Not possible to restrict?  maybe a validator?
+#
+class CommitteeTypeModelTest(TestCase):
     def test_market_type_choices(self):
         choices = (('A','AUTHORIZED BY A CANDIDATE'),
                 ('B','LOBBYIST/REGISTRANT PAC'),
@@ -76,12 +109,7 @@ class CommitteeDesignationModelTest(TestCase):
         self.assertEquals(only_committee_designation_in_database.committee_designation_type,"D")
     #def test_entering_a_bad_committee_designation_type(self):
         # Not possible to restrict?  maybe a validator?
-#
-#class CommitteeTypeModelTest(TestCase):
-#    def test_creating_a_new_CommitteeType_and_saving_it_to_the_database(self):
-#        # TODO: Create a new CommitteeType object 
-#        self.fail('todo: finish '+self.id())
-#     
+     
 #class ConnectedOrganizationModelTest(TestCase):
 #    def test_creating_a_new_ConnectedOrganization_and_saving_it_to_the_database(self):
 #        # TODO: Create a new ConnectedOrganization object 
