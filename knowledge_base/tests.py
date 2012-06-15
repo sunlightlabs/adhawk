@@ -18,10 +18,10 @@ from knowledge_base.models import Market,MediaType,Source
 #        # TODO: Create a new Author object 
 #        self.fail('todo: finish '+self.id())
 #
-#class BroadcastTypeModelTest(TestCase):
-#    def test_creating_a_new_BroadcastType_and_saving_it_to_the_database(self):
-#        # TODO: Create a new BroadcastType object 
-#        self.fail('todo: finish '+self.id())
+class BroadcastTypeModelTest(TestCase):
+    def test_creating_a_new_BroadcastType_and_saving_it_to_the_database(self):
+        # TODO: Create a new BroadcastType object 
+        self.fail('todo: finish '+self.id())
 #
 #class CandidateModelTest(TestCase):
 #    def test_creating_a_new_Candidate_and_saving_it_to_the_database(self):
@@ -109,8 +109,8 @@ class MarketModelTest(TestCase):
         # check that its attributes have been saved
         self.assertEquals(only_market_in_database.market_type,"A")
         self.assertEquals(only_market_in_database.name, "New New York")
-
-
+    #def test_entering_a_bad_market_type(self):
+        # Not possible to restrict?  maybe a validator?
 
 #class MediaModelTest(TestCase):
 #    def test_creating_a_new_Media_and_saving_it_to_the_database(self):
