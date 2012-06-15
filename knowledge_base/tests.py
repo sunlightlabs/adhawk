@@ -6,6 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
+from django.db import IntegrityError
 from knowledge_base.models import CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,CoverageType,BroadcastType,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,MediaType,Source,Stance
 
 #class AdModelTest(TestCase):
@@ -487,6 +488,15 @@ class StanceModelTest(TestCase):
         self.assertEquals(only_stance_in_database.description, 
                 'explicitly opposes the issue')
         self.assertEquals(only_stance_in_database.issue,issue)
+
+    def test_attempting_to_save_a_Stance_with_no_Issue(self):
+        # Create a new Stance object 
+        stance = Stance()
+        stance.name = 'opposes'
+        stance.description = 'explicitly opposes the issue'
+
+        # save it
+        self.assertRaises(IntegrityError,stance.save)
 
 #class TagModelTest(TestCase):
 #    def test_creating_a_new_Tag_and_saving_it_to_the_database(self):
