@@ -49,6 +49,11 @@ class IssueCategory(models.Model):
     def __unicode__(self):
         return '%s' % self.name
 
+class Issue(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=500)
+    issue_categories = models.ManyToManyField(IssueCategory,null=True,blank=True)
+
 class Market(models.Model):
     MARKET_TYPE_CHOICES = (('A','Area'),
             ('C','County'),
