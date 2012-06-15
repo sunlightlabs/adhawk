@@ -216,14 +216,14 @@ class InterestGroupCategoryModelTest(TestCase):
 
 #class IssueModelTest(TestCase):
 #    def test_creating_a_new_Issue_and_saving_it_to_the_database(self):
-#        # TODO: Create a new Issue object 
+#        # create a new Issue object 
 #        self.fail('todo: finish '+self.id())
-#
+
 class IssueCategoryModelTest(TestCase):
     def test_creating_a_new_IssueCategory_and_saving_it_to_the_database(self):
         # TODO: Create a new IssueCategory object with null parent
         issue_category = IssueCategory()
-        issue_category.name = "Three cent titanium tax"
+        issue_category.name = "Titanium tax"
 
         # make sure we can save it
         issue_category.save()
@@ -235,13 +235,13 @@ class IssueCategoryModelTest(TestCase):
         self.assertEquals(only_issue_category_in_database, issue_category)
 
         # check that its attributes have been saved
-        self.assertEquals(only_issue_category_in_database.name,"Three cent titanium tax")
+        self.assertEquals(only_issue_category_in_database.name,"Titanium tax")
         self.assertIsNone(only_issue_category_in_database.parent)
 
     def test_string_representation(self):
         issue_category = IssueCategory()
-        issue_category.name = "Three cent titanium tax"
-        self.assertEquals(str(issue_category.name),"Three cent titanium tax")
+        issue_category.name = "Titanium tax"
+        self.assertEquals(str(issue_category.name),"Titanium tax")
 
     def test_creating_a_parent_child_relationship_with_IssueCategory(self):
         # create parent IssueCategory
@@ -260,7 +260,7 @@ class IssueCategoryModelTest(TestCase):
 
         # create child IssueCategory
         issue_category_child = IssueCategory()
-        issue_category_child.name = "Three cent titanium tax"
+        issue_category_child.name = "Titanium tax"
         issue_category_child.parent = issue_category_parent
 
         # save child IssueCategory
@@ -268,7 +268,7 @@ class IssueCategoryModelTest(TestCase):
         
         # check to make sure we can find it
         issue_category_children_in_database = IssueCategory.objects.filter(
-                name="Three cent titanium tax")
+                name="Titanium tax")
         self.assertEquals(len(issue_category_children_in_database),1)
         only_issue_category_child_in_database = issue_category_children_in_database[0]
         self.assertEquals(only_issue_category_child_in_database,issue_category_child)
@@ -290,7 +290,7 @@ class IssueCategoryModelTest(TestCase):
 
         # create child IssueCategory
         issue_category_child = IssueCategory()
-        issue_category_child.name = "Three cent titanium tax"
+        issue_category_child.name = "Titanium tax"
         issue_category_child.parent = issue_category_parent
 
         # save child IssueCategory
