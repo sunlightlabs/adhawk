@@ -244,8 +244,41 @@ class IssueCategoryModelTest(TestCase):
         self.assertEquals(str(issue_category.name),"Three cent titanium tax")
 
     def test_creating_a_parent_child_relationship_with_IssueCategory(self):
-        # TODO: create a parent-child relationship with IssueCategory
-        self.fail('todo: finish ' + self.id())
+        # create parent IssueCategory
+        issue_category_parent = IssueCategory()
+        issue_category_parent.name = "Tax"
+        
+        # save parent IssueCategory
+        issue_category_parent.save()
+        
+        # check to make sure we can find it
+        issue_category_parents_in_database = IssueCategory.objects.filter(
+                name="Tax")
+        self.assertEquals(len(issue_category_parents_in_database),1)
+        only_issue_category_parent_in_database = issue_category_parents_in_database[0]
+        self.assertEquals(only_issue_category_parent_in_database,issue_category_parent)
+
+        # create child IssueCategory
+        issue_category_child = IssueCategory()
+        issue_category_child.name = "Three cent titanium tax"
+        issue_category_child.parent = issue_category_parent
+
+        # save child IssueCategory
+        issue_category_child.save()
+        
+        # check to make sure we can find it
+        issue_category_children_in_database = IssueCategory.objects.filter(
+                name="Three cent titanium tax")
+        self.assertEquals(len(issue_category_children_in_database),1)
+        only_issue_category_child_in_database = issue_category_children_in_database[0]
+        self.assertEquals(only_issue_category_child_in_database,issue_category_child)
+        
+        # check to make sure parent has no parent
+        self.assertEquals(only_issue_category_parent_in_database.parent,None)
+
+        # check to make sure child-parent relationship is established
+        self.assertEquals(only_issue_category_child_in_database.parent,
+                only_issue_category_parent_in_database)
 
     def test_on_delete_parameter(self):
         # TODO: test behavior of deleting a parent IssueCategory
