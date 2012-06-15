@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from knowledge_base.models import CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,CoverageType,BroadcastType,IncumbentChallengerStatus,InterestGroupCategory,IssueCategory,Market,MediaType,Source
+from knowledge_base.models import CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,CoverageType,BroadcastType,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,MediaType,Source
 
 #class AdModelTest(TestCase):
 #    def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
@@ -214,10 +214,66 @@ class InterestGroupCategoryModelTest(TestCase):
         self.assertEquals(only_interest_group_category_in_database.description, 
                 DESCRIPTION)
 
-#class IssueModelTest(TestCase):
-#    def test_creating_a_new_Issue_and_saving_it_to_the_database(self):
-#        # create a new Issue object 
-#        self.fail('todo: finish '+self.id())
+class IssueModelTest(TestCase):
+    def test_creating_a_new_Issue_and_saving_it_to_the_database(self):
+        # create a new Issue object with a null issue_category
+        issue = Issue()
+        issue.name = "Three cent titanium tax increase"
+        DESCRIPTION = "The three cent titanium tax increase is a proposal designed to offset the cost of environmental damage of titanium manufacturing"
+        issue.description = DESCRIPTION
+
+        # make sure we can save it
+        issue.save()
+
+        # make sure we can find it
+        all_issues_in_database = Issue.objects.all()
+        self.assertEquals(len(all_issues_in_database),1)
+        only_issue_in_database = all_issues_in_database[0]
+        self.assertEquals(only_issue_in_database, issue)
+
+        # check that its attributes have been saved
+        self.assertEquals(only_issue_in_database.name, 
+                "Three cent titanium tax increase")
+        self.assertEquals(only_issue_in_database.description, DESCRIPTION)
+        self.assertEquals(len(only_issue_in_database.issue_categories.all()),0)
+
+    def test_creating_a_new_issue_with_an_issue_category(self):
+        # create a new IssueCategory
+        issue_category = IssueCategory()
+        issue_category.name = "Titanium Tax"
+
+        # save IssueCategory
+        issue_category.save()
+
+        # create a new Issue with an IssueCategory
+        issue = Issue()
+        issue.name = "Three cent titanium tax increase"
+        DESCRIPTION = "The three cent titanium tax increase is a proposal designed to offset the cost of environmental damage of titanium manufacturing"
+        issue.description = DESCRIPTION
+
+        # make sure we can save it
+        issue.save()
+        
+        # add an issue category
+        issue.issue_categories.add(IssueCategory.objects.filter( 
+            name ='Titanium Tax')[0])
+
+        # update
+        issue.save()
+
+        # make sure we can find it
+        all_issues_in_database = Issue.objects.all()
+        self.assertEquals(len(all_issues_in_database),1)
+        only_issue_in_database = all_issues_in_database[0]
+        self.assertEquals(only_issue_in_database, issue)
+
+        # check that its attributes have been saved
+        self.assertEquals(only_issue_in_database.name, 
+                "Three cent titanium tax increase")
+        self.assertEquals(only_issue_in_database.description, DESCRIPTION)
+        self.assertEquals(len(only_issue_in_database.issue_categories.all()),1)
+        self.assertEquals(only_issue_in_databasse.issue_categories.all()[0],issue_category)
+
 
 class IssueCategoryModelTest(TestCase):
     def test_creating_a_new_IssueCategory_and_saving_it_to_the_database(self):
