@@ -281,8 +281,29 @@ class IssueCategoryModelTest(TestCase):
                 only_issue_category_parent_in_database)
 
     def test_on_delete_parameter(self):
-        self.fail('Write test')
+        # create parent IssueCategory
+        issue_category_parent = IssueCategory()
+        issue_category_parent.name = "Tax"
+        
+        # save parent IssueCategory
+        issue_category_parent.save()
 
+        # create child IssueCategory
+        issue_category_child = IssueCategory()
+        issue_category_child.name = "Three cent titanium tax"
+        issue_category_child.parent = issue_category_parent
+
+        # save child IssueCategory
+        issue_category_child.save()
+
+        # delete parent IssueCategory
+        issue_category_parent.delete()
+
+        # make sure the orphaned child IssueCategory wasn't deleted
+        issue_categories_in_database = IssueCategory.objects.all()
+        self.assertEquals(len(issue_categories_in_database),1)
+        self.assertEquals(issue_categories_in_database[0],issue_category_child)
+        
 
 class MarketModelTest(TestCase):
     def test_market_type_choices(self):
