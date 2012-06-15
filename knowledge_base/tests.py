@@ -48,7 +48,7 @@ class CandidateStatusModelTest(TestCase):
         # Create a new CandidateStatus object 
         candidate_status = CandidateStatus()
         candidate_status.code = 'C'
-        candidate_status.value = 'Satutory candidate'
+        candidate_status.value = 'Statutory candidate'
         DESCRIPTION = "The description of what the hell a statutory candidate is."
         candidate_status.description = DESCRIPTION
         # check that we can save it
