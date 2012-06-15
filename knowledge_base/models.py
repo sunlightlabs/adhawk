@@ -37,6 +37,16 @@ class InterestGroupCategory(models.Model):
     name = models.CharField(max_length=40)
     description = models.CharField(max_length=500)
 
+class IssueCategory(models.Model):
+    name = models.CharField(max_length=100)
+    parent =  models.ForeignKey("self", 
+            null=True, 
+            blank=True,
+            )
+
+    def __unicode__(self):
+        return '%s' % self.name
+
 class Market(models.Model):
     MARKET_TYPE_CHOICES = (('A','Area'),
             ('C','County'),
