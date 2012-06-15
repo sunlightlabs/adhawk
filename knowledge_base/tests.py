@@ -48,10 +48,10 @@ class BroadcastTypeModelTest(TestCase):
 #        # TODO: Create a new CandidateStatus object 
 #        self.fail('todo: finish '+self.id())
 #
-#class CommitteeDesignationModelTest(TestCase):
-#    def test_creating_a_new_CommitteeDesignation_and_saving_it_to_the_database(self):
-#        # TODO: Create a new CommitteeDesignation object 
-#        self.fail('todo: finish '+self.id())
+class CommitteeDesignationModelTest(TestCase):
+    def test_creating_a_new_CommitteeDesignation_and_saving_it_to_the_database(self):
+        # TODO: Create a new CommitteeDesignation object 
+        self.fail('todo: finish '+self.id())
 #
 #class CommitteeTypeModelTest(TestCase):
 #    def test_creating_a_new_CommitteeType_and_saving_it_to_the_database(self):
