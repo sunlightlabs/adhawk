@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from knowledge_base.models import Market,MediaType,Source
+from knowledge_base.models import BroadcastType,Market,MediaType,Source
 
 #class AdModelTest(TestCase):
 #    def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
@@ -20,8 +20,20 @@ from knowledge_base.models import Market,MediaType,Source
 #
 class BroadcastTypeModelTest(TestCase):
     def test_creating_a_new_BroadcastType_and_saving_it_to_the_database(self):
-        # TODO: Create a new BroadcastType object 
-        self.fail('todo: finish '+self.id())
+        # create a new BroadcastType object
+        broadcast_type = BroadcastType()
+        broadcast_type.name = "Television"
+
+        # make sure we can save it
+        broadcast_type.save()
+
+        # make sure we can find it
+        all_broadcast_types_in_database = BroadcastType.objects.all()
+        self.assertEquals(len(all_broadcast_types_in_database),1)
+        only_broadcast_type_in_database = all_broadcast_types_in_database[0]
+        self.assertEquals(only_broadcast_type_in_database,broadcast_type)
+
+        
 #
 #class CandidateModelTest(TestCase):
 #    def test_creating_a_new_Candidate_and_saving_it_to_the_database(self):
