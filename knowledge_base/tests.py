@@ -72,7 +72,7 @@ class CoverageTypeModelTest(TestCase):
     def test_creating_a_new_CoverageType_and_saving_it_to_the_database(self):
         # create a new BroadcastType object
         coverage_type = CoverageType()
-        coverage_type.name = "Blog Post"
+        coverage_type.name = "Blog post"
 
         # make sure we can save it
         coverage_type.save()
@@ -82,6 +82,9 @@ class CoverageTypeModelTest(TestCase):
         self.assertEquals(len(all_coverage_types_in_database),1)
         only_coverage_type_in_database = all_coverage_types_in_database[0]
         self.assertEquals(only_coverage_type_in_database,coverage_type)
+        
+        # and check to make sure it saved its attributes
+        self.assertEquals(only_coverage_type_in_database.name,"Blog post")
 #        
 #class FunderModelTest(TestCase):
 #    def test_creating_a_new_Funder_and_saving_it_to_the_database(self):
