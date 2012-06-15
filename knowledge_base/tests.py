@@ -236,7 +236,7 @@ class IssueCategoryModelTest(TestCase):
 
         # check that its attributes have been saved
         self.assertEquals(only_issue_category_in_database.name,"Three cent titanium tax")
-        self.assertEquals(only_issue_category_in_database.parent,None)
+        self.assertIsNone(only_issue_category_in_database.parent)
 
     def test_string_representation(self):
         issue_category = IssueCategory()
@@ -274,15 +274,14 @@ class IssueCategoryModelTest(TestCase):
         self.assertEquals(only_issue_category_child_in_database,issue_category_child)
         
         # check to make sure parent has no parent
-        self.assertEquals(only_issue_category_parent_in_database.parent,None)
+        self.assertIsNone(only_issue_category_parent_in_database.parent)
 
         # check to make sure child-parent relationship is established
         self.assertEquals(only_issue_category_child_in_database.parent,
                 only_issue_category_parent_in_database)
 
     def test_on_delete_parameter(self):
-        # TODO: test behavior of deleting a parent IssueCategory
-        self.fail('todo: finidh ' +self.id())
+        self.fail('Write test')
 
 
 class MarketModelTest(TestCase):
