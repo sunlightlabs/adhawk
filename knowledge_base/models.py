@@ -75,4 +75,15 @@ class Stance(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
     issue = models.ForeignKey(Issue)
-    
+
+class Tag(models.Model):
+    name = models.CharField(max_length=100)
+    relevant = models.BooleanField(default=True)
+    scraped = models.BooleanField(default=True)
+
+    def save(self, *args, **kwargs):
+        if self.relevant == False and self.scraped == False:
+            raise Exception('A manually entered tag must be relevant')
+        else:
+            super(Tag, self).save(*args, **kwargs)
+
