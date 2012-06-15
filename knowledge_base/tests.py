@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from knowledge_base.models import CommitteeDesignation,CommitteeType,CoverageType,BroadcastType,InterestGroupCategory,Market,MediaType,Source
+from knowledge_base.models import CommitteeDesignation,CommitteeType,ConnectedOrganization,CoverageType,BroadcastType,InterestGroupCategory,Market,MediaType,Source
 
 #class AdModelTest(TestCase):
 #    def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
@@ -96,11 +96,29 @@ class CommitteeTypeModelTest(TestCase):
         self.assertEquals(only_committee_type_in_database.description, 
                 DESCRIPTION)
      
-#class ConnectedOrganizationModelTest(TestCase):
-#    def test_creating_a_new_ConnectedOrganization_and_saving_it_to_the_database(self):
-#        # TODO: Create a new ConnectedOrganization object 
-#        self.fail('todo: finish '+self.id())
-#
+class ConnectedOrganizationModelTest(TestCase):
+    def test_creating_a_new_ConnectedOrganization_and_saving_it_to_the_database(self):
+        # Create a new ConnectedOrganization object 
+        connected_organization = ConnectedOrganization()
+        connected_organization.name = "NATIONAL ASSOCIATION OF HOME BUILDERS"
+        DESCRIPTION = """One of the largest trade associations in the United States. Headquartered in Washington, DC, NAHB's mission is "to enhance the climate for housing and the building industry. Chief among NAHB's goals is providing and expanding opportunities for all consumers to have safe, decent and affordable housing."""
+        connected_organization.description = DESCRIPTION 
+
+        # make sure we can save it
+        connected_organization.save()
+
+        # make sure we can find it
+        all_connected_organizations_in_database = ConnectedOrganization.objects.all()
+        self.assertEquals(len(all_connected_organizations_in_database),1)
+        only_connected_organization_in_database = all_connected_organizations_in_database[0]
+        self.assertEquals(only_connected_organization_in_database,connected_organization)
+        
+        # and check to make sure it saved its attributes
+        self.assertEquals(only_connected_organization_in_database.name, 
+                "NATIONAL ASSOCIATION OF HOME BUILDERS")
+        self.assertEquals(only_connected_organization_in_database.description,
+                DESCRIPTION)
+
 #class CoverageModelTest(TestCase):
 #    def test_creating_a_new_Coverage_and_saving_it_to_the_database(self):
 #        # TODO: Create a new Coverage object 
