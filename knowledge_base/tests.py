@@ -7,7 +7,7 @@ Replace this with more appropriate tests for your application.
 
 from django.test import TestCase
 from django.db import IntegrityError
-from knowledge_base.models import CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,CoverageType,BroadcastType,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,MediaType,Source,Stance
+from knowledge_base.models import CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,CoverageType,BroadcastType,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,MediaType,Source,Stance,Tag
 
 #class AdModelTest(TestCase):
 #    def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
@@ -495,11 +495,47 @@ class StanceModelTest(TestCase):
         stance.name = 'opposes'
         stance.description = 'explicitly opposes the issue'
 
-        # save it
+        # make sure we get an error if we try to save it
         self.assertRaises(IntegrityError,stance.save)
 
-#class TagModelTest(TestCase):
-#    def test_creating_a_new_Tag_and_saving_it_to_the_database(self):
-#        # TODO: Create a new Tag object 
-#        self.fail('todo: finish '+self.id())
-#
+class TagModelTest(TestCase):
+    def test_creating_a_new_Tag_and_saving_it_to_the_database(self):
+        # Create a new Tag object 
+        tag = Tag()
+        tag.name = "titanium"
+        
+        # Check default values
+        self.assertTrue(tag.relevant)
+        self.assertTrue(tag.scraped)
+
+        # assign new value
+        tag.relevant = False
+
+        # save the Tag
+        tag.save()
+
+        # make sure we can find it
+        all_tags_in_database = Tag.objects.all()
+        self.assertEquals(len(all_tags_in_database),1)
+        only_tag_in_database = all_tags_in_database[0]
+        self.assertEquals(only_tag_in_database, tag)
+
+        # check that its attributes have been saved
+        self.assertEquals(only_tag_in_database.name,'titanium')
+        self.assertEquals(only_tag_in_database.relevant, tag.relevant)
+        self.assertEquals(only_tag_in_database.scraped, tag.scraped)
+
+    def test_cannot_be_false_for_both_relevant_and_scraped(self):
+        # Create a new Tag object 
+        tag = Tag()
+        tag.name = "titanium"
+        tag.relevant = False
+        tag.scraped = False
+
+        # check that we get an exception if we try to save this abomination
+        self.assertRaises(Exception,tag.save)
+
+
+
+
+
