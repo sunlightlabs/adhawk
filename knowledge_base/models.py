@@ -22,6 +22,11 @@ class CoverageType(models.Model):
 class BroadcastType(models.Model):
     name = models.CharField(max_length=50)
 
+class IncumbentChallengerStatus(models.Model):
+    code = models.CharField(max_length=1)
+    value = models.CharField(max_length=11)
+    description = models.CharField(max_length=500)
+
 class InterestGroupCategory(models.Model):
     code = models.CharField(max_length=1)
     name = models.CharField(max_length=40)
