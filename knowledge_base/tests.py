@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from knowledge_base.models import CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,CoverageType,BroadcastType,IncumbentChallengerStatus,InterestGroupCategory,Market,MediaType,Source
+from knowledge_base.models import CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,CoverageType,BroadcastType,IncumbentChallengerStatus,InterestGroupCategory,IssueCategory,Market,MediaType,Source
 
 #class AdModelTest(TestCase):
 #    def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
@@ -219,11 +219,39 @@ class InterestGroupCategoryModelTest(TestCase):
 #        # TODO: Create a new Issue object 
 #        self.fail('todo: finish '+self.id())
 #
-#class IssueCategoryModelTest(TestCase):
-#    def test_creating_a_new_IssueCategory_and_saving_it_to_the_database(self):
-#        # TODO: Create a new IssueCategory object 
-#        self.fail('todo: finish '+self.id())
-#
+class IssueCategoryModelTest(TestCase):
+    def test_creating_a_new_IssueCategory_and_saving_it_to_the_database(self):
+        # TODO: Create a new IssueCategory object with null parent
+        issue_category = IssueCategory()
+        issue_category.name = "Three cent titanium tax"
+
+        # make sure we can save it
+        issue_category.save()
+
+        # make sure we can find it
+        all_issue_categories_in_database = IssueCategory.objects.all()
+        self.assertEquals(len(all_issue_categories_in_database),1)
+        only_issue_category_in_database = all_issue_categories_in_database[0]
+        self.assertEquals(only_issue_category_in_database, issue_category)
+
+        # check that its attributes have been saved
+        self.assertEquals(only_issue_category_in_database.name,"Three cent titanium tax")
+        self.assertEquals(only_issue_category_in_database.parent,None)
+
+    def test_string_representation(self):
+        issue_category = IssueCategory()
+        issue_category.name = "Three cent titanium tax"
+        self.assertEquals(str(issue_category.name),"Three cent titanium tax")
+
+    def test_creating_a_parent_child_relationship_with_IssueCategory(self):
+        # TODO: create a parent-child relationship with IssueCategory
+        self.fail('todo: finish ' + self.id())
+
+    def test_on_delete_parameter(self):
+        # TODO: test behavior of deleting a parent IssueCategory
+        self.fail('todo: finidh ' +self.id())
+
+
 class MarketModelTest(TestCase):
     def test_market_type_choices(self):
         choices = (('A','Area'), 
