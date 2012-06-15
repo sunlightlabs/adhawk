@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from knowledge_base.models import CommitteeDesignation,CoverageType,BroadcastType,Market,MediaType,Source
+from knowledge_base.models import CommitteeDesignation,CommitteeType,CoverageType,BroadcastType,Market,MediaType,Source
 
 #class AdModelTest(TestCase):
 #    def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
@@ -72,7 +72,29 @@ class CommitteeDesignationModelTest(TestCase):
         self.assertEquals(only_committee_designation_in_database.description, 
                 DESCRIPTION)
 #
-#class CommitteeTypeModelTest(TestCase):
+class CommitteeTypeModelTest(TestCase):
+    def test_creating_a_new_CommitteeType_and_saving_it_to_the_database(self):
+        # create a new CommitteeType object
+        committee_type = CommitteeType()
+        committee_type.code = 'C'
+        committee_type.name = 'Communication Cost'
+        DESCRIPTION = "Organizations like corporations or unions may prepare communications for their employees or members that advocate the election of specific candidates and they must disclose them under certain circumstances. These are usually paid with direct corporate or union funds rather than from PACs."
+        committee_type.description = DESCRIPTION
+        # check that we can save it
+        committee_type.save()
+
+        # check that we can find it
+        all_committee_types_in_database = CommitteeType.objects.all()
+        self.assertEquals(len(all_committee_types_in_database),1)
+        only_committee_type_in_database = all_committee_types_in_database[0]
+        self.assertEquals(only_committee_type_in_database, committee_type)
+
+        # check that its attributes have been saved
+        self.assertEquals(only_committee_type_in_database.code,"C")
+        self.assertEquals(only_committee_type_in_database.name,
+                "Communication Cost")
+        self.assertEquals(only_committee_type_in_database.description, 
+                DESCRIPTION)
      
 #class ConnectedOrganizationModelTest(TestCase):
 #    def test_creating_a_new_ConnectedOrganization_and_saving_it_to_the_database(self):
