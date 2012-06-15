@@ -2,9 +2,11 @@ from django.db import models
 
 # Create your models here.
 
+class CoverageType(models.Model):
+    name = models.CharField(max_length=50)
+
 class BroadcastType(models.Model):
-    pass
-    #name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
 
 class Market(models.Model):
     MARKET_TYPE_CHOICES = (('A','Area'),
