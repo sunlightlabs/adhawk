@@ -80,6 +80,7 @@ class Tag(models.Model):
     name = models.CharField(max_length=100)
     relevant = models.BooleanField(default=True)
     scraped = models.BooleanField(default=True)
+    issues = models.ManyToManyField(Issue,null=True,blank=True)
 
     def save(self, *args, **kwargs):
         if self.relevant == False and self.scraped == False:
