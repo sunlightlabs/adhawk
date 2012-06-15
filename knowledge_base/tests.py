@@ -237,7 +237,7 @@ class IssueModelTest(TestCase):
         self.assertEquals(only_issue_in_database.description, DESCRIPTION)
         self.assertEquals(len(only_issue_in_database.issue_categories.all()),0)
 
-    def test_creating_a_new_issue_with_an_issue_category(self):
+    def test_creating_a_new_Issue_with_an_issue_category(self):
         # create a new IssueCategory
         issue_category = IssueCategory()
         issue_category.name = "Titanium Tax"
