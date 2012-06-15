@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from knowledge_base.models import CommitteeDesignation,CommitteeType,ConnectedOrganization,CoverageType,BroadcastType,IncumbentChallengerStatus,InterestGroupCategory,Market,MediaType,Source
+from knowledge_base.models import CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,CoverageType,BroadcastType,IncumbentChallengerStatus,InterestGroupCategory,Market,MediaType,Source
 
 #class AdModelTest(TestCase):
 #    def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
@@ -43,11 +43,30 @@ class BroadcastTypeModelTest(TestCase):
 #        # TODO: Create a new Candidate object 
 #        self.fail('todo: finish '+self.id())
 #
-#class CandidateStatusModelTest(TestCase):
-#    def test_creating_a_new_CandidateStatus_and_saving_it_to_the_database(self):
-#        # TODO: Create a new CandidateStatus object 
-#        self.fail('todo: finish '+self.id())
-#
+class CandidateStatusModelTest(TestCase):
+    def test_creating_a_new_CandidateStatus_and_saving_it_to_the_database(self):
+        # Create a new CandidateStatus object 
+        candidate_status = CandidateStatus()
+        candidate_status.code = 'C'
+        candidate_status.value = 'Satutory candidate'
+        DESCRIPTION = "The description of what the hell a statutory candidate is."
+        candidate_status.description = DESCRIPTION
+        # check that we can save it
+        candidate_status.save()
+
+        # check that we can find it
+        all_candidate_statuses_in_database = CandidateStatus.objects.all()
+        self.assertEquals(len(all_candidate_statuses_in_database),1)
+        only_candidate_status_in_database = all_candidate_statuses_in_database[0]
+        self.assertEquals(only_candidate_status_in_database, candidate_status)
+
+        # check that its attributes have been saved
+        self.assertEquals(only_candidate_status_in_database.code,"C")
+        self.assertEquals(only_candidate_status_in_database.value,
+                "Statutory candidate")
+        self.assertEquals(only_candidate_status_in_database.description, 
+                DESCRIPTION)
+
 class CommitteeDesignationModelTest(TestCase):
     def test_creating_a_new_CommitteeDesignation_and_saving_it_to_the_database(self):
         # create a new CommitteeDesignation object
