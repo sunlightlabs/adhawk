@@ -2,6 +2,11 @@ from django.db import models
 
 # Create your models here.
 
+class CandidateStatus(models.Model):
+    code = models.CharField(max_length=1)
+    value = models.CharField(max_length=40)
+    description = models.CharField(max_length=500)
+
 class CommitteeDesignation(models.Model):
     code = models.CharField(max_length=1)
     name = models.CharField(max_length=50)
