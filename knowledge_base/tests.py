@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from knowledge_base.models import CommitteeDesignation,CommitteeType,CoverageType,BroadcastType,Market,MediaType,Source
+from knowledge_base.models import CommitteeDesignation,CommitteeType,CoverageType,BroadcastType,InterestGroupCategory,Market,MediaType,Source
 
 #class AdModelTest(TestCase):
 #    def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
@@ -134,11 +134,30 @@ class CoverageTypeModelTest(TestCase):
 #        # TODO: Create a new IncumbentChallengerStatus object 
 #        self.fail('todo: finish '+self.id())
 #
-#class InterestGroupCategoryModelTest(TestCase):
-#    def test_creating_a_new_InterestGroupCategory_and_saving_it_to_the_database(self):
-#        # TODO: Create a new InterestGroupCategory object 
-#        self.fail('todo: finish '+self.id())
-#
+class InterestGroupCategoryModelTest(TestCase):
+    def test_creating_a_new_InterestGroupCategory_and_saving_it_to_the_database(self):
+        # TODO: Create a new InterestGroupCategory object 
+        interest_group_category = InterestGroupCategory()
+        interest_group_category.code = 'L'
+        interest_group_category.name = 'LABOR ORGANIZATION'
+        DESCRIPTION = "These include unions and other representatives of workers"
+        interest_group_category.description = DESCRIPTION
+        # check that we can save it
+        interest_group_category.save()
+
+        # check that we can find it
+        all_interest_group_categories_in_database = InterestGroupCategory.objects.all()
+        self.assertEquals(len(all_interest_group_categories_in_database),1)
+        only_interest_group_category_in_database = all_interest_group_categories_in_database[0]
+        self.assertEquals(only_interest_group_category_in_database, interest_group_category)
+
+        # check that its attributes have been saved
+        self.assertEquals(only_interest_group_category_in_database.code,"L")
+        self.assertEquals(only_interest_group_category_in_database.name,
+                "LABOR ORGANIZATION")
+        self.assertEquals(only_interest_group_category_in_database.description, 
+                DESCRIPTION)
+
 #class IssueModelTest(TestCase):
 #    def test_creating_a_new_Issue_and_saving_it_to_the_database(self):
 #        # TODO: Create a new Issue object 
