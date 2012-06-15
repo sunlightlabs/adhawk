@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from knowledge_base.models import CommitteeDesignation,CommitteeType,ConnectedOrganization,CoverageType,BroadcastType,InterestGroupCategory,Market,MediaType,Source
+from knowledge_base.models import CommitteeDesignation,CommitteeType,ConnectedOrganization,CoverageType,BroadcastType,IncumbentChallengerStatus,InterestGroupCategory,Market,MediaType,Source
 
 #class AdModelTest(TestCase):
 #    def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
@@ -147,11 +147,30 @@ class CoverageTypeModelTest(TestCase):
 #        # TODO: Create a new CommitteeDesignation object 
 #        self.fail('todo: finish '+self.id())
 #
-#class IncumbentChallengerStatusModelTest(TestCase):
-#    def test_creating_a_new_IncumbentChallengerStatus_and_saving_it_to_the_database(self):
-#        # TODO: Create a new IncumbentChallengerStatus object 
-#        self.fail('todo: finish '+self.id())
-#
+class IncumbentChallengerStatusModelTest(TestCase):
+    def test_creating_a_new_IncumbentChallengerStatus_and_saving_it_to_the_database(self):
+        # TODO: Create a new IncumbentChallengerStatus object 
+        incumbent_challenger_status = IncumbentChallengerStatus()
+        incumbent_challenger_status.code = 'O'
+        incumbent_challenger_status.value = 'Open Seat'
+        DESCRIPTION = "Open seats are defined as seats where the incumbent never sought re-election. There can be cases where an incumbent is defeated in the primary election. In these cases there will be two or more challengers in the general election."
+        incumbent_challenger_status.description = DESCRIPTION
+        # check that we can save it
+        incumbent_challenger_status.save()
+
+        # check that we can find it
+        all_incumbent_challenger_statuses_in_database = IncumbentChallengerStatus.objects.all()
+        self.assertEquals(len(all_incumbent_challenger_statuses_in_database),1)
+        only_incumbent_challenger_status_in_database = all_incumbent_challenger_statuses_in_database[0]
+        self.assertEquals(only_incumbent_challenger_status_in_database, incumbent_challenger_status)
+
+        # check that its attributes have been saved
+        self.assertEquals(only_incumbent_challenger_status_in_database.code,"O")
+        self.assertEquals(only_incumbent_challenger_status_in_database.value,
+                "Open Seat")
+        self.assertEquals(only_incumbent_challenger_status_in_database.description, 
+                DESCRIPTION)
+
 class InterestGroupCategoryModelTest(TestCase):
     def test_creating_a_new_InterestGroupCategory_and_saving_it_to_the_database(self):
         # TODO: Create a new InterestGroupCategory object 
