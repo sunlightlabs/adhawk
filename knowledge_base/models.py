@@ -70,3 +70,9 @@ class MediaType(models.Model):
 class Source(models.Model):
     main_url = models.URLField(max_length=50)
     scraper_added = models.BooleanField(default=False)
+
+class Stance(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=500)
+    issue = models.ForeignKey(Issue)
+    
