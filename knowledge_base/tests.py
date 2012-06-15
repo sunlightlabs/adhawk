@@ -469,9 +469,9 @@ class StanceModelTest(TestCase):
 
         # Create a new Stance object 
         stance = Stance()
-        name = 'opposes'
-        descripton = 'explicity opposes the issue'
-        issue = Issue.objects.get(name="Three cent titanium tax increase")
+        stance.name = 'opposes'
+        stance.descripton = 'explicity opposes the issue'
+        stance.issue = Issue.objects.get(name="Three cent titanium tax increase")
         
         # save it
         stance.save()
