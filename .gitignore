@@ -4,3 +4,4 @@ local_settings.py
 *.swp
 *.db
 *.dummy
+knowledge_base/migrations/*
