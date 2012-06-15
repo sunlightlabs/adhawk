@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from knowledge_base.models import CoverageType,BroadcastType,Market,MediaType,Source
+from knowledge_base.models import CommitteeDesignation,CoverageType,BroadcastType,Market,MediaType,Source
 
 #class AdModelTest(TestCase):
 #    def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
@@ -49,9 +49,33 @@ class BroadcastTypeModelTest(TestCase):
 #        self.fail('todo: finish '+self.id())
 #
 class CommitteeDesignationModelTest(TestCase):
-    def test_creating_a_new_CommitteeDesignation_and_saving_it_to_the_database(self):
-        # TODO: Create a new CommitteeDesignation object 
-        self.fail('todo: finish '+self.id())
+    def test_market_type_choices(self):
+        choices = (('A','AUTHORIZED BY A CANDIDATE'),
+                ('B','LOBBYIST/REGISTRANT PAC'),
+                ('D','LEADERSHIP PAC'),
+                ('J','JOINT FUND RAISER'),
+                ('P','PRINCIPAL CAMPAIGN COMMITTEE OF A CANDIDATE'),
+                ('U','UNAUTHORIZED'),
+                )
+        self.assertEquals(CommitteeDesignation.COMMITTEE_DESIGNATION_CHOICES,choices)
+    def test_creating_a_new_Market_and_saving_it_to_the_database(self):
+        # create a new Market object
+        committee_designation = CommitteeDesignation()
+        committee_designation.committee_designation_type = 'D'
+
+        # check that we can save it
+        committee_designation.save()
+
+        # check that we can find it
+        all_committee_designations_in_database = CommitteeDesignation.objects.all()
+        self.assertEquals(len(all_committee_designations_in_database),1)
+        only_committee_designation_in_database = all_committee_designations_in_database[0]
+        self.assertEquals(only_committee_designation_in_database, committee_designation)
+
+        # check that its attributes have been saved
+        self.assertEquals(only_committee_designation_in_database.committee_designation_type,"D")
+    #def test_entering_a_bad_committee_designation_type(self):
+        # Not possible to restrict?  maybe a validator?
 #
 #class CommitteeTypeModelTest(TestCase):
 #    def test_creating_a_new_CommitteeType_and_saving_it_to_the_database(self):
