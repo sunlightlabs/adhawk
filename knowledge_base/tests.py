@@ -57,7 +57,7 @@ class CommitteeDesignationModelTest(TestCase):
                 ('P','PRINCIPAL CAMPAIGN COMMITTEE OF A CANDIDATE'),
                 ('U','UNAUTHORIZED'),
                 )
-        self.assertEquals(CommitteeDesignation.COMMITTEE_DESIGNATION_CHOICES,choices)
+        self.assertEquals(CommitteeDesignation.COMMITTEE_DESIGNATION_TYPE_CHOICES,choices)
     def test_creating_a_new_Market_and_saving_it_to_the_database(self):
         # create a new Market object
         committee_designation = CommitteeDesignation()
