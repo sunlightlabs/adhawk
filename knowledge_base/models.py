@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+            
 class CandidateStatus(models.Model):
     code = models.CharField(max_length=1)
     value = models.CharField(max_length=40)
@@ -20,6 +21,9 @@ class CommitteeType(models.Model):
 class ConnectedOrganization(models.Model):
     name = models.CharField(max_length=38)
     description = models.CharField(max_length=500)
+
+class Coverage(models.Model):
+    pass
 
 class CoverageType(models.Model):
     name = models.CharField(max_length=50)
@@ -88,3 +92,16 @@ class Tag(models.Model):
         else:
             super(Tag, self).save(*args, **kwargs)
 
+class Candidate(models.Model):
+    FEC_id = models.CharField(max_length=9)
+    name = models.CharField(max_length=38)
+    party = models.CharField(max_length=3)
+    year_of_election = models.IntegerField(max_length=4)
+    street_one = models.CharField(max_length=34)
+    street_two = models.CharField(max_length=34)
+    city = models.CharField(max_length=18)
+    state = models.CharField(max_length=2)
+    zip_code = models.IntegerField(max_length=5)
+
+    incumbent_challenger_status = models.ForeignKey(IncumbentChallengerStatus)
+    candidate_status = models.ForeignKey(CandidateStatus)
