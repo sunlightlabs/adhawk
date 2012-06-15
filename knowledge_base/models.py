@@ -3,7 +3,15 @@ from django.db import models
 # Create your models here.
 
 class CommitteeDesignation(models.Model):
-    pass
+    COMMITTEE_DESIGNATION_CHOICES = (('A','AUTHORIZED BY A CANDIDATE'),
+            ('B','LOBBYIST/REGISTRANT PAC'),
+            ('D','LEADERSHIP PAC'),
+            ('J','JOINT FUND RAISER'),
+            ('P','PRINCIPAL CAMPAIGN COMMITTEE OF A CANDIDATE'),
+            ('U','UNAUTHORIZED'),)
+    committee_designation_type = models.CharField(max_length=1, 
+            choices=COMMITTEE_DESIGNATION_CHOICES)
+
 
 class CoverageType(models.Model):
     name = models.CharField(max_length=50)
