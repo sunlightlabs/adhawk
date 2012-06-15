@@ -272,7 +272,7 @@ class IssueModelTest(TestCase):
                 "Three cent titanium tax increase")
         self.assertEquals(only_issue_in_database.description, DESCRIPTION)
         self.assertEquals(len(only_issue_in_database.issue_categories.all()),1)
-        self.assertEquals(only_issue_in_databasse.issue_categories.all()[0],issue_category)
+        self.assertEquals(only_issue_in_database.issue_categories.all()[0],issue_category)
 
 
 class IssueCategoryModelTest(TestCase):
