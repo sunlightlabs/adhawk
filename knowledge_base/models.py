@@ -12,12 +12,16 @@ class CommitteeType(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
 
-
 class CoverageType(models.Model):
     name = models.CharField(max_length=50)
 
 class BroadcastType(models.Model):
     name = models.CharField(max_length=50)
+
+class InterestGroupCategory(models.Model):
+    code = models.CharField(max_length=1)
+    name = models.CharField(max_length=40)
+    description = models.CharField(max_length=500)
 
 class Market(models.Model):
     MARKET_TYPE_CHOICES = (('A','Area'),
