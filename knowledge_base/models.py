@@ -42,6 +42,8 @@ class IssueCategory(models.Model):
     parent =  models.ForeignKey("self", 
             null=True, 
             blank=True,
+            related_name='children',
+            on_delete=models.SET_NULL
             )
 
     def __unicode__(self):
