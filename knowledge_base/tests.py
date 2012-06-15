@@ -7,7 +7,7 @@ Replace this with more appropriate tests for your application.
 
 from django.test import TestCase
 from django.db import IntegrityError
-from knowledge_base.models import Candidate,CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,CoverageType,BroadcastType,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,MediaType,Source,Stance,Tag
+from knowledge_base.models import Candidate,CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,Coverage,CoverageType,BroadcastType,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,MediaType,Source,Stance,Tag
 
 #class AdModelTest(TestCase):
 #    def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
@@ -41,8 +41,27 @@ class BroadcastTypeModelTest(TestCase):
 #
 class CandidateModelTest(TestCase):
     def test_creating_a_new_Candidate_and_saving_it_to_the_database(self):
+        # create IncumbentChallengerStatus object
+        incumbent_challenger_status = IncumbentChallengerStatus()
+        incumbent_challenger_status.code = 'O'
+        incumbent_challenger_status.value = 'Open Seat'
+        DESCRIPTION = "Open seats are defined as seats where the incumbent never sought re-election. There can be cases where an incumbent is defeated in the primary election. In these cases there will be two or more challengers in the general election."
+        incumbent_challenger_status.description = DESCRIPTION
+        #save it
+        incumbent_challenger_status.save()
+
+        # create CandidateStatus object
+        candidate_status = CandidateStatus()
+        candidate_status.code = 'C'
+        candidate_status.value = 'Statutory candidate'
+        DESCRIPTION = "The description of what the hell a statutory candidate is."
+        candidate_status.description = DESCRIPTION
+        # save it
+        candidate_status.save()
+
         # Create a new Candidate object 
         candidate = Candidate()
+        # add attibute values
         candidate.FEC_id = "J0EA00042"
         candidate.name = "JACK JOHNSON"
         candidate.party = "DEM"
@@ -52,12 +71,117 @@ class CandidateModelTest(TestCase):
         candidate.city = "New New York"
         candidate.state = "New York"
         candidate.zip_code = 90210
+        # add foreign key relations
+        candidate.incumbent_challenger_status = incumbent_challenger_status
+        candidate.candidate_status = candidate_status
 
         # save it
         candidate.save()
 
+        # check that we can find it
+        all_candidates_in_database = Candidate.objects.all()
+        self.assertEquals(len(all_candidates_in_database),1)
+        only_candidate_in_database = all_candidates_in_database[0]
+        self.assertEquals(only_candidate_in_database, candidate)
+
+        # check that its attributes have been saved
+        self.assertEquals(only_candidate_in_database.FEC_id,"J0EA00042")
+        self.assertEquals(only_candidate_in_database.name,"JACK JOHNSON")
+        self.assertEquals(only_candidate_in_database.party,"DEM")
+        self.assertEquals(only_candidate_in_database.year_of_election,2010)
+        self.assertEquals(only_candidate_in_database.street_one, 
+                "123 Fake Street")
+        self.assertEquals(only_candidate_in_database.street_two,"Apt. 3")
+        self.assertEquals(only_candidate_in_database.city,"New New York")
+        self.assertEquals(only_candidate_in_database.state,"New York")
+        self.assertEquals(only_candidate_in_database.zip_code,90210)
+        self.assertEquals(
+                only_candidate_in_database.incumbent_challenger_status, 
+                incumbent_challenger_status)
+        self.assertEquals(only_candidate_in_database.candidate_status, 
+                candidate_status)        
+
+    def test_add_candidate_with_stance_and_coverage(self):
+        # Create a basic candidate object
+        # create IncumbentChallengerStatus object
+        incumbent_challenger_status = IncumbentChallengerStatus()
+        incumbent_challenger_status.code = 'O'
+        incumbent_challenger_status.value = 'Open Seat'
+        DESCRIPTION = "Open seats are defined as seats where the incumbent never sought re-election. There can be cases where an incumbent is defeated in the primary election. In these cases there will be two or more challengers in the general election."
+        incumbent_challenger_status.description = DESCRIPTION
+        #save it
+        incumbent_challenger_status.save()
+
+        # create CandidateStatus object
+        candidate_status = CandidateStatus()
+        candidate_status.code = 'C'
+        candidate_status.value = 'Statutory candidate'
+        DESCRIPTION = "The description of what the hell a statutory candidate is."
+        candidate_status.description = DESCRIPTION
+        # save it
+        candidate_status.save()
+
+        # Create a new Candidate object 
+        candidate = Candidate()
+        
+        # add attibute values
+        candidate.FEC_id = "J0EA00042"
+        candidate.name = "JACK JOHNSON"
+        candidate.party = "DEM"
+        candidate.year_of_election = 2010
+        candidate.street_one = "123 Fake Street"
+        candidate.street_two = "Apt. 3"
+        candidate.city = "New New York"
+        candidate.state = "New York"
+        candidate.zip_code = 90210
+        
+        # add foreign key relations
+        candidate.incumbent_challenger_status = incumbent_challenger_status
+        candidate.candidate_status = candidate_status
+
+        # create a new Issue object
+        issue = Issue()
+        issue.name = "Three cent titanium tax increase"
+        DESCRIPTION = "The three cent titanium tax increase is a proposal designed to offset the cost of environmental damage of titanium manufacturing"
+        issue.description = DESCRIPTION
+
+        # make sure we can save it
+        issue.save()
 
 
+        # Create a new Stance object 
+        stance = Stance()
+        stance.name = 'opposes'
+        stance.description = 'explicitly opposes the issue'
+        stance.issue = issue
+        # save it
+        stance.save()
+
+        # TODO: create Coverage object
+        self.fail('todo: create coverage object')
+
+        # add many-to-many relations
+        candidate.stances.add(stance)
+        #candidate.coverages.add(coverage)
+        self.fail('add candidate/coverage many-to-many relation')
+
+        # save it
+        candidate.save()
+        
+        # check that we can find it
+        all_candidates_in_database = Candidate.objects.all()
+        self.assertEquals(len(all_candidates_in_database),1)
+        only_candidate_in_database = all_candidates_in_database[0]
+        self.assertEquals(only_candidate_in_database, candidate)
+
+        # check that stances have been saved
+        all_stances_for_candidate_in_database = only_candidate_in_database.stances.all()
+        self.assertEquals(len(all_stances_for_candidate_in_database),1)
+        only_stance_for_candidate_in_database = all_stances_for_candidate_in_database[0]
+        self.assertEquals(only_stance_for_candidate_in_database,stance)
+        
+        # TODO: check that coverages have been saved
+        self.fail('todo: create test for saving candidate/coverage many-to-many relation')
 
 class CandidateStatusModelTest(TestCase):
     def test_creating_a_new_CandidateStatus_and_saving_it_to_the_database(self):
@@ -154,11 +278,11 @@ class ConnectedOrganizationModelTest(TestCase):
         self.assertEquals(only_connected_organization_in_database.description,
                 DESCRIPTION)
 
-#class CoverageModelTest(TestCase):
-#    def test_creating_a_new_Coverage_and_saving_it_to_the_database(self):
-#        # TODO: Create a new Coverage object 
-#        self.fail('todo: finish '+self.id())
-#
+class CoverageModelTest(TestCase):
+    def test_creating_a_new_Coverage_and_saving_it_to_the_database(self):
+        # TODO: Create a new Coverage object 
+        self.fail('todo: finish '+self.id())
+
 class CoverageTypeModelTest(TestCase):
     def test_creating_a_new_CoverageType_and_saving_it_to_the_database(self):
         # create a new BroadcastType object
