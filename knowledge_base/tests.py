@@ -7,7 +7,7 @@ Replace this with more appropriate tests for your application.
 
 from django.test import TestCase
 from django.db import IntegrityError
-from knowledge_base.models import CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,CoverageType,BroadcastType,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,MediaType,Source,Stance,Tag
+from knowledge_base.models import Candidate,CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,CoverageType,BroadcastType,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,MediaType,Source,Stance,Tag
 
 #class AdModelTest(TestCase):
 #    def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
@@ -39,11 +39,26 @@ class BroadcastTypeModelTest(TestCase):
 
         
 #
-#class CandidateModelTest(TestCase):
-#    def test_creating_a_new_Candidate_and_saving_it_to_the_database(self):
-#        # TODO: Create a new Candidate object 
-#        self.fail('todo: finish '+self.id())
-#
+class CandidateModelTest(TestCase):
+    def test_creating_a_new_Candidate_and_saving_it_to_the_database(self):
+        # Create a new Candidate object 
+        candidate = Candidate()
+        candidate.FEC_id = "J0EA00042"
+        candidate.name = "JACK JOHNSON"
+        candidate.party = "DEM"
+        candidate.year_of_election = 2010
+        candidate.street_one = "123 Fake Street"
+        candidate.street_two = "Apt. 3"
+        candidate.city = "New New York"
+        candidate.state = "New York"
+        candidate.zip_code = 90210
+
+        # save it
+        candidate.save()
+
+
+
+
 class CandidateStatusModelTest(TestCase):
     def test_creating_a_new_CandidateStatus_and_saving_it_to_the_database(self):
         # Create a new CandidateStatus object 
