@@ -9,7 +9,7 @@ from django.test import TestCase
 from django.db import IntegrityError
 from django.db.models import ProtectedError
 
-from knowledge_base.models import Candidate,CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,Coverage,CoverageType,BroadcastType,Funder,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,MediaType,Source,Stance,Tag
+from knowledge_base.models import Candidate,CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,Coverage,CoverageType,BroadcastType,Funder,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,MediaProfile,MediaType,Source,Stance,Tag
 
 #class AdModelTest(TestCase):
 #    def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
@@ -643,11 +643,57 @@ class MarketModelTest(TestCase):
 #    def test_creating_a_new_Media_and_saving_it_to_the_database(self):
 #        # TODO: Create a new Media object 
 #        self.fail('todo: finish '+self.id())
-#
-#class MediaProfileModelTest(TestCase):
-#    def test_creating_a_new_MediaProfile_and_saving_it_to_the_database(self):
-#        # TODO: Create a new MediaProfile object 
-#        self.fail('todo: finish '+self.id())
+
+class MediaProfileModelTest(TestCase):
+    fixtures = ['funder.json',
+            'committeedesignation.json',
+            'committeetype.json',
+            'interestgroupcategory.json',
+            'connectedorganization.json',
+            'stance.json',
+            'issue.json',
+            'issuecategory.json']
+
+    def test_creating_a_new_MediaProfile_and_saving_it_to_the_database(self):
+        # TODO: Create a new MediaProfile object 
+        media_profile = MediaProfile()
+
+        # make sure we can't save it if url does not exist
+        media_profile.url = 'http://www.boblannon.com/notreal'
+        self.assertRaises(Exception,media_profile.save)
+
+        media_profile.url = 'http://www.youtube.com/user/CrossroadsGPSChannel'
+
+        # check that we can save it
+        media_profile.save()
+
+        # check that we can find it
+        all_media_profiles_in_database = MediaProfile.objects.all()
+        self.assertEquals(len(all_media_profiles_in_database),1)
+        only_media_profile_in_database = all_media_profiles_in_database[0]
+        self.assertEquals(only_media_profile_in_database, media_profile)
+
+        # check that its attributes have been saved
+        self.assertEquals(only_media_profile_in_database.url,"http://www.youtube.com/user/CrossroadsGPSChannel")
+
+        # add a FK relation to funder
+        funder = Funder.objects.all()[0]
+        media_profile.funder = funder 
+
+        # save it
+        media_profile.save()
+
+        # check that we can find it
+        all_media_profiles_in_database = MediaProfile.objects.all()
+        self.assertEquals(len(all_media_profiles_in_database),1)
+        only_media_profile_in_database = all_media_profiles_in_database[0]
+        self.assertEquals(only_media_profile_in_database, media_profile)
+
+        # check that its attributes have been saved
+        self.assertEquals(only_media_profile_in_database.url,"http://www.youtube.com/user/CrossroadsGPSChannel")
+        self.assertEquals(only_media_profile_in_database.funder,funder)
+
+
 
 class MediaTypeModelTest(TestCase):
     def test_creating_a_new_MediaType_and_saving_it_to_the_database(self):
