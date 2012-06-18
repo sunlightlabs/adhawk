@@ -9,13 +9,21 @@ from django.test import TestCase
 from django.db import IntegrityError
 from django.db.models import ProtectedError
 
-from knowledge_base.models import Candidate,CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,Coverage,CoverageType,BroadcastType,Funder,FunderToCandidate,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,Media,MediaProfile,MediaType,Source,Stance,Tag
+from knowledge_base.models import Ad,Candidate,CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,Coverage,CoverageType,BroadcastType,Funder,FunderToCandidate,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,Media,MediaProfile,MediaType,Source,Stance,Tag
 
-#class AdModelTest(TestCase):
-#    def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
-#        # TODO: Create a new Ad object 
-#        self.fail('todo: finish '+self.id())
-#
+class AdModelTest(TestCase):
+    fixtures = ['media.json',
+            'mediaprofile.json',
+            'mediatype.json',
+            'tag.json',
+            'market.json',
+            'broadcasttype.json',
+            'stance.json',
+            'issue.json']
+    def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
+        # Create a new Ad object 
+        self.fail('todo: finish '+self.id())
+
 #class AuthorModelTest(TestCase):
 #    def test_creating_a_new_Author_and_saving_it_to_the_database(self):
 #        # TODO: Create a new Author object 
@@ -690,8 +698,8 @@ class MediaModelTest(TestCase):
         # Create a new Media object 
         media = Media()
         media.url = "http://www.youtube.com/watch?v=BVdLafErW2w"
-        media.creator_description = "No description available."
-        media.curator_desctiption = "Attack ad against Claire McCaskill's bid        for MO senate, Attacks McCaskill's association with stimulus spending"
+        #media.creator_description = "No description available."
+        media.curator_description = "Attack ad against Claire McCaskill's bid for MO senate, Attacks McCaskill's association with stimulus spending"
         
         # add required FK relation
         media.media_profile = media_profile
@@ -707,6 +715,13 @@ class MediaModelTest(TestCase):
 
         # check that its attributes have been saved
         self.assertEquals(only_media_in_database.media_profile,media_profile)
+        self.assertEquals(only_media_in_database.url,
+                "http://www.youtube.com/watch?v=BVdLafErW2w")
+        self.assertEquals(only_media_in_database.creator_description,
+                "No description available.")
+        self.assertEquals(only_media_in_database.curator_description,
+                "Attack ad against Claire McCaskill's bid for MO senate, Attacks McCaskill's association with stimulus spending")
+
 
         # add optional MTM relation
         media.tags.add(tag)
