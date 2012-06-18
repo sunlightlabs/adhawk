@@ -52,6 +52,7 @@ class AdModelTest(TestCase):
 
         # and check to make sure it saved its attributes
         self.assertEquals(only_ad_in_database.title,'"Spending" MO')
+        self.assertEquals(only_ad_in_database.ingested,False)
         self.assertEquals(only_ad_in_database.media,media)
 
         # add optional MTM fields
