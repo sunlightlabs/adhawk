@@ -271,8 +271,13 @@ class CoverageTypeModelTest(TestCase):
         self.assertEquals(only_coverage_type_in_database.name,"Blog post")
 #        
 class FunderModelTest(TestCase):
-    fixtures = ['interestgroupcategory.json','connectedorganization.json',
-            'committeedesignation.json','committeetype.json']
+    fixtures = ['interestgroupcategory.json',
+            'connectedorganization.json',
+            'committeedesignation.json',
+            'committeetype.json',
+            'stance.json',
+            'issue.json',
+            'issuecategory.json']
 
     def test_creating_a_new_Funder_and_saving_it_to_the_database(self):
         # get FK-related objects
@@ -350,7 +355,55 @@ class FunderModelTest(TestCase):
         check_funder = Funder.objects.all()[0]
         self.assertEquals(check_funder,funder)
 
-    #def test_creating_Funder_model
+    def test_creating_Funder_model_with_Stance(self):
+        # get FK-related objects
+        committee_designation = CommitteeDesignation.objects.all()[0]
+        committee_type = CommitteeType.objects.all()[0]
+        interest_group_category = InterestGroupCategory.objects.all()[0]
+        connected_organization = ConnectedOrganization.objects.all()[0]
+
+        # get MTM-related objects
+        stance = Stance.objects.all()[0]
+
+        # Create a new Funder object
+        funder = Funder()
+        funder.FEC_id = 'C00012229'
+        funder.name = 'Fingerlicans for John Jackson'
+        funder.filing_frequency = 'Q'
+        funder.party = 'REP'
+        funder.treasurer_name = 'Hermes Conrad'
+        funder.street_one = '2504 FAIRBANKS STREET'
+        funder.street_two = ''
+        funder.state = 'AK'
+        funder.zip_code = '99503'
+
+        # add foreign key relations
+        funder.interest_group_category = interest_group_category
+        funder.committee_type = committee_type
+        funder.committee_designation = committee_designation
+        
+        # save it
+        funder.save()
+
+        # add manytomany relation
+        funder.stances.add(stance)
+
+        # update it
+        funder.save()
+
+        # check that we can find it
+        all_funders_in_database = Funder.objects.all()
+        self.assertEquals(len(all_funders_in_database),1)
+        only_funder_in_database = all_funders_in_database[0]
+        self.assertEquals(only_funder_in_database, funder)
+
+        # check that its attributes have been saved
+        all_stances_for_only_funder_in_database.stances.all()
+        self.assertEquals(len(all_stances_for_only_funder_in_database),1)
+        only_stance_for_only_funder_in_database = all_stances_for_only_funder_in_database[0]
+        assertEquals(only_stance_for_only_funder_in_database,
+                stance)
+
 
 class IncumbentChallengerStatusModelTest(TestCase):
     def test_creating_a_new_IncumbentChallengerStatus_and_saving_it_to_the_database(self):
