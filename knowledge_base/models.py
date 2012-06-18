@@ -172,6 +172,7 @@ class Media(models.Model):
     url = models.URLField()
     creator_description = models.CharField(max_length=500,default="No description available.")
     curator_description = models.CharField(max_length=500,blank=True,null=True)
+    link_broken = models.BooleanField(default=False)
 
     # FK relations
     media_profile = models.ForeignKey(MediaProfile,
@@ -180,3 +181,5 @@ class Media(models.Model):
     # MTM relations
     tags = models.ManyToManyField(Tag)
 
+class Ad(models.Model):
+    pass
