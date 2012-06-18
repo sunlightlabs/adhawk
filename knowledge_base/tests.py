@@ -7,7 +7,7 @@ Replace this with more appropriate tests for your application.
 
 from django.test import TestCase
 from django.db import IntegrityError
-from knowledge_base.models import Candidate,CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,Coverage,CoverageType,BroadcastType,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,MediaType,Source,Stance,Tag
+from knowledge_base.models import Candidate,CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,Coverage,CoverageType,BroadcastType,Funder,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,MediaType,Source,Stance,Tag
 
 #class AdModelTest(TestCase):
 #    def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
@@ -40,24 +40,13 @@ class BroadcastTypeModelTest(TestCase):
         
 #
 class CandidateModelTest(TestCase):
+    fixtures = ['incumbentchallengerstatus.json',
+                'candidatestatus.json',
+                'issue.json',
+                'stance.json']
     def test_creating_a_new_Candidate_and_saving_it_to_the_database(self):
-        # create IncumbentChallengerStatus object
-        incumbent_challenger_status = IncumbentChallengerStatus()
-        incumbent_challenger_status.code = 'O'
-        incumbent_challenger_status.value = 'Open Seat'
-        DESCRIPTION = "Open seats are defined as seats where the incumbent never sought re-election. There can be cases where an incumbent is defeated in the primary election. In these cases there will be two or more challengers in the general election."
-        incumbent_challenger_status.description = DESCRIPTION
-        #save it
-        incumbent_challenger_status.save()
-
-        # create CandidateStatus object
-        candidate_status = CandidateStatus()
-        candidate_status.code = 'C'
-        candidate_status.value = 'Statutory candidate'
-        DESCRIPTION = "The description of what the hell a statutory candidate is."
-        candidate_status.description = DESCRIPTION
-        # save it
-        candidate_status.save()
+        incumbent_challenger_status = IncumbentChallengerStatus.objects.all()[0]
+        candidate_status = CandidateStatus.objects.all()[0]
 
         # Create a new Candidate object 
         candidate = Candidate()
@@ -140,33 +129,14 @@ class CandidateModelTest(TestCase):
         candidate.candidate_status = candidate_status
 
         # create a new Issue object
-        issue = Issue()
-        issue.name = "Three cent titanium tax increase"
-        DESCRIPTION = "The three cent titanium tax increase is a proposal designed to offset the cost of environmental damage of titanium manufacturing"
-        issue.description = DESCRIPTION
-
-        # make sure we can save it
-        issue.save()
-
-
-        # Create a new Stance object 
-        stance = Stance()
-        stance.name = 'opposes'
-        stance.description = 'explicitly opposes the issue'
-        stance.issue = issue
-        # save it
-        stance.save()
-
-        # TODO: create Coverage object
-        self.fail('todo: create coverage object')
-
-        # add many-to-many relations
-        candidate.stances.add(stance)
-        #candidate.coverages.add(coverage)
-        self.fail('add candidate/coverage many-to-many relation')
+        issue = Issue.objects.all()[0]
+        stance = Stance.objects.all()[0]
 
         # save it
         candidate.save()
+        
+        # add many-to-many relations
+        candidate.stances.add(stance)
         
         # check that we can find it
         all_candidates_in_database = Candidate.objects.all()
@@ -179,9 +149,6 @@ class CandidateModelTest(TestCase):
         self.assertEquals(len(all_stances_for_candidate_in_database),1)
         only_stance_for_candidate_in_database = all_stances_for_candidate_in_database[0]
         self.assertEquals(only_stance_for_candidate_in_database,stance)
-        
-        # TODO: check that coverages have been saved
-        self.fail('todo: create test for saving candidate/coverage many-to-many relation')
 
 class CandidateStatusModelTest(TestCase):
     def test_creating_a_new_CandidateStatus_and_saving_it_to_the_database(self):
@@ -301,11 +268,43 @@ class CoverageTypeModelTest(TestCase):
         # and check to make sure it saved its attributes
         self.assertEquals(only_coverage_type_in_database.name,"Blog post")
 #        
-#class FunderModelTest(TestCase):
-#    def test_creating_a_new_Funder_and_saving_it_to_the_database(self):
-#        # TODO: Create a new CommitteeDesignation object 
-#        self.fail('todo: finish '+self.id())
-#
+class FunderModelTest(TestCase):
+    def test_creating_a_new_Funder_and_saving_it_to_the_database(self):
+        # Create a new Funder object
+        funder = Funder()
+        funder.FEC_id = 'C00012229'
+        funder.name = 'Fingerlicans for John Jackson'
+        funder.filing_frequency = 'Q'
+        funder.party = 'REP'
+        funder.treasurer_name = 'Hermes Conrad'
+        funder.street_one = '2504 FAIRBANKS STREET'
+        funder.street_two = ''
+        funder.state = 'AK'
+        funder.zip_code = '99503'
+        
+        # save it
+        funder.save()
+        
+        # check that we can find it
+        all_funders_in_database = Funder.objects.all()
+        self.assertEquals(len(all_funders_in_database),1)
+        only_funder_in_database = all_funders_in_database[0]
+        self.assertEquals(only_funder_in_database, funder)
+
+        # check that its attributes have been saved
+        self.assertEquals(only_funder_in_database.FEC_id,"C00012229")
+        self.assertEquals(only_funder_in_database.name,
+                'Fingerlicans for John Jackson')
+        self.assertEquals(only_funder_in_database.filing_frequency,'Q')
+        self.assertEquals(only_funder_in_database.party,'REP')
+        self.assertEquals(only_funder_in_database.treasurer_name, 
+                'Hermes Conrad')
+        self.assertEquals(only_funder_in_database.street_one, 
+                '2504 FAIRBANKS STREET')
+        self.assertEquals(only_funder_in_database.street_two,'')
+        self.assertEquals(only_funder_in_database.state,'AK')
+        self.assertEquals(only_funder_in_database.zip_code,'99503')
+
 class IncumbentChallengerStatusModelTest(TestCase):
     def test_creating_a_new_IncumbentChallengerStatus_and_saving_it_to_the_database(self):
         # TODO: Create a new IncumbentChallengerStatus object 
