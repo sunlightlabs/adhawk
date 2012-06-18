@@ -137,7 +137,15 @@ class Funder(models.Model):
 
     #MTM fields
     stances = models.ManyToManyField(Stance,null=True,blank=True)
+    candidates = models.ManyToManyField(Candidate,
+            through="FunderToCandidate",
+            blank=True,
+            null=True)
 
+class FunderToCandidate(models.Model):
+    funder = models.ForeignKey(Funder)
+    candidate = models.ForeignKey(Candidate)
+    relationship = models.CharField(max_length=50)
 
 class MediaProfile(models.Model):
     url = models.URLField()
@@ -159,3 +167,16 @@ class MediaProfile(models.Model):
             super(MediaProfile, self).save(*args, **kwargs)
         else:
             raise Exception('not a working url')
+
+class Media(models.Model):
+    url = models.URLField()
+    creator_description = models.CharField(max_length=500,default="No description available.")
+    curator_description = models.CharField(max_length=500,blank=True,null=True)
+
+    # FK relations
+    media_profile = models.ForeignKey(MediaProfile,
+            on_delete=models.PROTECT)
+
+    # MTM relations
+    tags = models.ManyToManyField(Tag)
+
