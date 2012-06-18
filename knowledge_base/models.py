@@ -98,7 +98,7 @@ class Candidate(models.Model):
     FEC_id = models.CharField(max_length=9)
     name = models.CharField(max_length=38)
     party = models.CharField(max_length=3)
-    year_of_election = models.IntegerField(max_length=4)
+    year_of_election = models.IntegerField(max_length=4,null=True,blank=True)
     street_one = models.CharField(max_length=34)
     street_two = models.CharField(max_length=34)
     city = models.CharField(max_length=18)
