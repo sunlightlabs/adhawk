@@ -715,6 +715,7 @@ class MediaModelTest(TestCase):
 
         # check that its attributes have been saved
         self.assertEquals(only_media_in_database.media_profile,media_profile)
+        self.assertEquals(only_media_in_database.link_broken,False)
         self.assertEquals(only_media_in_database.url,
                 "http://www.youtube.com/watch?v=BVdLafErW2w")
         self.assertEquals(only_media_in_database.creator_description,
