@@ -1,0 +1,11 @@
+[
+  {
+    "pk": 1,
+    "model": "knowledge_base.issue",
+    "fields": {
+      "issue_categories": [],
+      "name": "Three cent titanium tax increase",
+      "description": "Description of the three cent titanium tax increase"
+    }
+  }
+]

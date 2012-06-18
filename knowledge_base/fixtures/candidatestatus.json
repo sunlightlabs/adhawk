@@ -1,0 +1,11 @@
+[
+  {
+    "pk": 1,
+    "model": "knowledge_base.candidatestatus",
+    "fields": {
+      "code": "C",
+      "description": "Description of a statutory candidate",
+      "value": "Statutory candidate"
+    }
+  }
+]

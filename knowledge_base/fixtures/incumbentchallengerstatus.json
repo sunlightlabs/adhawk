@@ -1,0 +1,11 @@
+[
+  {
+    "pk": 1,
+    "model": "knowledge_base.incumbentchallengerstatus",
+    "fields": {
+      "code": "O",
+      "description": "description of open seat",
+      "value": "Open Seat"
+    }
+  }
+]
