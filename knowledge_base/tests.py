@@ -398,12 +398,20 @@ class FunderModelTest(TestCase):
         self.assertEquals(only_funder_in_database, funder)
 
         # check that its attributes have been saved
-        all_stances_for_only_funder_in_database.stances.all()
+        all_stances_for_only_funder_in_database = only_funder_in_database.stances.all()
         self.assertEquals(len(all_stances_for_only_funder_in_database),1)
         only_stance_for_only_funder_in_database = all_stances_for_only_funder_in_database[0]
-        assertEquals(only_stance_for_only_funder_in_database,
+        self.assertEquals(only_stance_for_only_funder_in_database,
                 stance)
 
+        # make sure deleting the stance doesn't delete the Funder
+        stance.delete()
+        all_funders_in_database = Funder.objects.all()
+        self.assertEquals(len(all_funders_in_database),1)
+        only_funder_in_database = all_funders_in_database[0]
+        self.assertEquals(only_funder_in_database, funder)
+
+        self.assertEquals(len(only_funder_in_database.stances.all()),0)
 
 class IncumbentChallengerStatusModelTest(TestCase):
     def test_creating_a_new_IncumbentChallengerStatus_and_saving_it_to_the_database(self):
