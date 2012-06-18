@@ -328,6 +328,8 @@ class FunderModelTest(TestCase):
         self.assertEquals(only_funder_in_database.interest_group_category,
                 interest_group_category)
         self.assertEquals(only_funder_in_database.committee_type,committee_type)
+        self.assertEquals(only_funder_in_database.committee_designation,
+                committee_designation)
         self.assertEquals(only_funder_in_database.connected_organization,
                 None)
 
