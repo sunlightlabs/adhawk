@@ -131,4 +131,7 @@ class Funder(models.Model):
             blank=True,
             on_delete=models.SET_NULL)
 
+    #MTM fields
+    stances = models.ManyToManyField(Stance,null=True,blank=True)
+
 
