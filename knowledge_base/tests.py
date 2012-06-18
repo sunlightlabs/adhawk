@@ -652,14 +652,20 @@ class MediaProfileModelTest(TestCase):
             'connectedorganization.json',
             'stance.json',
             'issue.json',
-            'issuecategory.json']
+            'issuecategory.json',
+            'mediatype.json']
 
     def test_creating_a_new_MediaProfile_and_saving_it_to_the_database(self):
         # TODO: Create a new MediaProfile object 
         media_profile = MediaProfile()
-
+        
+        # add required FK relation to MediaType
+        media_type = MediaType.objects.all()[0]
+        media_profile.media_type = media_type
+        
         # make sure we can't save it if url does not exist
         media_profile.url = 'http://www.boblannon.com/notreal'
+        
         self.assertRaises(Exception,media_profile.save)
 
         media_profile.url = 'http://www.youtube.com/user/CrossroadsGPSChannel'
@@ -675,10 +681,11 @@ class MediaProfileModelTest(TestCase):
 
         # check that its attributes have been saved
         self.assertEquals(only_media_profile_in_database.url,"http://www.youtube.com/user/CrossroadsGPSChannel")
+        self.assertEquals(only_media_profile_in_database.media_type,media_type)
 
-        # add a FK relation to funder
+        # add optional FK relation to funder
         funder = Funder.objects.all()[0]
-        media_profile.funder = funder 
+        media_profile.funder = funder
 
         # save it
         media_profile.save()
@@ -692,6 +699,15 @@ class MediaProfileModelTest(TestCase):
         # check that its attributes have been saved
         self.assertEquals(only_media_profile_in_database.url,"http://www.youtube.com/user/CrossroadsGPSChannel")
         self.assertEquals(only_media_profile_in_database.funder,funder)
+        self.assertEquals(only_media_profile_in_database.media_type,media_type)
+
+        # make sure deleting the funder doesn't delete the media profile
+        funder.delete()
+
+        self.assertEquals(MediaProfile.objects.all()[0],media_profile)
+
+        # make sure deleting the MediaType is not allowed
+        self.assertRaises(ProtectedError,media_type.delete)
 
 
 
