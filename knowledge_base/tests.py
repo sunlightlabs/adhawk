@@ -19,10 +19,104 @@ class AdModelTest(TestCase):
             'market.json',
             'broadcasttype.json',
             'stance.json',
-            'issue.json']
+            'issue.json',
+            'funder.json',
+            'committeedesignation.json',
+            'committeetype.json',
+            'interestgroupcategory.json',
+            'connectedorganization.json',
+            ]
+
     def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
+        # get dependencies
+        media = Media.objects.all()[0]
+        market = Market.objects.all()[0]
+        broadcast_type = BroadcastType.objects.all()[0]
+        stance = Stance.objects.all()[0]
+
         # Create a new Ad object 
-        self.fail('todo: finish '+self.id())
+        ad = Ad()
+        ad.title = '"Spending" MO'
+        
+        # Add OTO relation
+        ad.media = media
+
+        # save it
+        ad.save()
+
+        # make sure we can find it
+        all_ads_in_database = Ad.objects.all()
+        self.assertEquals(len(all_ads_in_database),1)
+        only_ad_in_database = all_ads_in_database[0]
+        self.assertEquals(only_ad_in_database,ad)
+
+        # and check to make sure it saved its attributes
+        self.assertEquals(only_ad_in_database.title,'"Spending" MO')
+        self.assertEquals(only_ad_in_database.media,media)
+
+        # add optional MTM fields
+        ad.markets.add(market)
+        ad.broadcast_types.add(broadcast_type)
+        ad.stances.add(stance)
+
+        # save it
+        ad.save()
+
+        # make sure we can still find it
+        all_ads_in_database = Ad.objects.all()
+        self.assertEquals(len(all_ads_in_database),1)
+        only_ad_in_database = all_ads_in_database[0]
+        self.assertEquals(only_ad_in_database, ad)
+
+        # check that its MTM have been saved
+        all_stances_for_only_ad_in_database = only_ad_in_database.stances.all()
+        self.assertEquals(len(all_stances_for_only_ad_in_database),1)
+        only_stance_for_only_ad_in_database = all_stances_for_only_ad_in_database[0]
+        self.assertEquals(only_stance_for_only_ad_in_database,
+                stance)
+
+        all_markets_for_only_ad_in_database = only_ad_in_database.markets.all()
+        self.assertEquals(len(all_markets_for_only_ad_in_database),1)
+        only_market_for_only_ad_in_database = all_markets_for_only_ad_in_database[0]
+        self.assertEquals(only_market_for_only_ad_in_database,
+                market)
+
+        all_broadcast_types_for_only_ad_in_database = only_ad_in_database.broadcast_types.all()
+        self.assertEquals(len(all_broadcast_types_for_only_ad_in_database),1)
+        only_broadcast_type_for_only_ad_in_database = all_broadcast_types_for_only_ad_in_database[0]
+        self.assertEquals(only_broadcast_type_for_only_ad_in_database,
+                broadcast_type)
+
+        # make sure deleting the stance doesn't delete the ad
+        stance.delete()
+        all_ads_in_database = Ad.objects.all()
+        self.assertEquals(len(all_ads_in_database),1)
+        only_ad_in_database = all_ads_in_database[0]
+        self.assertEquals(only_ad_in_database, ad)
+
+        self.assertEquals(len(only_ad_in_database.stances.all()),0)
+
+        # make sure deleting the market doesn't delete the ad
+        market.delete()
+        all_ads_in_database = Ad.objects.all()
+        self.assertEquals(len(all_ads_in_database),1)
+        only_ad_in_database = all_ads_in_database[0]
+        self.assertEquals(only_ad_in_database, ad)
+
+        self.assertEquals(len(only_ad_in_database.markets.all()),0)
+
+        # make sure deleting the broadcast_type doesn't delete the ad
+        broadcast_type.delete()
+        all_ads_in_database = Ad.objects.all()
+        self.assertEquals(len(all_ads_in_database),1)
+        only_ad_in_database = all_ads_in_database[0]
+        self.assertEquals(only_ad_in_database, ad)
+
+        self.assertEquals(len(only_ad_in_database.broadcast_types.all()),0)
+    
+    def test_make_sure_deleting_one_MTM_related_object_doesnt_clear_all(self):
+        self.fail('Finish this test')
+
 
 #class AuthorModelTest(TestCase):
 #    def test_creating_a_new_Author_and_saving_it_to_the_database(self):
