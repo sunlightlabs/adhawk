@@ -1,0 +1,11 @@
+[
+  {
+    "pk": 1,
+    "model": "knowledge_base.committeetype",
+    "fields": {
+      "code": "C",
+      "name": "Communication Cost",
+      "description": "Description of communication cost"
+    }
+  }
+]

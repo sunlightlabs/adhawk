@@ -1,0 +1,11 @@
+[
+  {
+    "pk": 1,
+    "model": "knowledge_base.interestgroupcategory",
+    "fields": {
+      "code": "L",
+      "name": "LABOR ORGANIZATION",
+      "description": "These include unions and other representatives of workers"
+    }
+  }
+]

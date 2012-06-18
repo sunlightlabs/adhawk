@@ -104,6 +104,11 @@ class Candidate(models.Model):
     zip_code = models.IntegerField(max_length=5)
 
 
+    incumbent_challenger_status = models.ForeignKey(IncumbentChallengerStatus)
+    candidate_status = models.ForeignKey(CandidateStatus)
+
+    stances = models.ManyToManyField(Stance)
+
 class Funder(models.Model):
     FEC_id = models.CharField(max_length=9)
     name = models.CharField(max_length=90)
@@ -115,5 +120,15 @@ class Funder(models.Model):
     zip_code = models.CharField(max_length=5)
     filing_frequency = models.CharField(max_length=1)
     party = models.CharField(max_length=3)
+
+    #FK fields
+    interest_group_category = models.ForeignKey(InterestGroupCategory, 
+            on_delete=models.PROTECT)
+    committee_type = models.ForeignKey(CommitteeType, 
+            on_delete=models.PROTECT)
+    connected_organization = models.ForeignKey(ConnectedOrganization,
+            null=True, 
+            blank=True,
+            on_delete=models.SET_NULL)
 
 

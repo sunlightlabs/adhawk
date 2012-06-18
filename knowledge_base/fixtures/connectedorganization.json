@@ -1,0 +1,10 @@
+[
+  {
+    "pk": 1,
+    "model": "knowledge_base.connectedorganization",
+    "fields": {
+      "name": "NATIONAL ASSOCIATION OF HOME BUILDERS",
+      "description": "Description of the NAHB"
+    }
+  }
+]
