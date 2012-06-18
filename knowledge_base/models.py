@@ -103,5 +103,17 @@ class Candidate(models.Model):
     state = models.CharField(max_length=2)
     zip_code = models.IntegerField(max_length=5)
 
-    incumbent_challenger_status = models.ForeignKey(IncumbentChallengerStatus)
-    candidate_status = models.ForeignKey(CandidateStatus)
+
+class Funder(models.Model):
+    FEC_id = models.CharField(max_length=9)
+    name = models.CharField(max_length=90)
+    treasurer_name = models.CharField(max_length=38)
+    street_one = models.CharField(max_length=34)
+    street_two = models.CharField(max_length=34)
+    city = models.CharField(max_length=18)
+    state = models.CharField(max_length=2)
+    zip_code = models.CharField(max_length=5)
+    filing_frequency = models.CharField(max_length=1)
+    party = models.CharField(max_length=3)
+
+
