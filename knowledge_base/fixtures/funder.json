@@ -1,0 +1,25 @@
+[
+  {
+    "pk": 1,
+    "model": "knowledge_base.funder",
+    "fields": {
+      "city": "Anchorage",
+      "street_two": "",
+      "name": "Fingerlicans for John Jackson",
+      "street_one": "2504 FAIRBANKS STREET",
+      "FEC_id": "C00012229",
+      "interest_group_category": 1,
+      "committee_designation": 1,
+      "state": "AK",
+      "stances": [
+        1
+      ],
+      "treasurer_name": "Hermes Conrad",
+      "party": "REP",
+      "filing_frequency": "Q",
+      "connected_organization": null,
+      "committee_type": 1,
+      "zip_code": "99503"
+    }
+  }
+]
