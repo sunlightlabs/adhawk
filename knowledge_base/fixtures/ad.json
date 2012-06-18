@@ -1,0 +1,20 @@
+[
+  {
+    "pk": 1,
+    "model": "knowledge_base.ad",
+    "fields": {
+      "title": "\"Spending\" MO",
+      "broadcast_types": [
+        1
+      ],
+      "media": 1,
+      "stances": [
+        1
+      ],
+      "ingested": false,
+      "markets": [
+        1
+      ]
+    }
+  }
+]
