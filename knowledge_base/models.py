@@ -1,3 +1,5 @@
+import urlparse,httplib
+
 from django.db import models
 
 # Create your models here.
@@ -126,6 +128,8 @@ class Funder(models.Model):
             on_delete=models.PROTECT)
     committee_type = models.ForeignKey(CommitteeType, 
             on_delete=models.PROTECT)
+    committee_designation = models.ForeignKey(CommitteeDesignation,
+            on_delete=models.PROTECT)
     connected_organization = models.ForeignKey(ConnectedOrganization,
             null=True, 
             blank=True,
@@ -135,3 +139,23 @@ class Funder(models.Model):
     stances = models.ManyToManyField(Stance,null=True,blank=True)
 
 
+class MediaProfile(models.Model):
+    url = models.URLField()
+
+    # FK relations
+    funder = models.ForeignKey(Funder,
+            null=True,
+            blank=True,
+            on_delete=models.SET_NULL)
+    media_type = models.ForeignKey(MediaType,
+            on_delete=models.PROTECT)
+
+    def save(self, *args, **kwargs):
+        sr = urlparse.urlsplit(self.url)
+        conn = httplib.HTTPConnection(sr.netloc)
+        conn.request("HEAD",sr.path)
+        status = conn.getresponse().status
+        if status == 200:
+            super(MediaProfile, self).save(*args, **kwargs)
+        else:
+            raise Exception('not a working url')
