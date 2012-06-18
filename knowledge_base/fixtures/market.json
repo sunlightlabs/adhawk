@@ -1,0 +1,10 @@
+[
+  {
+    "pk": 1,
+    "model": "knowledge_base.market",
+    "fields": {
+      "market_type": "",
+      "name": "New New York"
+    }
+  }
+]

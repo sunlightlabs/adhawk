@@ -1,0 +1,20 @@
+[
+  {
+    "pk": 1,
+    "model": "knowledge_base.stance",
+    "fields": {
+      "issue": 1,
+      "name": "opposes",
+      "description": "explicity opposes the issue"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "knowledge_base.stance",
+    "fields": {
+      "issue": 1,
+      "name": "supports",
+      "description": "explicitly supports this measure"
+    }
+  }
+]

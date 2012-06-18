@@ -1,0 +1,16 @@
+[
+  {
+    "pk": 1,
+    "model": "knowledge_base.media",
+    "fields": {
+      "tags": [
+        1
+      ],
+      "url": "http://www.youtube.com/watch?v=BVdLafErW2w",
+      "link_broken": false,
+      "creator_description": "No description available.",
+      "media_profile": 1,
+      "curator_description": "Attack ad against Claire McCaskill's bid for MO senate, Attacks McCaskill's association with stimulus spending"
+    }
+  }
+]

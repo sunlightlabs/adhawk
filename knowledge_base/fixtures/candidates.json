@@ -1,0 +1,42 @@
+[
+  {
+    "pk": 1,
+    "model": "knowledge_base.candidate",
+    "fields": {
+      "city": "New New York",
+      "street_two": "Apt. 3",
+      "name": "Jack Johnson",
+      "street_one": "123 Fake Street",
+      "FEC_id": "J0EA00042",
+      "year_of_election": 2010,
+      "candidate_status": 1,
+      "state": "New York",
+      "stances": [
+        1
+      ],
+      "incumbent_challenger_status": 1,
+      "party": "",
+      "zip_code": 90210
+    }
+  },
+  {
+    "pk": 2,
+    "model": "knowledge_base.candidate",
+    "fields": {
+      "city": "New New York",
+      "street_two": "Apt. 2",
+      "name": "JOHN JACKSON",
+      "street_one": "456 Camino Notreal",
+      "FEC_id": "J0EA00043",
+      "year_of_election": null,
+      "candidate_status": 1,
+      "state": "New York",
+      "stances": [
+        2
+      ],
+      "incumbent_challenger_status": 1,
+      "party": "REP",
+      "zip_code": 90210
+    }
+  }
+]
