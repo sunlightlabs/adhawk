@@ -182,4 +182,19 @@ class Media(models.Model):
     tags = models.ManyToManyField(Tag)
 
 class Ad(models.Model):
-    pass
+    title = models.CharField(max_length=200)
+    
+    # OTO relation
+    media = models.OneToOneField(Media,on_delete=models.PROTECT)
+
+    # MTM relations
+    markets = models.ManyToManyField(Market,
+            blank=True,
+            null=True)
+    broadcast_types = models.ManyToManyField(BroadcastType,
+            blank=True,
+            null=True)
+    stances = models.ManyToManyField(Stance,
+            blank=True,
+            null=True)
+
