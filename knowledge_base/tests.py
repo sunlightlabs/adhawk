@@ -9,7 +9,7 @@ from django.test import TestCase
 from django.db import IntegrityError
 from django.db.models import ProtectedError
 
-from knowledge_base.models import Candidate,CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,Coverage,CoverageType,BroadcastType,Funder,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,MediaProfile,MediaType,Source,Stance,Tag
+from knowledge_base.models import Candidate,CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,Coverage,CoverageType,BroadcastType,Funder,FunderToCandidate,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,Media,MediaProfile,MediaType,Source,Stance,Tag
 
 #class AdModelTest(TestCase):
 #    def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
@@ -414,6 +414,35 @@ class FunderModelTest(TestCase):
         self.assertEquals(only_funder_in_database, funder)
 
         self.assertEquals(len(only_funder_in_database.stances.all()),0)
+        
+class FunderToCandidateModelTest(TestCase):
+    fixtures = ['funder.json',
+            'interestgroupcategory.json',
+            'connectedorganization.json',
+            'committeedesignation.json',
+            'committeetype.json',
+            'stance.json',
+            'issue.json',
+            'issuecategory.json',
+            'candidate.json',
+            'incumbentchallengerstatus.json',
+            'candidatestatus.json']
+    def test_create_a_new_FunderToCandidate_relation(self):
+        # get candidate object and funder object
+        candidate_from_db = Candidate.objects.all()[0]
+        funder_from_db = Funder.objects.all()[0]
+
+        # add funder-to-candidate relation
+        funder_to_candidate = FunderToCandidate(funder=funder_from_db,
+                candidate=candidate_from_db,
+                relationship='Primary Campaign Committee')
+
+        # save it
+        funder_to_candidate.save()
+
+
+
+
 
 class IncumbentChallengerStatusModelTest(TestCase):
     def test_creating_a_new_IncumbentChallengerStatus_and_saving_it_to_the_database(self):
@@ -639,10 +668,72 @@ class MarketModelTest(TestCase):
     #def test_entering_a_bad_market_type(self):
         # Not possible to restrict?  maybe a validator?
 
-#class MediaModelTest(TestCase):
-#    def test_creating_a_new_Media_and_saving_it_to_the_database(self):
-#        # TODO: Create a new Media object 
-#        self.fail('todo: finish '+self.id())
+class MediaModelTest(TestCase):
+    fixtures = ['funder.json',
+            'mediaprofile.json',
+            'mediatype.json',
+            'tag.json',
+            'issue.json',
+            'issuecategory.json',
+            'committeedesignation.json',
+            'committeetype.json',
+            'interestgroupcategory.json',
+            'connectedorganization.json',
+            'stance.json',
+            ]
+
+
+    def test_creating_a_new_Media_and_saving_it_to_the_database(self):
+        media_profile = MediaProfile.objects.all()[0]
+        tag = Tag.objects.all()[0]
+
+        # Create a new Media object 
+        media = Media()
+        media.url = "http://www.youtube.com/watch?v=BVdLafErW2w"
+        media.creator_description = "No description available."
+        media.curator_desctiption = "Attack ad against Claire McCaskill's bid        for MO senate, Attacks McCaskill's association with stimulus spending"
+        
+        # add required FK relation
+        media.media_profile = media_profile
+
+        # save it
+        media.save()
+
+        # check that we can find it
+        all_medias_in_database = Media.objects.all()
+        self.assertEquals(len(all_medias_in_database),1)
+        only_media_in_database = all_medias_in_database[0]
+        self.assertEquals(only_media_in_database, media)
+
+        # check that its attributes have been saved
+        self.assertEquals(only_media_in_database.media_profile,media_profile)
+
+        # add optional MTM relation
+        media.tags.add(tag)
+
+        # save it
+        media.save()
+
+        # check that we can find it
+        all_medias_in_database = Media.objects.all()
+        self.assertEquals(len(all_medias_in_database),1)
+        only_media_in_database = all_medias_in_database[0]
+        self.assertEquals(only_media_in_database, media)
+
+        # check that its attributes have been saved
+        all_tags_for_only_media_in_database = only_media_in_database.tags.all()
+        self.assertEquals(len(all_tags_for_only_media_in_database),1)
+        only_tag_for_only_media_in_database = all_tags_for_only_media_in_database[0]
+        self.assertEquals(only_tag_for_only_media_in_database,tag)
+
+        # make sure that we can't delete the media profile
+        self.assertRaises(ProtectedError, media_profile.delete)
+
+        # make sure that we don't lose the media when we delete the tag
+        tag.delete()
+        only_media_in_database = Media.objects.all()[0]
+        self.assertEquals(len(only_media_in_database.tags.all()),0)
+
 
 class MediaProfileModelTest(TestCase):
     fixtures = ['funder.json',
