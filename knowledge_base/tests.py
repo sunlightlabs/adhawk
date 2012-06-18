@@ -7,6 +7,8 @@ Replace this with more appropriate tests for your application.
 
 from django.test import TestCase
 from django.db import IntegrityError
+from django.db.models import ProtectedError
+
 from knowledge_base.models import Candidate,CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,Coverage,CoverageType,BroadcastType,Funder,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,MediaType,Source,Stance,Tag
 
 #class AdModelTest(TestCase):
@@ -269,7 +271,16 @@ class CoverageTypeModelTest(TestCase):
         self.assertEquals(only_coverage_type_in_database.name,"Blog post")
 #        
 class FunderModelTest(TestCase):
+    fixtures = ['interestgroupcategory.json','connectedorganization.json',
+            'committeedesignation.json','committeetype.json']
+
     def test_creating_a_new_Funder_and_saving_it_to_the_database(self):
+        # get FK-related objects
+        committee_designation = CommitteeDesignation.objects.all()[0]
+        committee_type = CommitteeType.objects.all()[0]
+        interest_group_category = InterestGroupCategory.objects.all()[0]
+        connected_organization = ConnectedOrganization.objects.all()[0]
+
         # Create a new Funder object
         funder = Funder()
         funder.FEC_id = 'C00012229'
@@ -281,6 +292,11 @@ class FunderModelTest(TestCase):
         funder.street_two = ''
         funder.state = 'AK'
         funder.zip_code = '99503'
+
+        # add foreign key constraints
+        funder.interest_group_category = interest_group_category
+        funder.committee_type = committee_type
+        funder.committee_designation = committee_designation
         
         # save it
         funder.save()
@@ -304,6 +320,37 @@ class FunderModelTest(TestCase):
         self.assertEquals(only_funder_in_database.street_two,'')
         self.assertEquals(only_funder_in_database.state,'AK')
         self.assertEquals(only_funder_in_database.zip_code,'99503')
+        self.assertEquals(only_funder_in_database.interest_group_category,
+                interest_group_category)
+        self.assertEquals(only_funder_in_database.committee_type,committee_type)
+        self.assertEquals(only_funder_in_database.connected_organization,
+                None)
+
+        # add connected organization
+        funder.connected_organization = connected_organization
+        funder.save()
+
+        # check that we can find it
+        all_funders_in_database = Funder.objects.all()
+        self.assertEquals(len(all_funders_in_database),1)
+        only_funder_in_database = all_funders_in_database[0]
+        self.assertEquals(only_funder_in_database, funder)
+
+        # check that its attributes have been saved
+        self.assertEquals(only_funder_in_database.connected_organization,
+                connected_organization)
+
+        # make sure that deleting the FK-related objects doesn't delete the
+        # funder
+        self.assertRaises(ProtectedError,interest_group_category.delete)
+        
+        self.assertRaises(ProtectedError,committee_type.delete)
+        
+        connected_organization.delete()
+        check_funder = Funder.objects.all()[0]
+        self.assertEquals(check_funder,funder)
+
+    #def test_creating_Funder_model
 
 class IncumbentChallengerStatusModelTest(TestCase):
     def test_creating_a_new_IncumbentChallengerStatus_and_saving_it_to_the_database(self):
