@@ -1,0 +1,11 @@
+[
+  {
+    "pk": 1,
+    "model": "knowledge_base.fundertocandidate",
+    "fields": {
+      "funder": 1,
+      "relationship": "Primary Campaign Committee",
+      "candidate": 1
+    }
+  }
+]

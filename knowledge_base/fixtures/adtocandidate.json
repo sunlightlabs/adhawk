@@ -1,0 +1,11 @@
+[
+  {
+    "pk": 1,
+    "model": "knowledge_base.adtocandidate",
+    "fields": {
+      "portrayal": "NEG",
+      "ad": 1,
+      "candidate": 1
+    }
+  }
+]
