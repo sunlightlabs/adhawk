@@ -7,7 +7,7 @@ Replace this with more appropriate tests for your application.
 
 from django.test import LiveServerTestCase
 from selenium import webdriver
-from selenium.webdrive.common.keys import Keys
+from selenium.webdriver.common.keys import Keys
 
 class LoginTest(LiveServerTestCase):
 
@@ -27,10 +27,10 @@ class LoginTest(LiveServerTestCase):
 
         # type username and password and hit enter
         username_field = self.browser.find_element_by_name('username')
-        username_field.send_keys('admin')
+        username_field.send_keys('blannon')
 
         password_field = self.browser.find_element_by_name('password')
-        password_field.send_keys('adm1n')
+        password_field.send_keys('cuibono')
         password_field.send_keys(Keys.RETURN)
 
         # username and password accepted, taken to the Site Administration
