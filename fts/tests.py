@@ -89,4 +89,23 @@ class AuthorTest(LiveServerTestCase):
         self.assertIn('Name:', body.text)
         self.assertIn('Profile page URL:', body.text)
 
+        # enter the author's name
+        name_field = self.browser.find_element_by_name('name')
+        name_field.send_keys("Joel Duffman")
+
+        # enter the author's profile page
+        profile_page_url_field = self.browser.find_element_by_name('profile_page_url')
+        profile_page_url_field.send_keys("http://www.newslytimes.com/people/duffman")
+
+        # click the save button
+        save_button = self.browser.find_element_by_css_selector(
+                "input[value='Save']")
+        save_button.click()
+
+        # returned to the "Authors" listing, see new author
+        time.sleep(10)
+        new_author_links = self.browser.find_elements_by_link_text(
+                "Joel Duffman")
+        self.assertEquals(len(new_author_links),1)
+
 
