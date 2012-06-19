@@ -26,9 +26,6 @@ class ConnectedOrganization(models.Model):
     name = models.CharField(max_length=38)
     description = models.CharField(max_length=500)
 
-class Coverage(models.Model):
-    pass
-
 class CoverageType(models.Model):
     name = models.CharField(max_length=50)
 
@@ -200,4 +197,27 @@ class Ad(models.Model):
     stances = models.ManyToManyField(Stance,
             blank=True,
             null=True)
+
+class Coverage(models.Model):
+    url = models.URLField()
+    headline = models.CharField(max_length=200)
+    text = models.TextField()
+    date = models.DateField()
+
+    # FK relations
+    source = models.ForeignKey(Source,on_delete=models.PROTECT)
+    
+    # MTM relations
+    tags = models.ManyToManyField(Tag,null=True,blank=True)
+    ads = models.ManyToManyField(Ad,null=True,blank=True)
+    issues = models.ManyToManyField(Issue,null=True,blank=True)
+    candidates = models.ManyToManyField(Candidate,null=True,blank=True)
+    funders = models.ManyToManyField(Funder,null=True,blank=True)
+    authors = models.ManyToManyField(Author,null=True,blank=True)
+    stances = models.ManyToManyField(Stance,null=True,blank=True)
+
+
+
+
+
 

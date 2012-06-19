@@ -1,0 +1,10 @@
+[
+  {
+    "pk": 1,
+    "model": "knowledge_base.source",
+    "fields": {
+      "scraper_added": false,
+      "main_url": "http://www.factcheck.org"
+    }
+  }
+]
