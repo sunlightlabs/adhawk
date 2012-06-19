@@ -1,0 +1,35 @@
+[
+  {
+    "pk": 1,
+    "model": "knowledge_base.coverage",
+    "fields": {
+      "funders": [
+        1
+      ],
+      "ads": [
+        1
+      ],
+      "source": 1,
+      "url": "http://www.newslytimes.com/article/1045",
+      "text": " abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg. ",
+      "tags": [
+        1
+      ],
+      "coverage_type": 1,
+      "headline": "Clash of the titanium taxes",
+      "candidates": [
+        1
+      ],
+      "authors": [
+        1
+      ],
+      "date": "2012-06-19",
+      "stances": [
+        1
+      ],
+      "issues": [
+        1
+      ]
+    }
+  }
+]

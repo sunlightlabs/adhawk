@@ -1,0 +1,18 @@
+[
+  {
+    "pk": 1,
+    "model": "knowledge_base.issuecategory",
+    "fields": {
+      "name": "Tax",
+      "parent": null
+    }
+  },
+  {
+    "pk": 2,
+    "model": "knowledge_base.issuecategory",
+    "fields": {
+      "name": "Titanium Tax",
+      "parent": 1
+    }
+  }
+]

@@ -1,0 +1,9 @@
+[
+  {
+    "pk": 1,
+    "model": "knowledge_base.coveragetype",
+    "fields": {
+      "name": "News Site"
+    }
+  }
+]
