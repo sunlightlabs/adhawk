@@ -11,7 +11,7 @@ from django.db import IntegrityError
 from django.db.models import ProtectedError
 from django.utils import timezone
 
-from knowledge_base.models import Ad,Author,Candidate,CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,Coverage,CoverageType,BroadcastType,Funder,FunderToCandidate,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,Media,MediaProfile,MediaType,Source,Stance,Tag
+from knowledge_base.models import Ad,AdToCandidate,Author,Candidate,CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,Coverage,CoverageType,BroadcastType,Funder,FunderToCandidate,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,Media,MediaProfile,MediaType,Source,Stance,Tag
 
 class AdModelTest(TestCase):
     fixtures = ['media.json',
@@ -117,8 +117,53 @@ class AdModelTest(TestCase):
 
         self.assertEquals(len(only_ad_in_database.broadcast_types.all()),0)
     
-    def test_make_sure_deleting_one_MTM_related_object_doesnt_clear_all(self):
-        self.fail('Finish this test')
+class AdToCandidateModelTest(TestCase):
+    fixtures = ['ad.json',
+            'media.json',
+            'mediaprofile.json',
+            'mediatype.json',
+            'tag.json',
+            'market.json',
+            'broadcasttype.json',
+            'stance.json',
+            'issue.json',
+            'funder.json',
+            'committeedesignation.json',
+            'committeetype.json',
+            'candidates.json',
+            'interestgroupcategory.json',
+            'connectedorganization.json',
+            'incumbentchallengerstatus.json',
+            'candidatestatus.json'
+            ]
+    def test_creating_a_new_AdToCandidate_relation_and_saving_it(self):
+        #get related objects
+        ad = Ad.objects.all()[0]
+        candidate = Candidate.objects.all()[0]
+
+        # make a new AdToCandidate relation
+        ad_to_candidate = AdToCandidate()
+        ad_to_candidate.ad = ad
+        ad_to_candidate.candidate = candidate
+        ad_to_candidate.portrayal = 'NEG'
+
+        # save it
+        ad_to_candidate.save()
+        
+        # make sure we can find it
+        all_ad_to_candidates_in_database = AdToCandidate.objects.all()
+        self.assertEquals(len(all_ad_to_candidates_in_database),1)
+        only_ad_to_candidate_in_database = all_ad_to_candidates_in_database[0]
+        self.assertEquals(only_ad_to_candidate_in_database, ad_to_candidate)
+
+        # check that its attributes have been saved
+        self.assertEquals(only_ad_to_candidate_in_database.candidate,
+                candidate)
+        self.assertEquals(only_ad_to_candidate_in_database.ad,
+                ad)
+
+
+
 
 
 class AuthorModelTest(TestCase):
@@ -745,9 +790,17 @@ class FunderToCandidateModelTest(TestCase):
         # save it
         funder_to_candidate.save()
 
+        # make sure we can find it
+        all_funder_to_candidates_in_database = FunderToCandidate.objects.all()
+        self.assertEquals(len(all_funder_to_candidates_in_database),1)
+        only_funder_to_candidate_in_database = all_funder_to_candidates_in_database[0]
+        self.assertEquals(only_funder_to_candidate_in_database, funder_to_candidate)
 
-
-
+        # check that its attributes have been saved
+        self.assertEquals(only_funder_to_candidate_in_database.candidate,
+                candidate_from_db)
+        self.assertEquals(only_funder_to_candidate_in_database.funder,
+                funder_from_db)
 
 class IncumbentChallengerStatusModelTest(TestCase):
     def test_creating_a_new_IncumbentChallengerStatus_and_saving_it_to_the_database(self):
