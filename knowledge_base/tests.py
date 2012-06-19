@@ -186,6 +186,11 @@ class AuthorModelTest(TestCase):
             if field.name ==  'profile_page_url':
                 self.assertEquals(field.verbose_name,'Profile page URL')
 
+    def test_object_is_named_after_author(self):
+        author = Author()
+        author.name = "Joel Duffman"
+        self.assertEquals(unicode(author),"Joel Duffman")
+
 class BroadcastTypeModelTest(TestCase):
     def test_creating_a_new_BroadcastType_and_saving_it_to_the_database(self):
         # create a new BroadcastType object
