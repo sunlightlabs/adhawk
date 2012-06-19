@@ -9,7 +9,7 @@ from django.test import TestCase
 from django.db import IntegrityError
 from django.db.models import ProtectedError
 
-from knowledge_base.models import Ad,Candidate,CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,Coverage,CoverageType,BroadcastType,Funder,FunderToCandidate,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,Media,MediaProfile,MediaType,Source,Stance,Tag
+from knowledge_base.models import Ad,Author,Candidate,CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,Coverage,CoverageType,BroadcastType,Funder,FunderToCandidate,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,Media,MediaProfile,MediaType,Source,Stance,Tag
 
 class AdModelTest(TestCase):
     fixtures = ['media.json',
@@ -119,11 +119,26 @@ class AdModelTest(TestCase):
         self.fail('Finish this test')
 
 
-#class AuthorModelTest(TestCase):
-#    def test_creating_a_new_Author_and_saving_it_to_the_database(self):
-#        # TODO: Create a new Author object 
-#        self.fail('todo: finish '+self.id())
-#
+class AuthorModelTest(TestCase):
+    def test_creating_a_new_Author_and_saving_it_to_the_database(self):
+        # Create a new Author object 
+        author = Author()
+        author.name = "Joel Duffman"
+        author.profile_page_url = "http://www.newslytimes.com/people/duffman"
+
+        # Save it
+        author.save()
+
+        # make sure we can find it
+        all_authors_in_database = Author.objects.all()
+        self.assertEquals(len(all_authors_in_database),1)
+        only_author_in_database = all_authors_in_database[0]
+        self.assertEquals(only_author_in_database,author)
+
+        # and check to make sure it saved its attributes
+        self.assertEquals(only_author_in_database.name,'Joel Duffman')
+        self.assertEquals(only_author_in_database.profile_page_url,"http://www.newslytimes.com/people/duffman")
+
 class BroadcastTypeModelTest(TestCase):
     def test_creating_a_new_BroadcastType_and_saving_it_to_the_database(self):
         # create a new BroadcastType object
@@ -352,8 +367,8 @@ class ConnectedOrganizationModelTest(TestCase):
 
 class CoverageModelTest(TestCase):
     def test_creating_a_new_Coverage_and_saving_it_to_the_database(self):
-        # TODO: Create a new Coverage object 
-        self.fail('todo: finish '+self.id())
+        # Create a new Coverage object
+        self.fail()
 
 class CoverageTypeModelTest(TestCase):
     def test_creating_a_new_CoverageType_and_saving_it_to_the_database(self):
