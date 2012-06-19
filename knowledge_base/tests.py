@@ -1055,6 +1055,7 @@ class MediaModelTest(TestCase):
         media_profile = MediaProfile.objects.all()[0]
         tag = Tag.objects.all()[0]
         ad = Ad.objects.all()[0]
+        EMBED_CODE =  '<iframe width="560" height="315" src="http://www.youtube.com/embed/BVdLafErW2w" frameborder="0" allowfullscreen></iframe>'
 
         # Create a new Media object 
         media = Media()
@@ -1085,6 +1086,7 @@ class MediaModelTest(TestCase):
                 "No description available.")
         self.assertEquals(only_media_in_database.curator_description,
                 "Attack ad against Claire McCaskill's bid for MO senate, Attacks McCaskill's association with stimulus spending")
+        self.assertEquals(only_media_in_database.embed_code,EMBED_CODE)
 
 
         # add optional MTM relation
