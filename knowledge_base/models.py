@@ -195,6 +195,7 @@ class Ad(models.Model):
 
 class Media(models.Model):
     url = models.URLField()
+    embed_code = models.CharField(max_length=200,blank=True,null=True)
     creator_description = models.CharField(max_length=500,default="No description available.")
     curator_description = models.CharField(max_length=500,blank=True,null=True)
     link_broken = models.BooleanField(default=False)
@@ -207,6 +208,14 @@ class Media(models.Model):
 
     # MTM relations
     tags = models.ManyToManyField(Tag)
+    
+    def save(self, *args, **kwargs):
+        sr = urlparse.urlsplit(self.url)
+        if sr.netloc=='www.youtube.com':
+            self.embed_code = '<iframe width="560" height="315" src="http://www.youtube.com/embed/%s" frameborder="0" allowfullscreen></iframe>'%sr.query.replace('v=','')
+            super(Media, self).save(*args, **kwargs)
+        else:
+            super(Media, self).save(*args, **kwargs)
 
 class AdToCandidate(models.Model):
     CHOICES = (
