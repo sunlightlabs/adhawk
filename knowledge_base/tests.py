@@ -8,6 +8,7 @@ Replace this with more appropriate tests for your application.
 from django.test import TestCase
 from django.db import IntegrityError
 from django.db.models import ProtectedError
+from django.utils import timezone
 
 from knowledge_base.models import Ad,Author,Candidate,CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,Coverage,CoverageType,BroadcastType,Funder,FunderToCandidate,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,Media,MediaProfile,MediaType,Source,Stance,Tag
 
@@ -366,9 +367,190 @@ class ConnectedOrganizationModelTest(TestCase):
                 DESCRIPTION)
 
 class CoverageModelTest(TestCase):
+    fixtures = ['ad.json',
+            'media.json',
+            'mediaprofile.json',
+            'mediatype.json',
+            'market.json',
+            'broadcasttype.json',
+            'stance.json',
+            'source.json',
+            'author.json',
+            'issue.json',
+            'issuecategory.json',
+            'candidates.json',
+            'incumbentchallengerstatus.json',
+            'candidatestatus.json',
+            'funder.json',
+            'committeedesignation.json',
+            'committeetype.json',
+            'interestgroupcategory.json',
+            'connectedorganization.json',
+            'tag.json']
+
     def test_creating_a_new_Coverage_and_saving_it_to_the_database(self):
+        # get related objects
+        candidate1 = Candidate.objects.all()[0]
+        candidate2 = Candidate.objects.all()[1]
+        ad = Ad.objects.all()[0]
+        author = Author.objects.all()[0]
+        issue = Issue.objects.all()[0]
+        stance = Stance.objects.all()[0]
+        tag = Tag.objects.all()[0]
+        source = Source.objects.all()[0]
+
         # Create a new Coverage object
-        self.fail()
+        coverage = Coverage()
+        coverage.url = 'http://www.newslytimes.com/article/1045'
+        coverage.headline = 'Clash of the titanium taxes'
+        TEXT = """
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
+        pellentesque, augue nec aliquet iaculis, ligula lacus dictum dui, nec
+        tincidunt mauris erat ut sapien. Quisque vulputate dolor est.
+        Pellentesque habitant morbi tristique senectus et netus et malesuada
+        fames ac turpis egestas. Aenean a diam sit amet purus auctor malesuada.
+        Duis aliquam, orci quis tristique egestas, urna risus vestibulum odio,
+        at vulputate quam orci feugiat diam. Aenean porttitor accumsan tortor,
+        sed ornare erat iaculis in. Aliquam erat volutpat. Maecenas at accumsan
+        tortor.
+
+        Nunc pharetra semper convallis. Sed nulla risus, molestie vitae mollis
+        non, ornare vel massa. Class aptent taciti sociosqu ad litora torquent
+        per conubia nostra, per inceptos himenaeos. Vestibulum consequat
+        pulvinar ipsum at aliquet. Morbi sem lectus, ultricies laoreet iaculis
+        quis, consectetur dictum orci. Sed blandit viverra tempus. Etiam
+        lobortis ornare risus in vestibulum. Fusce hendrerit tellus ut nibh
+        facilisis vehicula. Duis placerat, neque ut luctus ornare, nisl eros
+        volutpat nulla, in suscipit est mi eget nulla. Donec eu eros in odio
+        consectetur volutpat quis ac felis. Sed dignissim nulla vel justo
+        accumsan eu aliquam justo consectetur. Curabitur scelerisque ornare
+        purus, eget auctor tellus convallis at. Duis arcu elit, placerat sit
+        amet ultricies nec, sodales vel tortor. Cum sociis natoque penatibus et
+        magnis dis parturient montes, nascetur ridiculus mus. Nulla dapibus
+        libero vel nunc egestas sed luctus lacus malesuada. In hac habitasse
+        platea dictumst.
+
+        Suspendisse nec nisl nec erat dapibus interdum eget a risus. Integer
+        gravida pulvinar ultricies. Class aptent taciti sociosqu ad litora
+        torquent per conubia nostra, per inceptos himenaeos. Nulla ultrices orci
+        sed mi ullamcorper euismod iaculis in sem. Nullam tempor, felis sit amet
+        laoreet varius, lectus arcu dictum arcu, eu adipiscing mauris justo et
+        leo. Pellentesque habitant morbi tristique senectus et netus et
+        malesuada fames ac turpis egestas. Phasellus tristique ligula ac magna
+        venenatis adipiscing vel at ante. Proin sit amet dignissim lacus. Cras
+        condimentum mauris faucibus velit porttitor non pulvinar felis blandit.
+        Aliquam lacinia quam vitae nibh vulputate rutrum. Sed quis purus ut odio
+        vulputate sodales. Morbi at hendrerit orci. Curabitur urna mi, tristique
+        et vehicula eget, dapibus ac felis.
+
+        Praesent auctor semper arcu, ut porta neque imperdiet eget. Pellentesque
+        nec lacinia nisi. Aenean mollis laoreet ligula, eu viverra quam
+        tincidunt nec. In tempor urna ac dolor faucibus mattis. Nam sit amet
+        nulla erat, quis accumsan arcu. In porta mattis magna, quis dapibus
+        metus venenatis vel. In semper, nunc at pretium mollis, erat urna
+        volutpat est, in pellentesque dui lacus et massa. Nullam sit amet dui
+        vitae urna accumsan pharetra posuere auctor felis. Cras sed hendrerit
+        enim. Curabitur bibendum lorem sit amet tellus interdum eu tincidunt
+        massa auctor. Nam vitae risus purus, eget sollicitudin urna.
+        Pellentesque et consequat orci.
+
+        Mauris ultricies metus non arcu pharetra at accumsan ligula tincidunt.
+        Maecenas iaculis, nisi a convallis suscipit, nisi ligula sollicitudin
+        enim, quis tincidunt sem nisl eget tellus. Nullam euismod arcu sit amet
+        tellus tempus a elementum sapien venenatis. Etiam a mi ut nunc gravida
+        scelerisque. Sed id imperdiet odio. Ut feugiat interdum nulla non
+        iaculis. Mauris pharetra odio eu risus porttitor rutrum. Vestibulum ante
+        ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+        Fusce rutrum tempus quam, eget posuere neque imperdiet non. Aliquam at
+        tellus mauris, ut eleifend enim. Quisque eu libero arcu, at gravida
+        massa. In hendrerit, neque vitae tincidunt convallis, felis elit auctor
+        arcu, adipiscing dapibus leo nisi euismod purus. Nam ornare interdum
+        ipsum, eget laoreet risus pellentesque et. """
+        coverage.text = TEXT
+        DATE = timezone.now()
+        coverage.date = DATE
+
+        # add FK relation
+        coverage.source = source
+
+        # save it
+        coverage.save()
+
+        # make sure we can find it
+        all_coverages_in_database = Coverage.objects.all()
+        self.assertEquals(len(all_coverages_in_database),1)
+        only_coverage_in_database = all_coverages_in_database[0]
+        self.assertEquals(only_coverage_in_database,coverage)
+        
+        # and check to make sure it saved its attributes
+        self.assertEquals(only_coverage_in_database.url,
+                'http://www.newslytimes.com/article/1045')
+        self.assertEquals(only_coverage_in_database.headline,
+                'Clash of the titanium taxes')
+        self.assertEquals(only_coverage_in_database.text,TEXT)
+        self.assertEquals(only_coverage_in_database.date,DATE)
+        self.assertEquals(only_coverage_in_database.source,source)
+
+        # add MTM relations
+        self.authors.add(author)
+        self.ads.add(ad)
+        self.candidates.add(candidate1)
+        self.candidates.add(candidate2)
+        self.funders.add(funder)
+        self.tags.add(tag)
+        self.issues.add(issue)
+        self.stances.add(stance)
+
+        # save it
+        self.save()
+
+        # check that we can find it
+        all_coverages_in_database = Coverage.objects.all()
+        self.assertEquals(len(all_coverages_in_database),1)
+        only_coverage_in_database = all_coverages_in_database[0]
+        self.assertEquals(only_coverage_in_database, coverage)
+
+        # check that authors have been saved
+        all_authors_for_coverage_in_database = only_coverage_in_database.authors.all()
+        self.assertEquals(len(all_authors_for_coverage_in_database),1)
+        only_author_for_coverage_in_database = all_authors_for_coverage_in_database[0]
+        self.assertEquals(only_author_for_coverage_in_database,author)
+        
+        # check that candidates have been saved
+        all_candidates_for_coverage_in_database = only_coverage_in_database.candidates.all()
+        self.assertEquals(len(all_candidates_for_coverage_in_database),2)
+        self.assertIn(all_candidates_for_coverage_in_database,candidate1)
+        self.assertIn(all_candidates_for_coverage_in_database,candidate2)
+        
+        # check that funders have been saved
+        all_funders_for_coverage_in_database = only_coverage_in_database.funders.all()
+        self.assertEquals(len(all_funders_for_coverage_in_database),1)
+        only_funder_for_coverage_in_database = all_funders_for_coverage_in_database[0]
+        self.assertEquals(only_funder_for_coverage_in_database,funder)
+        
+        # check that tags have been saved
+        all_tags_for_coverage_in_database = only_coverage_in_database.tags.all()
+        self.assertEquals(len(all_tags_for_coverage_in_database),1)
+        only_tag_for_coverage_in_database = all_tags_for_coverage_in_database[0]
+        self.assertEquals(only_tag_for_coverage_in_database,tag)
+        
+        # check that issues have been saved
+        all_issues_for_coverage_in_database = only_coverage_in_database.issues.all()
+        self.assertEquals(len(all_issues_for_coverage_in_database),1)
+        only_issue_for_coverage_in_database = all_issues_for_coverage_in_database[0]
+        self.assertEquals(only_issue_for_coverage_in_database,issue)
+        
+        # check that ads have been saved
+        all_ads_for_coverage_in_database = only_coverage_in_database.ads.all()
+        self.assertEquals(len(all_ads_for_coverage_in_database),1)
+        only_ad_for_coverage_in_database = all_ads_for_coverage_in_database[0]
+        self.assertEquals(only_ad_for_coverage_in_database,ad)
+        
+        # check that stances have been saved
+        all_stances_for_coverage_in_database = only_coverage_in_database.stances.all()
+        self.assertEquals(len(all_stances_for_coverage_in_database),1)
+        only_stance_for_coverage_in_database = all_stances_for_coverage_in_database[0]
+        self.assertEquals(only_stance_for_coverage_in_database,stance)
 
 class CoverageTypeModelTest(TestCase):
     def test_creating_a_new_CoverageType_and_saving_it_to_the_database(self):
