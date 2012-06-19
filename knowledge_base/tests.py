@@ -432,7 +432,8 @@ class CoverageModelTest(TestCase):
             'committeetype.json',
             'interestgroupcategory.json',
             'connectedorganization.json',
-            'tag.json']
+            'tag.json',
+            'coveragetype.json']
 
     def test_creating_a_new_Coverage_and_saving_it_to_the_database(self):
         # get related objects
@@ -445,6 +446,7 @@ class CoverageModelTest(TestCase):
         tag = Tag.objects.all()[0]
         source = Source.objects.all()[0]
         funder = Funder.objects.all()[0]
+        coverage_type = CoverageType.objects.all()[0]
 
         # Create a new Coverage object
         coverage = Coverage()
@@ -517,8 +519,9 @@ class CoverageModelTest(TestCase):
         DATE = date.today()
         coverage.date = DATE
 
-        # add FK relation
+        # add FK relations
         coverage.source = source
+        coverage.coverage_type = coverage_type
 
         # save it
         coverage.save()
@@ -537,6 +540,7 @@ class CoverageModelTest(TestCase):
         self.assertEquals(only_coverage_in_database.text,TEXT)
         self.assertEquals(only_coverage_in_database.date,DATE)
         self.assertEquals(only_coverage_in_database.source,source)
+        self.assertEquals(only_coverage_in_database.coverage_type,coverage_type)
 
         # make sure deleting the source raises an error
         self.assertRaises(ProtectedError,source.delete)
