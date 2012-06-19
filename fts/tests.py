@@ -73,5 +73,20 @@ class AuthorTest(LiveServerTestCase):
         #print body.text
         self.assertEquals(len(authors_links), 1)
 
-        # TODO: use the admin site to create a new Author
-        self.fail('finish this test')
+        # click on author link
+        authors_links[0].click()
+
+        # look at author page, see no authors yet
+        body = self.browser.find_element_by_tag_name('body')
+        self.assertIn('0 authors', body.text)
+
+        # see link to 'add' a new author, click it
+        new_author_link = self.browser.find_element_by_link_text('Add author')
+        new_author_link.click()
+
+        # see some input fields
+        body = self.browser.find_element_by_tag_name('body')
+        self.assertIn('Name:', body.text)
+        self.assertIn('Profile page URL:', body.text)
+
+
