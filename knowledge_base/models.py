@@ -7,6 +7,9 @@ class Author(models.Model):
     name = models.CharField(max_length=50)
     profile_page_url = models.URLField(max_length=100, 
             verbose_name='Profile page URL')
+
+    def __unicode__(self):
+        return self.name
             
 class CandidateStatus(models.Model):
     code = models.CharField(max_length=1)
