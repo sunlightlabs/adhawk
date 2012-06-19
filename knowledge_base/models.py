@@ -5,7 +5,8 @@ from django.db import models
 # Create your models here.
 class Author(models.Model):
     name = models.CharField(max_length=50)
-    profile_page_url = models.URLField(max_length=100)
+    profile_page_url = models.URLField(max_length=100, 
+            verbose_name='Profile page URL')
             
 class CandidateStatus(models.Model):
     code = models.CharField(max_length=1)
