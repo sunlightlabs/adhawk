@@ -220,6 +220,7 @@ class Coverage(models.Model):
 
     # FK relations
     source = models.ForeignKey(Source,on_delete=models.PROTECT)
+    coverage_type = models.ForeignKey(CoverageType,null=True,blank=True,on_delete=models.SET_NULL)
     
     # MTM relations
     tags = models.ManyToManyField(Tag,null=True,blank=True)
