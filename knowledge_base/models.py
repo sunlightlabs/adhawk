@@ -171,25 +171,12 @@ class MediaProfile(models.Model):
         else:
             raise Exception('not a working url')
 
-class Media(models.Model):
-    url = models.URLField()
-    creator_description = models.CharField(max_length=500,default="No description available.")
-    curator_description = models.CharField(max_length=500,blank=True,null=True)
-    link_broken = models.BooleanField(default=False)
-
-    # FK relations
-    media_profile = models.ForeignKey(MediaProfile,
-            on_delete=models.PROTECT)
-
-    # MTM relations
-    tags = models.ManyToManyField(Tag)
-
 class Ad(models.Model):
     title = models.CharField(max_length=200)
     ingested = models.BooleanField(default=False)
     
     # OTO relation
-    media = models.OneToOneField(Media,on_delete=models.PROTECT)
+    #media = models.OneToOneField(Media,on_delete=models.PROTECT)
 
     # MTM relations
     markets = models.ManyToManyField(Market,
@@ -205,6 +192,21 @@ class Ad(models.Model):
     # MTM through relation
     candidates = models.ManyToManyField(Candidate,
             through='AdToCandidate')
+
+class Media(models.Model):
+    url = models.URLField()
+    creator_description = models.CharField(max_length=500,default="No description available.")
+    curator_description = models.CharField(max_length=500,blank=True,null=True)
+    link_broken = models.BooleanField(default=False)
+
+    # FK relations
+    media_profile = models.ForeignKey(MediaProfile,
+            on_delete=models.PROTECT)
+    ad = models.ForeignKey(Ad,
+            on_delete=models.PROTECT)
+
+    # MTM relations
+    tags = models.ManyToManyField(Tag)
 
 class AdToCandidate(models.Model):
     CHOICES = (
