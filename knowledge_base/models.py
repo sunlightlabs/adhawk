@@ -198,6 +198,20 @@ class Ad(models.Model):
             blank=True,
             null=True)
 
+    # MTM through relation
+    candidates = models.ManyToManyField(Candidate,
+            through='AdToCandidate')
+
+class AdToCandidate(models.Model):
+    CHOICES = (
+            ('POS','Positive'),
+            ('NEG','Negative'),
+            ('NEU','Neutral'),
+            )
+    ad = models.ForeignKey(Ad)
+    candidate = models.ForeignKey(Candidate)
+    portrayal = models.CharField(max_length=3,choices=CHOICES)
+
 class Coverage(models.Model):
     url = models.URLField()
     headline = models.CharField(max_length=200)
