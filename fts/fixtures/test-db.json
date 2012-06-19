@@ -1,0 +1,311 @@
+[
+  {
+    "pk": 1,
+    "model": "knowledge_base.author",
+    "fields": {
+      "name": "Joel Duffman",
+      "profile_page_url": "http://www.newslytimes.com/people/duffman"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.candidatestatus",
+    "fields": {
+      "code": "C",
+      "description": "Description of a statutory candidate",
+      "value": "Statutory candidate"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.committeedesignation",
+    "fields": {
+      "code": "D",
+      "name": "LEADERSHIP PAC",
+      "description": "Description of a leadership PAC"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.committeetype",
+    "fields": {
+      "code": "C",
+      "name": "Communication Cost",
+      "description": "Description of communication cost"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.connectedorganization",
+    "fields": {
+      "name": "NATIONAL ASSOCIATION OF HOME BUILDERS",
+      "description": "Description of the NAHB"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.coveragetype",
+    "fields": {
+      "name": "News Site"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.broadcasttype",
+    "fields": {
+      "name": "Television"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.incumbentchallengerstatus",
+    "fields": {
+      "code": "O",
+      "description": "description of open seat",
+      "value": "Open Seat"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.interestgroupcategory",
+    "fields": {
+      "code": "L",
+      "name": "LABOR ORGANIZATION",
+      "description": "These include unions and other representatives of workers"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.issuecategory",
+    "fields": {
+      "name": "Tax",
+      "parent": null
+    }
+  },
+  {
+    "pk": 2,
+    "model": "knowledge_base.issuecategory",
+    "fields": {
+      "name": "Titanium Tax",
+      "parent": 1
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.issue",
+    "fields": {
+      "issue_categories": [],
+      "name": "Three cent titanium tax increase",
+      "description": "Description of the three cent titanium tax increase"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.market",
+    "fields": {
+      "market_type": "",
+      "name": "New New York"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.mediatype",
+    "fields": {
+      "scraper_added": false,
+      "main_url": "http://www.youtube.com"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.source",
+    "fields": {
+      "scraper_added": false,
+      "main_url": "http://www.factcheck.org"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.stance",
+    "fields": {
+      "issue": 1,
+      "name": "opposes",
+      "description": "explicity opposes the issue"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "knowledge_base.stance",
+    "fields": {
+      "issue": 1,
+      "name": "supports",
+      "description": "explicitly supports this measure"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.tag",
+    "fields": {
+      "relevant": true,
+      "scraped": true,
+      "name": "titanium",
+      "issues": [
+        1
+      ]
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.candidate",
+    "fields": {
+      "city": "New New York",
+      "street_two": "Apt. 3",
+      "name": "Jack Johnson",
+      "street_one": "123 Fake Street",
+      "FEC_id": "J0EA00042",
+      "year_of_election": 2010,
+      "candidate_status": 1,
+      "state": "New York",
+      "stances": [
+        1
+      ],
+      "incumbent_challenger_status": 1,
+      "party": "",
+      "zip_code": 90210
+    }
+  },
+  {
+    "pk": 2,
+    "model": "knowledge_base.candidate",
+    "fields": {
+      "city": "New New York",
+      "street_two": "Apt. 2",
+      "name": "JOHN JACKSON",
+      "street_one": "456 Camino Notreal",
+      "FEC_id": "J0EA00043",
+      "year_of_election": null,
+      "candidate_status": 1,
+      "state": "New York",
+      "stances": [
+        2
+      ],
+      "incumbent_challenger_status": 1,
+      "party": "REP",
+      "zip_code": 90210
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.funder",
+    "fields": {
+      "city": "Anchorage",
+      "street_two": "",
+      "name": "Fingerlicans for John Jackson",
+      "street_one": "2504 FAIRBANKS STREET",
+      "FEC_id": "C00012229",
+      "interest_group_category": 1,
+      "committee_designation": 1,
+      "state": "AK",
+      "stances": [
+        1
+      ],
+      "treasurer_name": "Hermes Conrad",
+      "party": "REP",
+      "filing_frequency": "Q",
+      "connected_organization": null,
+      "committee_type": 1,
+      "zip_code": "99503"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.fundertocandidate",
+    "fields": {
+      "funder": 1,
+      "relationship": "Primary Campaign Committee",
+      "candidate": 1
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.mediaprofile",
+    "fields": {
+      "url": "http://www.youtube.com",
+      "media_type": 1,
+      "funder": 1
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.media",
+    "fields": {
+      "tags": [
+        1
+      ],
+      "url": "http://www.youtube.com/watch?v=BVdLafErW2w",
+      "link_broken": false,
+      "creator_description": "No description available.",
+      "media_profile": 1,
+      "curator_description": "Attack ad against Claire McCaskill's bid for MO senate, Attacks McCaskill's association with stimulus spending"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.ad",
+    "fields": {
+      "title": "\"Spending\" MO",
+      "broadcast_types": [
+        1
+      ],
+      "media": 1,
+      "stances": [
+        1
+      ],
+      "ingested": false,
+      "markets": [
+        1
+      ]
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.adtocandidate",
+    "fields": {
+      "portrayal": "NEG",
+      "ad": 1,
+      "candidate": 1
+    }
+  },
+  {
+    "pk": 1,
+    "model": "knowledge_base.coverage",
+    "fields": {
+      "funders": [
+        1
+      ],
+      "ads": [
+        1
+      ],
+      "source": 1,
+      "url": "http://www.newslytimes.com/article/1045",
+      "text": " abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg.  abcd efg. ",
+      "tags": [
+        1
+      ],
+      "coverage_type": 1,
+      "headline": "Clash of the titanium taxes",
+      "candidates": [
+        1
+      ],
+      "authors": [
+        1
+      ],
+      "date": "2012-06-19",
+      "stances": [
+        1
+      ],
+      "issues": [
+        1
+      ]
+    }
+  }
+]
