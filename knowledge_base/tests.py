@@ -14,9 +14,7 @@ from django.utils import timezone
 from knowledge_base.models import Ad,AdToCandidate,Author,Candidate,CandidateStatus,CommitteeDesignation,CommitteeType,ConnectedOrganization,Coverage,CoverageType,BroadcastType,Funder,FunderToCandidate,IncumbentChallengerStatus,InterestGroupCategory,Issue,IssueCategory,Market,Media,MediaProfile,MediaType,Source,Stance,Tag
 
 class AdModelTest(TestCase):
-    fixtures = ['media.json',
-            'mediaprofile.json',
-            'mediatype.json',
+    fixtures = [
             'tag.json',
             'market.json',
             'broadcasttype.json',
@@ -31,7 +29,7 @@ class AdModelTest(TestCase):
 
     def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
         # get dependencies
-        media = Media.objects.all()[0]
+        # media = Media.objects.all()[0]
         market = Market.objects.all()[0]
         broadcast_type = BroadcastType.objects.all()[0]
         stance = Stance.objects.all()[0]
@@ -41,7 +39,7 @@ class AdModelTest(TestCase):
         ad.title = '"Spending" MO'
         
         # Add OTO relation
-        ad.media = media
+        #ad.media = media
 
         # save it
         ad.save()
@@ -55,7 +53,7 @@ class AdModelTest(TestCase):
         # and check to make sure it saved its attributes
         self.assertEquals(only_ad_in_database.title,'"Spending" MO')
         self.assertEquals(only_ad_in_database.ingested,False)
-        self.assertEquals(only_ad_in_database.media,media)
+        #self.assertEquals(only_ad_in_database.media,media)
 
         # add optional MTM fields
         ad.markets.add(market)
@@ -1047,12 +1045,16 @@ class MediaModelTest(TestCase):
             'interestgroupcategory.json',
             'connectedorganization.json',
             'stance.json',
+            'ad.json',
+            'market.json',
+            'broadcasttype.json'
             ]
 
 
     def test_creating_a_new_Media_and_saving_it_to_the_database(self):
         media_profile = MediaProfile.objects.all()[0]
         tag = Tag.objects.all()[0]
+        ad = Ad.objects.all()[0]
 
         # Create a new Media object 
         media = Media()
@@ -1062,6 +1064,7 @@ class MediaModelTest(TestCase):
         
         # add required FK relation
         media.media_profile = media_profile
+        media.ad = ad
 
         # save it
         media.save()
@@ -1074,6 +1077,7 @@ class MediaModelTest(TestCase):
 
         # check that its attributes have been saved
         self.assertEquals(only_media_in_database.media_profile,media_profile)
+        self.assertEquals(only_media_in_database.ad,ad)
         self.assertEquals(only_media_in_database.link_broken,False)
         self.assertEquals(only_media_in_database.url,
                 "http://www.youtube.com/watch?v=BVdLafErW2w")
