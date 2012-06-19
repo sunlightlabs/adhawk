@@ -4,6 +4,7 @@ when you run "manage.py test".
 
 Replace this with more appropriate tests for your application.
 """
+from datetime import date
 
 from django.test import TestCase
 from django.db import IntegrityError
@@ -398,6 +399,7 @@ class CoverageModelTest(TestCase):
         stance = Stance.objects.all()[0]
         tag = Tag.objects.all()[0]
         source = Source.objects.all()[0]
+        funder = Funder.objects.all()[0]
 
         # Create a new Coverage object
         coverage = Coverage()
@@ -467,7 +469,7 @@ class CoverageModelTest(TestCase):
         arcu, adipiscing dapibus leo nisi euismod purus. Nam ornare interdum
         ipsum, eget laoreet risus pellentesque et. """
         coverage.text = TEXT
-        DATE = timezone.now()
+        DATE = date.today()
         coverage.date = DATE
 
         # add FK relation
@@ -491,18 +493,21 @@ class CoverageModelTest(TestCase):
         self.assertEquals(only_coverage_in_database.date,DATE)
         self.assertEquals(only_coverage_in_database.source,source)
 
+        # make sure deleting the source raises an error
+        self.assertRaises(ProtectedError,source.delete)
+
         # add MTM relations
-        self.authors.add(author)
-        self.ads.add(ad)
-        self.candidates.add(candidate1)
-        self.candidates.add(candidate2)
-        self.funders.add(funder)
-        self.tags.add(tag)
-        self.issues.add(issue)
-        self.stances.add(stance)
+        coverage.authors.add(author)
+        coverage.ads.add(ad)
+        coverage.candidates.add(candidate1)
+        coverage.candidates.add(candidate2)
+        coverage.funders.add(funder)
+        coverage.tags.add(tag)
+        coverage.issues.add(issue)
+        coverage.stances.add(stance)
 
         # save it
-        self.save()
+        coverage.save()
 
         # check that we can find it
         all_coverages_in_database = Coverage.objects.all()
@@ -519,8 +524,8 @@ class CoverageModelTest(TestCase):
         # check that candidates have been saved
         all_candidates_for_coverage_in_database = only_coverage_in_database.candidates.all()
         self.assertEquals(len(all_candidates_for_coverage_in_database),2)
-        self.assertIn(all_candidates_for_coverage_in_database,candidate1)
-        self.assertIn(all_candidates_for_coverage_in_database,candidate2)
+        self.assertIn(candidate1,all_candidates_for_coverage_in_database)
+        self.assertIn(candidate2,all_candidates_for_coverage_in_database)
         
         # check that funders have been saved
         all_funders_for_coverage_in_database = only_coverage_in_database.funders.all()
