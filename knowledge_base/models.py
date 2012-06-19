@@ -3,7 +3,9 @@ import urlparse,httplib
 from django.db import models
 
 # Create your models here.
-
+class Author(models.Model):
+    name = models.CharField(max_length=50)
+    profile_page_url = models.URLField(max_length=100)
             
 class CandidateStatus(models.Model):
     code = models.CharField(max_length=1)
