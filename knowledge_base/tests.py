@@ -162,10 +162,6 @@ class AdToCandidateModelTest(TestCase):
         self.assertEquals(only_ad_to_candidate_in_database.ad,
                 ad)
 
-
-
-
-
 class AuthorModelTest(TestCase):
     def test_creating_a_new_Author_and_saving_it_to_the_database(self):
         # Create a new Author object 
@@ -185,6 +181,10 @@ class AuthorModelTest(TestCase):
         # and check to make sure it saved its attributes
         self.assertEquals(only_author_in_database.name,'Joel Duffman')
         self.assertEquals(only_author_in_database.profile_page_url,"http://www.newslytimes.com/people/duffman")
+    def test_verbose_name_for_profile_page_url_field(self):
+        for field in Author._meta.fields:
+            if field.name ==  'profile_page_url':
+                self.assertEquals(field.verbose_name,'Profile page URL')
 
 class BroadcastTypeModelTest(TestCase):
     def test_creating_a_new_BroadcastType_and_saving_it_to_the_database(self):
