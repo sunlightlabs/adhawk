@@ -33,6 +33,7 @@ class AdModelTest(TestCase):
         market = Market.objects.all()[0]
         broadcast_type = BroadcastType.objects.all()[0]
         stance = Stance.objects.all()[0]
+        tag = Tag.objects.all()[0]
 
         # Create a new Ad object 
         ad = Ad()
@@ -59,6 +60,7 @@ class AdModelTest(TestCase):
         ad.markets.add(market)
         ad.broadcast_types.add(broadcast_type)
         ad.stances.add(stance)
+        ad.tags.add(tag)
 
         # save it
         ad.save()
@@ -88,6 +90,12 @@ class AdModelTest(TestCase):
         self.assertEquals(only_broadcast_type_for_only_ad_in_database,
                 broadcast_type)
 
+        all_tags_for_only_ad_in_database = only_ad_in_database.tags.all()
+        self.assertEquals(len(all_tags_for_only_ad_in_database),1)
+        only_tag_for_only_ad_in_database = all_tags_for_only_ad_in_database[0]
+        self.assertEquals(only_tag_for_only_ad_in_database,
+                tag)
+        
         # make sure deleting the stance doesn't delete the ad
         stance.delete()
         all_ads_in_database = Ad.objects.all()
@@ -114,6 +122,16 @@ class AdModelTest(TestCase):
         self.assertEquals(only_ad_in_database, ad)
 
         self.assertEquals(len(only_ad_in_database.broadcast_types.all()),0)
+        
+        # make sure deleting the tag doesn't delete the ad
+        tag.delete()
+        all_ads_in_database = Ad.objects.all()
+        self.assertEquals(len(all_ads_in_database),1)
+        only_ad_in_database = all_ads_in_database[0]
+        self.assertEquals(only_ad_in_database, ad)
+
+        self.assertEquals(len(only_ad_in_database.tags.all()),0)
+
     
 class AdToCandidateModelTest(TestCase):
     fixtures = ['ad.json',
@@ -1053,7 +1071,6 @@ class MediaModelTest(TestCase):
 
     def test_creating_a_new_Media_and_saving_it_to_the_database(self):
         media_profile = MediaProfile.objects.all()[0]
-        tag = Tag.objects.all()[0]
         ad = Ad.objects.all()[0]
         EMBED_CODE =  '<iframe width="560" height="315" src="http://www.youtube.com/embed/BVdLafErW2w" frameborder="0" allowfullscreen></iframe>'
 
@@ -1088,33 +1105,8 @@ class MediaModelTest(TestCase):
                 "Attack ad against Claire McCaskill's bid for MO senate, Attacks McCaskill's association with stimulus spending")
         self.assertEquals(only_media_in_database.embed_code,EMBED_CODE)
 
-
-        # add optional MTM relation
-        media.tags.add(tag)
-
-        # save it
-        media.save()
-
-        # check that we can find it
-        all_medias_in_database = Media.objects.all()
-        self.assertEquals(len(all_medias_in_database),1)
-        only_media_in_database = all_medias_in_database[0]
-        self.assertEquals(only_media_in_database, media)
-
-        # check that its attributes have been saved
-        all_tags_for_only_media_in_database = only_media_in_database.tags.all()
-        self.assertEquals(len(all_tags_for_only_media_in_database),1)
-        only_tag_for_only_media_in_database = all_tags_for_only_media_in_database[0]
-        self.assertEquals(only_tag_for_only_media_in_database,tag)
-
         # make sure that we can't delete the media profile
         self.assertRaises(ProtectedError, media_profile.delete)
-
-        # make sure that we don't lose the media when we delete the tag
-        tag.delete()
-        only_media_in_database = Media.objects.all()[0]
-        self.assertEquals(len(only_media_in_database.tags.all()),0)
-
 
 class MediaProfileModelTest(TestCase):
     fixtures = ['funder.json',
