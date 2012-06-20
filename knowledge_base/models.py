@@ -188,6 +188,9 @@ class Ad(models.Model):
     stances = models.ManyToManyField(Stance,
             blank=True,
             null=True)
+    tags = models.ManyToManyField(Tag,
+            blank=True,
+            null=True)
 
     # MTM through relation
     candidates = models.ManyToManyField(Candidate,
@@ -196,8 +199,8 @@ class Ad(models.Model):
 class Media(models.Model):
     url = models.URLField()
     embed_code = models.CharField(max_length=200,blank=True,null=True)
-    creator_description = models.CharField(max_length=500,default="No description available.")
-    curator_description = models.CharField(max_length=500,blank=True,null=True)
+    creator_description = models.TextField(default="No description available.")
+    curator_description = models.TextField(blank=True,null=True)
     link_broken = models.BooleanField(default=False)
 
     # FK relations
@@ -206,8 +209,8 @@ class Media(models.Model):
     ad = models.ForeignKey(Ad,
             on_delete=models.PROTECT)
 
-    # MTM relations
-    tags = models.ManyToManyField(Tag)
+    # MTM relations (moved to Ad)
+    # tags = models.ManyToManyField(Tag)
     
     def save(self, *args, **kwargs):
         sr = urlparse.urlsplit(self.url)
