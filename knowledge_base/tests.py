@@ -132,6 +132,10 @@ class AdModelTest(TestCase):
 
         self.assertEquals(len(only_ad_in_database.tags.all()),0)
 
+    def test_object_is_named_after_ad_title(self):
+        ad = Ad()
+        ad.title = '"Spending" MO'
+        self.assertEquals(unicode(ad),'"Spending" MO')
     
 class AdToCandidateModelTest(TestCase):
     fixtures = ['ad.json',
