@@ -3,9 +3,9 @@
     "pk": 1,
     "model": "knowledge_base.funder",
     "fields": {
-      "city": "Anchorage",
-      "street_two": "",
-      "name": "Fingerlicans for John Jackson",
+      "city": "ANCHORAGE",
+      "street_two": "APT 2",
+      "name": "FINGERLICANS FOR JOHN JACKSON",
       "street_one": "2504 FAIRBANKS STREET",
       "FEC_id": "C00012229",
       "interest_group_category": 1,
@@ -14,7 +14,7 @@
       "stances": [
         1
       ],
-      "treasurer_name": "Hermes Conrad",
+      "treasurer_name": "HERMES CONRAD",
       "party": "REP",
       "filing_frequency": "Q",
       "connected_organization": null,
