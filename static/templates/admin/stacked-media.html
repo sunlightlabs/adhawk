@@ -9,7 +9,9 @@
     {% if inline_admin_form.show_url %}<a href="../../../r/{{ inline_admin_form.original_content_type_id }}/{{ inline_admin_form.original.id }}/">{% trans "View on site" %}</a>{% endif %}
     {% if inline_admin_formset.formset.can_delete and inline_admin_form.original %}<span class="delete">{{ inline_admin_form.deletion_field.field }} {{ inline_admin_form.deletion_field.label_tag }}</span>{% endif %}
 </h3>
+<!--
 <iframe style="float:right" width="560" height="315" src="http://www.youtube.com/embed/BVdLafErW2w" frameborder="0" allowfullscreen></iframe>
+-->
   {% if inline_admin_form.form.non_field_errors %}{{ inline_admin_form.form.non_field_errors }}{% endif %}
   {% for fieldset in inline_admin_form %}
     {% include "admin/includes/fieldset.html" %}
