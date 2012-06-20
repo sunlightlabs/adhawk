@@ -3,9 +3,6 @@
     "pk": 1,
     "model": "knowledge_base.media",
     "fields": {
-      "tags": [
-        1
-      ],
       "url": "http://www.youtube.com/watch?v=BVdLafErW2w",
       "embed_code": "<iframe width=\"560\" height=\"315\" src=\"http://www.youtube.com/embed/BVdLafErW2w\" frameborder=\"0\" allowfullscreen></iframe>",
       "link_broken": false,

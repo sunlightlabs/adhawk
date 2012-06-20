@@ -4,6 +4,9 @@
     "model": "knowledge_base.ad",
     "fields": {
       "title": "\"Spending\" MO",
+      "tags": [
+        1
+      ],
       "broadcast_types": [
         1
       ],
