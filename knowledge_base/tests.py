@@ -958,10 +958,10 @@ class InterestGroupCategoryModelTest(TestCase):
                 DESCRIPTION)
 
     def test_object_is_named_after_code_and_name(self):
-        incumbent_challenger_status = IncumbentChallengerStatus()
-        incumbent_challenger_status.code = "L"
-        incumbent_challenger_status.name = "Labor Organization"
-        self.assertEquals(unicode(incumbent_challenger_status),
+        interest_group_category = InterestGroupCategory()
+        interest_group_category.code = "L"
+        interest_group_category.name = "Labor Organization"
+        self.assertEquals(unicode(interest_group_category),
                 "L - Labor Organization")
 
 class IssueModelTest(TestCase):
