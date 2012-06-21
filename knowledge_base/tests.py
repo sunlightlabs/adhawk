@@ -182,6 +182,16 @@ class AdToCandidateModelTest(TestCase):
         self.assertEquals(only_ad_to_candidate_in_database.ad,
                 ad)
 
+    def test_object_is_named_after_ad_title_candidate_portayal(self):
+        ad = Ad.objects.all()[0]
+        candidate = Candidate.objects.all()[0]
+        atc = AdToCandidate()
+        atc.ad = ad
+        atc.candidate = candidate
+        atc.portrayal = 'NEG'
+        desired_name = "%s -> %s (%s)"%(ad.title,candidate.name,'Negative')
+        self.assertEquals(unicode(atc),desired_name)
+    
 class AuthorModelTest(TestCase):
     def test_creating_a_new_Author_and_saving_it_to_the_database(self):
         # Create a new Author object 
@@ -228,6 +238,11 @@ class BroadcastTypeModelTest(TestCase):
 
         # and check to make sure it saved its attributes
         self.assertEquals(only_broadcast_type_in_database.name,"Television")
+
+    def test_object_is_named_after_name(self):
+        broadcast_type = BroadcastType()
+        broadcast_type.name = "Television"
+        self.assertEquals(unicode(broadcast_type),"Television")
 
         
 #
@@ -342,6 +357,12 @@ class CandidateModelTest(TestCase):
         only_stance_for_candidate_in_database = all_stances_for_candidate_in_database[0]
         self.assertEquals(only_stance_for_candidate_in_database,stance)
 
+    def test_object_is_named_after_name_and_party(self):
+        candidate = Candidate()
+        candidate.name = "JACK JOHNSON"
+        candidate.party = "REP"
+        self.assertEquals(unicode(candidate),"Jack Johnson (R)")
+
 class CandidateStatusModelTest(TestCase):
     def test_creating_a_new_CandidateStatus_and_saving_it_to_the_database(self):
         # Create a new CandidateStatus object 
@@ -366,6 +387,12 @@ class CandidateStatusModelTest(TestCase):
         self.assertEquals(only_candidate_status_in_database.description, 
                 DESCRIPTION)
 
+    def test_object_is_named_after_code_and_value(self):
+        candidate_status = CandidateStatus()
+        candidate_status.code = "C"
+        candidate_status.party = "Statutory candidate"
+        self.assertEquals(unicode(candidate_status),"C - Statutory candidate")
+
 class CommitteeDesignationModelTest(TestCase):
     def test_creating_a_new_CommitteeDesignation_and_saving_it_to_the_database(self):
         # create a new CommitteeDesignation object
@@ -389,7 +416,13 @@ class CommitteeDesignationModelTest(TestCase):
                 "LEADERSHIP PAC")
         self.assertEquals(only_committee_designation_in_database.description, 
                 DESCRIPTION)
-#
+
+    def test_object_is_named_after_code_and_name(self):
+        committee_designation = CommitteeDesignation()
+        committee_designation.code = "D"
+        committee_designation.name = "Leadership PAC"
+        self.assertEquals(unicode(committee_designation),"D - Leadership PAC")
+
 class CommitteeTypeModelTest(TestCase):
     def test_creating_a_new_CommitteeType_and_saving_it_to_the_database(self):
         # create a new CommitteeType object
@@ -414,6 +447,12 @@ class CommitteeTypeModelTest(TestCase):
         self.assertEquals(only_committee_type_in_database.description, 
                 DESCRIPTION)
      
+    def test_object_is_named_after_code_and_name(self):
+        committee_type = CommitteeType()
+        committee_type.code = "C"
+        committee_type.name = "Communication Cost"
+        self.assertEquals(unicode(committee_type),"C - Communication Cost")
+
 class ConnectedOrganizationModelTest(TestCase):
     def test_creating_a_new_ConnectedOrganization_and_saving_it_to_the_database(self):
         # Create a new ConnectedOrganization object 
@@ -436,6 +475,12 @@ class ConnectedOrganizationModelTest(TestCase):
                 "NATIONAL ASSOCIATION OF HOME BUILDERS")
         self.assertEquals(only_connected_organization_in_database.description,
                 DESCRIPTION)
+
+    def test_object_is_named_after_name(self):
+        connected_organization = ConnectedOrganization()
+        connected_organization.name = "NATIONAL ASSOCIATION OF HOME BUILDERS"
+        self.assertEquals(unicode(connected_organization),
+                "National Association Of Home Builders")
 
 class CoverageModelTest(TestCase):
     fixtures = ['ad.json',
@@ -631,6 +676,13 @@ class CoverageModelTest(TestCase):
         only_stance_for_coverage_in_database = all_stances_for_coverage_in_database[0]
         self.assertEquals(only_stance_for_coverage_in_database,stance)
 
+    def test_object_is_named_after_headline_and_source(self):
+        source = Source.objects.all()[0]
+        headline = 'Clash of the titanium taxes'
+        coverage = Coverage(headline=headline,source=source)
+        desired_name = "%s (%s)"%(headline,source)
+        self.assertEquals(unicode(coverage),desired_name)
+
 class CoverageTypeModelTest(TestCase):
     def test_creating_a_new_CoverageType_and_saving_it_to_the_database(self):
         # create a new BroadcastType object
@@ -648,7 +700,11 @@ class CoverageTypeModelTest(TestCase):
         
         # and check to make sure it saved its attributes
         self.assertEquals(only_coverage_type_in_database.name,"Blog post")
-#        
+
+    def test_object_is_named_after_name(self):
+        coverage_type = CoverageType(name="Blog post")
+        self.assertEquals(unicode(coverage_type),"Blog post")
+
 class FunderModelTest(TestCase):
     fixtures = ['interestgroupcategory.json',
             'connectedorganization.json',
@@ -794,6 +850,10 @@ class FunderModelTest(TestCase):
 
         self.assertEquals(len(only_funder_in_database.stances.all()),0)
         
+    def test_object_is_named_after_name(self):
+        funder = Funder(name="Fingerlicans for John Jackson")
+        self.assertEquals(unicode(funder),"Fingerlicans for John Jackson")
+
 class FunderToCandidateModelTest(TestCase):
     fixtures = ['funder.json',
             'interestgroupcategory.json',
@@ -803,7 +863,7 @@ class FunderToCandidateModelTest(TestCase):
             'stance.json',
             'issue.json',
             'issuecategory.json',
-            'candidate.json',
+            'candidates.json',
             'incumbentchallengerstatus.json',
             'candidatestatus.json']
     def test_create_a_new_FunderToCandidate_relation(self):
@@ -831,6 +891,17 @@ class FunderToCandidateModelTest(TestCase):
         self.assertEquals(only_funder_to_candidate_in_database.funder,
                 funder_from_db)
 
+    def test_object_is_named_after_funder_candidate_and_relationship(self):
+        funder = Funder.objects.all()[0]
+        candidate = Candidate.objects.all()[1] 
+        ftc = FunderToCandidate(funder=funder,
+                candidate=candidate,
+                relationship='Primary Campaign Committee')
+        desired_name = '%s -> %s (%s)'%(funder.name.title(),
+                candidate.name.title(),
+                "Primary Campaign Committee")
+        self.assertEquals(unicode(ftc),desired_name)
+
 class IncumbentChallengerStatusModelTest(TestCase):
     def test_creating_a_new_IncumbentChallengerStatus_and_saving_it_to_the_database(self):
         # TODO: Create a new IncumbentChallengerStatus object 
@@ -855,12 +926,19 @@ class IncumbentChallengerStatusModelTest(TestCase):
         self.assertEquals(only_incumbent_challenger_status_in_database.description, 
                 DESCRIPTION)
 
+    def test_object_is_named_after_code_and_value(self):
+        incumbent_challenger_status = IncumbentChallengerStatus()
+        incumbent_challenger_status.code = "O"
+        incumbent_challenger_status.value = "Open Seat"
+        self.assertEquals(unicode(incumbent_challenger_status),
+                "O - Open Seat")
+
 class InterestGroupCategoryModelTest(TestCase):
     def test_creating_a_new_InterestGroupCategory_and_saving_it_to_the_database(self):
         # TODO: Create a new InterestGroupCategory object 
         interest_group_category = InterestGroupCategory()
         interest_group_category.code = 'L'
-        interest_group_category.name = 'LABOR ORGANIZATION'
+        interest_group_category.name = 'Labor Organization'
         DESCRIPTION = "These include unions and other representatives of workers"
         interest_group_category.description = DESCRIPTION
         # check that we can save it
@@ -875,9 +953,16 @@ class InterestGroupCategoryModelTest(TestCase):
         # check that its attributes have been saved
         self.assertEquals(only_interest_group_category_in_database.code,"L")
         self.assertEquals(only_interest_group_category_in_database.name,
-                "LABOR ORGANIZATION")
+                "Labor Organization")
         self.assertEquals(only_interest_group_category_in_database.description, 
                 DESCRIPTION)
+
+    def test_object_is_named_after_code_and_name(self):
+        incumbent_challenger_status = IncumbentChallengerStatus()
+        incumbent_challenger_status.code = "L"
+        incumbent_challenger_status.name = "Labor Organization"
+        self.assertEquals(unicode(incumbent_challenger_status),
+                "L - Labor Organization")
 
 class IssueModelTest(TestCase):
     def test_creating_a_new_Issue_and_saving_it_to_the_database(self):
@@ -939,6 +1024,11 @@ class IssueModelTest(TestCase):
         self.assertEquals(len(only_issue_in_database.issue_categories.all()),1)
         self.assertEquals(only_issue_in_database.issue_categories.all()[0],issue_category)
 
+    def test_object_is_named_after_name(self):
+        issue = Issue()
+        issue.name = "Three cent titanium tax increase"
+        self.assertEquals(unicode(issue),
+                "Three cent titanium tax increase")
 
 class IssueCategoryModelTest(TestCase):
     def test_creating_a_new_IssueCategory_and_saving_it_to_the_database(self):
@@ -1025,6 +1115,10 @@ class IssueCategoryModelTest(TestCase):
         self.assertEquals(len(issue_categories_in_database),1)
         self.assertEquals(issue_categories_in_database[0],issue_category_child)
         
+    def test_object_is_named_after_name(self):
+        issue_category = IssueCategory()
+        issue_category.name = "Titanium tax"
+        self.assertEquals(unicode(issue_category),"Titanium tax")
 
 class MarketModelTest(TestCase):
     def test_market_type_choices(self):
@@ -1055,6 +1149,12 @@ class MarketModelTest(TestCase):
     #def test_entering_a_bad_market_type(self):
         # Not possible to restrict?  maybe a validator?
 
+    def test_object_is_named_after_name_and_market_type(self):
+        market = Market()
+        market.market_type = "A"
+        market.name = "New New York"
+        self.assertEquals(unicode(market),"New New York (Area)")
+
 class MediaModelTest(TestCase):
     fixtures = ['funder.json',
             'mediaprofile.json',
@@ -1071,7 +1171,6 @@ class MediaModelTest(TestCase):
             'market.json',
             'broadcasttype.json'
             ]
-
 
     def test_creating_a_new_Media_and_saving_it_to_the_database(self):
         media_profile = MediaProfile.objects.all()[0]
@@ -1111,6 +1210,13 @@ class MediaModelTest(TestCase):
 
         # make sure that we can't delete the media profile
         self.assertRaises(ProtectedError, media_profile.delete)
+
+    def test_object_is_named_after_url(self):
+        media = Media()
+        media.ad = Ad.objects.all()[0]
+        media.url = "http://www.youtube.com/watch?v=BVdLafErW2w"
+        self.assertEquals(unicode(media),
+                '"Spending" MO (http://www.youtube.com/watch?v=BVdLafErW2w)')
 
 class MediaProfileModelTest(TestCase):
     fixtures = ['funder.json',
@@ -1177,7 +1283,13 @@ class MediaProfileModelTest(TestCase):
         # make sure deleting the MediaType is not allowed
         self.assertRaises(ProtectedError,media_type.delete)
 
-
+    def test_object_is_named_after_funder_and_media_type(self):
+        funder = Funder.objects.all()[0]
+        media_type = MediaType.objects.all()[0]
+        media_profile = MediaProfile(funder=funder,
+                media_type=media_type)
+        self.assertEquals(unicode(media_type),
+                "Fingerlicans For John Jackson (http://www.youtube.com)")
 
 class MediaTypeModelTest(TestCase):
     def test_creating_a_new_MediaType_and_saving_it_to_the_database(self):
@@ -1206,6 +1318,9 @@ class MediaTypeModelTest(TestCase):
         
         # assert that defaults are correct
         self.assertEquals(media_type.scraper_added,False)
+    def test_object_is_named_after_main_url(self):
+        media_type = MediaType(main_url = "http://www.youtube.com")
+        self.assertEquals(unicode(media_type),"http://www.youtube.com")
 
 class SourceModelTest(TestCase):
     def test_creating_a_new_Source_and_saving_it_to_the_database(self):
@@ -1230,27 +1345,28 @@ class SourceModelTest(TestCase):
     def test_creating_a_new_Source_with_default_values(self):
         # create a new MediaType, not specifying defaulted fields
         source = Source()
-        source.main_url = "http://www.youtube.com"
+        source.main_url = "http://www.factcheck.org"
         
         # assert that defaults are correct
         self.assertEquals(source.scraper_added,False)
 
-class StanceModelTest(TestCase):
-    def test_creating_a_new_Stance_and_saving_it_to_the_database(self):
-        # Create a new Issue object
-        issue = Issue()
-        issue.name = 'Three cent titanium tax increase'
-        ISSUE_DESCRIPTION = "The three cent titanium tax increase is a proposal designed to offset the cost of environmental damage of titanium manufacturing"
-        issue.description = ISSUE_DESCRIPTION
+    def test_object_is_named_after_main_url(self):
+        source = Source(main_url = "http://www.factcheck.org")
+        self.assertEquals(unicode(source),"http://www.factcheck.org")
 
-        # Save the Issue object
-        issue.save()
+class StanceModelTest(TestCase):
+    fixtures = ['issue.json',
+            'issuecategory.json'
+            ]
+    def test_creating_a_new_Stance_and_saving_it_to_the_database(self):
+        # get Issue object
+        issue = Issue.objects.all()[0]
 
         # Create a new Stance object 
         stance = Stance()
         stance.name = 'opposes'
         stance.description = 'explicitly opposes the issue'
-        stance.issue = Issue.objects.get(name="Three cent titanium tax increase")
+        stance.issue = issue
         
         # save it
         stance.save()
@@ -1276,7 +1392,17 @@ class StanceModelTest(TestCase):
         # make sure we get an error if we try to save it
         self.assertRaises(IntegrityError,stance.save)
 
+    def test_object_is_named_after_name_and_issue(self):
+        issue = Issue.objects.all()[0]
+        stance = Stance(issue=issue, 
+                name='opposes', 
+                description='explicitly opposes')
+        self.assertEquals(unicode(stance),
+                '[opposes] Three cent titanium tax increase')
+
 class TagModelTest(TestCase):
+    fixtures = ['issue.json',
+            'issuecategory.json']
     def test_creating_a_new_Tag_and_saving_it_to_the_database(self):
         # Create a new Tag object 
         tag = Tag()
@@ -1315,13 +1441,7 @@ class TagModelTest(TestCase):
 
     def test_adding_Tag_with_associated_issue(self):
         # create a new Issue object
-        issue = Issue()
-        issue.name = 'Three cent titanium tax increase'
-        ISSUE_DESCRIPTION = "The three cent titanium tax increase is a proposal designed to offset the cost of environmental damage of titanium manufacturing"
-        issue.description = ISSUE_DESCRIPTION
-
-        # Save the Issue object
-        issue.save()
+        issue = Issue.objects.all()[0]
 
         # Create a new Tag object 
         tag = Tag()
@@ -1344,3 +1464,6 @@ class TagModelTest(TestCase):
         self.assertEquals(len(tags_issues_in_database),1)
         tags_only_issue_in_database = tags_issues_in_database[0]
         self.assertEquals(tags_only_issue_in_database,issue)
+    def test_object_is_named_after_name(self):
+        tag = Tag(name="titanium")
+        self.assertEquals(unicode(tag),"titanium")
