@@ -45,6 +45,30 @@ class AdAdmin(admin.ModelAdmin):
             'stances'
             ]
 
+class CoverageAdmin(admin.ModelAdmin):
+    fields = ('url',
+            'headline',
+            'date',
+            'source',
+            'coverage_type',
+            'authors',
+            'ads',
+            'funders',
+            'candidates',
+            'tags',
+            'issues',
+            'stances')
+    filter_horizontal = [
+            'tags',
+            'ads',
+            'issues',
+            'candidates',
+            'funders',
+            'authors',
+            'stances'
+            ]
+
+
 class CandidateAdmin(admin.ModelAdmin):
     inlines = [
             AdToCandidateInline
@@ -55,7 +79,7 @@ admin.site.register(AdToCandidate)
 admin.site.register(Author)
 admin.site.register(BroadcastType)
 admin.site.register(Candidate,CandidateAdmin)
-admin.site.register(Coverage)
+admin.site.register(Coverage,CoverageAdmin)
 admin.site.register(CoverageType)
 admin.site.register(Funder)
 admin.site.register(Issue)
