@@ -1287,9 +1287,11 @@ class MediaProfileModelTest(TestCase):
         funder = Funder.objects.all()[0]
         media_type = MediaType.objects.all()[0]
         media_profile = MediaProfile(funder=funder,
-                media_type=media_type)
+                media_type=media_type,
+                url="http://www.youtube.com/user/CrossroadsGPSChannel")
         self.assertEquals(unicode(media_profile),
-                "Fingerlicans For John Jackson (http://www.youtube.com)")
+                "Fingerlicans For John Jackson
+                (http://www.youtube.com/user/CrossroadsGPSChannel)")
 
 class MediaTypeModelTest(TestCase):
     def test_creating_a_new_MediaType_and_saving_it_to_the_database(self):
