@@ -40,7 +40,9 @@ class AdAdmin(admin.ModelAdmin):
             AdToCandidateInline
             ]
     filter_horizontal = [
-            'markets'
+            'markets',
+            'tags',
+            'stances'
             ]
 
 class CandidateAdmin(admin.ModelAdmin):
