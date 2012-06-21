@@ -262,10 +262,10 @@ class CandidateModelTest(TestCase):
         candidate.name = "JACK JOHNSON"
         candidate.party = "DEM"
         candidate.year_of_election = 2010
-        candidate.street_one = "123 Fake Street"
-        candidate.street_two = "Apt. 3"
-        candidate.city = "New New York"
-        candidate.state = "New York"
+        candidate.street_one = "123 FAKE STREET"
+        candidate.street_two = "APT. 3"
+        candidate.city = "NEW NEW YORK"
+        candidate.state = "NEW YORK"
         candidate.zip_code = 90210
         # add foreign key relations
         candidate.incumbent_challenger_status = incumbent_challenger_status
@@ -286,10 +286,10 @@ class CandidateModelTest(TestCase):
         self.assertEquals(only_candidate_in_database.party,"DEM")
         self.assertEquals(only_candidate_in_database.year_of_election,2010)
         self.assertEquals(only_candidate_in_database.street_one, 
-                "123 Fake Street")
-        self.assertEquals(only_candidate_in_database.street_two,"Apt. 3")
-        self.assertEquals(only_candidate_in_database.city,"New New York")
-        self.assertEquals(only_candidate_in_database.state,"New York")
+                "123 FAKE STREET")
+        self.assertEquals(only_candidate_in_database.street_two,"APT. 3")
+        self.assertEquals(only_candidate_in_database.city,"NEW NEW YORK")
+        self.assertEquals(only_candidate_in_database.state,"NEW YORK")
         self.assertEquals(only_candidate_in_database.zip_code,90210)
         self.assertEquals(
                 only_candidate_in_database.incumbent_challenger_status, 
@@ -724,10 +724,10 @@ class FunderModelTest(TestCase):
         # Create a new Funder object
         funder = Funder()
         funder.FEC_id = 'C00012229'
-        funder.name = 'Fingerlicans for John Jackson'
+        funder.name = 'FINGERLICANS FOR JOHN JACKSON'
         funder.filing_frequency = 'Q'
         funder.party = 'REP'
-        funder.treasurer_name = 'Hermes Conrad'
+        funder.treasurer_name = 'HERMES CONRAD'
         funder.street_one = '2504 FAIRBANKS STREET'
         funder.street_two = ''
         funder.state = 'AK'
@@ -750,11 +750,11 @@ class FunderModelTest(TestCase):
         # check that its attributes have been saved
         self.assertEquals(only_funder_in_database.FEC_id,"C00012229")
         self.assertEquals(only_funder_in_database.name,
-                'Fingerlicans for John Jackson')
+                'FINGERLICANS FOR JOHN JACKSON')
         self.assertEquals(only_funder_in_database.filing_frequency,'Q')
         self.assertEquals(only_funder_in_database.party,'REP')
         self.assertEquals(only_funder_in_database.treasurer_name, 
-                'Hermes Conrad')
+                'HERMES CONRAD')
         self.assertEquals(only_funder_in_database.street_one, 
                 '2504 FAIRBANKS STREET')
         self.assertEquals(only_funder_in_database.street_two,'')
@@ -805,10 +805,10 @@ class FunderModelTest(TestCase):
         # Create a new Funder object
         funder = Funder()
         funder.FEC_id = 'C00012229'
-        funder.name = 'Fingerlicans for John Jackson'
+        funder.name = 'FINGERLICANS FOR JOHN JACKSON'
         funder.filing_frequency = 'Q'
         funder.party = 'REP'
-        funder.treasurer_name = 'Hermes Conrad'
+        funder.treasurer_name = 'HERMES_CONRAD'
         funder.street_one = '2504 FAIRBANKS STREET'
         funder.street_two = ''
         funder.state = 'AK'
@@ -851,8 +851,8 @@ class FunderModelTest(TestCase):
         self.assertEquals(len(only_funder_in_database.stances.all()),0)
         
     def test_object_is_named_after_name(self):
-        funder = Funder(name="Fingerlicans for John Jackson")
-        self.assertEquals(unicode(funder),"Fingerlicans for John Jackson")
+        funder = Funder(name="FINGERLICANS FOR JOHN JACKSON")
+        self.assertEquals(unicode(funder),"Fingerlicans For John Jackson")
 
 class FunderToCandidateModelTest(TestCase):
     fixtures = ['funder.json',
