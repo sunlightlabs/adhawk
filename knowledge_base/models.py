@@ -16,35 +16,59 @@ class CandidateStatus(models.Model):
     value = models.CharField(max_length=40)
     description = models.CharField(max_length=500)
 
+    def __unicode__(self):
+        return "%s - %s"%(self.code,self.value)
+
 class CommitteeDesignation(models.Model):
     code = models.CharField(max_length=1)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
+
+    def __unicode__(self):
+        return "%s - %s"%(self.code,self.name)
 
 class CommitteeType(models.Model):
     code = models.CharField(max_length=1)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
 
+    def __unicode__(self):
+        return "%s - %s"%(self.code,self.name)
+
 class ConnectedOrganization(models.Model):
     name = models.CharField(max_length=38)
     description = models.CharField(max_length=500)
 
+    def __unicode__(self):
+        return self.name.title()
+
 class CoverageType(models.Model):
     name = models.CharField(max_length=50)
 
+    def __unicode__(self):
+        return self.name
+
 class BroadcastType(models.Model):
     name = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        return self.name
 
 class IncumbentChallengerStatus(models.Model):
     code = models.CharField(max_length=1)
     value = models.CharField(max_length=11)
     description = models.CharField(max_length=500)
 
+    def __unicode__(self):
+        return '%s - %s'%(self.code,self.value)
+
 class InterestGroupCategory(models.Model):
     code = models.CharField(max_length=1)
     name = models.CharField(max_length=40)
     description = models.CharField(max_length=500)
+
+    def __unicode__(self):
+        return '%s - %s'%(self.code,self.name)
 
 class IssueCategory(models.Model):
     name = models.CharField(max_length=100)
@@ -63,33 +87,57 @@ class Issue(models.Model):
     description = models.CharField(max_length=500)
     issue_categories = models.ManyToManyField(IssueCategory,null=True,blank=True)
 
+    def __unicode__(self):
+        return self.name
+
 class Market(models.Model):
     MARKET_TYPE_CHOICES = (('A','Area'),
             ('C','County'),
             ('S','State'),
             ('N','Nationwide'),
             )
+    MARKET_TYPE_DICT = {'A':'Area',
+            'C':'County',
+            'S':'State',
+            'N':'Nationwide'
+            }
     market_type = models.CharField(max_length=1,choices=MARKET_TYPE_CHOICES)
     name = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        mt = self.MARKET_TYPE_DICT[self.market_type]
+        return "%s (%s)"%(self.name,mt)
 
 class MediaType(models.Model):
     main_url = models.URLField(max_length=50)
     scraper_added = models.BooleanField(default=False)
 
+    def __unicode__(self):
+        return self.main_url
+
 class Source(models.Model):
     main_url = models.URLField(max_length=50)
     scraper_added = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return self.main_url
 
 class Stance(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
     issue = models.ForeignKey(Issue)
 
+    def __unicode__(self):
+        return "[%s] %s"%(self.name,self.issue.name)
+
 class Tag(models.Model):
     name = models.CharField(max_length=100)
     relevant = models.BooleanField(default=True)
     scraped = models.BooleanField(default=True)
     issues = models.ManyToManyField(Issue,null=True,blank=True)
+
+    def __unicode__(self):
+        return self.name
 
     def save(self, *args, **kwargs):
         if self.relevant == False and self.scraped == False:
@@ -113,6 +161,9 @@ class Candidate(models.Model):
     candidate_status = models.ForeignKey(CandidateStatus)
 
     stances = models.ManyToManyField(Stance)
+
+    def __unicode__(self):
+        return '%s (%s)'%(self.name.title(),self.party[0])
 
 class Funder(models.Model):
     FEC_id = models.CharField(max_length=9)
@@ -145,10 +196,18 @@ class Funder(models.Model):
             blank=True,
             null=True)
 
+    def __unicode__(self):
+        return self.name.title()
+
 class FunderToCandidate(models.Model):
     funder = models.ForeignKey(Funder)
     candidate = models.ForeignKey(Candidate)
     relationship = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        return "%s -> %s (%s)"%(unicode(self.funder),
+                self.candidate.name.title(),
+                self.relationship)
 
 class MediaProfile(models.Model):
     url = models.URLField()
@@ -160,6 +219,12 @@ class MediaProfile(models.Model):
             on_delete=models.SET_NULL)
     media_type = models.ForeignKey(MediaType,
             on_delete=models.PROTECT)
+
+    def __unicode__(self):
+        if self.funder:
+            return '%s (%s)'%(unicode(self.funder),self.url)
+        else:
+            return 'NO FUNDER ASSIGNED (%s)'%(self.url,)
 
     def save(self, *args, **kwargs):
         sr = urlparse.urlsplit(self.url)
@@ -196,6 +261,9 @@ class Ad(models.Model):
     candidates = models.ManyToManyField(Candidate,
             through='AdToCandidate')
 
+    def __unicode__(self):
+        return self.title
+
 class Media(models.Model):
     url = models.URLField()
     embed_code = models.CharField(max_length=200,blank=True,null=True)
@@ -211,6 +279,8 @@ class Media(models.Model):
 
     # MTM relations (moved to Ad)
     # tags = models.ManyToManyField(Tag)
+    def __unicode__(self):
+        return "%s (%s)"%(self.ad.title,self.url)
     
     def save(self, *args, **kwargs):
         sr = urlparse.urlsplit(self.url)
@@ -226,9 +296,18 @@ class AdToCandidate(models.Model):
             ('NEG','Negative'),
             ('NEU','Neutral'),
             )
+    CHOICES_DICT = {'POS':'Positive',
+            'NEG':'Negative',
+            'NEU':'Neutral'
+            }
     ad = models.ForeignKey(Ad)
     candidate = models.ForeignKey(Candidate)
     portrayal = models.CharField(max_length=3,choices=CHOICES)
+
+    def __unicode__(self):
+        return "%s -> %s (%s)"%(self.ad.title,
+                self.candidate.name.title(),
+                self.CHOICES_DICT[self.portrayal])
 
 class Coverage(models.Model):
     url = models.URLField()
@@ -249,8 +328,6 @@ class Coverage(models.Model):
     authors = models.ManyToManyField(Author,null=True,blank=True)
     stances = models.ManyToManyField(Stance,null=True,blank=True)
 
-
-
-
-
+    def __unicode__(self):
+        return "%s (%s)"%(self.headline,self.source.main_url)
 
