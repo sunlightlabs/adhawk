@@ -1,6 +1,6 @@
 *.pyo
 *.pyc
-local_settings.py
+local_settings*
 *.swp
 *.db
 *.dummy
