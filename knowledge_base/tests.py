@@ -390,7 +390,7 @@ class CandidateStatusModelTest(TestCase):
     def test_object_is_named_after_code_and_value(self):
         candidate_status = CandidateStatus()
         candidate_status.code = "C"
-        candidate_status.party = "Statutory candidate"
+        candidate_status.value = "Statutory candidate"
         self.assertEquals(unicode(candidate_status),"C - Statutory candidate")
 
 class CommitteeDesignationModelTest(TestCase):
