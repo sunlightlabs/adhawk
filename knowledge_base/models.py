@@ -105,8 +105,11 @@ class Market(models.Model):
     name = models.CharField(max_length=50)
 
     def __unicode__(self):
-        mt = self.MARKET_TYPE_DICT[self.market_type]
-        return "%s (%s)"%(self.name,mt)
+        try:
+            mt = self.MARKET_TYPE_DICT[self.market_type]
+            return "%s (%s)"%(self.name,mt)
+        except KeyError:
+            return "%s (%s)"%(self.name,self.market_type)
 
 class MediaType(models.Model):
     main_url = models.URLField(max_length=50)
@@ -163,7 +166,10 @@ class Candidate(models.Model):
     stances = models.ManyToManyField(Stance)
 
     def __unicode__(self):
-        return '%s (%s)'%(self.name.title(),self.party[0])
+        try:
+            return '%s (%s)'%(self.name.title(),self.party[0])
+        except IndexError:
+            return '%s (UNK)'%(self.name.title(),)
 
 class Funder(models.Model):
     FEC_id = models.CharField(max_length=9)
