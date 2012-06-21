@@ -1288,7 +1288,7 @@ class MediaProfileModelTest(TestCase):
         media_type = MediaType.objects.all()[0]
         media_profile = MediaProfile(funder=funder,
                 media_type=media_type)
-        self.assertEquals(unicode(media_type),
+        self.assertEquals(unicode(media_profile),
                 "Fingerlicans For John Jackson (http://www.youtube.com)")
 
 class MediaTypeModelTest(TestCase):
