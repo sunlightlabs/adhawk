@@ -25,6 +25,8 @@ class AdModelTest(TestCase):
             'committeetype.json',
             'interestgroupcategory.json',
             'connectedorganization.json',
+            'mediaprofile.json',
+            'mediatype.json'
             ]
 
     def test_creating_a_new_Ad_and_saving_it_to_the_database(self):
@@ -712,7 +714,10 @@ class FunderModelTest(TestCase):
             'committeetype.json',
             'stance.json',
             'issue.json',
-            'issuecategory.json']
+            'issuecategory.json',
+            'mediaprofile.json',
+            'mediatype.json'
+            ]
 
     def test_creating_a_new_Funder_and_saving_it_to_the_database(self):
         # get FK-related objects
@@ -720,6 +725,7 @@ class FunderModelTest(TestCase):
         committee_type = CommitteeType.objects.all()[0]
         interest_group_category = InterestGroupCategory.objects.all()[0]
         connected_organization = ConnectedOrganization.objects.all()[0]
+        media_profile = MediaProfile.objects.all()[0]
 
         # Create a new Funder object
         funder = Funder()
@@ -737,6 +743,7 @@ class FunderModelTest(TestCase):
         funder.interest_group_category = interest_group_category
         funder.committee_type = committee_type
         funder.committee_designation = committee_designation
+        funder.media_profile = media_profile
         
         # save it
         funder.save()
@@ -767,6 +774,7 @@ class FunderModelTest(TestCase):
                 committee_designation)
         self.assertEquals(only_funder_in_database.connected_organization,
                 None)
+        self.assertEquals(only_funder_in_database.media_profile,media_profile)
 
         # add connected organization
         funder.connected_organization = connected_organization
@@ -856,6 +864,8 @@ class FunderModelTest(TestCase):
 
 class FunderToCandidateModelTest(TestCase):
     fixtures = ['funder.json',
+            'mediaprofile.json',
+            'mediatype.json',
             'interestgroupcategory.json',
             'connectedorganization.json',
             'committeedesignation.json',
@@ -1219,18 +1229,18 @@ class MediaModelTest(TestCase):
                 '"Spending" MO (http://www.youtube.com/watch?v=BVdLafErW2w)')
 
 class MediaProfileModelTest(TestCase):
-    fixtures = ['funder.json',
-            'committeedesignation.json',
+    fixtures = ['committeedesignation.json',
             'committeetype.json',
             'interestgroupcategory.json',
             'connectedorganization.json',
             'stance.json',
             'issue.json',
             'issuecategory.json',
-            'mediatype.json']
+            'mediatype.json'
+            ]
 
     def test_creating_a_new_MediaProfile_and_saving_it_to_the_database(self):
-        # TODO: Create a new MediaProfile object 
+        # Create a new MediaProfile object 
         media_profile = MediaProfile()
         
         # add required FK relation to MediaType
@@ -1257,11 +1267,6 @@ class MediaProfileModelTest(TestCase):
         self.assertEquals(only_media_profile_in_database.url,"http://www.youtube.com/user/CrossroadsGPSChannel")
         self.assertEquals(only_media_profile_in_database.media_type,media_type)
 
-        # add optional FK relation to funder
-        funder = Funder.objects.all()[0]
-        media_profile.funder = funder
-
-        # save it
         media_profile.save()
 
         # check that we can find it
@@ -1272,23 +1277,29 @@ class MediaProfileModelTest(TestCase):
 
         # check that its attributes have been saved
         self.assertEquals(only_media_profile_in_database.url,"http://www.youtube.com/user/CrossroadsGPSChannel")
-        self.assertEquals(only_media_profile_in_database.funder,funder)
         self.assertEquals(only_media_profile_in_database.media_type,media_type)
 
-        # make sure deleting the funder doesn't delete the media profile
-        funder.delete()
-
-        self.assertEquals(MediaProfile.objects.all()[0],media_profile)
 
         # make sure deleting the MediaType is not allowed
         self.assertRaises(ProtectedError,media_type.delete)
 
+class MediaProfileModelUnicodeTest(TestCase):
+    fixtures = ['committeedesignation.json',
+            'committeetype.json',
+            'interestgroupcategory.json',
+            'connectedorganization.json',
+            'stance.json',
+            'issue.json',
+            'issuecategory.json',
+            'mediatype.json',
+            'mediaprofile.json',
+            'funder.json'
+            ]
+
     def test_object_is_named_after_funder_and_media_type(self):
         funder = Funder.objects.all()[0]
         media_type = MediaType.objects.all()[0]
-        media_profile = MediaProfile(funder=funder,
-                media_type=media_type,
-                url="http://www.youtube.com/user/CrossroadsGPSChannel")
+        media_profile = MediaProfile.objects.all()[0]
         self.assertEquals(unicode(media_profile),
                 "Fingerlicans For John Jackson (http://www.youtube.com/user/CrossroadsGPSChannel)")
 
