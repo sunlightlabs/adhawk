@@ -3,8 +3,8 @@
     "pk": 1,
     "model": "knowledge_base.mediaprofile",
     "fields": {
-      "url": "http://www.youtube.com",
-      "media_type": 1,
+      "url": "http://www.youtube.com/user/CrossroadsGPSChannel",
+      "media_type": 1
     }
   }
 ]
