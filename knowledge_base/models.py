@@ -171,30 +171,6 @@ class Candidate(models.Model):
         except IndexError:
             return '%s (UNK)'%(self.name.title(),)
 
-class MediaProfile(models.Model):
-    url = models.URLField()
-
-    # FK relations
-    media_type = models.ForeignKey(MediaType,
-            on_delete=models.PROTECT)
-
-    def __unicode__(self):
-        funder = self.funder_set.only()[0]
-        if funder:
-            return '%s (%s)'%(unicode(funder),self.url)
-        else:
-            return 'NO FUNDER ASSIGNED (%s)'%(self.url,)
-
-    def save(self, *args, **kwargs):
-        sr = urlparse.urlsplit(self.url)
-        conn = httplib.HTTPConnection(sr.netloc)
-        conn.request("HEAD",sr.path)
-        status = conn.getresponse().status
-        if status == 200:
-            super(MediaProfile, self).save(*args, **kwargs)
-        else:
-            raise Exception('not a working url')
-
 class Funder(models.Model):
     FEC_id = models.CharField(max_length=9)
     name = models.CharField(max_length=90)
@@ -218,10 +194,6 @@ class Funder(models.Model):
             null=True, 
             blank=True,
             on_delete=models.SET_NULL)
-    media_profile = models.ForeignKey(MediaProfile,
-            null=True, 
-            blank=True,
-            on_delete=models.SET_NULL)
 
     #MTM fields
     stances = models.ManyToManyField(Stance,null=True,blank=True)
@@ -229,9 +201,50 @@ class Funder(models.Model):
             through="FunderToCandidate",
             blank=True,
             null=True)
+    related_funders = models.ManyToManyField("self",
+            through="FunderToFunder",
+            blank=True,
+            null=True,
+            symmetrical=False)
 
     def __unicode__(self):
         return self.name.title()
+
+class MediaProfile(models.Model):
+    url = models.URLField()
+
+    # FK relations
+    media_type = models.ForeignKey(MediaType,
+            on_delete=models.PROTECT)
+    funder = models.ForeignKey(Funder,
+            null=True, 
+            blank=True,
+            on_delete=models.SET_NULL)
+
+    def __unicode__(self):
+        funder = self.funder
+        if funder:
+            return '%s (%s)'%(unicode(funder),self.url)
+        else:
+            return 'NO FUNDER ASSIGNED (%s)'%(self.url,)
+
+    def save(self, *args, **kwargs):
+        sr = urlparse.urlsplit(self.url)
+        conn = httplib.HTTPConnection(sr.netloc)
+        conn.request("HEAD",sr.path)
+        status = conn.getresponse().status
+        if status == 200:
+            super(MediaProfile, self).save(*args, **kwargs)
+        else:
+            raise Exception('not a working url')
+
+class FunderToFunder(models.Model):
+    funder = models.ForeignKey(Funder,related_name="funder_has_relative")
+    related_funder = models.ForeignKey(Funder,related_name="related_funder")
+    relationship = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        return ('%s -> %s (%s)'%(funder_a,funder_b,relationship))
 
 class FunderToCandidate(models.Model):
     funder = models.ForeignKey(Funder)

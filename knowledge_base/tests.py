@@ -1283,23 +1283,16 @@ class MediaProfileModelTest(TestCase):
         # make sure deleting the MediaType is not allowed
         self.assertRaises(ProtectedError,media_type.delete)
 
-class MediaProfileModelUnicodeTest(TestCase):
-    fixtures = ['committeedesignation.json',
-            'committeetype.json',
-            'interestgroupcategory.json',
-            'connectedorganization.json',
-            'stance.json',
-            'issue.json',
-            'issuecategory.json',
-            'mediatype.json',
-            'mediaprofile.json',
-            'funder.json'
-            ]
-
     def test_object_is_named_after_funder_and_media_type(self):
         funder = Funder.objects.all()[0]
         media_type = MediaType.objects.all()[0]
-        media_profile = MediaProfile.objects.all()[0]
+        media_profile.media_type = media_type
+        media_profile.url = 'http://www.youtube.com/user/CrossroadsGPSChannel'
+        media_profile.funder = funder
+
+        # check that we can save it
+        media_profile.save()
+        media_profile = MediaProfile(
         self.assertEquals(unicode(media_profile),
                 "Fingerlicans For John Jackson (http://www.youtube.com/user/CrossroadsGPSChannel)")
 
