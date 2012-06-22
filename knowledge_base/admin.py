@@ -6,12 +6,14 @@ Coverage,
 CoverageType,
 BroadcastType,
 Funder,
+FunderToFunder,
 IncumbentChallengerStatus,
 InterestGroupCategory,
 Issue,
 IssueCategory,
 Market,
 Media,
+MediaProfile,
 MediaType,
 Source,
 Stance,
@@ -30,11 +32,43 @@ class MediaInline(admin.StackedInline):
     template = 'admin/stacked-media.html'
     extra = 0
 
-class MediaProfile(admin.ModelAdmin):
-    pass
+class FunderToFunderInline(admin.StackedInline):
+    model = FunderToFunder
+    fk_name = "related_funder"
+    extra = 3
+
+class MediaProfileInline(admin.StackedInline):
+    model = MediaProfile
+    extra = 0
 
 class FunderAdmin(admin.ModelAdmin):
-    pass
+    fieldsets = (
+            (None, {
+                'fields':(('name','FEC_id','party'))
+                }),
+            ('Address', {
+                'classes': ('collapse',),
+                'fields':(('street_one','street_two'),('city','state','zip_code'))
+                }),
+            ('Regulatory Details', {
+                'classes': ('collapse',),
+                'fields': (('filing_frequency',
+                    'interest_group_category',
+                    'committee_type',
+                    'committee_designation'),
+                    'treasurer_name',
+                    'connected_organization')
+                })
+            )
+    inlines = [
+            MediaProfileInline,
+            FunderToFunderInline
+            ]
+
+
+
+
+
 
 
 
@@ -89,11 +123,13 @@ class FunderAdmin(admin.ModelAdmin):
 #admin.site.register(Candidate,CandidateAdmin)
 #admin.site.register(Coverage,CoverageAdmin)
 #admin.site.register(CoverageType)
-admin.site.register(Funder)
+admin.site.register(Funder,FunderAdmin)
+admin.site.register(FunderToFunder)
 #admin.site.register(Issue)
 #admin.site.register(IssueCategory)
 #admin.site.register(Market)
 #admin.site.register(Media)
+admin.site.register(MediaProfile)
 #admin.site.register(MediaType)
 #admin.site.register(Source)
 #admin.site.register(Stance)
