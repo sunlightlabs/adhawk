@@ -189,7 +189,7 @@ class AdToCandidateModelTest(TestCase):
         atc.ad = ad
         atc.candidate = candidate
         atc.portrayal = 'NEG'
-        desired_name = "%s -> %s (%s)"%(ad.title,candidate.name,'Negative')
+        desired_name = "%s -> %s (%s)"%(ad.title,candidate.name.title(),'Negative')
         self.assertEquals(unicode(atc),desired_name)
     
 class AuthorModelTest(TestCase):
