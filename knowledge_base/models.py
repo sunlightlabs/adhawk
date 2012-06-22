@@ -171,6 +171,30 @@ class Candidate(models.Model):
         except IndexError:
             return '%s (UNK)'%(self.name.title(),)
 
+class MediaProfile(models.Model):
+    url = models.URLField()
+
+    # FK relations
+    media_type = models.ForeignKey(MediaType,
+            on_delete=models.PROTECT)
+
+    def __unicode__(self):
+        funder = self.funder_set.only()[0]
+        if funder:
+            return '%s (%s)'%(unicode(funder),self.url)
+        else:
+            return 'NO FUNDER ASSIGNED (%s)'%(self.url,)
+
+    def save(self, *args, **kwargs):
+        sr = urlparse.urlsplit(self.url)
+        conn = httplib.HTTPConnection(sr.netloc)
+        conn.request("HEAD",sr.path)
+        status = conn.getresponse().status
+        if status == 200:
+            super(MediaProfile, self).save(*args, **kwargs)
+        else:
+            raise Exception('not a working url')
+
 class Funder(models.Model):
     FEC_id = models.CharField(max_length=9)
     name = models.CharField(max_length=90)
@@ -194,6 +218,10 @@ class Funder(models.Model):
             null=True, 
             blank=True,
             on_delete=models.SET_NULL)
+    media_profile = models.ForeignKey(MediaProfile,
+            null=True, 
+            blank=True,
+            on_delete=models.SET_NULL)
 
     #MTM fields
     stances = models.ManyToManyField(Stance,null=True,blank=True)
@@ -214,33 +242,6 @@ class FunderToCandidate(models.Model):
         return "%s -> %s (%s)"%(unicode(self.funder),
                 self.candidate.name.title(),
                 self.relationship)
-
-class MediaProfile(models.Model):
-    url = models.URLField()
-
-    # FK relations
-    funder = models.ForeignKey(Funder,
-            null=True,
-            blank=True,
-            on_delete=models.SET_NULL)
-    media_type = models.ForeignKey(MediaType,
-            on_delete=models.PROTECT)
-
-    def __unicode__(self):
-        if self.funder:
-            return '%s (%s)'%(unicode(self.funder),self.url)
-        else:
-            return 'NO FUNDER ASSIGNED (%s)'%(self.url,)
-
-    def save(self, *args, **kwargs):
-        sr = urlparse.urlsplit(self.url)
-        conn = httplib.HTTPConnection(sr.netloc)
-        conn.request("HEAD",sr.path)
-        status = conn.getresponse().status
-        if status == 200:
-            super(MediaProfile, self).save(*args, **kwargs)
-        else:
-            raise Exception('not a working url')
 
 class Ad(models.Model):
     title = models.CharField(max_length=200)
