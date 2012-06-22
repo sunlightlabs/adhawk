@@ -4,7 +4,8 @@
     "model": "knowledge_base.mediaprofile",
     "fields": {
       "url": "http://www.youtube.com/user/CrossroadsGPSChannel",
-      "media_type": 1
+      "media_type": 1,
+      "funder": 1
     }
   }
 ]
