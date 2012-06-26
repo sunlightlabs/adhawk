@@ -1,0 +1,772 @@
+2012-06-25 23:31:04,909 - fec_importer - INFO - Downloading files to db_script/processing/...
+2012-06-25 23:31:04,910 - fec_importer - INFO - downloading ftp://ftp.fec.gov/FEC/2012/indiv12.zip to db_script/processing/indiv12/indiv12.zip...
+2012-06-25 23:36:25,785 - fec_importer - INFO - downloading ftp://ftp.fec.gov/FEC/2012/pas212.zip to db_script/processing/pas212/pas212.zip...
+2012-06-25 23:37:26,148 - fec_importer - INFO - downloading ftp://ftp.fec.gov/FEC/2012/oth12.zip to db_script/processing/oth12/oth12.zip...
+2012-06-25 23:39:29,438 - fec_importer - INFO - downloading ftp://ftp.fec.gov/FEC/cm12.zip to db_script/processing/cm12/cm12.zip...
+2012-06-25 23:39:35,324 - fec_importer - INFO - downloading ftp://ftp.fec.gov/FEC/cn12.zip to db_script/processing/cn12/cn12.zip...
+2012-06-25 23:39:37,130 - fec_importer - INFO - downloading ftp://ftp.fec.gov/FEC/webl12.zip to db_script/processing/webl12/webl12.zip...
+2012-06-25 23:39:39,128 - fec_importer - INFO - downloading ftp://ftp.fec.gov/FEC/webk12.zip to db_script/processing/webk12/webk12.zip...
+2012-06-25 23:39:42,547 - fec_importer - INFO - Extracting files...
+2012-06-25 23:39:50,478 - fec_importer - INFO - Converting to unicode...
+2012-06-25 23:40:01,482 - fec_importer - INFO - Converting to CSV...
+2012-06-25 23:55:50,818 - fec_importer - ERROR - [Errno 2] No such file or directory: '/home/blannon/Dropbox/dev/django-projects/whopaid/db_script/preload.sql'
+2012-06-25 23:56:50,697 - fec_importer - INFO - Uploading data...
+2012-06-25 23:57:43,511 - fec_importer - INFO - Processing uploaded data...
+2012-06-25 23:57:43,536 - fec_importer - INFO - Executing 
+ drop table if exists fec_candidates
+2012-06-25 23:57:43,538 - fec_importer - INFO - Executing 
+ create table fec_candidates as
+ select *,
+     case
+         when substring(candidate_id for 1) = 'P' then 'P'
+         when substring(candidate_id for 1) = 'S' then 'S' || '-' || substring(candidate_id from 3 for 2)
+         when substring(candidate_id for 1) = 'H' then 'H' || '-' || substring(candidate_id from 3 for 2) || '-' || current_district
+     end as race
+ from fec_candidates_import
+2012-06-25 23:57:45,617 - fec_importer - INFO - Executing 
+ 
+ create index fec_candidates_candidate_id on fec_candidates (candidate_id)
+2012-06-25 23:57:45,899 - fec_importer - INFO - Executing 
+ 
+ 
+ 
+ drop table if exists fec_indiv
+2012-06-25 23:57:45,899 - fec_importer - INFO - Executing 
+ create table fec_indiv as
+ select 
+     filer_id,
+     amendment,
+     report_type,
+     election_type,
+     microfilm_location,
+     lower(transaction_type) as transaction_type,
+     entity_type,
+     contributor_name,
+     city,
+     state,
+     zipcode,
+     employer,
+     occupation,
+     (substring(date for 4 from 5) || substring(date for 2) || substring(date for 2 from 3))::date as date,
+     case when transaction_type = '22Y' then -abs(amount) else amount end as amount,
+     other_id,
+     transaction_id,
+     file_num,
+     memo_code,
+     memo_text,
+     fec_record
+ from fec_indiv_import
+2012-06-25 23:58:00,907 - fec_importer - INFO - Executing 
+ create index fec_indiv_filer_id on fec_indiv (filer_id)
+2012-06-25 23:58:39,157 - fec_importer - INFO - Executing 
+ 
+ drop table if exists fec_pac2cand
+2012-06-25 23:58:39,162 - fec_importer - INFO - Executing 
+ create table fec_pac2cand as
+ select 
+     filer_id,
+     amendment,
+     report_type,
+     election_type,
+     microfilm_location,
+     lower(transaction_type) as transaction_type,
+     entity_type,
+     contributor_name,
+     city,
+     state,
+     zipcode,
+     employer,
+     occupation,
+     (substring(date for 4 from 5) || substring(date for 2) || substring(date for 2 from 3))::date as date,
+     case when transaction_type = '22Y' then -abs(amount) else amount end as amount,
+     other_id,
+     candidate_id,
+     transaction_id,
+     file_num,
+     memo_code,
+     memo_text,
+     fec_record
+ from fec_pac2cand_import
+2012-06-25 23:58:41,479 - fec_importer - INFO - Executing 
+ create index fec_pac2cand_other_id on fec_pac2cand (other_id)
+2012-06-25 23:58:44,701 - fec_importer - INFO - Executing 
+ create index fec_pac2cand_cand_id on fec_pac2cand (candidate_id)
+2012-06-25 23:58:47,346 - fec_importer - INFO - Executing 
+ 
+ drop table if exists fec_pac2pac
+2012-06-25 23:58:47,347 - fec_importer - INFO - Executing 
+ create table fec_pac2pac as
+ select 
+     filer_id,
+     amendment,
+     report_type,
+     election_type,
+     microfilm_location,
+     lower(transaction_type) as transaction_type,
+     entity_type,
+     contributor_name,
+     city,
+     state,
+     zipcode,
+     employer,
+     occupation,
+     (substring(date for 4 from 5) || substring(date for 2) || substring(date for 2 from 3))::date as date,
+     case when transaction_type = '22Y' then -abs(amount) else amount end as amount,
+     other_id,
+     transaction_id,
+     file_num,
+     memo_code,
+     memo_text,
+     fec_record
+ from fec_pac2pac_import
+2012-06-25 23:58:51,194 - fec_importer - INFO - Executing    
+ create index fec_pac2pac_filer_id on fec_pac2pac (filer_id)
+2012-06-25 23:58:58,617 - fec_importer - INFO - Executing 
+ create index fec_pac2pac_other_id on fec_pac2pac (other_id)
+2012-06-25 23:59:03,726 - fec_importer - INFO - Executing 
+ 
+ drop table if exists fec_candidate_summaries
+2012-06-25 23:59:03,729 - fec_importer - INFO - Executing 
+ create table fec_candidate_summaries as
+ select candidate_id, total_receipts, ending_cash, total_disbursements,
+     candidate_loan_repayments, other_loan_repayments, refunds_to_individuals, refunds_to_committees,
+     contributions_from_other_committees, contributions_from_party_committees,
+     contributions_from_candidate, loans_from_candidate,
+     authorized_transfers_from, total_individual_contributions,
+     (substring(ending_date for 4 from 5) || substring(ending_date for 2 from 1) || substring(ending_date for 2 from 3))::date as ending_date
+ from fec_candidate_summaries_import
+2012-06-25 23:59:03,983 - fec_importer - INFO - Executing 
+ 
+ create index fec_candidate_summaries_candidate_id on fec_candidate_summaries (candidate_id)
+2012-06-25 23:59:04,216 - fec_importer - INFO - Executing 
+ 
+ drop table if exists fec_committee_summaries
+2012-06-25 23:59:04,217 - fec_importer - INFO - Executing 
+ create table fec_committee_summaries as
+ select committee_id, committee_name, committee_type, committee_designation, filing_frequency, 
+     (through_year || through_month || through_day)::date as through_date,
+     total_receipts, transfers_from_affiliates, individual_contributions, 
+     contributions_from_other_committees, 
+     total_loans_received, total_disbursements, transfers_to_affiliates,
+     refunds_to_individuals, refunds_to_committees, 
+     loan_repayments, cash_beginning_of_year, cash_close_of_period,
+     debts_owed, nonfederal_transfers_received, contributions_to_committees,
+     independent_expenditures_made, party_coordinated_expenditures_made, nonfederal_expenditure_share
+ from fec_committee_summaries_import
+ where
+     -- there are a number of data-less rows. Discard them by looking for valid date.
+     through_year != 0
+2012-06-25 23:59:04,548 - fec_importer - INFO - Executing 
+ create index fec_committee_summaries_committee_id on fec_committee_summaries (committee_id)
+2012-06-25 23:59:04,932 - fec_importer - INFO - Executing 
+ 
+ 
+ drop table if exists agg_fec_candidate_rankings
+2012-06-25 23:59:04,933 - fec_importer - INFO - Executing 
+ create table agg_fec_candidate_rankings as
+ select candidate_id, substring(race for 1) as race,
+     rank() over (partition by substring(race for 1) order by total_receipts desc) as total_receipts_rank,
+     rank() over (partition by substring(race for 1) order by ending_cash desc) as cash_on_hand_rank,
+     rank() over (partition by substring(race for 1) order by total_disbursements desc) as total_disbursements_rank
+ from fec_candidates c
+ inner join fec_candidate_summaries s using (candidate_id)
+ where
+     candidate_status = 'C'
+     and election_year = '12'
+2012-06-25 23:59:05,592 - fec_importer - INFO - Executing 
+ 
+ 
+ 
+ drop table if exists agg_fec_candidate_timeline
+2012-06-25 23:59:05,593 - fec_importer - INFO - Executing 
+ create table agg_fec_candidate_timeline as
+ select candidate_id, race, (date - '2011-01-01') / 7 as week, count(*), sum(amount) as amount
+ from fec_candidates c
+ inner join fec_candidate_summaries s using (candidate_id)
+ inner join (select filer_id, date, amount from fec_indiv union all select other_id, date, amount from fec_pac2cand) t on c.committee_id = t.filer_id
+ where
+     t.date <= s.ending_date -- there was a problem with forward-dated contributions throwing off charts 
+ group by candidate_id, race, week
+2012-06-26 00:00:26,676 - fec_importer - INFO - Executing 
+ 
+ drop table if exists agg_fec_candidate_cumulative_timeline
+2012-06-26 00:00:26,677 - fec_importer - INFO - Executing 
+ create table agg_fec_candidate_cumulative_timeline as
+ select candidate_id, race, week, sum(amount) OVER (partition by candidate_id, race order by week) as cumulative_raised
+ from agg_fec_candidate_timeline
+2012-06-26 00:00:28,287 - fec_importer - INFO - Executing 
+ 
+ 
+ drop table if exists fec_candidate_itemized
+2012-06-26 00:00:28,288 - fec_importer - INFO - Executing 
+ create table fec_candidate_itemized as
+ select
+     contributor_name, date, amount, contributor_type, transaction_type, 
+     employer, occupation, i.city, i.state, i.zipcode, 
+     candidate_name, party_designation1 as party, race, incumbent_challenger_open as status, committee_id, candidate_id
+ from fec_candidates c
+ inner join (
+     select filer_id as committee_id, 'indiv' as contributor_type, contributor_name,
+         i.city, i.state, i.zipcode, employer, occupation,
+         date, amount, transaction_type
+     from fec_indiv i
+ 
+     union all
+ 
+     select other_id, 'pac', committee_name,
+         t.city, t.state, t.zipcode, connected_org, '',
+         date, amount, transaction_type
+     from fec_pac2cand t
+     inner join fec_committees c on (c.committee_id = t.filer_id)) i using (committee_id)
+2012-06-26 00:00:42,161 - fec_importer - INFO - Executing 
+ create index fec_candidate_itemized_candidate_id on fec_candidate_itemized (candidate_id)
+2012-06-26 00:01:10,090 - fec_importer - INFO - Executing 
+ 
+ 
+ drop table if exists fec_committee_itemized
+2012-06-26 00:01:10,091 - fec_importer - INFO - Executing 
+ create table fec_committee_itemized as
+ select
+     contributor_name, date, amount, contributor_type, contributor_committee_id, transaction_type, 
+     employer, occupation, i.city, i.state, i.zipcode, 
+     committee_name, committee_id, committee_designation, committee_type, committee_party, interest_group, connected_org, candidate_id
+ from fec_committees c
+ inner join (
+     select filer_id as committee_id, 'indiv' as contributor_type, contributor_name, '' as contributor_committee_id,
+         city, state, zipcode, employer, occupation,
+         date, amount, transaction_type
+     from fec_indiv
+ 
+     union all
+ 
+     select filer_id, 'pac', contributor_name, other_id,
+         city, state, zipcode, '', occupation,
+         date, amount, transaction_type
+     from fec_pac2pac) i using (committee_id)
+ where
+     -- only transaction types 10-19 are money coming in. 20-29 are money going out, which we're not interested in here.
+     substring(transaction_type for 2)::integer between 10 and 19
+2012-06-26 00:01:26,515 - fec_importer - INFO - Executing 
+ create index fec_committee_itemized_committee_id on fec_committee_itemized (committee_id)
+2012-06-26 00:02:09,253 - fec_importer - INFO - Executing 
+ 
+ 
+ drop table if exists agg_fec_committee_summaries
+2012-06-26 00:02:09,258 - fec_importer - INFO - Executing 
+ create table agg_fec_committee_summaries as
+ select
+     cycle, entity_id,
+     sum(total_receipts - (loan_repayments + refunds_to_individuals + refunds_to_committees)) as total_raised,
+     sum(individual_contributions - refunds_to_individuals) as individual_contributions,
+     sum(contributions_from_other_committees) as contributions_from_other_committees,
+     sum(transfers_from_affiliates) as transfers_from_affiliates,
+     sum(nonfederal_transfers_received) as nonfederal_transfers_received,
+     sum(total_loans_received) as total_loans_received,
+     sum(total_disbursements) as total_disbursements,
+     sum(cash_close_of_period) as cash_close_of_period,
+     sum(debts_owed) as debts_owed,
+     sum(contributions_to_committees) as contributions_to_committees,
+     sum(independent_expenditures_made) as independent_expenditures_made,
+     sum(party_coordinated_expenditures_made) as party_coordinated_expenditures_made,
+     sum(nonfederal_expenditure_share) as nonfederal_expenditure_share,
+     min(through_date) as min_through_date,
+     max(through_date) as max_through_date,
+     count(*)
+ from fec_committee_summaries c
+ inner join matchbox_entityattribute a on c.committee_id = a.value and a.namespace = 'urn:fec:committee'
+ cross join (values (-1), (2012)) as cycles (cycle)
+ group by cycle, entity_id
+2012-06-26 00:02:09,640 - fec_importer - ERROR - relation "matchbox_entityattribute" does not exist
+LINE 22:  inner join matchbox_entityattribute a on c.committee_id = a...
+                     ^
+
+2012-06-26 00:07:21,755 - fec_importer - INFO - Uploading data...
+2012-06-26 00:08:18,346 - fec_importer - INFO - Processing uploaded data...
+2012-06-26 00:08:18,346 - fec_importer - INFO - Executing 
+ drop table if exists fec_candidates
+2012-06-26 00:08:18,347 - fec_importer - INFO - Executing 
+ create table fec_candidates as
+ select *,
+     case
+         when substring(candidate_id for 1) = 'P' then 'P'
+         when substring(candidate_id for 1) = 'S' then 'S' || '-' || substring(candidate_id from 3 for 2)
+         when substring(candidate_id for 1) = 'H' then 'H' || '-' || substring(candidate_id from 3 for 2) || '-' || current_district
+     end as race
+ from fec_candidates_import
+2012-06-26 00:08:18,701 - fec_importer - INFO - Executing 
+ 
+ create index fec_candidates_candidate_id on fec_candidates (candidate_id)
+2012-06-26 00:08:18,861 - fec_importer - INFO - Executing 
+ 
+ 
+ 
+ drop table if exists fec_indiv
+2012-06-26 00:08:18,862 - fec_importer - INFO - Executing 
+ create table fec_indiv as
+ select 
+     filer_id,
+     amendment,
+     report_type,
+     election_type,
+     microfilm_location,
+     lower(transaction_type) as transaction_type,
+     entity_type,
+     contributor_name,
+     city,
+     state,
+     zipcode,
+     employer,
+     occupation,
+     (substring(date for 4 from 5) || substring(date for 2) || substring(date for 2 from 3))::date as date,
+     case when transaction_type = '22Y' then -abs(amount) else amount end as amount,
+     other_id,
+     transaction_id,
+     file_num,
+     memo_code,
+     memo_text,
+     fec_record
+ from fec_indiv_import
+2012-06-26 00:08:32,310 - fec_importer - INFO - Executing 
+ create index fec_indiv_filer_id on fec_indiv (filer_id)
+2012-06-26 00:09:11,159 - fec_importer - INFO - Executing 
+ 
+ drop table if exists fec_pac2cand
+2012-06-26 00:09:11,160 - fec_importer - INFO - Executing 
+ create table fec_pac2cand as
+ select 
+     filer_id,
+     amendment,
+     report_type,
+     election_type,
+     microfilm_location,
+     lower(transaction_type) as transaction_type,
+     entity_type,
+     contributor_name,
+     city,
+     state,
+     zipcode,
+     employer,
+     occupation,
+     (substring(date for 4 from 5) || substring(date for 2) || substring(date for 2 from 3))::date as date,
+     case when transaction_type = '22Y' then -abs(amount) else amount end as amount,
+     other_id,
+     candidate_id,
+     transaction_id,
+     file_num,
+     memo_code,
+     memo_text,
+     fec_record
+ from fec_pac2cand_import
+2012-06-26 00:09:12,993 - fec_importer - INFO - Executing 
+ create index fec_pac2cand_other_id on fec_pac2cand (other_id)
+2012-06-26 00:09:15,966 - fec_importer - INFO - Executing 
+ create index fec_pac2cand_cand_id on fec_pac2cand (candidate_id)
+2012-06-26 00:09:19,006 - fec_importer - INFO - Executing 
+ 
+ drop table if exists fec_pac2pac
+2012-06-26 00:09:19,008 - fec_importer - INFO - Executing 
+ create table fec_pac2pac as
+ select 
+     filer_id,
+     amendment,
+     report_type,
+     election_type,
+     microfilm_location,
+     lower(transaction_type) as transaction_type,
+     entity_type,
+     contributor_name,
+     city,
+     state,
+     zipcode,
+     employer,
+     occupation,
+     (substring(date for 4 from 5) || substring(date for 2) || substring(date for 2 from 3))::date as date,
+     case when transaction_type = '22Y' then -abs(amount) else amount end as amount,
+     other_id,
+     transaction_id,
+     file_num,
+     memo_code,
+     memo_text,
+     fec_record
+ from fec_pac2pac_import
+2012-06-26 00:09:22,148 - fec_importer - INFO - Executing    
+ create index fec_pac2pac_filer_id on fec_pac2pac (filer_id)
+2012-06-26 00:09:28,857 - fec_importer - INFO - Executing 
+ create index fec_pac2pac_other_id on fec_pac2pac (other_id)
+2012-06-26 00:09:33,750 - fec_importer - INFO - Executing 
+ 
+ drop table if exists fec_candidate_summaries
+2012-06-26 00:09:33,751 - fec_importer - INFO - Executing 
+ create table fec_candidate_summaries as
+ select candidate_id, total_receipts, ending_cash, total_disbursements,
+     candidate_loan_repayments, other_loan_repayments, refunds_to_individuals, refunds_to_committees,
+     contributions_from_other_committees, contributions_from_party_committees,
+     contributions_from_candidate, loans_from_candidate,
+     authorized_transfers_from, total_individual_contributions,
+     (substring(ending_date for 4 from 5) || substring(ending_date for 2 from 1) || substring(ending_date for 2 from 3))::date as ending_date
+ from fec_candidate_summaries_import
+2012-06-26 00:09:33,969 - fec_importer - INFO - Executing 
+ 
+ create index fec_candidate_summaries_candidate_id on fec_candidate_summaries (candidate_id)
+2012-06-26 00:09:34,069 - fec_importer - INFO - Executing 
+ 
+ drop table if exists fec_committee_summaries
+2012-06-26 00:09:34,070 - fec_importer - INFO - Executing 
+ create table fec_committee_summaries as
+ select committee_id, committee_name, committee_type, committee_designation, filing_frequency, 
+     (through_year || through_month || through_day)::date as through_date,
+     total_receipts, transfers_from_affiliates, individual_contributions, 
+     contributions_from_other_committees, 
+     total_loans_received, total_disbursements, transfers_to_affiliates,
+     refunds_to_individuals, refunds_to_committees, 
+     loan_repayments, cash_beginning_of_year, cash_close_of_period,
+     debts_owed, nonfederal_transfers_received, contributions_to_committees,
+     independent_expenditures_made, party_coordinated_expenditures_made, nonfederal_expenditure_share
+ from fec_committee_summaries_import
+ where
+     -- there are a number of data-less rows. Discard them by looking for valid date.
+     through_year != 0
+2012-06-26 00:09:34,323 - fec_importer - INFO - Executing 
+ create index fec_committee_summaries_committee_id on fec_committee_summaries (committee_id)
+2012-06-26 00:09:34,565 - fec_importer - INFO - Executing 
+ 
+ 
+ drop table if exists agg_fec_candidate_rankings
+2012-06-26 00:09:34,565 - fec_importer - INFO - Executing 
+ create table agg_fec_candidate_rankings as
+ select candidate_id, substring(race for 1) as race,
+     rank() over (partition by substring(race for 1) order by total_receipts desc) as total_receipts_rank,
+     rank() over (partition by substring(race for 1) order by ending_cash desc) as cash_on_hand_rank,
+     rank() over (partition by substring(race for 1) order by total_disbursements desc) as total_disbursements_rank
+ from fec_candidates c
+ inner join fec_candidate_summaries s using (candidate_id)
+ where
+     candidate_status = 'C'
+     and election_year = '12'
+2012-06-26 00:09:34,968 - fec_importer - INFO - Executing 
+ 
+ 
+ 
+ drop table if exists agg_fec_candidate_timeline
+2012-06-26 00:09:34,969 - fec_importer - INFO - Executing 
+ create table agg_fec_candidate_timeline as
+ select candidate_id, race, (date - '2011-01-01') / 7 as week, count(*), sum(amount) as amount
+ from fec_candidates c
+ inner join fec_candidate_summaries s using (candidate_id)
+ inner join (select filer_id, date, amount from fec_indiv union all select other_id, date, amount from fec_pac2cand) t on c.committee_id = t.filer_id
+ where
+     t.date <= s.ending_date -- there was a problem with forward-dated contributions throwing off charts 
+ group by candidate_id, race, week
+2012-06-26 00:10:53,571 - fec_importer - INFO - Executing 
+ 
+ drop table if exists agg_fec_candidate_cumulative_timeline
+2012-06-26 00:10:53,572 - fec_importer - INFO - Executing 
+ create table agg_fec_candidate_cumulative_timeline as
+ select candidate_id, race, week, sum(amount) OVER (partition by candidate_id, race order by week) as cumulative_raised
+ from agg_fec_candidate_timeline
+2012-06-26 00:10:54,894 - fec_importer - INFO - Executing 
+ 
+ 
+ drop table if exists fec_candidate_itemized
+2012-06-26 00:10:54,895 - fec_importer - INFO - Executing 
+ create table fec_candidate_itemized as
+ select
+     contributor_name, date, amount, contributor_type, transaction_type, 
+     employer, occupation, i.city, i.state, i.zipcode, 
+     candidate_name, party_designation1 as party, race, incumbent_challenger_open as status, committee_id, candidate_id
+ from fec_candidates c
+ inner join (
+     select filer_id as committee_id, 'indiv' as contributor_type, contributor_name,
+         i.city, i.state, i.zipcode, employer, occupation,
+         date, amount, transaction_type
+     from fec_indiv i
+ 
+     union all
+ 
+     select other_id, 'pac', committee_name,
+         t.city, t.state, t.zipcode, connected_org, '',
+         date, amount, transaction_type
+     from fec_pac2cand t
+     inner join fec_committees c on (c.committee_id = t.filer_id)) i using (committee_id)
+2012-06-26 00:11:06,240 - fec_importer - INFO - Executing 
+ create index fec_candidate_itemized_candidate_id on fec_candidate_itemized (candidate_id)
+2012-06-26 00:11:32,909 - fec_importer - INFO - Executing 
+ 
+ 
+ drop table if exists fec_committee_itemized
+2012-06-26 00:11:32,910 - fec_importer - INFO - Executing 
+ create table fec_committee_itemized as
+ select
+     contributor_name, date, amount, contributor_type, contributor_committee_id, transaction_type, 
+     employer, occupation, i.city, i.state, i.zipcode, 
+     committee_name, committee_id, committee_designation, committee_type, committee_party, interest_group, connected_org, candidate_id
+ from fec_committees c
+ inner join (
+     select filer_id as committee_id, 'indiv' as contributor_type, contributor_name, '' as contributor_committee_id,
+         city, state, zipcode, employer, occupation,
+         date, amount, transaction_type
+     from fec_indiv
+ 
+     union all
+ 
+     select filer_id, 'pac', contributor_name, other_id,
+         city, state, zipcode, '', occupation,
+         date, amount, transaction_type
+     from fec_pac2pac) i using (committee_id)
+ where
+     -- only transaction types 10-19 are money coming in. 20-29 are money going out, which we're not interested in here.
+     substring(transaction_type for 2)::integer between 10 and 19
+2012-06-26 00:11:46,206 - fec_importer - INFO - Executing 
+ create index fec_committee_itemized_committee_id on fec_committee_itemized (committee_id)
+2012-06-26 00:12:26,359 - fec_importer - INFO - Done.
+2012-06-26 00:43:34,358 - fec_importer - INFO - Uploading data...
+2012-06-26 00:44:27,162 - fec_importer - INFO - Processing uploaded data...
+2012-06-26 00:44:27,162 - fec_importer - INFO - Executing 
+ drop table if exists fec_candidates
+2012-06-26 00:44:27,163 - fec_importer - INFO - Executing 
+ create table fec_candidates as
+ select *,
+     case
+         when substring(candidate_id for 1) = 'P' then 'P'
+         when substring(candidate_id for 1) = 'S' then 'S' || '-' || substring(candidate_id from 3 for 2)
+         when substring(candidate_id for 1) = 'H' then 'H' || '-' || substring(candidate_id from 3 for 2) || '-' || current_district
+     end as race
+ from fec_candidates_import
+2012-06-26 00:44:28,878 - fec_importer - INFO - Executing 
+ 
+ create index fec_candidates_candidate_id on fec_candidates (candidate_id)
+2012-06-26 00:44:29,023 - fec_importer - INFO - Executing 
+ 
+ 
+ 
+ drop table if exists fec_indiv
+2012-06-26 00:44:29,024 - fec_importer - INFO - Executing 
+ create table fec_indiv as
+ select 
+     filer_id,
+     amendment,
+     report_type,
+     election_type,
+     microfilm_location,
+     lower(transaction_type) as transaction_type,
+     entity_type,
+     contributor_name,
+     city,
+     state,
+     zipcode,
+     employer,
+     occupation,
+     (substring(date for 4 from 5) || substring(date for 2) || substring(date for 2 from 3))::date as date,
+     case when transaction_type = '22Y' then -abs(amount) else amount end as amount,
+     other_id,
+     transaction_id,
+     file_num,
+     memo_code,
+     memo_text,
+     fec_record
+ from fec_indiv_import
+2012-06-26 00:44:43,435 - fec_importer - INFO - Executing 
+ create index fec_indiv_filer_id on fec_indiv (filer_id)
+2012-06-26 00:45:24,678 - fec_importer - INFO - Executing 
+ 
+ drop table if exists fec_pac2cand
+2012-06-26 00:45:24,685 - fec_importer - INFO - Executing 
+ create table fec_pac2cand as
+ select 
+     filer_id,
+     amendment,
+     report_type,
+     election_type,
+     microfilm_location,
+     lower(transaction_type) as transaction_type,
+     entity_type,
+     contributor_name,
+     city,
+     state,
+     zipcode,
+     employer,
+     occupation,
+     (substring(date for 4 from 5) || substring(date for 2) || substring(date for 2 from 3))::date as date,
+     case when transaction_type = '22Y' then -abs(amount) else amount end as amount,
+     other_id,
+     candidate_id,
+     transaction_id,
+     file_num,
+     memo_code,
+     memo_text,
+     fec_record
+ from fec_pac2cand_import
+2012-06-26 00:45:26,808 - fec_importer - INFO - Executing 
+ create index fec_pac2cand_other_id on fec_pac2cand (other_id)
+2012-06-26 00:45:30,183 - fec_importer - INFO - Executing 
+ create index fec_pac2cand_cand_id on fec_pac2cand (candidate_id)
+2012-06-26 00:45:32,948 - fec_importer - INFO - Executing 
+ 
+ drop table if exists fec_pac2pac
+2012-06-26 00:45:32,949 - fec_importer - INFO - Executing 
+ create table fec_pac2pac as
+ select 
+     filer_id,
+     amendment,
+     report_type,
+     election_type,
+     microfilm_location,
+     lower(transaction_type) as transaction_type,
+     entity_type,
+     contributor_name,
+     city,
+     state,
+     zipcode,
+     employer,
+     occupation,
+     (substring(date for 4 from 5) || substring(date for 2) || substring(date for 2 from 3))::date as date,
+     case when transaction_type = '22Y' then -abs(amount) else amount end as amount,
+     other_id,
+     transaction_id,
+     file_num,
+     memo_code,
+     memo_text,
+     fec_record
+ from fec_pac2pac_import
+2012-06-26 00:45:37,681 - fec_importer - INFO - Executing    
+ create index fec_pac2pac_filer_id on fec_pac2pac (filer_id)
+2012-06-26 00:45:44,778 - fec_importer - INFO - Executing 
+ create index fec_pac2pac_other_id on fec_pac2pac (other_id)
+2012-06-26 00:45:49,885 - fec_importer - INFO - Executing 
+ 
+ drop table if exists fec_candidate_summaries
+2012-06-26 00:45:49,886 - fec_importer - INFO - Executing 
+ create table fec_candidate_summaries as
+ select candidate_id, total_receipts, ending_cash, total_disbursements,
+     candidate_loan_repayments, other_loan_repayments, refunds_to_individuals, refunds_to_committees,
+     contributions_from_other_committees, contributions_from_party_committees,
+     contributions_from_candidate, loans_from_candidate,
+     authorized_transfers_from, total_individual_contributions,
+     (substring(ending_date for 4 from 5) || substring(ending_date for 2 from 1) || substring(ending_date for 2 from 3))::date as ending_date
+ from fec_candidate_summaries_import
+2012-06-26 00:45:50,055 - fec_importer - INFO - Executing 
+ 
+ create index fec_candidate_summaries_candidate_id on fec_candidate_summaries (candidate_id)
+2012-06-26 00:45:50,270 - fec_importer - INFO - Executing 
+ 
+ drop table if exists fec_committee_summaries
+2012-06-26 00:45:50,272 - fec_importer - INFO - Executing 
+ create table fec_committee_summaries as
+ select committee_id, committee_name, committee_type, committee_designation, filing_frequency, 
+     (through_year || through_month || through_day)::date as through_date,
+     total_receipts, transfers_from_affiliates, individual_contributions, 
+     contributions_from_other_committees, 
+     total_loans_received, total_disbursements, transfers_to_affiliates,
+     refunds_to_individuals, refunds_to_committees, 
+     loan_repayments, cash_beginning_of_year, cash_close_of_period,
+     debts_owed, nonfederal_transfers_received, contributions_to_committees,
+     independent_expenditures_made, party_coordinated_expenditures_made, nonfederal_expenditure_share
+ from fec_committee_summaries_import
+ where
+     -- there are a number of data-less rows. Discard them by looking for valid date.
+     through_year != 0
+2012-06-26 00:45:50,510 - fec_importer - INFO - Executing 
+ create index fec_committee_summaries_committee_id on fec_committee_summaries (committee_id)
+2012-06-26 00:45:50,849 - fec_importer - INFO - Executing 
+ 
+ 
+ drop table if exists agg_fec_candidate_rankings
+2012-06-26 00:45:50,850 - fec_importer - INFO - Executing 
+ create table agg_fec_candidate_rankings as
+ select candidate_id, substring(race for 1) as race,
+     rank() over (partition by substring(race for 1) order by total_receipts desc) as total_receipts_rank,
+     rank() over (partition by substring(race for 1) order by ending_cash desc) as cash_on_hand_rank,
+     rank() over (partition by substring(race for 1) order by total_disbursements desc) as total_disbursements_rank
+ from fec_candidates c
+ inner join fec_candidate_summaries s using (candidate_id)
+ where
+     candidate_status = 'C'
+     and election_year = '12'
+2012-06-26 00:45:51,221 - fec_importer - INFO - Executing 
+ 
+ 
+ 
+ drop table if exists agg_fec_candidate_timeline
+2012-06-26 00:45:51,222 - fec_importer - INFO - Executing 
+ create table agg_fec_candidate_timeline as
+ select candidate_id, race, (date - '2011-01-01') / 7 as week, count(*), sum(amount) as amount
+ from fec_candidates c
+ inner join fec_candidate_summaries s using (candidate_id)
+ inner join (select filer_id, date, amount from fec_indiv union all select other_id, date, amount from fec_pac2cand) t on c.committee_id = t.filer_id
+ where
+     t.date <= s.ending_date -- there was a problem with forward-dated contributions throwing off charts 
+ group by candidate_id, race, week
+2012-06-26 00:47:12,856 - fec_importer - INFO - Executing 
+ 
+ drop table if exists agg_fec_candidate_cumulative_timeline
+2012-06-26 00:47:12,856 - fec_importer - INFO - Executing 
+ create table agg_fec_candidate_cumulative_timeline as
+ select candidate_id, race, week, sum(amount) OVER (partition by candidate_id, race order by week) as cumulative_raised
+ from agg_fec_candidate_timeline
+2012-06-26 00:47:14,276 - fec_importer - INFO - Executing 
+ 
+ 
+ drop table if exists fec_candidate_itemized
+2012-06-26 00:47:14,277 - fec_importer - INFO - Executing 
+ create table fec_candidate_itemized as
+ select
+     contributor_name, date, amount, contributor_type, transaction_type, 
+     employer, occupation, i.city, i.state, i.zipcode, 
+     candidate_name, party_designation1 as party, race, incumbent_challenger_open as status, committee_id, candidate_id
+ from fec_candidates c
+ inner join (
+     select filer_id as committee_id, 'indiv' as contributor_type, contributor_name,
+         i.city, i.state, i.zipcode, employer, occupation,
+         date, amount, transaction_type
+     from fec_indiv i
+ 
+     union all
+ 
+     select other_id, 'pac', committee_name,
+         t.city, t.state, t.zipcode, connected_org, '',
+         date, amount, transaction_type
+     from fec_pac2cand t
+     inner join fec_committees c on (c.committee_id = t.filer_id)) i using (committee_id)
+2012-06-26 00:47:24,953 - fec_importer - INFO - Executing 
+ create index fec_candidate_itemized_candidate_id on fec_candidate_itemized (candidate_id)
+2012-06-26 00:47:52,453 - fec_importer - INFO - Executing 
+ 
+ 
+ drop table if exists fec_committee_itemized
+2012-06-26 00:47:52,454 - fec_importer - INFO - Executing 
+ create table fec_committee_itemized as
+ select
+     contributor_name, date, amount, contributor_type, contributor_committee_id, transaction_type, 
+     employer, occupation, i.city, i.state, i.zipcode, 
+     committee_name, committee_id, committee_designation, committee_type, committee_party, interest_group, connected_org, candidate_id
+ from fec_committees c
+ inner join (
+     select filer_id as committee_id, 'indiv' as contributor_type, contributor_name, '' as contributor_committee_id,
+         city, state, zipcode, employer, occupation,
+         date, amount, transaction_type
+     from fec_indiv
+ 
+     union all
+ 
+     select filer_id, 'pac', contributor_name, other_id,
+         city, state, zipcode, '', occupation,
+         date, amount, transaction_type
+     from fec_pac2pac) i using (committee_id)
+ where
+     -- only transaction types 10-19 are money coming in. 20-29 are money going out, which we're not interested in here.
+     substring(transaction_type for 2)::integer between 10 and 19
+2012-06-26 00:48:06,870 - fec_importer - INFO - Executing 
+ create index fec_committee_itemized_committee_id on fec_committee_itemized (committee_id)
+2012-06-26 00:48:47,970 - fec_importer - INFO - Done.
+2012-06-26 00:58:41,443 - fec_importer - INFO - Uploading data...
+2012-06-26 00:59:39,549 - fec_importer - INFO - Done.
+2012-06-26 01:03:00,745 - fec_importer - INFO - Uploading data...
+2012-06-26 01:04:03,927 - fec_importer - INFO - Done.
+2012-06-26 01:18:14,041 - fec_importer - INFO - Uploading data...
+2012-06-26 01:19:08,802 - fec_importer - INFO - Done.
+2012-06-26 02:26:41,399 - fec_importer - INFO - Uploading data...
+2012-06-26 02:27:43,301 - fec_importer - INFO - Done.
+2012-06-26 02:35:40,195 - fec_importer - INFO - Uploading data...
+2012-06-26 02:36:36,671 - fec_importer - INFO - Done.
+2012-06-26 02:50:27,412 - fec_importer - INFO - Uploading data...
+2012-06-26 02:51:17,464 - fec_importer - INFO - Done.
