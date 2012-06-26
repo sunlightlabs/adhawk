@@ -10,4 +10,4 @@ knowledge_base/migrations/*
 *.csv
 *.zip
 *.dta.utf8
-*.dat
+*.dat.utf8
