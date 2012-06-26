@@ -6,7 +6,7 @@ SITE_ROOT = os.path.realpath(
         os.path.join(os.path.dirname(__file__),
             os.path.pardir))
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -126,7 +126,8 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'knowledge_base',
-    'fts'
+    'fts',
+    'db_script',
     #'south'
 )
 
