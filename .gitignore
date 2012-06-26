@@ -6,4 +6,8 @@ local_settings*
 *.dummy
 knowledge_base/migrations/*
 *.vim
-db_script/processing/*
+*.dta
+*.csv
+*.zip
+*.dta.utf8
+*.dat
