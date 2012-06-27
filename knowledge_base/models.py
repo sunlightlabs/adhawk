@@ -6,38 +6,39 @@ from django.db import models
 class Author(models.Model):
     name = models.CharField(max_length=50)
     profile_page_url = models.URLField(max_length=100, 
-            verbose_name='Profile page URL')
+            verbose_name='Profile page URL',
+            null=True)
 
     def __unicode__(self):
         return self.name
             
 class CandidateStatus(models.Model):
     code = models.CharField(max_length=1)
-    value = models.CharField(max_length=40)
-    description = models.CharField(max_length=500)
+    value = models.CharField(max_length=40,null=True)
+    description = models.CharField(max_length=500,null=True)
 
     def __unicode__(self):
         return "%s - %s"%(self.code,self.value)
 
 class CommitteeDesignation(models.Model):
     code = models.CharField(max_length=1)
-    name = models.CharField(max_length=50)
-    description = models.CharField(max_length=500)
+    name = models.CharField(max_length=50,null=True)
+    description = models.CharField(max_length=500,null=True)
 
     def __unicode__(self):
         return "%s - %s"%(self.code,self.name)
 
 class CommitteeType(models.Model):
     code = models.CharField(max_length=1)
-    name = models.CharField(max_length=50)
-    description = models.CharField(max_length=500)
+    name = models.CharField(max_length=50,null=True)
+    description = models.CharField(max_length=500,null=True)
 
     def __unicode__(self):
         return "%s - %s"%(self.code,self.name)
 
 class ConnectedOrganization(models.Model):
     name = models.CharField(max_length=38)
-    description = models.CharField(max_length=500)
+    description = models.CharField(max_length=500,null=True,blank=True)
 
     def __unicode__(self):
         return self.name.title()
@@ -56,16 +57,16 @@ class BroadcastType(models.Model):
 
 class IncumbentChallengerStatus(models.Model):
     code = models.CharField(max_length=1)
-    value = models.CharField(max_length=11)
-    description = models.CharField(max_length=500)
+    value = models.CharField(max_length=11,null=True)
+    description = models.CharField(max_length=500,null=True)
 
     def __unicode__(self):
         return '%s - %s'%(self.code,self.value)
 
 class InterestGroupCategory(models.Model):
     code = models.CharField(max_length=1)
-    name = models.CharField(max_length=40)
-    description = models.CharField(max_length=500)
+    name = models.CharField(max_length=40,null=True)
+    description = models.CharField(max_length=500,null=True)
 
     def __unicode__(self):
         return '%s - %s'%(self.code,self.name)
@@ -151,45 +152,54 @@ class Tag(models.Model):
 class Candidate(models.Model):
     FEC_id = models.CharField(max_length=9)
     name = models.CharField(max_length=38)
-    party = models.CharField(max_length=3)
+    party = models.CharField(max_length=3,null=True,blank=True)
     year_of_election = models.IntegerField(max_length=4,null=True,blank=True)
-    street_one = models.CharField(max_length=34)
-    street_two = models.CharField(max_length=34)
-    city = models.CharField(max_length=18)
-    state = models.CharField(max_length=2)
-    zip_code = models.IntegerField(max_length=5)
+    street_one = models.CharField(max_length=34,null=True,blank=True)
+    street_two = models.CharField(max_length=34,null=True,blank=True)
+    city = models.CharField(max_length=18,null=True,blank=True)
+    state = models.CharField(max_length=2,null=True,blank=True)
+    zip_code = models.IntegerField(max_length=5,null=True,blank=True)
 
 
-    incumbent_challenger_status = models.ForeignKey(IncumbentChallengerStatus)
-    candidate_status = models.ForeignKey(CandidateStatus)
+    incumbent_challenger_status = models.ForeignKey(
+            IncumbentChallengerStatus,
+            blank=True,
+            null=True)
+    candidate_status = models.ForeignKey(
+            CandidateStatus,
+            blank=True,
+            null=True)
 
     stances = models.ManyToManyField(Stance)
 
     def __unicode__(self):
         try:
-            return '%s (%s)'%(self.name.title(),self.party[0])
+            if self.party:
+                return '%s (%s)'%(self.name.title(),self.party[0])
+            else:
+                return '%s (UNK)'%(self.name.title(),)
         except IndexError:
             return '%s (UNK)'%(self.name.title(),)
 
 class Funder(models.Model):
     FEC_id = models.CharField(max_length=9)
     name = models.CharField(max_length=90)
-    treasurer_name = models.CharField(max_length=38)
-    street_one = models.CharField(max_length=34)
-    street_two = models.CharField(max_length=34)
-    city = models.CharField(max_length=18)
-    state = models.CharField(max_length=2)
-    zip_code = models.CharField(max_length=5)
-    filing_frequency = models.CharField(max_length=1)
-    party = models.CharField(max_length=3)
+    treasurer_name = models.CharField(max_length=38,null=True,blank=True)
+    street_one = models.CharField(max_length=34,null=True,blank=True)
+    street_two = models.CharField(max_length=34,null=True,blank=True)
+    city = models.CharField(max_length=18,null=True,blank=True)
+    state = models.CharField(max_length=2,null=True,blank=True)
+    zip_code = models.CharField(max_length=5,null=True,blank=True)
+    filing_frequency = models.CharField(max_length=1,null=True,blank=True)
+    party = models.CharField(max_length=3,null=True,blank=True)
 
     #FK fields
     interest_group_category = models.ForeignKey(InterestGroupCategory, 
-            on_delete=models.PROTECT)
+            on_delete=models.PROTECT,null=True,blank=True)
     committee_type = models.ForeignKey(CommitteeType, 
-            on_delete=models.PROTECT)
+            on_delete=models.PROTECT,null=True,blank=True)
     committee_designation = models.ForeignKey(CommitteeDesignation,
-            on_delete=models.PROTECT)
+            on_delete=models.PROTECT,null=True,blank=True)
     connected_organization = models.ForeignKey(ConnectedOrganization,
             null=True, 
             blank=True,
