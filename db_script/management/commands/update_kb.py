@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
-from db_script.importer import FECImporter
+from db_script.update_kb_models import CandidateImporter,CommitteeImporter
 
 
 class Command(BaseCommand):
@@ -14,6 +14,9 @@ class Command(BaseCommand):
         else:
             data_dir = None
 
-        i = FECImporter(data_dir)
-        i.update_csv()
-        i.update_db()
+        cni = CandidateImporter(data_dir)
+        cni.update()
+        
+        cmi = CommitteeImporter(data_dir)
+        cmi.update()
+
