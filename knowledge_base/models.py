@@ -269,6 +269,7 @@ class FunderToCandidate(models.Model):
 class Ad(models.Model):
     title = models.CharField(max_length=200)
     ingested = models.BooleanField(default=False)
+    profile_url = models.URLField(null=True)
     
     # OTO relation
     #media = models.OneToOneField(Media,on_delete=models.PROTECT)

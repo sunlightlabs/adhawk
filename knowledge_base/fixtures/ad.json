@@ -3,6 +3,7 @@
     "pk": 1,
     "model": "knowledge_base.ad",
     "fields": {
+      "profile_url": "https://dl.dropbox.com/u/16950143/greatjob_eric.png",
       "title": "\"Spending\" MO",
       "tags": [
         1
