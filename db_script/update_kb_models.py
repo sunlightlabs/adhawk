@@ -162,7 +162,7 @@ def diff_committee(committee,cr):
             return True
     else:
         igc = None
-    if ct.committee_type:
+    if cr.committee_type:
         try:
             ct = CommitteeType.objects.get_or_create(
                 code=cr.committee_type)
@@ -233,7 +233,7 @@ def merge_committee_object(committee,cr,log):
     else:
         co = None
     committee.name=cr.committee_name
-    committee.treasurer_name=cr.election_year
+    committee.treasurer_name=cr.treasurers_name
     committee.street_one=cr.street1
     committee.street_two=cr.street2
     committee.city=cr.city
@@ -395,11 +395,11 @@ class CommitteeImporter():
         CommitteeResult = make_result_object(ec)
         for r in ec:
             cr = CommitteeResult(*r)
-            old_c = committee.objects.get(FEC_id=r.committee_id)
+            old_c = Funder.objects.get(FEC_id=cr.committee_id)
             if diff_committee(old_c,cr):
-                merged = merge_committee_object(old_c,cr)
+                merged = merge_committee_object(old_c,cr,self.log)
                 merged.save()
-                merged_entries = []
+                merged_entries += 1
                 self.log.info("...added\tCommittee\t%s"%(unicode(merged),))
             else:
                 continue
