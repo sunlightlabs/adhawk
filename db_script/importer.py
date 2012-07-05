@@ -66,8 +66,8 @@ class FECImporter():
             self.log.info("Uploading data...")
             self.upload(c)
 
-            #self.log.info("Processing uploaded data...")
-            #self.execute_file(c, SQL_POSTLOAD_FILE)
+            self.log.info("Processing uploaded data...")
+            self.execute_file(c, SQL_POSTLOAD_FILE)
 
             self.log.info("Done.")
         except Exception as e:
