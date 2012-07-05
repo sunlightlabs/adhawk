@@ -12,3 +12,4 @@ knowledge_base/migrations/*
 *.dta.utf8
 *.dat.utf8
 *.log
+*.dat
