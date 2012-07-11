@@ -300,6 +300,8 @@ class Media(models.Model):
     embed_code = models.CharField(max_length=200,blank=True,null=True)
     creator_description = models.TextField(default="No description available.")
     curator_description = models.TextField(blank=True,null=True)
+    duration = models.IntegerField()
+    pub_date = models.DateTimeField()
     link_broken = models.BooleanField(default=False)
 
     # FK relations
