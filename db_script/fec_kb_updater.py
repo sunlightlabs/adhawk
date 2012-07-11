@@ -140,6 +140,7 @@ def make_committee_object(cr,log):
     else:
         co = None
     committee = Funder()
+    committee.FEC_id=cr.committee_id
     committee.name=cr.committee_name
     committee.treasurer_name=cr.treasurers_name
     committee.street_one=cr.street1
@@ -328,12 +329,12 @@ class CandidateImporter():
         CandidateResult = make_result_object(ec)
         for r in ec:
             cr = CandidateResult(*r)
-            old_c = Candidate.objects.get(FEC_id=r.candidate_id)
+            old_c = Candidate.objects.get(FEC_id=cr.candidate_id)
             if diff_candidate(old_c,cr):
-                merged = merge_candidate_object(old_c,cr,log)
+                merged = merge_candidate_object(old_c,cr,self.log)
                 merged.save()
                 merged_entries += 1
-                self.log.info("...merged\tCandidate\t%s"(unicode(merged),))
+                self.log.info("...merged\tCandidate\t%s"%(unicode(merged),))
             else:
                 continue
         self.done_msg += "Merged %d entries\n"%(merged_entries,)

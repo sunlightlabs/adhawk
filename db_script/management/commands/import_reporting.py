@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
-from db_script.import_reporting_youtube import ReportingYouTubeImporter
+from db_script.reporting_importer import ReportingYouTubeImporter
 
 class Command(BaseCommand):
 

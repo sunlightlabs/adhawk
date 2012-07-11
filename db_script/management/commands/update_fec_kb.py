@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
-from db_script.update_kb_models import CandidateImporter,CommitteeImporter
+from db_script.fec_kb_updater import CandidateImporter,CommitteeImporter
 
 
 class Command(BaseCommand):
