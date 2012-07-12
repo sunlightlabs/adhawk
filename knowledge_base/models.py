@@ -303,6 +303,7 @@ class Media(models.Model):
     duration = models.IntegerField()
     pub_date = models.DateTimeField()
     link_broken = models.BooleanField(default=False)
+    downloaded = models.BooleanField(default=False)
 
     # FK relations
     media_profile = models.ForeignKey(MediaProfile,
