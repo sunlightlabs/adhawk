@@ -10,9 +10,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         if args:
-            data_dir = args[0]
+            data_dir = sys.argv[1]
         else:
-            data_dir = None
+            data_dir = 'db_script/processing'
 
         i = FECImporter(data_dir)
         i.update_csv()
