@@ -13,3 +13,4 @@ knowledge_base/migrations/*
 *.dat.utf8
 *.log
 *.dat
+whopaid_api/testing/result.html
