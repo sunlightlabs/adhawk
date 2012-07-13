@@ -14,3 +14,4 @@ knowledge_base/migrations/*
 *.log
 *.dat
 whopaid_api/testing/result.html
+*~
