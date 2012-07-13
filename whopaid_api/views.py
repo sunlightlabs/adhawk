@@ -12,6 +12,8 @@ except ImportError:
 
 # Create your views here.
 
+BASE_URL = 'http://adhawk.sunlightfoundation.com/ad/%s'
+
 def lookup(fingerprint):
     if len(fingerprint):
         decoded = fp.decode_code_string(fingerprint)
@@ -41,6 +43,10 @@ def fp_search(request):
                 result=result)
         fpquery.save()
         ad = Ad.objects.get(pk=result)
-        response_data['ad_profile_url'] = ad.profile_url
+        response_data['result_url'] = BASE_URL%(str(ad.pk),)
+        return HttpResponse(json.dumps(response_data),
+                mimetype="application/json")
+    else:
+        response_data['result_url'] = BASE_URL%('not_found.html',)
         return HttpResponse(json.dumps(response_data),
                 mimetype="application/json")
