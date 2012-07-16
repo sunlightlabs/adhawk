@@ -1,4 +1,5 @@
 import sys
+import os
 import urlparse
 from collections import defaultdict
 from datetime import datetime
@@ -6,6 +7,8 @@ from datetime import datetime
 import gdata.youtube
 import gdata.youtube.service
 from gdata.service import RequestError
+
+from db_script.log import set_up_logger
 
 from knowledge_base.models import Ad,Media,MediaProfile,MediaType,Tag
 
@@ -80,15 +83,22 @@ class YouTubeMediaCollector():
 
 class YouTubeMediaImporter():
     def __init__(self,media_type,media_profile):
+        self.processing_dir = os.path.expanduser('db_script/processing')
+        self.log = set_up_logger("ad_media_importer",self.processing_dir)
+        self.log.info("Beginning import for %s"%(media_profile.url,))
         self.media_type = media_type
         self.media_profile = media_profile
+        self.log.info("collecting youtube media for %s"%(media_profile.url,))
         self.collector = YouTubeMediaCollector(
                 self.extract_username(media_profile))
+        self.log.info("filtering out old ads for %s"%(media_profile.url,))
         self.filter_for_new_ads()
     def extract_username(self,media_profile):
         path = urlparse.urlparse(media_profile.url).path
         return path.replace('/user/','')
     def upload(self):
+        self.log.info("uploading %d ads for %s"%
+                (len(self.collector.youtube_medias),self.media_profile.url))
         if self.collector.youtube_medias:
             for youtube_media in self.collector.youtube_medias:
                 ad = Ad(title=youtube_media.title, \
@@ -114,13 +124,20 @@ class YouTubeMediaImporter():
                     media.creator_description = youtube_media.description
                 media.save()
         else:
+            self.log.info("No ads to upload for %s"%(self.media_profile.url,))
             pass
     def filter_for_new_ads(self):
         imported = set([m.url for m in self.media_profile.media_set.all()])
         found = set([ym.url for ym in self.collector.youtube_medias])
         new = found - imported
+        self.log.info("%d of %d ads have already been imported"%
+            (len(found) - len(new),len(found)))
+        self.log.info("imported\n%s"%'\n'.join(list(imported)))
+        self.log.info("found\n%s"%'\n'.join(list(found)))
+        self.log.info("new\n%s"%'\n'.join(list(new)))
         new_youtube_medias = [ym for ym in self.collector.youtube_medias 
                 if ym.url in new]
+        self.log.info("%d ads in new_youtube_medias"%(len(new_youtube_medias),))
         self.collector.youtube_medias = new_youtube_medias
 
 
