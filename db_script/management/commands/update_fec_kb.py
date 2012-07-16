@@ -12,7 +12,7 @@ class Command(BaseCommand):
         if args:
             data_dir = args[0]
         else:
-            data_dir = None
+            data_dir = 'db_script/processing'
 
         cni = CandidateImporter(data_dir)
         cni.update()
