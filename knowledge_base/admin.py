@@ -23,6 +23,11 @@ from django.contrib import admin
 from django.forms import TextInput, Textarea
 from django.db import models
 
+def set_checked(modeladmin, request, queryset):
+    queryset.update(checked=True)
+
+set_checked.short_description = "Mark selected as checked"
+
 class MediaInline(admin.StackedInline):
     formfield_overrides = {
             # models.CharField: {'widget': TextInput(attrs={'size':'20'})},
@@ -114,6 +119,8 @@ class MediaAdmin(admin.ModelAdmin):
     list_editable = ('checked','valid',)
     list_per_page = 10
     ordering = ('rmse',)
+    actions = [set_checked]
+    list_filter = ('checked','valid',)
 
 
 admin.site.register(Ad,AdAdmin)
