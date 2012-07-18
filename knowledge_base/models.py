@@ -1,6 +1,7 @@
 import urlparse,httplib
 
 from django.db import models
+from whopaid.settings import MEDIA_ROOT
 
 # Create your models here.
 class Author(models.Model):
@@ -323,8 +324,18 @@ class Media(models.Model):
         popup = u'<a href="%s" target="_blank" onclick="link_popup(this); return false">%s</a>'%(self.url,img_tag)
         return popup
 
+    def thumbvid(self):
+        vid = urlparse.parse_qs(urlparse.urlsplit(self.url).query)['v'][0]
+        embed = '<iframe width="120" height="90"'
+        embed += 'src="http://www.youtube.com/embed/%s"'%(vid,)
+        embed += 'frameborder="0" allowfullscreen></iframe>'
+        return embed
+
     thumbstrip.short_description = "thumbstrip"
     thumbstrip.allow_tags = True
+
+    thumbvid.short_description = "video"
+    thumbvid.allow_tags = True
 
     # MTM relations (moved to Ad)
     # tags = models.ManyToManyField(Tag)

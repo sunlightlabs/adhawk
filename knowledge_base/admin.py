@@ -115,7 +115,12 @@ class CandidateAdmin(admin.ModelAdmin):
             ]
 
 class MediaAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__','thumbstrip','checked','valid',)
+    list_display = ('__unicode__',
+            'checked',
+            'valid',
+            'duration',
+            'thumbstrip',
+            'thumbvid',)
     list_editable = ('checked','valid',)
     list_per_page = 10
     ordering = ('rmse',)
