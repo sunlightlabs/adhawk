@@ -1,10 +1,10 @@
 from knowledge_base.models import *
 import urllib
 import urlparse
-
+import whopaid.settings as settings
 
 YTIMG = "http://img.youtube.com/vi/%s/"
-thumbs_dir = "static/images/media_thumbnails/"
+thumbs_dir = settings.MEDIA_ROOT+"/images/media_thumbnails/"
 
 class ThumbDownloader():
     def __init__(self,media):
