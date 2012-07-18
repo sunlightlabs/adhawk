@@ -15,3 +15,5 @@ knowledge_base/migrations
 *.dat
 whopaid_api/testing/result.html
 *~
+db_script/processing
+media/
