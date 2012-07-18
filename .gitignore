@@ -4,7 +4,7 @@ local_settings*
 *.swp
 *.db
 *.dummy
-knowledge_base/migrations/*
+knowledge_base/migrations
 *.vim
 *.dta
 *.csv
