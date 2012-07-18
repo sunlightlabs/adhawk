@@ -109,6 +109,13 @@ class CandidateAdmin(admin.ModelAdmin):
             AdToCandidateInline
             ]
 
+class MediaAdmin(admin.ModelAdmin):
+    list_display = ('__unicode__','thumbstrip','checked','valid',)
+    list_editable = ('checked','valid',)
+    list_per_page = 10
+    ordering = ('rmse',)
+
+
 admin.site.register(Ad,AdAdmin)
 admin.site.register(AdToCandidate)
 admin.site.register(Author)
@@ -121,7 +128,7 @@ admin.site.register(FunderToFunder)
 admin.site.register(Issue)
 admin.site.register(IssueCategory)
 admin.site.register(Market)
-admin.site.register(Media)
+admin.site.register(Media,MediaAdmin)
 admin.site.register(MediaProfile)
 admin.site.register(MediaType)
 admin.site.register(Source)

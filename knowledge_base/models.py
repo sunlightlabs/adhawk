@@ -304,12 +304,27 @@ class Media(models.Model):
     pub_date = models.DateTimeField()
     link_broken = models.BooleanField(default=False)
     downloaded = models.BooleanField(default=False)
+    checked = models.BooleanField(default=False)
+    valid = models.BooleanField(default=True)
+    rmse = models.FloatField(default=0.0)
 
     # FK relations
     media_profile = models.ForeignKey(MediaProfile,
             on_delete=models.PROTECT)
     ad = models.ForeignKey(Ad,
             on_delete=models.PROTECT)
+
+    def thumbstrip(self):
+        pad = str(self.pk).zfill(5)
+        loc = u'http://localhost:8000/media/'
+        loc += u'images/media_thumbnails/strips/'
+        loc += u'Media_%s_strip.jpg'%(pad,)
+        img_tag = u'<img src="%s" />'%(loc,)
+        popup = u'<a href="%s" target="_blank" onclick="link_popup(this); return false">%s</a>'%(self.url,img_tag)
+        return popup
+
+    thumbstrip.short_description = "thumbstrip"
+    thumbstrip.allow_tags = True
 
     # MTM relations (moved to Ad)
     # tags = models.ManyToManyField(Tag)
