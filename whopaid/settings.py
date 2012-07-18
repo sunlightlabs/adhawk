@@ -131,7 +131,7 @@ INSTALLED_APPS = (
     'whopaid_api',
     'fts',
     'db_script',
-    #'south'
+    'south'
 )
 
 # A sample logging configuration. The only tangible logging
