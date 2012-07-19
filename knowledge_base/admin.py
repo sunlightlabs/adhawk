@@ -127,7 +127,7 @@ class MediaAdmin(admin.ModelAdmin):
     actions = [set_checked]
     list_filter = ('checked','valid',)
 
-
+admin.site.disable_action('delete_selected')
 admin.site.register(Ad,AdAdmin)
 admin.site.register(AdToCandidate)
 admin.site.register(Author)
