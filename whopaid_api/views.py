@@ -42,8 +42,9 @@ def fp_search(request):
                 lon=lon, \
                 result=result)
         fpquery.save()
-        ad = Ad.objects.get(pk=result)
-        response_data['result_url'] = BASE_URL%(str(ad.pk),)
+        media = Media.objects.get(pk=result)
+        path = str(media.pk)+'c'
+        response_data['result_url'] = BASE_URL%(path,)
         return HttpResponse(json.dumps(response_data),
                 mimetype="application/json")
     else:
