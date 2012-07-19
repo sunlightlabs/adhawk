@@ -1,7 +1,7 @@
 import urlparse,httplib
 
 from django.db import models
-from whopaid.settings import MEDIA_ROOT
+from whopaid.settings import EXTERNAL_URL,MEDIA_URL
 
 # Create your models here.
 class Author(models.Model):
@@ -317,7 +317,7 @@ class Media(models.Model):
 
     def thumbstrip(self):
         pad = str(self.pk).zfill(5)
-        loc = u'http://localhost:8000/media/'
+        loc = EXTERNAL_URL + MEDIA_URL
         loc += u'images/media_thumbnails/strips/'
         loc += u'Media_%s_strip.jpg'%(pad,)
         img_tag = u'<img src="%s" />'%(loc,)
@@ -336,6 +336,9 @@ class Media(models.Model):
 
     thumbvid.short_description = "video"
     thumbvid.allow_tags = True
+
+    class Meta:
+        verbose_name_plural = "media"
 
     # MTM relations (moved to Ad)
     # tags = models.ManyToManyField(Tag)
