@@ -19,5 +19,5 @@ urlpatterns = patterns('',
     url(r'^api/',include('whopaid_api.urls')),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': settings.MEDIA_ROOT}),
-    url(r'^ad/',include('knowledge_base.urls')),
+    url(r'^ad/(?P<path>.*)$','knowledge_base.views.ad_profile'),
 )
