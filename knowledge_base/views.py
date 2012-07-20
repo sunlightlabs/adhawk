@@ -1,16 +1,27 @@
 import urlparse
+
+from django.template import Context
 from django.shortcuts import render_to_response
 
-from knowledge_base.models import Ad,Media,Funder,CommitteeType
+from knowledge_base.models import Ad, \
+                                  Media, \
+                                  Funder, \
+                                  FunderFamily, \
+                                  CommitteeType
 
 def ad_profile(request, path):
-    pass
-#    if path[-1] == 'c':
-#        template = 'ad/client_ad_profile.html'
-#        ad_pk = path[:-1]
-#    else:
-#        ad_pk = path
-#    ad = Ad.objects.get(pk=ad_pk)
-#    c = Context({
-#            'ad' : ad,
-#            'funder' : ad.
+    if path[-1] == 'c':
+        template = 'knowledge_base/client_ad_profile.html'
+        media_pk = path[:-1]
+    else:
+        template = 'knowledge_base/ad_profile.html'
+        media_pk = path
+    media = Media.objects.get(pk=media_pk)
+    pk_pad = str(media.pk).zfill(5)
+    c = Context({
+            'media' : media,
+            'ad' : media.ad,
+            'funder_family' : media.media_profile.funder.funder_family,
+            'pk_pad' : pk_pad
+            })
+    return render_to_response(template)
