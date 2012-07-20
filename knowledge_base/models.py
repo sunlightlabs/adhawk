@@ -1,6 +1,7 @@
 import urlparse,httplib
 
 from django.db import models
+from django.db.models import Sum
 from whopaid.settings import EXTERNAL_URL,MEDIA_URL
 
 # Create your models here.
@@ -182,6 +183,84 @@ class Candidate(models.Model):
         except IndexError:
             return '%s (UNK)'%(self.name.title(),)
 
+class FunderFamily(models.Model):
+    primary_FEC_id = models.CharField(max_length=9)
+    name = models.CharField(max_length=90)
+    total_contributions = models.DecimalField(
+            max_digits=21,
+            decimal_places=2,
+            default=0.00)
+    cash_on_hand = models.DecimalField(
+            max_digits=21,
+            decimal_places=2,
+            default=0.00)
+    total_independent_expenditures = models.DecimalField(
+            max_digits=21,
+            decimal_places=2,
+            default=0.00)
+    ie_negative_percent = models.FloatField(default=0.0)
+    ie_positive_percent = models.FloatField(default=0.0)
+    ie_opposes_dems = models.DecimalField(
+            max_digits=21,
+            decimal_places=2,
+            default=0.00)
+    ie_opposes_reps = models.DecimalField(
+            max_digits=21,
+            decimal_places=2,
+            default=0.00)
+    ie_supports_dems = models.DecimalField(
+            max_digits=21,
+            decimal_places=2,
+            default=0.00)
+    ie_supports_reps = models.DecimalField(
+            max_digits=21,
+            decimal_places=2,
+            default=0.00)
+    is_superpac = models.BooleanField(default=False)
+    
+    #MTM relations
+    committee_types = models.ManyToManyField(CommitteeType,null=True,blank=True)
+
+    def __unicode__(self):
+        display = self.name.title()
+        display += ' ('
+        display += ','.join([ct.code for ct in self.committee_types.all()])
+        display += ')'
+        return display
+
+    class Meta:
+        verbose_name_plural = 'funder families'
+
+    def update_values(self):
+        if self.funder_set:
+            for funder in self.funder_set.all():
+                self.committee_types.add(funder.committee_type)
+                if funder.committee_type.code == "O":
+                    self.is_superpac = True
+                else:
+                    continue
+            self.total_contributions = self.funder_set.aggregate(
+                    Sum('total_contributions'))['total_contributions__sum']
+            self.cash_on_hand = self.funder_set.aggregate(
+                    Sum('cash_on_hand'))['cash_on_hand__sum']
+            self.independent_expenditures = self.funder_set.aggregate(
+                    Sum('total_independent_expenditures'))['total_independent_expenditures__sum']
+            self.ie_opposes_dems = self.funder_set.aggregate(
+                    Sum('ie_opposes_dems'))['ie_opposes_dems__sum']
+            self.ie_opposes_reps = self.funder_set.aggregate(
+                    Sum('ie_opposes_reps'))['ie_opposes_reps__sum']
+            self.ie_supports_dems = self.funder_set.aggregate(
+                    Sum('ie_supports_dems'))['ie_supports_dems__sum']
+            self.ie_supports_reps = self.funder_set.aggregate(
+                    Sum('ie_supports_reps'))['ie_supports_reps__sum']
+        total_pos = float(self.ie_supports_dems + self.ie_supports_reps)
+        total_neg = float(self.ie_opposes_dems + self.ie_opposes_reps)
+        denom = total_pos + total_neg
+        if denom:
+            self.ie_negative_percent = total_neg / denom
+            self.ie_positive_percent = total_pos / denom
+        self.save()
+
 class Funder(models.Model):
     FEC_id = models.CharField(max_length=9)
     name = models.CharField(max_length=90)
@@ -193,6 +272,36 @@ class Funder(models.Model):
     zip_code = models.CharField(max_length=5,null=True,blank=True)
     filing_frequency = models.CharField(max_length=1,null=True,blank=True)
     party = models.CharField(max_length=3,null=True,blank=True)
+    total_contributions = models.DecimalField(
+            max_digits=21,
+            decimal_places=2,
+            default=0.00)
+    cash_on_hand = models.DecimalField(
+            max_digits=21,
+            decimal_places=2,
+            default=0.00)
+    total_independent_expenditures = models.DecimalField(
+            max_digits=21,
+            decimal_places=2,
+            default=0.00)
+    ie_negative_percent = models.FloatField(default=0.0)
+    ie_positive_percent = models.FloatField(default=0.0)
+    ie_opposes_dems = models.DecimalField(
+            max_digits=21,
+            decimal_places=2,
+            default=0.00)
+    ie_opposes_reps = models.DecimalField(
+            max_digits=21,
+            decimal_places=2,
+            default=0.00)
+    ie_supports_dems = models.DecimalField(
+            max_digits=21,
+            decimal_places=2,
+            default=0.00)
+    ie_supports_reps = models.DecimalField(
+            max_digits=21,
+            decimal_places=2,
+            default=0.00)
 
     #FK fields
     interest_group_category = models.ForeignKey(InterestGroupCategory, 
@@ -203,6 +312,10 @@ class Funder(models.Model):
             on_delete=models.PROTECT,null=True,blank=True)
     connected_organization = models.ForeignKey(ConnectedOrganization,
             null=True, 
+            blank=True,
+            on_delete=models.SET_NULL)
+    funder_family = models.ForeignKey(FunderFamily,
+            null=True,
             blank=True,
             on_delete=models.SET_NULL)
 
@@ -393,4 +506,5 @@ class Coverage(models.Model):
 
     def __unicode__(self):
         return "%s (%s)"%(self.headline,self.source.main_url)
+
 
