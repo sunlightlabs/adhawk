@@ -6,6 +6,7 @@ Coverage,
 CoverageType,
 BroadcastType,
 Funder,
+FunderFamily,
 FunderToFunder,
 IncumbentChallengerStatus,
 InterestGroupCategory,
@@ -28,6 +29,10 @@ def set_checked(modeladmin, request, queryset):
 
 set_checked.short_description = "Mark selected as checked"
 
+class FunderInline(admin.StackedInline):
+    model = Funder
+    extra = 0
+
 class MediaInline(admin.StackedInline):
     formfield_overrides = {
             # models.CharField: {'widget': TextInput(attrs={'size':'20'})},
@@ -49,7 +54,7 @@ class MediaProfileInline(admin.StackedInline):
 class FunderAdmin(admin.ModelAdmin):
     fieldsets = (
             (None, {
-                'fields':(('name','FEC_id','party'))
+                'fields':(('name','FEC_id','party','funder_family'))
                 }),
             ('Address', {
                 'classes': ('collapse',),
@@ -67,8 +72,13 @@ class FunderAdmin(admin.ModelAdmin):
             )
     inlines = [
             MediaProfileInline,
-            FunderToFunderInline
+            FunderToFunderInline,
             ]
+    search_fields = ['FEC_id','name','funder_family__name']
+
+class FunderFamilyAdmin(admin.ModelAdmin):
+    model = FunderFamily
+    inlines = [ FunderInline ]
 
 class AdToCandidateInline(admin.StackedInline):
     model = AdToCandidate
@@ -136,6 +146,7 @@ admin.site.register(Candidate,CandidateAdmin)
 admin.site.register(Coverage,CoverageAdmin)
 admin.site.register(CoverageType)
 admin.site.register(Funder,FunderAdmin)
+admin.site.register(FunderFamily,FunderFamilyAdmin)
 admin.site.register(FunderToFunder)
 admin.site.register(Issue)
 admin.site.register(IssueCategory)
