@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from knowledge_base.models import (Ad, 
 AdToCandidate,
 Author,

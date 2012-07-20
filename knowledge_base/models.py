@@ -1,4 +1,5 @@
 import urlparse,httplib
+from decimal import Decimal
 
 from django.db import models
 from django.db.models import Sum
@@ -189,33 +190,33 @@ class FunderFamily(models.Model):
     total_contributions = models.DecimalField(
             max_digits=21,
             decimal_places=2,
-            default=0.00)
+            default=Decimal("0.00"))
     cash_on_hand = models.DecimalField(
             max_digits=21,
             decimal_places=2,
-            default=0.00)
+            default=Decimal("0.00"))
     total_independent_expenditures = models.DecimalField(
             max_digits=21,
             decimal_places=2,
-            default=0.00)
+            default=Decimal("0.00"))
     ie_negative_percent = models.FloatField(default=0.0)
     ie_positive_percent = models.FloatField(default=0.0)
     ie_opposes_dems = models.DecimalField(
             max_digits=21,
             decimal_places=2,
-            default=0.00)
+            default=Decimal("0.00"))
     ie_opposes_reps = models.DecimalField(
             max_digits=21,
             decimal_places=2,
-            default=0.00)
+            default=Decimal("0.00"))
     ie_supports_dems = models.DecimalField(
             max_digits=21,
             decimal_places=2,
-            default=0.00)
+            default=Decimal("0.00"))
     ie_supports_reps = models.DecimalField(
             max_digits=21,
             decimal_places=2,
-            default=0.00)
+            default=Decimal("0.00"))
     is_superpac = models.BooleanField(default=False)
     
     #MTM relations
@@ -275,33 +276,33 @@ class Funder(models.Model):
     total_contributions = models.DecimalField(
             max_digits=21,
             decimal_places=2,
-            default=0.00)
+            default=Decimal("0.00"))
     cash_on_hand = models.DecimalField(
             max_digits=21,
             decimal_places=2,
-            default=0.00)
+            default=Decimal("0.00"))
     total_independent_expenditures = models.DecimalField(
             max_digits=21,
             decimal_places=2,
-            default=0.00)
+            default=Decimal("0.00"))
     ie_negative_percent = models.FloatField(default=0.0)
     ie_positive_percent = models.FloatField(default=0.0)
     ie_opposes_dems = models.DecimalField(
             max_digits=21,
             decimal_places=2,
-            default=0.00)
+            default=Decimal("0.00"))
     ie_opposes_reps = models.DecimalField(
             max_digits=21,
             decimal_places=2,
-            default=0.00)
+            default=Decimal("0.00"))
     ie_supports_dems = models.DecimalField(
             max_digits=21,
             decimal_places=2,
-            default=0.00)
+            default=Decimal("0.00"))
     ie_supports_reps = models.DecimalField(
             max_digits=21,
             decimal_places=2,
-            default=0.00)
+            default=Decimal("0.00"))
 
     #FK fields
     interest_group_category = models.ForeignKey(InterestGroupCategory, 
