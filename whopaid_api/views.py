@@ -1,5 +1,5 @@
 from whopaid_api.models import FpQuery
-from knowledge_base.models import Ad
+from knowledge_base.models import Media
 from echoprint_server_api import fp
 
 from django.http import HttpResponse
