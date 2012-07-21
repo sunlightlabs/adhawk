@@ -13,9 +13,14 @@ class Command(BaseCommand):
 
         log = set_up_logger("video_download.log","db_script/processing")
 
-        media_objects = Media.objects.filter(downloaded=False)[:2]
-
-        for media_object in media_objects:
-            print "downloading videos for pk=%s"%media_object.pk
-            vd = VideoDownloader(media_object)
-            log.info(vd.download_file())
+        media_objects = Media.objects.filter(downloaded=False,
+                                             valid=True,
+                                             checked=True)
+        
+        if media_objects:
+            for media_object in media_objects:
+                print "downloading videos for pk=%s"%media_object.pk
+                vd = VideoDownloader(media_object)
+                log.info(vd.download_file())
+        else:
+            print "Nothing to download"
