@@ -17,7 +17,7 @@ class VideoDownloader():
         process = subprocess.Popen(
                 ['youtube-dl.py','-o',self.output_file,self.url],
                 stderr=subprocess.PIPE)
-        self.error = process.communicate()
+        self.error = process.communicate()[1]
         exit_code = process.wait()
         if int(exit_code) == 0:
             self.media_object.downloaded = True
