@@ -383,7 +383,6 @@ class FunderToCandidate(models.Model):
 
 class Ad(models.Model):
     title = models.CharField(max_length=200)
-    ingested = models.BooleanField(default=False)
     profile_url = models.URLField(null=True)
     
     # OTO relation
@@ -419,6 +418,7 @@ class Media(models.Model):
     pub_date = models.DateTimeField()
     link_broken = models.BooleanField(default=False)
     downloaded = models.BooleanField(default=False)
+    ingested = models.BooleanField(default=False)
     checked = models.BooleanField(default=False)
     valid = models.BooleanField(default=True)
     rmse = models.FloatField(default=0.0)
