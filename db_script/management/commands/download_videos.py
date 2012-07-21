@@ -18,6 +18,7 @@ class Command(BaseCommand):
                                              checked=True)
         
         if media_objects:
+            print "%d videos to download"%len(media_objects)
             for media_object in media_objects:
                 print "downloading videos for pk=%s"%media_object.pk
                 vd = VideoDownloader(media_object)
