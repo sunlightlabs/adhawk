@@ -36,7 +36,7 @@ class Fingerprinter():
         return i
     def ingest_fingerprint(self,j):
         i = self.build_ingest_dict(j)
-        print "ingesting %s"%(str(i))
+        #print "ingesting %s"%(str(i))
         fp.ingest(i)
     def get_codegen(self):
         process = subprocess.Popen(

@@ -28,6 +28,7 @@ class Command(BaseCommand):
                 loc_dic[pk] = os.path.join(dirpath,fn)
         if loc_dic:
             for media_pk,loc in loc_dic.items():
+                print "fingerprinting %s"%loc
                 f = Fingerprinter(loc)
                 log.info(f.get_codegen())
         else:
