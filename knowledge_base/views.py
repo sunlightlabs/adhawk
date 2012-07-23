@@ -24,4 +24,4 @@ def ad_profile(request, path):
             'funder_family' : media.media_profile.funder.funder_family,
             'pk_pad' : pk_pad
             })
-    return render_to_response(template)
+    return render_to_response(template,c)
