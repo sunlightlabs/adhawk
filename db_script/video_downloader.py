@@ -15,7 +15,7 @@ class VideoDownloader():
         self.output_file = os.path.join(MEDIA_ROOT,TEMPLATE%self.pk)
     def download_file(self):
         process = subprocess.Popen(
-                ['youtube-dl.py','-o',self.output_file,self.url],
+                ['youtube-dl.py','--no-part','-o',self.output_file,self.url],
                 stderr=subprocess.PIPE)
         self.error = process.communicate()[1]
         exit_code = process.wait()
