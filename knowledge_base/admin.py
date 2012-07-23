@@ -96,6 +96,7 @@ class AdAdmin(admin.ModelAdmin):
             'tags',
             'stances'
             ]
+    search_fields = ['title','profile_url']
 
 class CoverageAdmin(admin.ModelAdmin):
     fields = ('url',
@@ -138,6 +139,7 @@ class MediaAdmin(admin.ModelAdmin):
     ordering = ('rmse',)
     actions = [set_checked]
     list_filter = ('checked','valid',)
+    search_fields = ['ad__title','url','media_profile__funder__funder_family__name']
 
 admin.site.disable_action('delete_selected')
 admin.site.register(Ad,AdAdmin)
