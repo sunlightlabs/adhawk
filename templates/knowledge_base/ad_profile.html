@@ -21,7 +21,7 @@
       <div id="committee_activities">
         <h3>Activities:</h3>
         <ul>
-          {% for committee_type in funder_family.committee_types %}
+          {% for committee_type in funder_family.committee_types.all %}
           <li> {{ committee_type.name }} </li>
           {% endfor %}
         </ul>
