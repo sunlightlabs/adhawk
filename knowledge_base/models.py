@@ -335,6 +335,17 @@ class Funder(models.Model):
     def __unicode__(self):
         return self.name.title()
 
+    def save(self, *args, **kwargs): 
+        total_pos = float(self.ie_supports_dems + self.ie_supports_reps)
+        total_neg = float(self.ie_opposes_dems + self.ie_opposes_reps)
+        denom = total_pos + total_neg
+        if denom:
+            self.ie_negative_percent = total_neg / denom
+            self.ie_positive_percent = total_pos / denom
+        super(Funder, self).save(*args,**kwargs)
+        if self.funder_family:
+            self.funder_family.update_values()
+
 class MediaProfile(models.Model):
     url = models.URLField()
 
