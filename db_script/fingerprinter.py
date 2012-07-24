@@ -26,7 +26,7 @@ class Fingerprinter():
         return os.path.basename(self.loc)
     def write_codegen_file(self,j):
         fout = open(os.path.join(CODEGEN_DIR,self.codegen_fname),'w')
-        fout.write(str(j))
+        fout.write(json.dumps(j))
         fout.close()
     def build_ingest_dict(self,j):
         i = {   "track_id"  : self.pk,
