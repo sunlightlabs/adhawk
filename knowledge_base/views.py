@@ -25,3 +25,6 @@ def ad_profile(request, path):
             'pk_pad' : pk_pad
             })
     return render_to_response(template,c)
+
+def not_found(request):
+    return render_to_response('knowledge_base/not_found.html')
