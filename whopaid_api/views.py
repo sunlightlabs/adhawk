@@ -43,7 +43,7 @@ def fp_search(request):
                 result=result)
         fpquery.save()
         media = Media.objects.get(pk=result)
-        path = str(media.pk)+'c'
+        path = str(media.pk)
         response_data['result_url'] = BASE_URL%(path,)
         return HttpResponse(json.dumps(response_data),
                 mimetype="application/json")
