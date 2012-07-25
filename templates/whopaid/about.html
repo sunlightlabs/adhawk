@@ -1,0 +1,15 @@
+{% extends "whopaid/base.html" %}
+{% block content %}
+    <div id="heading">
+      <h1>About</h1>
+      <div id="content">
+        <p>AdHawk is blah blah blah</p>
+        <h2>This app was produced by the Sunlight Foundation</h2>
+        <p>Founded in 2006, the Sunlight Foundation is a non-partisan non-profit that uses cutting-edge technology and ideas to make government transparent and accurate</p>
+        <form>
+          <button type="button" name="join" onClick="parent.location='join_url'">JOIN</button>
+          <button type="button" name="donate" onClick="parent.location='donate_url'">DONATE</button>
+        </form>
+      </div>
+    </div>
+{% endblock %}
