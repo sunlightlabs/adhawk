@@ -9,8 +9,20 @@ from knowledge_base.models import Ad, \
                                   FunderFamily, \
                                   CommitteeType
 
+def set_client(request):
+    user_agent = request.META['HTTP_USER_AGENT']
+    if user_agent == 'com.sunlightfoundation.com.adhawk.android':
+        return 'android'
+    elif user_agent == 'com.sunlightfoundation.com.adhawk.ios':
+        return 'ios'
+    else:
+        return user_agent
+
 def ad_profile(request, path):
-    client = request.GET.get('client','normal')
+    client = set_client(request)
+    user_agent = request.META['HTTP_USER_AGENT']
+
+    print 'user agent is %s'%(user_agent,)
     media = Media.objects.get(pk=path)
     #pk_pad = str(media.pk).zfill(5)
     c = Context({
@@ -27,7 +39,7 @@ def ad_profile(request, path):
 #    return render_to_response('knowledge_base/not_found.html')
 
 def top_ads(request,path):
-    client = request.GET.get('client','normal')
+    client = set_client(request)
     ads = Ad.objects.filter(top_ad=True)
     medias = [a.media_set.get() for a in ads]
     c = Context({

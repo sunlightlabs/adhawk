@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}base.css" type="text/css" media="screen, projection" />
   </head>
   <body>
-    {% if client != "app" %}
+    {% if client != "ios" and client != "android" %}
     <div id="branding">
       BRANDING GOES HERE (version is {{ client }})
     </div>
