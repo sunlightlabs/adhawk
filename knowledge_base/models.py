@@ -423,6 +423,7 @@ class Ad(models.Model):
 
 class Media(models.Model):
     url = models.URLField()
+    gigya_url = models.URLField(blank=True,null=True)
     embed_code = models.CharField(max_length=200,blank=True,null=True)
     creator_description = models.TextField(default="No description available.")
     curator_description = models.TextField(blank=True,null=True)
