@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}base.css" type="text/css" media="screen, projection" />
   </head>
   <body>
+    {% if client != "app" %}
+    <div id="branding">
+      BRANDING GOES HERE (version is {{ client }})
+    </div>
+    {% endif %}
     <div id="content">
       {% block content %}{% endblock %}
     </div> <!-- end div content -->

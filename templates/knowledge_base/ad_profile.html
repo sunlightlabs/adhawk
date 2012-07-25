@@ -1,15 +1,12 @@
 {% extends "whopaid/base.html" %}
 {% block content %}
-      <div id="branding">
-        BRANDING GOES HERE
-      </div> <!-- end div branding -->
       <div id="title">
         <h1>{{ ad.title }}</h1>
         <p><a href="http://adhawk.sunlightfoundation.com/ad/nn/{{ media.pk}}">not your ad?</a></p>
       </div> <!-- end div title -->
       <div id="preview">
         <a class="youtube_link" href="{{ media.url }}">
-          <img class="thumbstrip" src="http://adhawk.sunlightfoundation.com/media/images/media_thumbnails/strips/Media_{{ pk_pad }}_strip.jpg">
+          <img class="thumbstrip" src="http://adhawk.sunlightfoundation.com/media/images/media_thumbnails/strips/Media_{{ media.pk|stringformat:"05i" }}_strip.jpg">
         </a>
       </div> <!-- end div preview -->
       <div id="funder_name">

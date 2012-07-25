@@ -20,6 +20,6 @@ urlpatterns = patterns('',
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': settings.MEDIA_ROOT}),
     url(r'^about$','whopaid.views.about'),
-    url(r'^ad/top$','knowledge_base.views.top_ads'),
+    url(r'^ad/top(?P<path>.*)$','knowledge_base.views.top_ads'),
     url(r'^ad/(?P<path>.*)$','knowledge_base.views.ad_profile'),
 )
