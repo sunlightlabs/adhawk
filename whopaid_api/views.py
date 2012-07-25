@@ -48,6 +48,6 @@ def fp_search(request):
         return HttpResponse(json.dumps(response_data),
                 mimetype="application/json")
     else:
-        response_data['result_url'] = BASE_URL%('not_found.html',)
+        response_data['result_url'] = None
         return HttpResponse(json.dumps(response_data),
                 mimetype="application/json")
