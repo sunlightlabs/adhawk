@@ -1,10 +1,14 @@
-from knowledge_base.models import *
+import logging
 import urllib
 import urlparse
+
+from knowledge_base.models import *
 import whopaid.settings as settings
 
 YTIMG = "http://img.youtube.com/vi/%s/"
 thumbs_dir = settings.MEDIA_ROOT+"/images/media_thumbnails/"
+
+log = logging.getLogger('db_script.thumb_getter')
 
 class ThumbDownloader():
     def __init__(self,media):
@@ -18,13 +22,14 @@ class ThumbDownloader():
         qs = up.query
         return urlparse.parse_qs(qs)['v'][0]
     def get_thumbs(self):
-        #self.log.info("getting thumbs for Media(%s)"%(self.ytimg_base,))
+        log.info("getting thumbs for Media(%s)"%(self.ytimg_base,))
         for n in ['1','2','3']:
             #self.log.info(".")
             fname = "%s.jpg"%n
             f = self.fout_base+fname
             ytimg = self.ytimg_base+fname
             urllib.urlretrieve(ytimg,thumbs_dir+f)
+        log.info("...gotten"
 
 
 #pk_vid = []

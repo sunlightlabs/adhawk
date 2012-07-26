@@ -1,7 +1,10 @@
 import os
 import sys
+import logging
 
 from knowledge_base.models import Funder,FunderFamily
+
+log = logging.getLogger('db_script.funder_family_initializer')
 
 class FunderFamilyInitializer():
     def __init__(self,funder_object):
@@ -18,5 +21,5 @@ class FunderFamilyInitializer():
     def assign_new_funder_family(self):
         self.funder_object.funder_family = self.new_funder_family_object
         self.funder_object.save()
-        return "Funder(pk=%d) added to FunderFamily(pk=%d)"%(
-                    self.funder_object.pk,self.new_funder_family_object.pk)
+        log.info("Funder(pk=%d) added to FunderFamily(pk=%d)"%(
+                    self.funder_object.pk,self.new_funder_family_object.pk))

@@ -1,6 +1,7 @@
 import sys
 import os
 import collections
+import logging
 
 from knowledge_base.models import Candidate, \
         CandidateStatus, \
@@ -13,8 +14,10 @@ from knowledge_base.models import Candidate, \
         Funder, \
         FunderToFunder, \
         FunderToCandidate
-from db_script.log import set_up_logger
+#from db_script.log import set_up_logger
 from django.db import connections
+
+log = logging.getLogger('db_script.fec_kb_updater')
 
 CONN = connections['default']
 
@@ -22,7 +25,7 @@ def make_result_object(executed_cursor):
     return collections.namedtuple('Result', 
             ', '.join([col.name for col in executed_cursor.description]))
 
-def make_candidate_object(cr,log):
+def make_candidate_object(cr):
     if cr.incumbent_challenger_open:
         ics,created_ics = IncumbentChallengerStatus.objects.get_or_create(
             code=cr.incumbent_challenger_open)
@@ -84,7 +87,7 @@ def diff_candidate(candidate,cr):
     else:
         return False
 
-def merge_candidate_object(candidate,cr,log):
+def merge_candidate_object(candidate,cr):
     if cr.incumbent_challenger_open:
         ics,created_ics = IncumbentChallengerStatus.objects.get_or_create(
                 code=cr.incumbent_challenger_open)
@@ -110,7 +113,7 @@ def merge_candidate_object(candidate,cr,log):
     candidate.candidate_status=cs
     return candidate
 
-def make_committee_object(cr,log):
+def make_committee_object(cr):
     if cr.interest_group:
         igc,created_igc = InterestGroupCategory.objects.get_or_create(
                 code=cr.interest_group)
@@ -204,7 +207,7 @@ def diff_committee(committee,cr):
     else:
         return False
 
-def merge_committee_object(committee,cr,log):
+def merge_committee_object(committee,cr):
     if cr.interest_group:
         igc,created_igc = InterestGroupCategory.objects.get_or_create(
                 code=cr.interest_group)
@@ -273,7 +276,7 @@ class CommitteeQuery():
 class CandidateImporter():
     def __init__(self,processing_dir,conn=CONN):
         self.processing_dir = os.path.expanduser(processing_dir)
-        self.log = set_up_logger('candidate_importer',self.processing_dir)
+        #self.log = set_up_logger('candidate_importer',self.processing_dir)
         self.conn = conn
         self.imported_id_set = self.get_imported_ids()
         self.model_id_set = self.get_model_ids()
@@ -294,19 +297,19 @@ class CandidateImporter():
     #def get_missing_ids(self):
     #    return self.model_id_set - self.imported_id_set
     def update(self):
-        self.log.info("Adding Candidates...\n"+ \
+        log.info("Adding Candidates...\n"+ \
                 '\n'.join(['+'+str(a) for a in self.create_id_set]))
         if self.create_id_set:
             self.add_candidates()
 
-        self.log.info("Updating Candidates...\n"+ \
+        log.info("Updating Candidates...\n"+ \
                 '\n'.join(['++'+str(a) for a in self.update_id_set]))
         if self.update_id_set:
             self.update_candidates()
 
-        self.log.info(self.done_msg)
+        log.info(self.done_msg)
 
-        #self.log.info("Deleting Candidates...\n"+ \
+        #log.info("Deleting Candidates...\n"+ \
         #        '\n'.join(['-'+str(a) for a in self.delete_id_set]))
         #delete_candidates()
     def add_candidates(self):
@@ -316,9 +319,9 @@ class CandidateImporter():
         CandidateResult = make_result_object(ec)
         for r in ec:
             cr = CandidateResult(*r)
-            candidate = make_candidate_object(cr,self.log)
+            candidate = make_candidate_object(cr)
             candidate.save()
-            self.log.info("...added\tCandidate\t%s"%(unicode(candidate),))
+            log.info("...added\tCandidate\t%s"%(unicode(candidate),))
             added_entries += 1
         self.done_msg += "Added %d new entries\n"%(added_entries,)
 
@@ -331,10 +334,10 @@ class CandidateImporter():
             cr = CandidateResult(*r)
             old_c = Candidate.objects.get(FEC_id=cr.candidate_id)
             if diff_candidate(old_c,cr):
-                merged = merge_candidate_object(old_c,cr,self.log)
+                merged = merge_candidate_object(old_c,cr)
                 merged.save()
                 merged_entries += 1
-                self.log.info("...merged\tCandidate\t%s"%(unicode(merged),))
+                log.info("...merged\tCandidate\t%s"%(unicode(merged),))
             else:
                 continue
         self.done_msg += "Merged %d entries\n"%(merged_entries,)
@@ -342,7 +345,7 @@ class CandidateImporter():
 class CommitteeImporter():
     def __init__(self,processing_dir,conn=CONN):
         self.processing_dir = os.path.expanduser(processing_dir)
-        self.log = set_up_logger('committee_importer',self.processing_dir)
+        #self.log = set_up_logger('committee_importer',self.processing_dir)
         self.conn = conn
         self.imported_id_set = self.get_imported_ids()
         self.model_id_set = self.get_model_ids()
@@ -363,17 +366,17 @@ class CommitteeImporter():
     #def get_missing_ids(self):
     #    return self.model_id_set - self.imported_id_set
     def update(self):
-        self.log.info("Adding Committees...\n"+ \
+        log.info("Adding Committees...\n"+ \
                 '\n'.join(['+'+str(a) for a in self.create_id_set]))
         if self.create_id_set:
             self.add_committees()
 
-        self.log.info("Updating Committees...\n"+ \
+        log.info("Updating Committees...\n"+ \
                 '\n'.join(['++'+str(a) for a in self.update_id_set]))
         if self.update_id_set:
             self.update_committees()
 
-        self.log.info(self.done_msg)
+        log.info(self.done_msg)
         #self.log.info("Deleting Candidates...\n"+ \
         #        '\n'.join(['-'+str(a) for a in self.delete_id_set]))
         #delete_candidates()
@@ -384,9 +387,9 @@ class CommitteeImporter():
         CommitteeResult = make_result_object(ec)
         for r in ec:
             cr = CommitteeResult(*r)
-            committee = make_committee_object(cr,self.log)
+            committee = make_committee_object(cr)
             committee.save()
-            self.log.info("...added\tCommittee\t%s"%(unicode(committee),))
+            log.info("...added\tCommittee\t%s"%(unicode(committee),))
             added_entries += 1
         self.done_msg += "Added %d new entries\n"%(added_entries,)
     def update_committees(self):
@@ -398,10 +401,10 @@ class CommitteeImporter():
             cr = CommitteeResult(*r)
             old_c = Funder.objects.get(FEC_id=cr.committee_id)
             if diff_committee(old_c,cr):
-                merged = merge_committee_object(old_c,cr,self.log)
+                merged = merge_committee_object(old_c,cr)
                 merged.save()
                 merged_entries += 1
-                self.log.info("...added\tCommittee\t%s"%(unicode(merged),))
+                log.info("...added\tCommittee\t%s"%(unicode(merged),))
             else:
                 continue
         self.done_msg += "...Merged %d new entries"%(merged_entries,)

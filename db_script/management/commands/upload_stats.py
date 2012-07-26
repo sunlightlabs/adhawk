@@ -4,7 +4,7 @@ from django.db import transaction
 from db_script.stats_uploader import RMSEUploader
 from knowledge_base.models import Media
 
-from db_script.log import set_up_logger
+#from db_script.log import set_up_logger
 
 class Command(BaseCommand):
 
@@ -16,7 +16,7 @@ class Command(BaseCommand):
         else:
             data_dir = 'db_script/processing'
 
-        log = set_up_logger("","db_script/processing")
+        #log = set_up_logger("","db_script/processing")
 
         rmse = RMSEUploader()
         rmse.upload()

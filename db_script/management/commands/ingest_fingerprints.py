@@ -3,8 +3,8 @@ import os
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
-from db_script.fingerprinter import Fingerprinter
-from db_script.log import set_up_logger
+from db_script.fingerprint_ingester import FingerprintIngester
+#from db_script.log import set_up_logger
 from whopaid.settings import MEDIA_ROOT
 from knowledge_base.models import Media
 
@@ -15,7 +15,7 @@ class Command(BaseCommand):
     @transaction.commit_on_success
     def handle(self, *args, **options):
 
-        log = set_up_logger('fingerprinter','db_script/processing')
+        #log = set_up_logger('fingerprinter','db_script/processing')
 
         w = os.walk(VIDEO_DIR)
         medias = Media.objects.filter(ingested=False)
@@ -29,7 +29,8 @@ class Command(BaseCommand):
         if loc_dic:
             for media_pk,loc in loc_dic.items():
                 print "fingerprinting %s"%loc
-                f = Fingerprinter(loc)
-                log.info(f.get_codegen())
+                f = FingerprintIngester(loc)
+                f.get_codegen()
+                #log.info(f.get_codegen())
         else:
             print "Nothing to ingest"

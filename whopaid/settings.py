@@ -141,24 +141,146 @@ INSTALLED_APPS = (
 # more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
+    'disable_existing_loggers': True,
+    #'filters': {
+    #    'require_debug_false': {
+    #        '()': 'django.utils.log.RequireDebugFalse'
+    #    }
+    #},
     'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        }
+        'matching' : {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(
+                LOG_ROOT,'echoprint_server_api/match_report.log'),
+        },
+        'fp_querying' : {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(
+                LOG_ROOT,'echoprint_server_api/fp.log'),
+        },
+        'ad_media_importing' : {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(
+                LOG_ROOT,'db_script/ad_media_importer.log'),
+        },
+        'fec_kb_updating' : {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(
+                LOG_ROOT,'db_script/fec_kb_updater.log'),
+        },
+        'fingerprint_ingesting' : {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(
+                LOG_ROOT,'db_script/fingerprint_ingester.log'),
+        },
+        'funder_family_initializing' : {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(
+                LOG_ROOT,'db_script/funder_family_initializer.log'),
+        },
+        'fec_importing' : {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(
+                LOG_ROOT,'db_script/fec_importer.log'),
+        },
+        'reporting_importing' : {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(
+                LOG_ROOT,'db_script/reporting_importer.log'),
+        },
+        'reporting_kb_updating' : {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(
+                LOG_ROOT,'db_script/reporting_kb_updater.log'),
+        },
+        'stats_uploading' : {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(
+                LOG_ROOT,'db_script/stats_uploader.log'),
+        },
+        'thumb_getting' : {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(
+                LOG_ROOT,'db_script/thumb_getter.log'),
+        },
+        'video_downloading' : {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(
+                LOG_ROOT,'db_script/video_downloader.log'),
+        },
     },
     'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
+        'echoprint_server_api.fp.match' : {
+            'handlers': ['matching'],
             'propagate': True,
+            'level': 'DEBUG',
+        },
+        'echoprint_server_api.fp.fingerprint' : {
+            'handlers': ['fp_querying'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'db_script.ad_media_importer' : {
+            'handlers': ['ad_media_importing'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'db_script.fec_kb_updater' : {
+            'handlers': ['fec_kb_updating'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'db_script.ad_media_importer' : {
+            'handlers': ['ad_media_importing'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'db_script.fingerprint_ingester' : {
+            'handlers': ['fingerprint_ingesting'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'db_script.funder_family_initializer' : {
+            'handlers': ['funder_family_initializing'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'db_script.reporting_importer' : {
+            'handlers': ['reporting_importing'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'db_script.reporting_kb_updater' : {
+            'handlers': ['reporting_kb_updating'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'db_script.stats_uploader' : {
+            'handlers': ['stats_uploading'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'db_script.thumb_getter' : {
+            'handlers': ['thumb_getting'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'db_script.video_downloader' : {
+            'handlers': ['video_downloading'],
+            'propagate': True,
+            'level': 'DEBUG',
         },
     }
 }

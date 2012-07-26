@@ -25,10 +25,7 @@ except ImportError:
 
 _fp_solr = solr.SolrConnectionPool("http://localhost:8502/solr/fp")
 _hexpoch = int(time.time() * 1000)
-match_report_logger = logging.getLogger('echoprint_server_api.fp.match')
-match_report_handler = logging.FileHandler('logs/echoprint_server_api/match_report.log')
-fp_logger = logging.getLogger('echoprint_server_api.fp.fingerprint')
-fp_handler = logging.FileHandler('logs/echoprint_server_api/fp.log')
+logger = logging.getLogger(__name__)
 _tyrant_address = ['localhost', 1978]
 _tyrant = None
 
@@ -97,8 +94,8 @@ def decode_code_string(compressed_code_string):
         # this will decode both URL safe b64 and non-url-safe
         actual_code = zlib.decompress(base64.urlsafe_b64decode(compressed_code_string))
     except (zlib.error, TypeError):
-        fp_logger.warn("Could not decode base64 zlib string %s" % (compressed_code_string))
-        import traceback; fp_logger.warn(traceback.format_exc())
+        logger.warn("Could not decode base64 zlib string %s" % (compressed_code_string))
+        import traceback; logger.warn(traceback.format_exc())
         return None
     # If it is a deflated code, expand it from hex
     if ' ' not in actual_code:
@@ -144,7 +141,6 @@ def cut_code_string_length(code_string):
     return " ".join(parts)
 
 def best_match_for_query(code_string, elbow=10, local=False):
-    match_report_logger.debug("="*80)
     # DEC strings come in as unicode so we have to force them to ASCII
     code_string = code_string.encode("utf8")
     tic = int(time.time()*1000)
@@ -157,40 +153,36 @@ def best_match_for_query(code_string, elbow=10, local=False):
     
     code_len = len(code_string.split(" ")) / 2
     if code_len < elbow:
-        match_report_logger.warn("Query code length (%d) is less than elbow (%d)" % (code_len, elbow))
+        logger.warn("Query code length (%d) is less than elbow (%d)" % (code_len, elbow))
         return Response(Response.NOT_ENOUGH_CODE, tic=tic)
 
     code_string = cut_code_string_length(code_string)
-    code_len = len(code_string.split(" ")) / 2
 
     # Query the FP flat directly.
     response = query_fp(code_string, rows=30, local=local, get_data=True)
-    match_report_logger.debug("solr qtime is %d\t(line 17" % (response.header["QTime"]))
+    logger.debug("solr qtime is %d" % (response.header["QTime"]))
     
     if len(response.results) == 0:
-        match_report_logger.debug("found no results\t(line 171)")
         return Response(Response.NO_RESULTS, qtime=response.header["QTime"], tic=tic)
 
     # If we just had one result, make sure that it is close enough. We rarely if ever have a single match so this is not helpful (and probably doesn't work well.)
     top_match_score = int(response.results[0]["score"])
-    match_report_logger.debug("top_match_score: %d\t(line 176)"%top_match_score)
-    match_report_logger.debug("number of results: %d\t"%len(response.results))
     if len(response.results) == 1:
         trackid = response.results[0]["track_id"]
         trackid = trackid.split("-")[0] # will work even if no `-` in trid
         meta = metadata_for_track_id(trackid, local=local)
-        if code_len - top_match_score < elbow:
-            match_report_logger.debug(
-            "code_len - top_match_score was less than elbow (line 184)")
-            return Response(Response.SINGLE_GOOD_MATCH, TRID=trackid, score=top_match_score, qtime=response.header["QTime"], tic=tic, metadata=meta)
-        else:
-            match_report_logger.debug(
-            "code_len - top_match_score was not less than elbow (line 188)")
-            return Response(Response.SINGLE_BAD_MATCH, qtime=response.header["QTime"], tic=tic)
+        #CUIBONO: added
+        return Response(Response.SINGLE_GOOD_MATCH, TRID=trackid, score=top_match_score, qtime=response.header["QTime"], tic=tic, metadata=meta)
+        #/CUIBONO
+        #if code_len - top_match_score < elbow:
+            #return Response(Response.SINGLE_GOOD_MATCH, TRID=trackid, score=top_match_score, qtime=response.header["QTime"], tic=tic, metadata=meta)
+        #else:
+            #return Response(Response.SINGLE_BAD_MATCH, qtime=response.header["QTime"], tic=tic)
 
-    # If the scores are really low (less than 5% of the query length) then say no results
-#    if top_match_score < code_len * 0.01:
-#        return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, qtime = response.header["QTime"], tic=tic)
+    # If the scores are really low (less than 10% of the query length) then say no results
+    # CUIBONO: edited this to 1% of query length
+    if top_match_score < code_len * 0.01:
+        return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, qtime = response.header["QTime"], tic=tic)
 
     # Not a strong match, so we look up the codes in the keystore and compute actual matches...
 
@@ -218,43 +210,43 @@ def best_match_for_query(code_string, elbow=10, local=False):
     #logger.debug("Actual score for %s is %d (code_len %d), original was %d" % (r["track_id"], actual_scores[r["track_id"]], code_len, top_match_score))
     # Sort the actual scores
     sorted_actual_scores = sorted(actual_scores.iteritems(), key=lambda (k,v): (v,k), reverse=True)
-    sas_str = '\n'.join(['%s\t%s'%(a,b) for a,b in sorted_actual_scores])
-    match_report_logger.debug("sorted actual scores (line 222): \n%s"%sas_str)
-
+    
     # Because we split songs up into multiple parts, sometimes the results will have the same track in the
     # first few results. Remove these duplicates so that the falloff is (potentially) higher.
-    new_sorted_actual_scores = []
+    new_sorted_actual_scores = sorted_actual_scores
     existing_trids = []
     for trid, result in sorted_actual_scores:
         trid_split = trid.split("-")[0]
         if trid_split not in existing_trids:
-            new_sorted_actual_scores.append((trid, result))
+            #new_sorted_actual_scores.append((trid, result))
             existing_trids.append(trid_split)
-    sorted_actual_scores = new_sorted_actual_scores
-    sas_str = '\n'.join(['%s\t%s'%(a,b) for a,b in sorted_actual_scores])
-    match_report_logger.debug("new sorted actual scores (line 235): \n%s"%sas_str)
-
+    
     # We might have reduced the length of the list to 1
-    if len(sorted_actual_scores) == 1:
-        match_report_logger.info("only have 1 score result...")
-        (top_track_id, top_score) = sorted_actual_scores[0]
-        if top_score < 10:
-        #if top_score < code_len * 0.1:
-            #logger.info("only result less than 10%% of the query string (%d < %d *0.1 (%d)) SINGLE_BAD_MATCH", top_score, code_len, code_len*0.1)
-            match_report_logger.info("only result had score less than 10 SINGLE_BAD_MATCH")
+    if len(new_sorted_actual_scores) == 1:
+        logger.info("only have 1 score result...")
+        (top_track_id, top_score) = new_sorted_actual_scores[0]
+        # CUIBONO: edited this to be .1%
+        if top_score < code_len * 0.001:
+            logger.info("only result less than 10%% of the query string (%d < %d *0.1 (%d)) SINGLE_BAD_MATCH", top_score, code_len, code_len*0.1)
             return Response(Response.SINGLE_BAD_MATCH, qtime = response.header["QTime"], tic=tic)
         else:
-            if top_score > (original_scores[top_track_id] / 2): 
-                match_report_logger.info("top_score > original_scores[%s]/2 (%d > %d) GOOD_MATCH_DECREASED",
-                    top_track_id, top_score, original_scores[top_track_id]/2)
-                trid = top_track_id.split("-")[0]
-                meta = metadata_for_track_id(trid, local=local)
-                return Response(Response.MULTIPLE_GOOD_MATCH_HISTOGRAM_DECREASED, TRID=trid, score=top_score, qtime=response.header["QTime"], tic=tic, metadata=meta)
-            else:
-                match_report_logger.info("top_score NOT > original_scores[%s]/2 (%d <= %d) BAD_HISTOGRAM_MATCH",
-                    top_track_id, top_score, original_scores[top_track_id]/2)
-                return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, qtime=response.header["QTime"], tic=tic)
+            trid = top_track_id.split("-")[0]
+            meta = metadata_for_track_id(trid, local=local)
+            return Response(Response.SINGLE_GOOD_MATCH, TRID=trid, score=top_score, qtime = response.header["QTime"], tic=tic, metadata=meta)
+            # CUIBONO: removed this test
+            #if top_score > (original_scores[top_track_id] / 2): 
+                #logger.info("top_score > original_scores[%s]/2 (%d > %d) GOOD_MATCH_DECREASED",
+                #    top_track_id, top_score, original_scores[top_track_id]/2)
+                #trid = top_track_id.split("-")[0]
+                #meta = metadata_for_track_id(trid, local=local)
+                #return Response(Response.MULTIPLE_GOOD_MATCH_HISTOGRAM_DECREASED, TRID=trid, score=top_score, qtime=response.header["QTime"], tic=tic, metadata=meta)
+            #else:
+                #logger.info("top_score NOT > original_scores[%s]/2 (%d <= %d) BAD_HISTOGRAM_MATCH",
+                #    top_track_id, top_score, original_scores[top_track_id]/2)
+                #return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, qtime=response.header["QTime"], tic=tic)
         
+    sorted_actual_scores = new_sorted_actual_scores    
+
     # Get the top one
     (actual_score_top_track_id, actual_score_top_score) = sorted_actual_scores[0]
     # Get the 2nd top one (we know there is always at least 2 matches)
@@ -263,23 +255,23 @@ def best_match_for_query(code_string, elbow=10, local=False):
     trackid = actual_score_top_track_id.split("-")[0]
     meta = metadata_for_track_id(trackid, local=local)
     
-    #if actual_score_top_score < code_len * 0.05:
-    if actual_score_top_score < 15:
-        match_report_logger.debug("actual_score_top_score < 15")
-        #logger.debug("actual_score_top_score = %d < code_len * 0.05 = %d"%(
-        #                                actual_score_top_score,
-        #                                code_len))
+    # CUIBONO: edited this to be .1%
+    if actual_score_top_score < code_len * 0.001:
         return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, qtime = response.header["QTime"], tic=tic)
     else:
+        return Response(Response.SINGLE_GOOD_MATCH, TRID=trackid,
+                        score=actual_score_top_score,
+                        qtime=response.header["QTime"], tic=tic, metadata=meta)
+        # CUIBONO: removed this test
         # If the actual score went down it still could be close enough, so check for that
-        if actual_score_top_score > (original_scores[actual_score_top_track_id] / 4): 
-            if (actual_score_top_score - actual_score_2nd_score) >= (actual_score_top_score / 3):  # for examples [10,4], 10-4 = 6, which >= 5, so OK
-                return Response(Response.MULTIPLE_GOOD_MATCH_HISTOGRAM_DECREASED, TRID=trackid, score=actual_score_top_score, qtime=response.header["QTime"], tic=tic, metadata=meta)
-            else:
-                return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, qtime = response.header["QTime"], tic=tic)
-        else:
+        #if actual_score_top_score > (original_scores[actual_score_top_track_id] / 2): 
+            #if (actual_score_top_score - actual_score_2nd_score) >= (actual_score_top_score / 2):  # for examples [10,4], 10-4 = 6, which >= 5, so OK
+                #return Response(Response.MULTIPLE_GOOD_MATCH_HISTOGRAM_DECREASED, TRID=trackid, score=actual_score_top_score, qtime=response.header["QTime"], tic=tic, metadata=meta)
+            #else:
+                #return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, qtime = response.header["QTime"], tic=tic)
+        #else:
             # If the actual score was not close enough, then no match.
-            return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, qtime=response.header["QTime"], tic=tic)
+            #return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, qtime=response.header["QTime"], tic=tic)
 
 def actual_matches(code_string_query, code_string_match, slop = 2, elbow = 10):
     code_query = code_string_query.split(" ")
@@ -289,11 +281,6 @@ def actual_matches(code_string_query, code_string_match, slop = 2, elbow = 10):
 
     time_diffs = {}
 
-    # Normalise the query timecodes to start with offset 0
-    code_query_int = [int(x) for x in code_query]
-    min_time = min(code_query_int[1::2])
-    code_query[1::2] = [str(x - min_time) for x in code_query_int[1::2]]
-    
     #
     # Invert the query codes
     query_codes = {}
@@ -312,10 +299,7 @@ def actual_matches(code_string_query, code_string_match, slop = 2, elbow = 10):
             match_code_time = int(code_match[match_counter])/slop
             min_dist = 32767
             for qtime in query_codes[match_code]:
-                # match_code_time > qtime for all corresponding
-                # hashcodes since normalising query timecodes, so no
-                # need for abs() anymore
-                dist = match_code_time - qtime
+                dist = abs(match_code_time - qtime)
                 if dist < min_dist:
                     min_dist = dist
             if min_dist < 32767:
@@ -432,11 +416,8 @@ def local_dump():
 def local_query_fp(code_string,rows=10,get_data=False):
     keys = code_string.split(" ")[0::2]
     track_hist = []
-    unique_keys = []
     for k in keys:
-        if k not in unique_keys:
-            track_hist += _fake_solr["index"].get(k, [])
-            unique_keys += [k]
+        track_hist += _fake_solr["index"].get(k, [])
     top_matches = defaultdict(int)
     for track in track_hist:
         top_matches[track] += 1

@@ -1,15 +1,18 @@
 import os
 import subprocess
 import json
+import logging
 
 from knowledge_base.models import Media
 from whopaid.settings import MEDIA_ROOT
 from echoprint_server_api import fp
 
+log = logging.getLogger('db_script.fingerprint_ingester')
+
 VIDEO_DIR = os.path.join(os.path.abspath(MEDIA_ROOT),'videos')
 CODEGEN_DIR = os.path.join(os.path.abspath(MEDIA_ROOT),'codegens')
 
-class Fingerprinter():
+class FingerprintIngester():
     def __init__(self,loc):
         self.loc = loc
         self.video_fname = self.get_video_fname()
@@ -52,8 +55,8 @@ class Fingerprinter():
             self.ingest_fingerprint(j)
             self.media.ingested = True
             self.media.save()
-            return 'Media %s ingested as %s'%(str(self.pk).zfill(5),
-                                                self.codegen_fname)
+            log.info('Media %s ingested as %s'%(str(self.pk).zfill(5),
+                                                self.codegen_fname))
         else:
-            return 'Media %s ERROR %s'%(str(self.pk).zfill(5),
-                                            err)
+            log.info('Media %s ERROR %s'%(str(self.pk).zfill(5),
+                                            err))

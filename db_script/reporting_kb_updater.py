@@ -4,6 +4,7 @@ import collections
 import string
 import csv
 import re
+import logging
 
 from knowledge_base.models import Candidate, \
         CandidateStatus, \
@@ -18,7 +19,7 @@ from knowledge_base.models import Candidate, \
         FunderToCandidate, \
         MediaType, \
         MediaProfile
-from db_script.log import set_up_logger
+#from db_script.log import set_up_logger
 from django.db import connections
 
 CONN = connections['default']
@@ -33,6 +34,7 @@ URLTYPE_DICT = {
     'vimeo':'^(http:\\/\\/vimeo.com\\/)'
     }
 
+log = logging.getLogger('db_script.reporting_kb_updater')
 
 rchars = string.whitespace + string.punctuation
 
@@ -40,7 +42,7 @@ def make_result_object(executed_cursor):
     return collections.namedtuple('Result', 
             ', '.join([col.name for col in executed_cursor.description]))
 
-def make_media_profile_object(mpr,log):
+def make_media_profile_object(mpr):
     #hard coded, just doing youtubez for now
     media_type = MediaType.objects.get(main_url='http://www.youtube.com')
     media_profile = MediaProfile()
@@ -98,7 +100,7 @@ class MediaProfileFilter():
 class MediaProfileImporter():
     def __init__(self,processing_dir=PROCESSING_DIR,conn=CONN):
         self.processing_dir = os.path.expanduser(processing_dir)
-        self.log = set_up_logger("media_profile_importer",self.processing_dir)
+        #self.log = set_up_logger("media_profile_importer",self.processing_dir)
         self.conn = conn
         self.imported_url_set = self.get_imported_urls()
         self.model_url_set = self.get_model_urls()
@@ -121,9 +123,9 @@ class MediaProfileImporter():
         MediaProfileResult = make_result_object(ec)
         for r in ec:
             mpr = MediaProfileResult(*r)
-            media_profile = make_media_profile_object(mpr,self.log)
+            media_profile = make_media_profile_object(mpr)
             media_profile.save()
-            self.log.info(",,,added\tMediaProfile\t%s"%(unicode(media_profile),))
+            log.info(",,,added\tMediaProfile\t%s"%(unicode(media_profile),))
             added_entries += 1
-        self.log.info("Added %d new entries"%(added_entries,))
+        log.info("Added %d new entries"%(added_entries,))
 
