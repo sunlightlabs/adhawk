@@ -38,7 +38,7 @@ def ad_profile(request, path):
 #def not_found(request):
 #    return render_to_response('knowledge_base/not_found.html')
 
-def top_ads(request,path):
+def top_ads(request):
     client = set_client(request)
     ads = Ad.objects.filter(top_ad=True)
     medias = [a.media_set.get() for a in ads]
