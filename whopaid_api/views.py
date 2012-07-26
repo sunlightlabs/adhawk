@@ -12,7 +12,7 @@ except ImportError:
 
 # Create your views here.
 
-BASE_URL = 'http://adhawk.sunlightfoundation.com/ad/%s'
+BASE_URL = 'http://adhawk.sunlightfoundation.com/ad/%s/'
 
 def lookup(fingerprint):
     if len(fingerprint):
