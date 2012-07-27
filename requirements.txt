@@ -1,4 +1,25 @@
-django==1.4
-psycopg2
--e git://github.com/sunlightlabs/ffs.git#egg=ffs
-csvkit
+Django==1.4
+Pillow==1.7.7
+SQLAlchemy==0.6.6
+South==0.7.5
+actionlib==0.0.0
+argparse==1.2.1
+catkin==0.4.5
+csvkit==0.4.4
+dbf==0.90.004
+-e git://github.com/sunlightlabs/ffs.git@88113bb964a371d11f92641077510cd56750c7d8#egg=ffs-dev
+gdata==2.0.17
+gencpp==0.3.4
+genlisp==0.3.3
+genmsg==0.3.10
+genpy==0.3.7
+ipython==0.13
+numpy==1.6.2
+openpyxl==1.5.7
+psycopg2==2.4.5
+python-dateutil==1.5
+ros-comm==1.8.15
+roslib==1.8.10
+rx==1.7.2
+wsgiref==0.1.2
+xlrd==0.7.1
