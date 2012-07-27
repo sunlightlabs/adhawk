@@ -18,8 +18,6 @@ numpy==1.6.2
 openpyxl==1.5.7
 psycopg2==2.4.5
 python-dateutil==1.5
-ros-comm==1.8.15
-roslib==1.8.10
 rx==1.7.2
 wsgiref==0.1.2
 xlrd==0.7.1
