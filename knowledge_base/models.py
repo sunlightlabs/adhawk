@@ -187,6 +187,7 @@ class Candidate(models.Model):
 class FunderFamily(models.Model):
     primary_FEC_id = models.CharField(max_length=9)
     name = models.CharField(max_length=90)
+    description = models.TextField(blank=True,null=True)
     total_contributions = models.DecimalField(
             max_digits=21,
             decimal_places=2,
@@ -224,6 +225,7 @@ class FunderFamily(models.Model):
 
     def __unicode__(self):
         display = self.name.title()
+        display += '['+self.primary_FEC_id']'
         display += ' ('
         display += ','.join([ct.code for ct in self.committee_types.all()])
         display += ')'
@@ -235,6 +237,8 @@ class FunderFamily(models.Model):
     def update_values(self):
         if self.funder_set:
             for funder in self.funder_set.all():
+                if funder.FEC_id == self.primary_FEC_id:
+                    self.description = funder.description
                 self.committee_types.add(funder.committee_type)
                 if funder.committee_type.code == "O":
                     self.is_superpac = True
@@ -265,6 +269,7 @@ class FunderFamily(models.Model):
 class Funder(models.Model):
     FEC_id = models.CharField(max_length=9)
     name = models.CharField(max_length=90)
+    description = models.TextField(null=True,blank=True)
     treasurer_name = models.CharField(max_length=38,null=True,blank=True)
     street_one = models.CharField(max_length=34,null=True,blank=True)
     street_two = models.CharField(max_length=34,null=True,blank=True)
