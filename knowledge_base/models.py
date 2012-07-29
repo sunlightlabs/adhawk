@@ -225,7 +225,7 @@ class FunderFamily(models.Model):
 
     def __unicode__(self):
         display = self.name.title()
-        display += '['+self.primary_FEC_id']'
+        display += '['+self.primary_FEC_id+']'
         display += ' ('
         display += ','.join([ct.code for ct in self.committee_types.all()])
         display += ')'
