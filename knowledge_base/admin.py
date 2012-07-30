@@ -4,6 +4,7 @@ from knowledge_base.models import (Ad,
 AdToCandidate,
 Author,
 Candidate,
+CommitteeType,
 Coverage,
 CoverageType,
 BroadcastType,
@@ -121,6 +122,8 @@ class CoverageAdmin(admin.ModelAdmin):
             'stances'
             ]
 
+class CommitteeTypeAdmin(admin.ModelAdmin):
+    model = CommitteeType
 
 class CandidateAdmin(admin.ModelAdmin):
     inlines = [
@@ -147,6 +150,7 @@ admin.site.register(AdToCandidate)
 admin.site.register(Author)
 admin.site.register(BroadcastType)
 admin.site.register(Candidate,CandidateAdmin)
+admin.site.register(CommitteeType,CommitteeTypeAdmin)
 admin.site.register(Coverage,CoverageAdmin)
 admin.site.register(CoverageType)
 admin.site.register(Funder,FunderAdmin)
