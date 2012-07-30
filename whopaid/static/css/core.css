@@ -1,0 +1,24 @@
+@import url("reset.css");
+@import url("screen.css");
+
+/*
+@media handheld, screen and (max-width:767px) {
+  @import url("antiscreen.css");
+}
+*/
+
+/*
+@media only screen {
+  @import url("antiscreen.css");
+}
+
+@media handheld {
+  @import url("antiscreen.css");
+}
+*/
+
+
+/*
+@import url("antiscreen.css") (min-width:100) and (max-width:600);
+@import url("antiscreen.css") handheld;
+*/

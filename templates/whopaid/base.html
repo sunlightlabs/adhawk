@@ -6,18 +6,42 @@
     <title>Ad Hawk</title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="{{ STATIC_URL }}base.css" type="text/css" media="screen, projection" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/core.css" type="text/css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/antiscreen.css" type="text/css" media="handheld,screen and (max-width: 800px)" />
+
   </head>
   <body>
+  <div id="page">
     {% if client != "ios" and client != "android" %}
-    <div id="branding">
-      BRANDING GOES HERE (version is {{ client }})
-    </div>
+    <div id="header">
+        <div id="logo">
+          <h1>
+            <a href="/">
+              <small>Sunlight Foundation</small>
+              <big>Ad Hawk</big>
+            </a>
+          </h1>
+        </div>
+        <div id="nav">
+          <ul>
+            <li>Home</li>
+            <li>Download</li>
+            <li>About</li>
+            <li>Press</li>
+            <li>Contact</li>
+          <ul>
+        </div> <!-- end div nav -->
+        <div id="date">
+          <h2>{% now "DATE_FORMAT" %}</h2>
+        </div> <!-- end div date -->
+      </div> <!-- end div header -->
     {% endif %}
     <div id="content">
       {% block content %}{% endblock %}
     </div> <!-- end div content -->
     <div id="footer">
     </div> <!-- end div footer -->
+  </div> <!-- end div page -->
   </body>
 </html>

@@ -1,6 +1,6 @@
 import urlparse
 
-from django.template import Context
+from django.template import Context,RequestContext
 from django.shortcuts import render_to_response
 
 from knowledge_base.models import Ad, \
@@ -25,7 +25,7 @@ def ad_profile(request, path):
     print 'user agent is %s'%(user_agent,)
     media = Media.objects.get(pk=path)
     #pk_pad = str(media.pk).zfill(5)
-    c = Context({
+    c = RequestContext(request, {
             'client' : client,
             'media' : media,
             'ad' : media.ad,
@@ -42,7 +42,7 @@ def top_ads(request):
     client = set_client(request)
     ads = Ad.objects.filter(top_ad=True)
     medias = [a.media_set.get() for a in ads]
-    c = Context({
+    c = RequestContext(request,{
             'client' : client,
             'medias' : medias,
             })

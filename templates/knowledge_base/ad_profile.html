@@ -1,37 +1,56 @@
 {% extends "whopaid/base.html" %}
 {% block content %}
+    <div id="subhead">
+      {% if client != "ios" and client != "android" %}
+        <h1>Ad Explorer</h1>
+      {% endif %}
+      {% if client != "ios" and client != "android" %}
+        <div id="breadcrumbs">
+          <ul>
+            <li>
+              <a href="http://adhawk.sunlightfoundation.com/ad/">All Ads</a>
+            </li>
+            <li>
+              <a href="http://adhawk.sunlightfoundation.com/ad/funder/{{ funder_family.pk}}">{{ funder_family.name|title|truncatechars:30 }}</a>
+            </li>
+          </ul>
+        </div> <!-- end div breadcrumbs -->
+      {% endif %}
       <div id="title">
-        <h1>{{ ad.title }}</h1>
+        <h2>{{ ad.title }}</h2>
+        {% if client = "ios" or client = "android" %}
         <p><a href="http://adhawk.sunlightfoundation.com/ad/nn/{{ media.pk}}">not your ad?</a></p>
-      </div> <!-- end div title -->
-      <div id="preview">
-        <a class="youtube_link" href="{{ media.url }}">
-          <img class="thumbstrip" src="http://adhawk.sunlightfoundation.com/media/images/media_thumbnails/strips/Media_{{ media.pk|stringformat:"05i" }}_strip.jpg">
-        </a>
-      </div> <!-- end div preview -->
-      <div id="funder_name">
-        <h2>Sponsor:</h2> {{ funder_family.name }}
-        {% if funder_family.is_superpac %}
-        <p> This group is a <a href="link_to_superpac_def"><em>Super Pac</em></a></p>
         {% endif %}
+      </div> <!-- end div title -->
+      <div id="strip">
+        <a id="youtube_link" href="{{ media.url }}"><img class="thumbstrip" src="http://adhawk.sunlightfoundation.com/media/images/media_thumbnails/strips/Media_{{ media.pk|stringformat:"05i" }}_strip.jpg"></a>
+      </div> <!-- end div strip -->
+    </div> <!-- end div subhead -->
+    <div id="profile">
+      <div id="funder_name">
+        <strong>Sponsor:</strong> {{ funder_family.name|title }}
+          {% if funder_family.is_superpac %}
+            <p> This group is a <a href="link_to_superpac_def"><em>Super Pac</em></a></p>
+          {% endif %}
       </div> <!-- end div funder_name -->
-      <div id="committee_activities">
-        <h3>Activities:</h3>
+      <div id="funder_chart">
+        <!-- code for bar chart goes here -->
+      </div> <!-- end div funder_chart -->
+      <div id="funder_description">
+        <p> {{funder_family.description}} <p>
+      </div> <!-- end div funder_description -->
+      <div id="funder_activities">
+        <strong>Activities:</strong>
         <ul>
           {% for committee_type in funder_family.committee_types.all %}
-          <li> {{ committee_type.name }} </li>
+            <li> {{ committee_type.name }} </li>
           {% endfor %}
         </ul>
-      </div> <!-- end div committee_activites -->
-      <div id="financial_info">
-        <h3>Recieved: </h3> {{ funder_family.total_contributions }}
-        <h3>Spent: </h3> {{ funder_family.total_independent_expenditures }}
-        <h3>Cash on hand: </h3> {{ funder_family.cash_on_hand }}
-      </div> <!-- end div financial_info -->
-      <!-- TODO 
-      <div id="financial_viz">
-      </div>
-      <div id="coverage">
-      </div> 
-      -->
+      </div> <!-- end div funder_activites -->
+      <div id="funder_financial_info">
+        <strong>Total Recieved: </strong> ${{ funder_family.total_contributions }} <br />
+        <strong>Total Spent: </strong> ${{ funder_family.total_independent_expenditures }} <br/>
+        <strong>Cash on hand: </strong> ${{ funder_family.cash_on_hand }} <br />`
+      </div> <!-- end div funder_financial_info -->
+    </div> <!-- end div profile -->
 {% endblock %}

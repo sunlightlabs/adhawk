@@ -1,0 +1,66 @@
+#page {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  max-width: 100%;
+}
+
+#header #date,
+#header #nav,
+#breadcrumbs,
+#strip,
+#title,
+#profile {
+  float: none;
+}
+
+#header #nav li {
+  color: #FFFFFF;
+  line-height: normal;
+  margin-top: 12px;
+  margin-left: 5%;
+  padding-left: 0.42%;
+}
+
+#header #nav,
+#title,
+#profile {
+  margin-left: 0;
+}
+
+#title {
+  clear: both;
+}
+
+#header {
+  height: 75px;
+}
+
+#header #nav,
+#breadcrumbs,
+{
+  margin-right: 0;
+}
+
+#header #date {
+  visibility: hidden;
+  display:none;
+}
+
+#subhead,
+#breadcrumbs,
+#strip,
+#title {
+/*  display: inline; */
+}
+
+#header h1 a {
+}
+
+#title,
+#strip,
+#profile,
+#breadcrumbs {
+  width: 100%;
+}
+
+
