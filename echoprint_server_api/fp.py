@@ -26,9 +26,7 @@ except ImportError:
 _fp_solr = solr.SolrConnectionPool("http://localhost:8502/solr/fp")
 _hexpoch = int(time.time() * 1000)
 match_report_logger = logging.getLogger('echoprint_server_api.fp.match')
-match_report_handler = logging.FileHandler('logs/echoprint_server_api/match_report.log')
 fp_logger = logging.getLogger('echoprint_server_api.fp.fingerprint')
-fp_handler = logging.FileHandler('logs/echoprint_server_api/fp.log')
 _tyrant_address = ['localhost', 1978]
 _tyrant = None
 
