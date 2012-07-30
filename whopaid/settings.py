@@ -222,6 +222,12 @@ LOGGING = {
             'filename': os.path.join(
                 LOG_ROOT,'db_script/video_downloader.log'),
         },
+        'ftum_importing' : {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(
+                LOG_ROOT,'db_script/video_downloader.log'),
+        },
     },
     'loggers': {
         'echoprint_server_api.fp.match' : {
@@ -283,6 +289,11 @@ LOGGING = {
             'handlers': ['video_downloading'],
             'propagate': True,
             'level': 'DEBUG',
+        },
+        'db_script.ftum_importer' : {
+            'handlers': ['ftum_importing'],
+            'propagate': True,
+            'level': 'DEBUG'
         },
     }
 }
