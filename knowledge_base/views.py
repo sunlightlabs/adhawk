@@ -1,7 +1,9 @@
 import urlparse
 
 from django.template import Context,RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,redirect
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 from knowledge_base.models import Ad, \
                                   Media, \
@@ -9,11 +11,14 @@ from knowledge_base.models import Ad, \
                                   FunderFamily, \
                                   CommitteeType
 
+from whopaid_api.views import BASE_URL,SHARE_TEXT
+
+
 def set_client(request):
     user_agent = request.META['HTTP_USER_AGENT']
-    if user_agent == 'com.sunlightfoundation.com.adhawk.android':
+    if user_agent == 'com.sunlightfoundation.adhawk.android':
         return 'android'
-    elif user_agent == 'com.sunlightfoundation.com.adhawk.ios':
+    elif user_agent == 'com.sunlightfoundation.adhawk.ios':
         return 'ios'
     else:
         return user_agent
@@ -47,4 +52,16 @@ def top_ads(request):
             'medias' : medias,
             })
     return render_to_response('knowledge_base/top_ads.html',c)
-    
+
+@csrf_exempt
+def top_ad_select(request,path):
+    client = set_client(request)
+    if client in ['android','ios']:
+        media = Media.objects.get(pk=path)
+        response_data = {}
+        response_data['result_url'] = BASE_URL%(path,)
+        response_data['share_text'] = SHARE_TEXT%(media.gigya_url,)
+        return HttpResponse(json.dumps(response_data),
+                mimetype="application/json")
+    else:
+        return redirect('/ad/%s/'%(path))

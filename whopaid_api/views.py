@@ -13,6 +13,7 @@ except ImportError:
 # Create your views here.
 
 BASE_URL = 'http://adhawk.sunlightfoundation.com/ad/%s/'
+SHARE_TEXT = 'I just used Ad Hawk from @sunfoundation to discover the sponsor behind this ad: %s'
 
 def lookup(fingerprint):
     if len(fingerprint):
@@ -45,9 +46,11 @@ def fp_search(request):
         media = Media.objects.get(pk=result)
         path = str(media.pk)
         response_data['result_url'] = BASE_URL%(path,)
+        response_data['share_text'] = SHARE_TEXT%(media.gigya_url,)
         return HttpResponse(json.dumps(response_data),
                 mimetype="application/json")
     else:
         response_data['result_url'] = None
+        response_data['share_text'] = None
         return HttpResponse(json.dumps(response_data),
                 mimetype="application/json")
