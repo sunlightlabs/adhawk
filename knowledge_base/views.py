@@ -12,7 +12,7 @@ from knowledge_base.models import Ad, \
                                   FunderFamily, \
                                   CommitteeType
 
-from whopaid_api.views import BASE_URL,SHARE_TEXT
+from whopaid_api.views import make_media_response_dict,BASE_URL,SHARE_TEXT
 
 
 def set_client(request):
@@ -59,9 +59,7 @@ def top_ad_select(request,path):
     client = set_client(request)
     if client in ['android','ios']:
         media = Media.objects.get(pk=path)
-        response_data = {}
-        response_data['result_url'] = BASE_URL%(path,)
-        response_data['share_text'] = SHARE_TEXT%(media.gigya_url,)
+        response_data = make_media_response_dict(media)
         return HttpResponse(json.dumps(response_data),
                 mimetype="application/json")
     else:

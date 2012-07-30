@@ -26,6 +26,13 @@ def lookup(fingerprint):
     else:
         return False
 
+def make_media_response_dict(media):
+    response_data = {}
+    response_data['result_url'] = BASE_URL%(str(media.pk),)
+    response_data['share_text'] = SHARE_TEXT%(media.gigya_url,)
+    return response_data
+
+
 @csrf_exempt
 def fp_search(request):
     json_request = json.loads(request.body)
@@ -44,9 +51,7 @@ def fp_search(request):
                 result=result)
         fpquery.save()
         media = Media.objects.get(pk=result)
-        path = str(media.pk)
-        response_data['result_url'] = BASE_URL%(path,)
-        response_data['share_text'] = SHARE_TEXT%(media.gigya_url,)
+        response_data = make_media_response_dict(media)
         return HttpResponse(json.dumps(response_data),
                 mimetype="application/json")
     else:
