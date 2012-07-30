@@ -1,0 +1,13 @@
+{% block subhead_nav %}
+        <h1>Ad Explorer</h1>
+        <div id="breadcrumbs">
+          <ul>
+            <li>
+              <a href="http://adhawk.sunlightfoundation.com/ad/">All Ads</a>
+            </li>
+            <li>
+              <a href="http://adhawk.sunlightfoundation.com/ad/funder/{{ funder_family.pk}}">{{ funder_family.name|title|truncatechars:30 }}</a>
+            </li>
+          </ul>
+        </div> <!-- end div breadcrumbs -->
+{% endblock %}
