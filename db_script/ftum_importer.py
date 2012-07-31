@@ -1,6 +1,7 @@
 import logging
 import os
 import urllib
+from decimal import Decimal
 try:
     import json
 except ImportError:
@@ -31,15 +32,22 @@ class FTUMImporter():
                 funder = Funder.objects.get(FEC_id=fec_id)
             except Funder.DoesNotExist:
                 log.warning('...WARNING: Funder %s not in db yet!'%(fec_id,))
-            funder.total_contributions = committee['total_contributions']
-            funder.cash_on_hand = committee['cash_on_hand']
-            funder.total_independent_expenditures =committee['total_independent_expenditures']
+            funder.total_contributions = Decimal(
+                    str(committee['total_contributions']))
+            funder.cash_on_hand = Decimal(
+                    str(committee['cash_on_hand']))
+            funder.total_independent_expenditures = Decimal(
+                    str(committee['total_independent_expenditures']))
             funder.ie_negative_percent = committee['ie_negative_percent']
             funder.ie_positive_percent = committee['ie_positive_percent']
-            funder.ie_opposes_dems = committee['ie_opposes_dems']
-            funder.ie_opposes_reps = committee['ie_opposes_reps']
-            funder.ie_supports_dems = committee['ie_supports_dems']
-            funder.ie_supports_reps = committee['ie_supports_reps']
+            funder.ie_opposes_dems = Decimal(
+                    str(committee['ie_opposes_dems']))
+            funder.ie_opposes_reps = Decimal(
+                    str(committee['ie_opposes_reps']))
+            funder.ie_supports_dems = Decimal(
+                    str(committee['ie_supports_dems']))
+            funder.ie_supports_reps = Decimal(
+                    str(committee['ie_supports_reps']))
             funder.ftum_url = FTUM_BASE%(committee['href'],)
             funder.save()
     def update_families(self):
