@@ -207,18 +207,22 @@ class FunderFamily(models.Model):
             max_digits=21,
             decimal_places=2,
             default=Decimal("0.00"))
+    ie_opposes_dems_percent = models.FloatField(default=0.0)
     ie_opposes_reps = models.DecimalField(
             max_digits=21,
             decimal_places=2,
             default=Decimal("0.00"))
+    ie_opposes_reps_percent = models.FloatField(default=0.0)
     ie_supports_dems = models.DecimalField(
             max_digits=21,
             decimal_places=2,
             default=Decimal("0.00"))
+    ie_supports_dems_percent = models.FloatField(default=0.0)
     ie_supports_reps = models.DecimalField(
             max_digits=21,
             decimal_places=2,
             default=Decimal("0.00"))
+    ie_supports_reps_percent = models.FloatField(default=0.0)
     is_superpac = models.BooleanField(default=False)
     
     #MTM relations
@@ -262,10 +266,19 @@ class FunderFamily(models.Model):
                     Sum('ie_supports_reps'))['ie_supports_reps__sum']
         total_pos = float(self.ie_supports_dems + self.ie_supports_reps)
         total_neg = float(self.ie_opposes_dems + self.ie_opposes_reps)
+        grand_total = total_pos + total_neg
         denom = total_pos + total_neg
         if denom:
             self.ie_negative_percent = total_neg / denom
             self.ie_positive_percent = total_pos / denom
+            self.ie_supports_dems_percent = (float(str(
+                    self.ie_supports_dems)) / denom)
+            self.ie_supports_reps_percent = (float(str(
+                    self.ie_supports_reps)) / denom)
+            self.ie_opposes_dems_percent = (float(str(
+                    self.ie_opposes_dems)) / denom)
+            self.ie_opposes_reps_percent = (float(str(
+                    self.ie_opposes_reps)) / denom)
         self.save()
 
 class Funder(models.Model):
