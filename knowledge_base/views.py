@@ -17,9 +17,9 @@ from whopaid_api.views import make_media_response_dict,BASE_URL,SHARE_TEXT
 
 def set_client(request):
     user_agent = request.META['HTTP_USER_AGENT']
-    if user_agent == 'com.sunlightfoundation.adhawk.android':
+    if 'com.sunlightfoundation.adhawk.android' in user_agent:
         return 'android'
-    elif user_agent == 'com.sunlightfoundation.adhawk.ios':
+    elif 'com.sunlightfoundation.adhawk.ios' in user_agent:
         return 'ios'
     else:
         return user_agent
