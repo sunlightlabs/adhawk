@@ -54,7 +54,7 @@ def top_ads(request):
             })
     return render_to_response('knowledge_base/top_ads.html',c)
 
-@csrf_exempt
+#@csrf_exempt
 def top_ad_select(request,path):
     client = set_client(request)
     if client in ['android','ios']:
