@@ -250,7 +250,7 @@ class FunderFamily(models.Model):
                     Sum('total_contributions'))['total_contributions__sum']
             self.cash_on_hand = self.funder_set.aggregate(
                     Sum('cash_on_hand'))['cash_on_hand__sum']
-            self.independent_expenditures = self.funder_set.aggregate(
+            self.total_independent_expenditures = self.funder_set.aggregate(
                     Sum('total_independent_expenditures'))['total_independent_expenditures__sum']
             self.ie_opposes_dems = self.funder_set.aggregate(
                     Sum('ie_opposes_dems'))['ie_opposes_dems__sum']
