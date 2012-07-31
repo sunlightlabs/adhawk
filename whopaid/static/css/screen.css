@@ -21,6 +21,14 @@ p {
   margin-bottom: 1em;
 }
 
+h3 {
+  font-size: 1.25em;
+  color: #c7b188;
+  font-family: "ltc-squareface-sc",sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  }
+
 /*
  * HEADER
  */
@@ -84,6 +92,8 @@ p {
   width: 100%;
 }
 
+
+
 /*
  * SUBHEAD
  */
@@ -137,6 +147,9 @@ p {
 
 #title h2 {
   font-size: 1.75em;
+  font-family: "ltc-squareface-sc",sans-serif;
+  font-style: normal;
+  font-weight: 400;
 }
 
 #title a {
@@ -154,17 +167,17 @@ p {
   margin-left: 4.1667%;
 }
 
-#profile #funder_name {
-  font-size: 1.25em;
-}
 
-#profile strong {
+#profile #funder_name {
   font-weight:bold;
+  color: #000000;
+  
 }
 
 #profile #funder_name p {
   font-style: oblique;
   font-size: .8em;
+  
 }
 
 #profile #funder_description p {
@@ -181,13 +194,9 @@ p {
 }
 
 #profile #funder_financial_info {
-  color: #668C1E
 }
 
-#profile #funder_financial_info strong {
-  color: #000000;
-  font-weight: bold;
-}
+
 
 /*
  * Margins and padding
