@@ -82,6 +82,7 @@ class FunderAdmin(admin.ModelAdmin):
 class FunderFamilyAdmin(admin.ModelAdmin):
     model = FunderFamily
     inlines = [ FunderInline ]
+    search_fields = ['primary_FEC_id','name','funder__name']
 
 class AdToCandidateInline(admin.StackedInline):
     model = AdToCandidate
