@@ -226,7 +226,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': os.path.join(
-                LOG_ROOT,'db_script/video_downloader.log'),
+                LOG_ROOT,'db_script/ftum_importer.log'),
         },
     },
     'loggers': {
