@@ -31,12 +31,7 @@
   clear: both;
 }
 
-#title h2{
-  font-size: 1.75em;
-  font-family: "ltc-squareface-sc",sans-serif;
-  font-style: normal;
-  font-weight: 400;
-}
+
 
 #header {
   height: 75px;
@@ -60,8 +55,12 @@
 /*  display: inline; */
 }
 
-#header h1 a {
-}
+#subhead {
+  background-image: url(http://design.sunlightlabs.com/AdHawk/exclusive_paper.png);
+  background-repeat: repeat;
+  margin-bottom: 20px;
+   }
+
 
 #title,
 #strip,
@@ -70,11 +69,42 @@
   width: 100%;
 }
 
+#title {
+  padding-left: 5%;
+  padding-right: 5%;
+  }
+  
+#funder {
+  padding-left: 5%;
+  padding-right: 5%;
+  }  
+
+#funder_received p,
+#financial_info p {
+  font-weight: bold;
+  }
+
+
+  
+#financial_info {
+  -webkit-column-count: 2;
+  -webkit-column-gap: 30px; 
+  -webkit-column-rule: 1px solid #f4eee3;
+  -moz-column-count: 2;
+  -moz-column-gap: 30px;  
+  -moz-column-rule: 1px solid #f4eee3;
+  column-count: 2;
+  column-gap: 30px; 
+  column-rule: 1px solid #f4eee3;
+ } 
+
 #strip img {
   border: 3px white solid;
   width: 90%;
   max-width: 366px; 
   display: block; 
+  margin-right: 5%;
+  margin-left: 5%;
   }
 
 #topgrade {
@@ -98,16 +128,89 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#6e000000',GradientType=0 ); /* IE6-9 */
   height: 17px;
   padding-bottom: 0;
-  margin-bottom: 0;
-  
+  margin-bottom: 0px;
 	}
+	
+#line {
+   border-top-color: #f4eee3;
+   border-top-style: solid;
+   border-top-width: 1px;
+   height: 7px;
+   background: -moz-linear-gradient(top,  rgba(252,251,250,1) 0%, rgba(252,251,250,0) 100%); /* FF3.6+ */
+   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,251,250,1)), color-stop(100%,rgba(252,251,250,0))); /* Chrome,Safari4+ */
+   background: -webkit-linear-gradient(top,  rgba(252,251,250,1) 0%,rgba(252,251,250,0) 100%); /* Chrome10+,Safari5.1+ */
+   background: -o-linear-gradient(top,  rgba(252,251,250,1) 0%,rgba(252,251,250,0) 100%); /* Opera 11.10+ */
+   background: -ms-linear-gradient(top,  rgba(252,251,250,1) 0%,rgba(252,251,250,0) 100%); /* IE10+ */
+   background: linear-gradient(to bottom,  rgba(252,251,250,1) 0%,rgba(252,251,250,0) 100%); /* W3C */
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfbfa', endColorstr='#00fcfbfa',GradientType=0 ); /* IE6-9 */
+   margin-top: 20px;
+   margin-bottom: 20px;
+   width: 100%;
+   }
+
+
+/* type */
+
+p {
+   font-size: .9em;
+   font-family: Helvetica, Arial, sans-serif;
+   font-weight: normal;
+   font-style: normal;
+   color: #000000;
+   }
+   
+#funder_activities li{
+   font-size: .9em;
+   font-family: Helvetica, Arial, sans-serif;
+   font-weight: normal;
+   font-style: normal;
+   color: #000000;
+   margin: 0px;
+   padding: 0px;
+   }
+   
+#funder_activities ul{
+   margin: 0px;
+   padding: 0px;
+   }
+
+  
+#title h2{
+  font-size: 1.5em;
+  font-family: "ltc-squareface-sc",sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  padding-top: 4px;
+  } 
+  
+#title a{
+  color: white;} 
 
 
 h3 {
-  font-size: 1.25em;
+  font-size: .8em;
   color: #c7b188;
   font-family: "ltc-squareface-sc",sans-serif;
   font-style: normal;
   font-weight: 400;
+  padding-bottom: 5px;
   }
-
+  
+h4 {
+   font-size: 1.5em;
+   font-weight: bold;
+   font-family: Helvetica, Arial, sans-serif;
+   color: #000000;
+   }
+   
+#funder_name h4 a{
+  color: #c7b188;
+  font-weight: normal;
+  font-style: italic;
+  text-decoration: none;
+  }
+  
+#more_info a{
+  color: #000000;
+  }
+   

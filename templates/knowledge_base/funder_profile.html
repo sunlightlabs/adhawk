@@ -1,27 +1,71 @@
 {% block funder_profile %}
+	
+	
+<div id="funder">
+
       <div id="funder_name">
-        <h3>Sponsor:</h3> {{ funder_family.name|title }}
-          {% if funder_family.is_superpac %}
-            <p><a href="link_to_superpac_def"><em>Super Pac</em></a></p>
-          {% endif %}
+        <h3>Sponsor:</h3> 
+        <h4>{{ funder_family.name|title }}
+          {% if funder_family.is_superpac %}<a href="link_to_superpac_def"><em>Super Pac</em></a>
+          {% endif %}</h4>
+        <div id="line"></div>
       </div> <!-- end div funder_name -->
-      <div id="funder_chart">
-        <!-- code for bar chart goes here -->
-      </div> <!-- end div funder_chart -->
+      
       <div id="funder_description">
-        <p> {{funder_family.description}} <p>
+      <h3>About:</h3>
+        <p>{{funder_family.description}}<p>
+        <div id="line"></div>
       </div> <!-- end div funder_description -->
+      
       <div id="funder_activities">
         <h3>Activities:</h3>
-        <ul>
-          {% for committee_type in funder_family.committee_types.all %}
-            <li> {{ committee_type.name }} </li>
+        <p><ul>{% for committee_type in funder_family.committee_types.all %}
+            <li>{{ committee_type.name }}</li>
           {% endfor %}
-        </ul>
+        </ul></p>
+        <div id="line"></div>
       </div> <!-- end div funder_activites -->
-      <div id="funder_financial_info">
-        <h3>Total Received: </h3> ${{ funder_family.total_contributions }} <br />
-        <h3>Total Spent: </h3> ${{ funder_family.total_independent_expenditures }} <br/>
-        <h3>Cash on hand: </h3> ${{ funder_family.cash_on_hand }} <br />
+      
+      <div id="funder_received">
+        <h3>Total Received: </h3> 
+        <p>${{ funder_family.total_contributions }}</p>
+        <div id="line"></div>
+	  </div><!-- end div funder_received -->
+	 
+      <div id="financial_info">  
+        <div id="total_spent">
+          <h3>Total Spent:</h3> 
+          <p>${{ funder_family.total_independent_expenditures }}</p>
+        </div>
+        
+        <div id="cash_hand">
+          <h3>Cash on hand:</h3> 
+          <p>${{ funder_family.cash_on_hand }}<p>
+        </div>
+
       </div> <!-- end div funder_financial_info -->
+      <div id="line"></div>
+
+      
+     <div id="funder_chart">
+       <h3>Independent Expenditure Summary:</h3> 
+        <!-- code for bar chart goes here -->
+        <div id="line"></div>
+     </div> <!-- end div funder_chart -->
+     
+     <div id="where_aired">
+       <h3>Where it Aired:</h3> 
+        <!-- code for where it aired goes here -->
+        <div id="line"></div>
+     </div> <!-- end div where_aired -->
+     
+     <div id="more_info">
+       <h3>More Information:</h3> 
+        <p><a href="http://reporting.sunlightfoundation.com/">Follow the Unlimited Money</a></p>
+        <p><a href="http://influenceexplorer.com">Influence Explorer</a></p>
+        <p><a href="http://politicaladsleuth.sunlightfoundation.com/">Political Ad Sleuth</a></p>
+     </div> <!-- end div where_aired -->
+     
+</div>   
+      
 {% endblock %}
