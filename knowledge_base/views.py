@@ -16,7 +16,10 @@ from whopaid_api.views import make_media_response_dict,BASE_URL,SHARE_TEXT
 
 
 def set_client(request):
-    user_agent = request.META['HTTP_USER_AGENT']
+    try:
+        user_agent = request.META['HTTP_X_CLIENT_APP']
+    except KeyError:
+        return request.META['HTTP_USER_AGENT']
     if 'com.sunlightfoundation.adhawk.android' in user_agent:
         return 'android'
     elif 'com.sunlightfoundation.adhawk.ios' in user_agent:
@@ -26,9 +29,12 @@ def set_client(request):
 
 def ad_profile(request, path):
     client = set_client(request)
-    user_agent = request.META['HTTP_USER_AGENT']
-
+    try:
+        user_agent = request.META['HTTP_X_CLIENT_APP']
+    except KeyError:
+        user_agent = request.META['HTTP_USER_AGENT']
     print 'user agent is %s'%(user_agent,)
+    #print request.META.keys()
     media = Media.objects.get(pk=path)
     #pk_pad = str(media.pk).zfill(5)
     c = RequestContext(request, {
