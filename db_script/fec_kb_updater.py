@@ -403,7 +403,7 @@ class CommitteeImporter():
                 merged = merge_committee_object(old_c,cr)
                 merged.save()
                 merged_entries += 1
-                log.info("...added\tCommittee\t%s"%(unicode(merged),))
+                log.info("...updated\tCommittee\t%s"%(unicode(merged),))
             else:
                 continue
         self.done_msg += "...Merged %d new entries"%(merged_entries,)

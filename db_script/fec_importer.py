@@ -19,7 +19,7 @@ FEC_CONFIG = [
     F('ftp://ftp.fec.gov/FEC/2012/webk12.zip', 'webk12.txt', 'fec_committee_summaries')
 ]
 
-SQL_PRELOAD_FILE = os.path.join(os.path.dirname(__file__), 'preload.sql')
+SQL_PRELOAD_FILE = os.path.join(os.path.dirname(__file__), 'create_fec.sql')
 SQL_POSTLOAD_FILE = os.path.join(os.path.dirname(__file__), 'postload.sql')
 
 log = logging.getLogger('db_script.fec_importer')
