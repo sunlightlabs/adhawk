@@ -18,3 +18,4 @@ whopaid_api/testing/result.html
 db_script/processing
 media/
 site_static/
+.idea*
