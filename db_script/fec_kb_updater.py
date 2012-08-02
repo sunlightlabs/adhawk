@@ -50,10 +50,8 @@ def make_candidate_object(cr):
             zip_code=cr.zipcode,
             incumbent_challenger_status=ics,
             candidate_status=cs)
-    if cr.party_designation1:
-        candidate.party = cr.party_designation1
-    else:
-        candidate.party = cr.party_designation3
+    if cr.party:
+        candidate.party = cr.party
     return candidate
 
 def diff_candidate(candidate,cr):
@@ -75,7 +73,7 @@ def diff_candidate(candidate,cr):
         cs = None
     if  candidate.name!=cr.candidate_name or \
         candidate.year_of_election!=cr.election_year or \
-        candidate.party not in [cr.party_designation1,cr.party_designation3] or \
+        candidate.party != cr.party or \
         candidate.street_one!=cr.street1 or \
         candidate.street_two!=cr.street2 or \
         candidate.city!=cr.city or \
@@ -109,6 +107,7 @@ def merge_candidate_object(candidate,cr):
     candidate.city=cr.city
     candidate.state=cr.state
     candidate.zip_code=cr.zipcode
+    candidate.party=cr.party
     candidate.incumbent_challenger_status=ics
     candidate.candidate_status=cs
     return candidate
