@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
         #log = set_up_logger("thumb_download","db_script/processing")
 
-        for media in Media.objects.all():
+        for media in Media.objects.filter(checked=False):
             #log.info("downloading thumbs for pk=%s"%media.pk)
             i = ThumbDownloader(media)
             i.get_thumbs()
