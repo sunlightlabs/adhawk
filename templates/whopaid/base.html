@@ -20,34 +20,24 @@
   <body>
   <div id="page">
     {% if client != "ios" and client != "android" %}
-    <div id="header">
+    <header>
         <div id="logo">
-          <h1>
-            <a href="/">
-              <small>Sunlight Foundation</small>
-              <big>Ad Hawk</big>
-            </a>
-          </h1>
+          <h1>Ad Hawk</h1>
         </div>
-        <div id="nav">
+        <nav>
           <ul>
-            <li>Home</li>
-            <li>Download</li>
-            <li>About</li>
-            <li>Press</li>
-            <li>Contact</li>
+            <li><a href="##">Top Ads</a></li>
+            <li><a href="##">About</a></li>
+            <li><a href="##">Contact</a></li>
           <ul>
-        </div> <!-- end div nav -->
-        <div id="date">
-          <h2>{% now "DATE_FORMAT" %}</h2>
-        </div> <!-- end div date -->
-      </div> <!-- end div header -->
+        </nav> 
+      </header>
     {% endif %}
     <div id="content">
       {% block content %}{% endblock %}
     </div> <!-- end div content -->
-    <div id="footer">
-    </div> <!-- end div footer -->
+    <footer>
+    </footer>
   </div> <!-- end div page -->
   </body>
 </html>

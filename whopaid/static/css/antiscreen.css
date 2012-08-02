@@ -4,8 +4,7 @@
   max-width: 100%;
 }
 
-#header #date,
-#header #nav,
+nav,
 #breadcrumbs,
 #strip,
 #title,
@@ -13,7 +12,7 @@
   float: none;
 }
 
-#header #nav li {
+nav li {
   color: #FFFFFF;
   line-height: normal;
   margin-top: 12px;
@@ -21,7 +20,7 @@
   padding-left: 0.42%;
 }
 
-#header #nav,
+nav,
 #title,
 #profile {
   margin-left: 0;
@@ -33,20 +32,16 @@
 
 
 
-#header {
+header {
   height: 75px;
 }
 
-#header #nav,
+nav,
 #breadcrumbs,
 {
   margin-right: 0;
 }
 
-#header #date {
-  visibility: hidden;
-  display:none;
-}
 
 #subhead,
 #breadcrumbs,
@@ -165,6 +160,170 @@
    }
    
    
+
+ /* graph */ 
+
+#graph * {
+padding: 0;
+margin: 0;
+}
+
+
+#graph {
+width: 100%;
+list-style-type: none;
+  }
+
+#graph body {
+  font-family: Helvetica, Arial, sans-serif;
+  color: #333;
+  }
+
+#graph h3 {
+   color: #666;
+   font-family: Helvetica, Arial, sans-serif;
+   font-size: .75em;
+  padding-bottom: 2em;
+  }
+
+#graph h6{
+  font-size: 1em;
+  font-family: Helvetica, Arial, sans-serif;;
+  }
+
+.section {
+  float: left;
+  padding: 0;
+  width: 49.5%;
+  } 
+
+
+
+.border{
+	border-right: 1px solid #EEE;
+	z-index: 2;
+    }
+
+.chartlist {
+    float: left;
+    width: 100%;
+	border-top: 1px solid #EEE;
+    }
+
+.chartlist li {
+    position: relative;
+    display: block;
+    border-bottom: 1px solid #EEE;
+    _zoom: 1;
+    height: 30px;
+    padding-right: 5px;
+padding-left: 5px;
+    }
+
+.chartlist li h6 {
+display: block;
+padding: 0.4em 4.5em 0.4em 0.5em;
+position: relative;
+z-index: 2;
+}
+
+
+.chartlist .count {
+display: block;
+position: absolute;
+top: 0;
+color: #000;
+font-weight: bold;
+font-size: 0.875em;
+line-height: 2em;
+z-index: 2;
+margin-left: 10px !important;  
+margin-right: 10px !important;
+margin-top: .2em !important;
+}
+
+
+.chartlist .bar {
+display: block;
+position: absolute;
+top: 0;
+height: 100%;
+text-indent: -9999px;
+overflow: hidden;
+line-height: 2em;
+}
+
+.right {
+	right: 0;
+	float: right;	
+   }
+
+.left {
+	left: 0;
+	float: left;
+   }
+
+.count-left{
+left: 0;
+text-align: left;	
+}
+
+.count-right{
+right: 0;
+text-align:right;
+}
+
+.neg-dem {
+background: #a5c1d2;
+}
+
+.neg-rep {
+background: #daa698;
+}
+
+.pro_dem {
+   background: #cce9f4;
+   }
+
+.pro-rep {
+   background: #f5beb0;
+   }
+
+#graph .lables p{
+   float: left;
+   width: 20%;
+   color: #666;
+   font-family: Helvetica, Arial, sans-serif;
+   font-size: .75em;
+   
+   }
+
+#graph .lables-left{
+  text-align: left;
+  }
+  
+#graph .lables-center{
+  text-align: center;
+  }
+  
+#graph .lables-right{
+  text-align: right;
+  }  
+
+#graph .full-key{
+  width: 100%;
+  padding: 20px 0 20px 0;
+  }    
+   
+#graph .key{
+  width: 1em;
+  height: 1em;
+  float: left;
+  margin-right: 1em;
+  }  
+   
+   
+   
    
    
  /* about */  
@@ -179,7 +338,7 @@
   border-bottom:2px solid #9e8d6e;
   }
   
-#about_buttons{
+#about_intro{
   padding: 5%;
   }
 
@@ -204,6 +363,21 @@ p a{
    color: #000000;
    }
    
+#about_intro p{
+  font-size: 1em;
+  color: #6e614b;
+  font-family: Helvetica, Arial, sans-serif;
+  font-style: italic;
+  font-weight: normal;
+  padding-bottom: 5px;
+  line-height: 1.5em;
+  }
+  
+#about_intro p a{
+  color: #6e614b;
+  }
+  
+   
 #funder_activities li{
    font-size: .9em;
    font-family: Helvetica, Arial, sans-serif;
@@ -217,12 +391,32 @@ p a{
 #funder_activities ul{
    margin: 0px;
    padding: 0px;
+   list-style-position: none;
+   list-style-type: none;
+   }
+   
+   
+#more_info li{
+   font-size: .9em;
+   font-family: Helvetica, Arial, sans-serif;
+   font-weight: normal;
+   font-style: normal;
+   color: #000000;
+   margin: 0px;
+   padding: 0px;
+   }
+   
+#more_info ul{
+   margin: 0px;
+   padding: 0px;
+   list-style-position: none;
+   list-style-type: none;
    }
 
   
 #title h2{
   font-size: 1.5em;
-  font-family: "ltc-squareface-sc",sans-serif;
+  font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
   font-style: normal;
   font-weight: 400;
   padding-top: 4px;
@@ -230,7 +424,7 @@ p a{
   
 #top_ad_list h2 a{
   font-size: 1.2em;
-  font-family: "ltc-squareface-sc",sans-serif;
+  font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
   font-style: normal;
   font-weight: 400;
   padding-top: 4px;
@@ -238,16 +432,16 @@ p a{
   }
   
 #title a{
-  color: white;} 
+  color: white;
+  } 
 
 
 h3 {
   font-size: .8em;
   color: #c7b188;
-  font-family: "ltc-squareface-sc",sans-serif;
+  font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
   font-style: normal;
   font-weight: 400;
-  padding-bottom: 5px;
   filter:alpha(opacity=100);
   opacity:1;
   }
@@ -291,19 +485,6 @@ h4 {
    color: #000000;
    }
    
-h5 {
-  font-size: 1em;
-  color: #6e614b;
-  font-family: Helvetica, Arial, sans-serif;
-  font-style: italic;
-  font-weight: normal;
-  padding-bottom: 5px;
-  line-height: 1.5em;
-  }
-  
-h5 a{
-  color: #6e614b;
-  }
    
 #funder_name h4 a{
   color: #c7b188;
