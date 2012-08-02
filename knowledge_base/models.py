@@ -40,7 +40,7 @@ class CommitteeType(models.Model):
         return "%s - %s"%(self.code,self.name)
 
 class ConnectedOrganization(models.Model):
-    name = models.CharField(max_length=38)
+    name = models.CharField(max_length=200)
     description = models.CharField(max_length=500,null=True,blank=True)
 
     def __unicode__(self):
@@ -154,7 +154,7 @@ class Tag(models.Model):
 
 class Candidate(models.Model):
     FEC_id = models.CharField(max_length=9)
-    name = models.CharField(max_length=38)
+    name = models.CharField(max_length=200)
     party = models.CharField(max_length=3,null=True,blank=True)
     year_of_election = models.IntegerField(max_length=4,null=True,blank=True)
     street_one = models.CharField(max_length=34,null=True,blank=True)
@@ -162,6 +162,9 @@ class Candidate(models.Model):
     city = models.CharField(max_length=18,null=True,blank=True)
     state = models.CharField(max_length=2,null=True,blank=True)
     zip_code = models.IntegerField(max_length=5,null=True,blank=True)
+    office_state = models.CharField(max_length=2,null=True,blank=True)
+    office = models.CharField(max_length=1,null=True,blank=True)
+    office_district = models.CharField(max_length=2,null=True,blank=True)
 
 
     incumbent_challenger_status = models.ForeignKey(
@@ -186,7 +189,7 @@ class Candidate(models.Model):
 
 class FunderFamily(models.Model):
     primary_FEC_id = models.CharField(max_length=9)
-    name = models.CharField(max_length=90)
+    name = models.CharField(max_length=200)
     ftum_url = models.URLField(blank=True,null=True)
     description = models.TextField(blank=True,null=True)
     total_contributions = models.DecimalField(
@@ -283,15 +286,15 @@ class FunderFamily(models.Model):
 
 class Funder(models.Model):
     FEC_id = models.CharField(max_length=9)
-    name = models.CharField(max_length=90)
+    name = models.CharField(max_length=200)
     ftum_url = models.URLField(null=True,blank=True)
     description = models.TextField(null=True,blank=True)
-    treasurer_name = models.CharField(max_length=38,null=True,blank=True)
+    treasurer_name = models.CharField(max_length=90,null=True,blank=True)
     street_one = models.CharField(max_length=34,null=True,blank=True)
     street_two = models.CharField(max_length=34,null=True,blank=True)
-    city = models.CharField(max_length=18,null=True,blank=True)
+    city = models.CharField(max_length=30,null=True,blank=True)
     state = models.CharField(max_length=2,null=True,blank=True)
-    zip_code = models.CharField(max_length=5,null=True,blank=True)
+    zip_code = models.CharField(max_length=9,null=True,blank=True)
     filing_frequency = models.CharField(max_length=1,null=True,blank=True)
     party = models.CharField(max_length=3,null=True,blank=True)
     total_contributions = models.DecimalField(
