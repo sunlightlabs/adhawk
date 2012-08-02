@@ -1,6 +1,7 @@
 import logging
 import urllib
 import urlparse
+import time
 
 from knowledge_base.models import *
 import whopaid.settings as settings
@@ -25,23 +26,18 @@ class ThumbDownloader():
         log.info("getting thumbs for Media(%s)"%(self.ytimg_base,))
         for n in ['1','2','3']:
             #self.log.info(".")
+            not_successful_yet = True
             fname = "%s.jpg"%n
             f = self.fout_base+fname
             ytimg = self.ytimg_base+fname
-            urllib.urlretrieve(ytimg,thumbs_dir+f)
-        log.info("...gotten"
+            while not_successful_yet:
+                try:
+                    urllib.urlretrieve(ytimg,thumbs_dir+f)
+                    not_successful_yet = False
+                except IOError:
+                    log.warning("Warning: IOError, waiting 5 seconds")
+                    time.sleep(5)
+                    not_successful_yet = True
+        log.info("...gotten")
 
 
-#pk_vid = []
-#ms = Media.objects.all()
-#for m in ms:
-#    up = urlparse.urlparse(m.url)
-#    qs = up.query
-#    vid = urlparse.parse_qs(qs)['v'][0]
-#    pk_vid.append((m.pk,vid))
-#for pk,vid in pk_vid:
-#    foutname = "Media_%s_"%(str(pk).zfill(5),)
-#    for n in ['1','2','3']:
-#        f = foutname+"%s.jpg"%n
-#        ytimg = "http://img.youtube.com/vi/%s/%s.jpg"%(vid,n)
-#        urllib.urlretrieve(ytimg,'static/images/media_thumbnails/'+f)
