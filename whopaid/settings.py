@@ -169,6 +169,12 @@ LOGGING = {
             'filename': os.path.join(
                 LOG_ROOT,'db_script/ad_media_importer.log'),
         },
+        'fec_importing' : {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(
+                LOG_ROOT,'db_script/fec_importer.log'),
+        },
         'fec_kb_updating' : {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
@@ -246,6 +252,11 @@ LOGGING = {
             'propagate': True,
             'level': 'DEBUG',
         },
+        'db_script.fec_importer' : {
+            'handlers': ['fec_importing'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
         'db_script.fec_kb_updater' : {
             'handlers': ['fec_kb_updating'],
             'propagate': True,
@@ -295,6 +306,6 @@ LOGGING = {
             'handlers': ['ftum_importing'],
             'propagate': True,
             'level': 'DEBUG'
-        },
+            },
     }
 }
