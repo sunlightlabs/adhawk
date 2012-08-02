@@ -248,9 +248,10 @@ class FunderFamily(models.Model):
                 if funder.FEC_id == self.primary_FEC_id:
                     self.description = funder.description
                     self.ftum_url = funder.ftum_url
-                self.committee_types.add(funder.committee_type)
-                if funder.committee_type.code == "O":
-                    self.is_superpac = True
+                if funder.committee_type:
+                    self.committee_types.add(funder.committee_type)
+                    if funder.committee_type.code == "O":
+                        self.is_superpac = True
                 else:
                     continue
             self.total_contributions = self.funder_set.aggregate(

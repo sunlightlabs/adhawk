@@ -15,7 +15,8 @@ class FunderFamilyInitializer():
                 primary_FEC_id=self.funder_object.FEC_id,
                 name=self.funder_object.name)
         self.new_funder_family_object.save()
-        self.new_funder_family_object.committee_types.add(
+        if self.funder_object.committee_type:
+            self.new_funder_family_object.committee_types.add(
                 self.funder_object.committee_type)
         self.new_funder_family_object.save()
     def assign_new_funder_family(self):
