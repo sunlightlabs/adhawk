@@ -105,7 +105,6 @@ class YouTubeMediaImporter():
         if self.collector.youtube_medias:
             for youtube_media in self.collector.youtube_medias:
                 ad = Ad(title=youtube_media.title, \
-                        ingested=False, \
                         profile_url=self.media_profile.url)
                 ad.save()
                 try:
@@ -122,6 +121,7 @@ class YouTubeMediaImporter():
                               media_profile=self.media_profile, \
                               duration=youtube_media.duration, \
                               pub_date=youtube_media.pub_date, \
+                              ingested=False, \
                               ad=ad)
                 if youtube_media.description:
                     media.creator_description = youtube_media.description
