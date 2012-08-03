@@ -303,7 +303,7 @@ background: #daa698;
   border-bottom:2px solid #9e8d6e;
   }
   
-#about_intro{
+#about_intro, #no_match_info{
   padding: 5%;
   }
 
@@ -313,7 +313,7 @@ background: #daa698;
 
 /* type */
 
-#title h1{
+h1{
   font-size: 1.5em;
   font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
   font-style: normal;
@@ -381,7 +381,7 @@ p a{
    padding: 0px;
    }
    
-#more_info ul{
+#more_info ul, #no_match_info ul{
    margin: 0px;
    padding: 0px;
    list-style-position: none;
@@ -424,7 +424,9 @@ h3 {
    color: #000000;
    }
    
-#top_ad_list h3 {
+   
+   
+#top_ad_list h3, #no_match_info h3 {
    color: #564e3f;
    }
    
