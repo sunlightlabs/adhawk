@@ -17,3 +17,10 @@ def about(request):
             'client' : client,
             })
     return render_to_response('whopaid/about.html',c)
+
+def no_match(request):
+    client = set_client(request)
+    c = RequestContext({
+            'client' : client,
+            })
+    return render_to_response('whopaid/no_match.html',c)
