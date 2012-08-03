@@ -26,7 +26,12 @@ header {
 }
 
 
-
+.strip {
+  border: 3px white solid;
+  width: 99%;
+  max-width: 366px; 
+  display: block; 
+  }
 
 
 #subhead {
@@ -68,14 +73,6 @@ header {
   column-rule: 1px solid #f4eee3;
  } 
 
-#strip img {
-  border: 3px white solid;
-  width: 90%;
-  max-width: 366px; 
-  display: block; 
-  margin-right: 5%;
-  margin-left: 5%;
-  }
 
 #topgrade {
   background: -moz-linear-gradient(top,  rgba(0,0,0,0.43) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
@@ -101,47 +98,22 @@ header {
   margin-bottom: 0px;
 	}
 	
-#line {
-   border-top-color: #f4eee3;
-   border-top-style: solid;
-   border-top-width: 1px;
-   height: 7px;
-   background: -moz-linear-gradient(top,  rgba(252,251,250,1) 0%, rgba(252,251,250,0) 100%); /* FF3.6+ */
-   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,251,250,1)), color-stop(100%,rgba(252,251,250,0))); /* Chrome,Safari4+ */
-   background: -webkit-linear-gradient(top,  rgba(252,251,250,1) 0%,rgba(252,251,250,0) 100%); /* Chrome10+,Safari5.1+ */
-   background: -o-linear-gradient(top,  rgba(252,251,250,1) 0%,rgba(252,251,250,0) 100%); /* Opera 11.10+ */
-   background: -ms-linear-gradient(top,  rgba(252,251,250,1) 0%,rgba(252,251,250,0) 100%); /* IE10+ */
-   background: linear-gradient(to bottom,  rgba(252,251,250,1) 0%,rgba(252,251,250,0) 100%); /* W3C */
-   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfbfa', endColorstr='#00fcfbfa',GradientType=0 ); /* IE6-9 */
-   margin-top: 20px;
-   margin-bottom: 20px;
-   width: 100%;
-   }
+
    
 .line_a {
-  background: url("http://design.sunlightlabs.com/AdHawk/line_a.png") repeat-x bottom left;  margin-bottom: 20px;
+  background: url("http://design.sunlightlabs.com/AdHawk/line_a.png") repeat-x bottom left;  
+  margin-bottom: 20px;
   padding-bottom: 20px;
   width: 100%;
   }
    
-   
-#line-dk {
-   border-top-color: #f4eee3;
-   border-top-style: solid;
-   border-top-width: 1px;
-   height: 7px;
-   background: -moz-linear-gradient(top,  rgba(252,251,250,1) 0%, rgba(252,251,250,0) 100%); /* FF3.6+ */
-   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,251,250,1)), color-stop(100%,rgba(252,251,250,0))); /* Chrome,Safari4+ */
-   background: -webkit-linear-gradient(top,  rgba(252,251,250,1) 0%,rgba(252,251,250,0) 100%); /* Chrome10+,Safari5.1+ */
-   background: -o-linear-gradient(top,  rgba(252,251,250,1) 0%,rgba(252,251,250,0) 100%); /* Opera 11.10+ */
-   background: -ms-linear-gradient(top,  rgba(252,251,250,1) 0%,rgba(252,251,250,0) 100%); /* IE10+ */
-   background: linear-gradient(to bottom,  rgba(252,251,250,1) 0%,rgba(252,251,250,0) 100%); /* W3C */
-   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfbfa', endColorstr='#00fcfbfa',GradientType=0 ); /* IE6-9 */
-   margin-top: 20px;
-   margin-bottom: 20px;
-   width: 100%;
-   }
-   
+.line_b {
+  background: url("http://design.sunlightlabs.com/AdHawk/line_b.png") repeat-x bottom left;  
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  width: 100%;
+  }   
+
    
 
  /* graph */ 
@@ -180,8 +152,6 @@ list-style-type: none;
   width: 49.5%;
   } 
 
-
-
 .border{
 	border-right: 1px solid #EEE;
 	z-index: 2;
@@ -200,7 +170,7 @@ list-style-type: none;
     _zoom: 1;
     height: 30px;
     padding-right: 5px;
-padding-left: 5px;
+    padding-left: 5px;
     }
 
 .chartlist li h6 {
@@ -296,6 +266,7 @@ background: #daa698;
 #graph .full-key{
   width: 100%;
   padding: 20px 0 20px 0;
+  clear: both;
   }    
    
 #graph .key{
@@ -304,8 +275,19 @@ background: #daa698;
   float: left;
   margin-right: 1em;
   }  
+  
+  
+  
+/* top ads */
    
+#top_ad_list ul{
+   margin: 0px;
+   padding: 0px;
+   list-style-position: none;
+   list-style-type: none;
+   }  
    
+    
    
    
    
@@ -331,14 +313,24 @@ background: #daa698;
 
 /* type */
 
+#title h1{
+  font-size: 1.5em;
+  font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  padding-top: 4px;
+  color: #FFF;
+   
+   }
+
 p {
    font-size: .9em;
    font-family: Helvetica, Arial, sans-serif;
    font-weight: normal;
    font-style: normal;
    color: #000000;
-   filter:alpha(opacity=100);
-   opacity:1;
+   filter: alpha(opacity=100);
+   opacity: 1;
    line-height: 1.25em;
    }
    
@@ -406,12 +398,11 @@ p a{
   } 
   
 #top_ad_list h2 a{
-  font-size: 1.2em;
+  font-size: .8em;
   font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
   font-style: normal;
   font-weight: 400;
-  padding-top: 4px;
-  color: #FFFFFF;
+  color: #564e3f;
   }
   
 #title a{
@@ -480,3 +471,8 @@ h4 {
   color: #000000;
   }
    
+#sponsor {
+  color: #FFF;
+   font-weight: bold;
+   font-family: Helvetica, Arial, sans-serif;
+  }   
