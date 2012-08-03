@@ -55,6 +55,7 @@ class MediaProfileInline(admin.StackedInline):
     extra = 0
 
 class FunderAdmin(admin.ModelAdmin):
+    raw_id_fields = ('funder_family',)
     fieldsets = (
             (None, {
                 'fields':(('name','FEC_id','party','funder_family'))
@@ -75,7 +76,6 @@ class FunderAdmin(admin.ModelAdmin):
             )
     inlines = [
             MediaProfileInline,
-            FunderToFunderInline,
             ]
     search_fields = ['FEC_id','name','funder_family__name']
 
