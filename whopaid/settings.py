@@ -180,7 +180,7 @@ LOGGING = {
             'fromaddr': 'blannon@sunlightfoundation.com',
             'toaddrs': ['jhatch@sunlightfoundation.com',
                         'blannon@sunlightfoundation.com'],
-            'subject': 'New videos added to Ad Hawk Admin',
+            'subject': '[Ad Hawk] New videos added',
         },
         'ad_media_reporting_log' : {
             'level': 'DEBUG',
@@ -253,6 +253,16 @@ LOGGING = {
             'class': 'logging.FileHandler',
             'filename': os.path.join(
                 LOG_ROOT,'db_script/ftum_importer.log'),
+        },
+        'funder_prioritizing' : {
+            'level': 'INFO',
+            'class': 'logging.handlers.SMTPHandler',
+            'mailhost': 'smtp.postmarkapp.com',
+            'credentials': (POSTMARK_API_KEY,POSTMARK_API_KEY),
+            'fromaddr': 'blannon@sunlightfoundation.com',
+            'toaddrs': ['jhatch@sunlightfoundation.com',
+                        'blannon@sunlightfoundation.com'],
+            'subject': '[Ad Hawk] New profiles needed for biggest spenders',
         },
     },
     'loggers': {
@@ -330,6 +340,11 @@ LOGGING = {
             'handlers': ['ftum_importing'],
             'propagate': True,
             'level': 'DEBUG'
+            },
+        'db_script.funder_prioritizer' : {
+            'handlers': ['funder_prioritizing'],
+            'propagate': True,
+            'level': 'DEBUG',
             },
     }
 }
