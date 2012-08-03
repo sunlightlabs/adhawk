@@ -129,6 +129,7 @@ class YouTubeMediaImporter():
         else:
             log.info("No ads to upload for %s"%(self.media_profile.url,))
             pass
+        return len(self.collector.youtube_medias)
     def filter_for_new_ads(self):
         imported = set([m.url for m in self.media_profile.media_set.all()])
         found = set([ym.url for ym in self.collector.youtube_medias])

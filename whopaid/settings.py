@@ -1,10 +1,13 @@
 # Django settings for whopaid project.
 from local_settings import *
+from logging.handlers import SMTPHandler
 import os.path
 
 SITE_ROOT = os.path.realpath(
         os.path.join(os.path.dirname(__file__),
             os.path.pardir))
+
+POSTMARK_API_KEY = '***REMOVED***'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -169,6 +172,22 @@ LOGGING = {
             'filename': os.path.join(
                 LOG_ROOT,'db_script/ad_media_importer.log'),
         },
+        'ad_media_reporting_email' : {
+            'level': 'INFO',
+            'class': 'logging.handlers.SMTPHandler',
+            'mailhost': 'smtp.postmarkapp.com',
+            'credentials': (POSTMARK_API_KEY,POSTMARK_API_KEY),
+            'fromaddr': 'blannon@sunlightfoundation.com',
+            'toaddrs': ['jhatch@sunlightfoundation.com',
+                        'blannon@sunlightfoundation.com'],
+            'subject': 'New videos added to Ad Hawk Admin',
+        },
+        'ad_media_reporting_log' : {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(
+                LOG_ROOT,'db_script/ad_media_reporter.log'),
+        },
         'fec_importing' : {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
@@ -266,6 +285,11 @@ LOGGING = {
             'handlers': ['ad_media_importing'],
             'propagate': True,
             'level': 'DEBUG',
+        },
+        'db_script.ad_media_reporter' : {
+            'handlers': ['ad_media_reporting_email','ad_media_reporting_log'],
+            'propagate': True,
+            'level': 'INFO',
         },
         'db_script.fingerprint_ingester' : {
             'handlers': ['fingerprint_ingesting'],
