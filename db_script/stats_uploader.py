@@ -1,11 +1,12 @@
 import logging
+import os
 
 from collections import defaultdict
 
 from knowledge_base.models import Media
 from whopaid.settings import MEDIA_ROOT
 
-RMSE_FILE = MEDIA_ROOT+'images/media_thumbnails/stats/rmse.csv'
+RMSE_FILE = os.path.join(MEDIA_ROOT,'images/media_thumbnails/stats/rmse.csv')
 
 log = logging.getLogger('db_script.stats_uploader')
 
