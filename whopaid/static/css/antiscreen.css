@@ -12,19 +12,8 @@ nav,
   float: none;
 }
 
-nav li {
-  color: #FFFFFF;
-  line-height: normal;
-  margin-top: 12px;
-  margin-left: 5%;
-  padding-left: 0.42%;
-}
 
-nav,
-#title,
-#profile {
-  margin-left: 0;
-}
+
 
 #title {
   clear: both;
@@ -36,19 +25,9 @@ header {
   height: 75px;
 }
 
-nav,
-#breadcrumbs,
-{
-  margin-right: 0;
-}
 
 
-#subhead,
-#breadcrumbs,
-#strip,
-#title {
-/*  display: inline; */
-}
+
 
 #subhead {
   background-image: url(http://design.sunlightlabs.com/AdHawk/exclusive_paper.png);
@@ -58,10 +37,8 @@ nav,
 
 
 #title,
-#strip,
-#profile,
-#breadcrumbs {
-  width: 100%;
+#strip {
+  width: 90%;
 }
 
 #title {
@@ -140,6 +117,12 @@ nav,
    margin-bottom: 20px;
    width: 100%;
    }
+   
+.line_a {
+  background: url("http://design.sunlightlabs.com/AdHawk/line_a.png") repeat-x bottom left;  margin-bottom: 20px;
+  padding-bottom: 20px;
+  width: 100%;
+  }
    
    
 #line-dk {
