@@ -1,3 +1,4 @@
+{% load humanize %}
 {% block funder_profile %}
 	
 	
@@ -8,46 +9,41 @@
         <h4>{{ funder_family.name|title }}
           {% if funder_family.is_superpac %}<a href="link_to_superpac_def"><em>Super Pac</em></a>
           {% endif %}</h4>
-        <div id="line"></div>
       </div> <!-- end div funder_name -->
       
-      <div id="funder_description">
+      <div id="funder_description" class="line_a">
       <h3>About:</h3>
         <p>{{funder_family.description}}<p>
-        <div id="line"></div>
       </div> <!-- end div funder_description -->
       
-      <div id="funder_activities">
+      <div id="funder_activities" class="line_a">
         <h3>Activities:</h3>
         <p><ul>{% for committee_type in funder_family.committee_types.all %}
             <li>{{ committee_type.name }}</li>
           {% endfor %}
         </ul></p>
-        <div id="line"></div>
       </div> <!-- end div funder_activites -->
       
-      <div id="funder_received">
+      <div id="funder_received" class="line_a">
         <h3>Total Received: </h3> 
-        <p>${{ funder_family.total_contributions }}</p>
-        <div id="line"></div>
+        <p>${{ funder_family.total_contributions|floatformat:0|intcomma }}</p>
 	  </div><!-- end div funder_received -->
 	 
-      <div id="financial_info">  
+      <div id="financial_info" class="line_a">  
         <div id="total_spent">
           <h3>Total Spent:</h3> 
-          <p>${{ funder_family.total_independent_expenditures }}</p>
+          <p>${{ funder_family.total_independent_expenditures|floatformat:0|intcomma }}</p>
         </div>
         
         <div id="cash_hand">
           <h3>Cash on hand:</h3> 
-          <p>${{ funder_family.cash_on_hand }}<p>
+          <p>${{ funder_family.cash_on_hand|floatformat:0|intcomma }}<p>
         </div>
 
       </div> <!-- end div funder_financial_info -->
-      <div id="line"></div>
 
       
-     <div id="funder_chart">
+     <div id="funder_chart" class="line_a">
        <h3>Independent Expenditure Summary:</h3> 
          <div id="graph">
         <h3>
@@ -57,13 +53,13 @@
           <div class="section border">
                 <ul class="chartlist">
                     <li>
-                        <span class="count count-right">$42,000,000</span>
-                        <span class="bar right neg-dem" style="width: 70%">(70%)</span>
+                        <span class="count count-right">${{ funder_family.ie_opposes_dems|floatformat:0|intcomma }}</span>
+                        <span class="bar right neg-dem" style="width: {% widthratio funder_family.ie_opposes_dems funder_family.total_independent_expenditures 100 %}%">({% widthratio funder_family.ie_opposes_dems funder_family.total_independent_expenditures 100 %}%)</span>
                     </li>
 
                     <li>
-                        <span class="count count-right">$2,800,000</span>
-                        <span class="bar right neg-rep" style="width: 28%">(28%)</span>
+                        <span class="count count-right">${{ funder_family.ie_opposes_reps|floatformat:0|intcomma }}</span>
+                        <span class="bar right neg-rep" style="width: {% widthratio funder_family.ie_opposes_reps funder_family.total_independent_expenditures 100 %}%">({% widthratio funder_family.ie_opposes_reps funder_family.total_independent_expenditures 100 %}%)</span>
                     </li>
                 </ul>
            </div>
@@ -71,13 +67,13 @@
           <div class="section">
                <ul class="chartlist">
                     <li>
-                         <span class="count count-left">$200,000</span>
-                         <span class="bar left pro_dem" style="width: 11%">(11%)</span>
+                         <span class="count count-left">${{ funder_family.ie_supports_dems|floatformat:0|intcomma }}</span>
+                         <span class="bar left pro_dem" style="width: {% widthratio funder_family.ie_supports_dems funder_family.total_independent_expenditures 100 %}%">({% widthratio funder_family.ie_supports_dems funder_family.total_independent_expenditures 100 %}%)</span>
                     </li>
 
                     <li>
-                          <span class="count  count-left">$100</span>
-                          <span class="bar left pro-rep" style="width: 90%">(90%)</span>
+                          <span class="count  count-left">${{ funder_family.ie_supports_reps|floatformat:0|intcomma }}</span>
+                          <span class="bar left pro-rep" style="width: {% widthratio funder_family.ie_supports_reps funder_family.total_independent_expenditures 100 %}%">({% widthratio funder_family.ie_supports_reps funder_family.total_independent_expenditures 100 %}%)</span>
                     </li>
                 </ul>
                
@@ -93,8 +89,7 @@
             
             
             
-		<div style="clear: both;">
-	    </div>
+
 	    
 	    <div class="full-key">
                 <div class="neg-dem key"></div>
@@ -108,16 +103,14 @@
 
        </div>
 
-        <div id="line"></div>
      </div> <!-- end div funder_chart -->
      
-     <div id="where_aired">
+     <div id="where_aired" class="line_a">
        <h3>Where it Aired:</h3> 
         <!-- code for where it aired goes here -->
-        <div id="line"></div>
      </div> <!-- end div where_aired -->
      
-     <div id="more_info">
+     <div id="more_info" class="line_a">
        <h3>More Information:</h3> 
          <ul>
             <li><a href="http://reporting.sunlightfoundation.com/">Follow the Unlimited Money</li></p>

@@ -2,27 +2,26 @@
 {% block content %}
 
   <div id="subhead">
+    <div id="topgrade"></div>
     <div id="title">
-      <h1>Top Ads</h1>
+      <h1>Popular Ads</h1>
     
     <div id="top_ad_list">
       <ul>
         {% for media in medias %}
+          <div class="line_b">
           <li>
             <h2>
-              <a id="ad_profile_link" href="{{ EXTERNAL_URL }}/ad/top/{{ media.pk }}/">
-                {{ media.ad.title }}
-              </a>
+              <a id="ad_profile_link" href="{{ EXTERNAL_URL }}/ad/top/{{ media.pk }}/">{{ media.ad.title }}</a>
             </h2>
-            <h3>Sponsor:</h3>
-            <p>{{ media.media_profile.funder.name|title }}</p>
+            
+            <h3>Sponsor: <span id="sponsor">{{ media.media_profile.funder.name|title }}</span></h3>
             <a id="youtube_link" href="{{media.url}}">
-              <div id="strip">
-                 <img src="http://adhawk.sunlightfoundation.com/media/images/media_thumbnails/strips/Media_{{ media.pk|stringformat:"05i" }}_strip.jpg">
-               </div>
+
+                 <img class="strip" src="http://adhawk.sunlightfoundation.com/media/images/media_thumbnails/strips/Media_{{ media.pk|stringformat:"05i" }}_strip.jpg">
             </a>
           </li>
-          <div id="line-dk"></div>
+          </div>
 
         {% endfor %}
       </ul>
