@@ -36,8 +36,10 @@
     <div id="content">
       {% block content %}{% endblock %}
     </div> <!-- end div content -->
+    {% if client != "ios" and client != "android" %}
     <footer>
     </footer>
+    {% endif %}
   </div> <!-- end div page -->
   </body>
 </html>
