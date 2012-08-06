@@ -1,26 +1,19 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 
-
-def set_client(request):
-    user_agent = request.META['HTTP_USER_AGENT']
-    if user_agent == 'com.sunlightfoundation.adhawk.android':
-        return 'android'
-    elif user_agent == 'com.sunlightfoundation.adhawk.ios':
-        return 'ios'
-    else:
-        return user_agent
+from knowledge_base.views import set_client
 
 def about(request):
     client = set_client(request)
-    c = RequestContext({
+    print "user agent is",client
+    c = RequestContext(request,{
             'client' : client,
             })
     return render_to_response('whopaid/about.html',c)
 
 def no_match(request):
     client = set_client(request)
-    c = RequestContext({
+    c = RequestContext(request,{
             'client' : client,
             })
     return render_to_response('whopaid/no_match.html',c)
