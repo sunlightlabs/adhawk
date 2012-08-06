@@ -1,4 +1,4 @@
-from django.template import Context
+from django.template import RequestContext
 from django.shortcuts import render_to_response
 
 
@@ -13,7 +13,14 @@ def set_client(request):
 
 def about(request):
     client = set_client(request)
-    c = Context({
+    c = RequestContext({
             'client' : client,
             })
     return render_to_response('whopaid/about.html',c)
+
+def no_match(request):
+    client = set_client(request)
+    c = RequestContext({
+            'client' : client,
+            })
+    return render_to_response('whopaid/no_match.html',c)

@@ -1,0 +1,22 @@
+{% extends "whopaid/base.html" %}
+{% block content %}
+    <div id="subhead">
+      <div id="topgrade"></div>
+    </subhead>
+      <div id="no_match_info">
+        <h1>Why Couldn't I Find a Match?</h1>
+        <h2>Possible reasons:</h2>
+        <ul>
+          <li>
+          <strong>Distorted or Missing Audio:</strong> Ad Hawk needs approximately 15 seconds of audio to correctly fingerprint the ad. Next time keep Ad Hawk close to catch the biggest portion of the ad and keep non-ad noise to a minimum.
+          </li>
+          <li>
+          <strong>Not in Our Database Yet:</strong> Disclosure requirements are currently lacking, if Sunlight had our druthers the details of donors and ad buy information would be available as it happens. We are constantly expanding our database to include the latest ads but it’s an endless game of catch up. We must manually fingerprint the ads and bring in any contextual information we can find. For more information about the process see our methodology on the <a href="http://adhawk.sunlightfoundation.com/about/">About</a> page. Hopefully we’ll have this ad the next time it airs!
+          </li>
+          <li>
+          <strong>No internet connection:</strong> Ad Hawk needs to upload the audio fingerprint to match against our database of ads and return results to you.
+          </li>
+        </ul>
+        
+      </div> <!-- end div no_match_info -->
+{% endblock %}

@@ -13,7 +13,7 @@ a {
 }
 
 a:hover {
-  color: #3366CC;
+  color: #ab2e17;
   text-decoration: none;
 }
 
@@ -142,7 +142,6 @@ h3 {
   display: inline-block;
   float: left;
   width: 53.1667%;
-  margin-left: 4.1667%;
 }
 
 #title h2 {
@@ -161,40 +160,7 @@ h3 {
  * Profile
  */
 
-#profile {
-  float: left;
-  width: 85.4167%;
-  margin-left: 4.1667%;
-}
 
-
-#profile #funder_name {
-  font-weight:bold;
-  color: #000000;
-  
-}
-
-#profile #funder_name p {
-  font-style: oblique;
-  font-size: .8em;
-  
-}
-
-#profile #funder_description p {
-  font-size: .8em;
-}
-
-#profile #funder_activities ul {
-  margin-left: 2.4%;
-  list-style: none outside none;
-}
-
-#profile #funder_activities ul li {
-
-}
-
-#profile #funder_financial_info {
-}
 
 
 

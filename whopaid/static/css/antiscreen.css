@@ -4,8 +4,7 @@
   max-width: 100%;
 }
 
-#header #date,
-#header #nav,
+nav,
 #breadcrumbs,
 #strip,
 #title,
@@ -13,68 +12,69 @@
   float: none;
 }
 
-#header #nav li {
-  color: #FFFFFF;
-  line-height: normal;
-  margin-top: 12px;
-  margin-left: 5%;
-  padding-left: 0.42%;
-}
 
-#header #nav,
-#title,
-#profile {
-  margin-left: 0;
-}
+
 
 #title {
   clear: both;
 }
 
-#title h2{
-  font-size: 1.75em;
-  font-family: "ltc-squareface-sc",sans-serif;
-  font-style: normal;
-  font-weight: 400;
-}
 
-#header {
+
+header {
   height: 75px;
 }
 
-#header #nav,
-#breadcrumbs,
-{
-  margin-right: 0;
-}
 
-#header #date {
-  visibility: hidden;
-  display:none;
-}
 
-#subhead,
-#breadcrumbs,
-#strip,
-#title {
-/*  display: inline; */
-}
 
-#header h1 a {
-}
+
+#subhead {
+  background-image: url(http://design.sunlightlabs.com/AdHawk/exclusive_paper.png);
+  background-repeat: repeat;
+  margin-bottom: 20px;
+   }
+
 
 #title,
-#strip,
-#profile,
-#breadcrumbs {
-  width: 100%;
+#strip {
+  width: 90%;
 }
+
+#title {
+  padding-left: 5%;
+  padding-right: 5%;
+  }
+  
+#funder {
+  padding-left: 5%;
+  padding-right: 5%;
+  }  
+
+#funder_received p,
+#financial_info p {
+  font-weight: bold;
+  }
+  
+#financial_info {
+  -webkit-column-count: 2;
+  -webkit-column-gap: 30px; 
+  -webkit-column-rule: 1px solid #f4eee3;
+  -moz-column-count: 2;
+  -moz-column-gap: 30px;  
+  -moz-column-rule: 1px solid #f4eee3;
+  column-count: 2;
+  column-gap: 30px; 
+  column-rule: 1px solid #f4eee3;
+ } 
 
 #strip img {
   border: 3px white solid;
   width: 90%;
   max-width: 366px; 
   display: block; 
+  margin-right: 5%;
+  margin-left: 5%;
   }
 
 #topgrade {
@@ -98,16 +98,385 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#6e000000',GradientType=0 ); /* IE6-9 */
   height: 17px;
   padding-bottom: 0;
-  margin-bottom: 0;
-  
+  margin-bottom: 0px;
 	}
+	
+#line {
+   border-top-color: #f4eee3;
+   border-top-style: solid;
+   border-top-width: 1px;
+   height: 7px;
+   background: -moz-linear-gradient(top,  rgba(252,251,250,1) 0%, rgba(252,251,250,0) 100%); /* FF3.6+ */
+   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,251,250,1)), color-stop(100%,rgba(252,251,250,0))); /* Chrome,Safari4+ */
+   background: -webkit-linear-gradient(top,  rgba(252,251,250,1) 0%,rgba(252,251,250,0) 100%); /* Chrome10+,Safari5.1+ */
+   background: -o-linear-gradient(top,  rgba(252,251,250,1) 0%,rgba(252,251,250,0) 100%); /* Opera 11.10+ */
+   background: -ms-linear-gradient(top,  rgba(252,251,250,1) 0%,rgba(252,251,250,0) 100%); /* IE10+ */
+   background: linear-gradient(to bottom,  rgba(252,251,250,1) 0%,rgba(252,251,250,0) 100%); /* W3C */
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfbfa', endColorstr='#00fcfbfa',GradientType=0 ); /* IE6-9 */
+   margin-top: 20px;
+   margin-bottom: 20px;
+   width: 100%;
+   }
+   
+.line_a {
+  background: url("http://design.sunlightlabs.com/AdHawk/line_a.png") repeat-x bottom left;  margin-bottom: 20px;
+  padding-bottom: 20px;
+  width: 100%;
+  }
+   
+   
+#line-dk {
+   border-top-color: #f4eee3;
+   border-top-style: solid;
+   border-top-width: 1px;
+   height: 7px;
+   background: -moz-linear-gradient(top,  rgba(252,251,250,1) 0%, rgba(252,251,250,0) 100%); /* FF3.6+ */
+   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,251,250,1)), color-stop(100%,rgba(252,251,250,0))); /* Chrome,Safari4+ */
+   background: -webkit-linear-gradient(top,  rgba(252,251,250,1) 0%,rgba(252,251,250,0) 100%); /* Chrome10+,Safari5.1+ */
+   background: -o-linear-gradient(top,  rgba(252,251,250,1) 0%,rgba(252,251,250,0) 100%); /* Opera 11.10+ */
+   background: -ms-linear-gradient(top,  rgba(252,251,250,1) 0%,rgba(252,251,250,0) 100%); /* IE10+ */
+   background: linear-gradient(to bottom,  rgba(252,251,250,1) 0%,rgba(252,251,250,0) 100%); /* W3C */
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfbfa', endColorstr='#00fcfbfa',GradientType=0 ); /* IE6-9 */
+   margin-top: 20px;
+   margin-bottom: 20px;
+   width: 100%;
+   }
+   
+   
+
+ /* graph */ 
+
+#graph * {
+padding: 0;
+margin: 0;
+}
+
+
+#graph {
+width: 100%;
+list-style-type: none;
+  }
+
+#graph body {
+  font-family: Helvetica, Arial, sans-serif;
+  color: #333;
+  }
+
+#graph h3 {
+   color: #666;
+   font-family: Helvetica, Arial, sans-serif;
+   font-size: .75em;
+  padding-bottom: 2em;
+  }
+
+#graph h6{
+  font-size: 1em;
+  font-family: Helvetica, Arial, sans-serif;;
+  }
+
+.section {
+  float: left;
+  padding: 0;
+  width: 49.5%;
+  } 
+
+
+
+.border{
+	border-right: 1px solid #EEE;
+	z-index: 2;
+    }
+
+.chartlist {
+    float: left;
+    width: 100%;
+	border-top: 1px solid #EEE;
+    }
+
+.chartlist li {
+    position: relative;
+    display: block;
+    border-bottom: 1px solid #EEE;
+    _zoom: 1;
+    height: 30px;
+    padding-right: 5px;
+padding-left: 5px;
+    }
+
+.chartlist li h6 {
+display: block;
+padding: 0.4em 4.5em 0.4em 0.5em;
+position: relative;
+z-index: 2;
+}
+
+
+.chartlist .count {
+display: block;
+position: absolute;
+top: 0;
+color: #000;
+font-weight: bold;
+font-size: 0.875em;
+line-height: 2em;
+z-index: 2;
+margin-left: 10px !important;  
+margin-right: 10px !important;
+margin-top: .2em !important;
+}
+
+
+.chartlist .bar {
+display: block;
+position: absolute;
+top: 0;
+height: 100%;
+text-indent: -9999px;
+overflow: hidden;
+line-height: 2em;
+}
+
+.right {
+	right: 0;
+	float: right;	
+   }
+
+.left {
+	left: 0;
+	float: left;
+   }
+
+.count-left{
+left: 0;
+text-align: left;	
+}
+
+.count-right{
+right: 0;
+text-align:right;
+}
+
+.neg-dem {
+background: #a5c1d2;
+}
+
+.neg-rep {
+background: #daa698;
+}
+
+.pro_dem {
+   background: #cce9f4;
+   }
+
+.pro-rep {
+   background: #f5beb0;
+   }
+
+#graph .lables p{
+   float: left;
+   width: 20%;
+   color: #666;
+   font-family: Helvetica, Arial, sans-serif;
+   font-size: .75em;
+   
+   }
+
+#graph .lables-left{
+  text-align: left;
+  }
+  
+#graph .lables-center{
+  text-align: center;
+  }
+  
+#graph .lables-right{
+  text-align: right;
+  }  
+
+#graph .full-key{
+  width: 100%;
+  padding: 20px 0 20px 0;
+  }    
+   
+#graph .key{
+  width: 1em;
+  height: 1em;
+  float: left;
+  margin-right: 1em;
+  }  
+   
+   
+   
+   
+   
+ /* about */  
+
+#about_content {
+  background-color: #FFFFFF;
+  filter:alpha(opacity=60);
+  opacity:.6;
+  margin: 5%;
+  padding: 5%;
+  border-top:2px solid #9e8d6e;
+  border-bottom:2px solid #9e8d6e;
+  }
+  
+#about_intro{
+  padding: 5%;
+  }
+
+
+
+
+
+/* type */
+
+p {
+   font-size: .9em;
+   font-family: Helvetica, Arial, sans-serif;
+   font-weight: normal;
+   font-style: normal;
+   color: #000000;
+   filter:alpha(opacity=100);
+   opacity:1;
+   line-height: 1.25em;
+   }
+   
+p a{
+   color: #000000;
+   }
+   
+#about_intro p{
+  font-size: 1em;
+  color: #6e614b;
+  font-family: Helvetica, Arial, sans-serif;
+  font-style: italic;
+  font-weight: normal;
+  padding-bottom: 5px;
+  line-height: 1.5em;
+  }
+  
+#about_intro p a{
+  color: #6e614b;
+  }
+  
+   
+#funder_activities li{
+   font-size: .9em;
+   font-family: Helvetica, Arial, sans-serif;
+   font-weight: normal;
+   font-style: normal;
+   color: #000000;
+   margin: 0px;
+   padding: 0px;
+   }
+   
+#funder_activities ul{
+   margin: 0px;
+   padding: 0px;
+   list-style-position: none;
+   list-style-type: none;
+   }
+   
+   
+#more_info li{
+   font-size: .9em;
+   font-family: Helvetica, Arial, sans-serif;
+   font-weight: normal;
+   font-style: normal;
+   color: #000000;
+   margin: 0px;
+   padding: 0px;
+   }
+   
+#more_info ul{
+   margin: 0px;
+   padding: 0px;
+   list-style-position: none;
+   list-style-type: none;
+   }
+
+  
+#title h2{
+  font-size: 1.5em;
+  font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  padding-top: 4px;
+  } 
+  
+#top_ad_list h2 a{
+  font-size: 1.2em;
+  font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  padding-top: 4px;
+  color: #FFFFFF;
+  }
+  
+#title a{
+  color: white;
+  } 
 
 
 h3 {
-  font-size: 1.25em;
+  font-size: .8em;
   color: #c7b188;
-  font-family: "ltc-squareface-sc",sans-serif;
+  font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
   font-style: normal;
   font-weight: 400;
+  filter:alpha(opacity=100);
+  opacity:1;
   }
+  
+#about_content h3{
+   color: #000000;
+   }
+   
+#top_ad_list h3 {
+   color: #564e3f;
+   }
+   
+#about_content ul{
+   list-style-position: outside;
+   list-style-type: square;
+   padding-left: 10px;
+   }
+   
+#about_content li{
+   font-size: .9em;
+   font-family: Helvetica, Arial, sans-serif;
+   font-weight: normal;
+   font-style: normal;
+   color: #000000;
+   filter:alpha(opacity=100);
+   opacity:1;
+   line-height: 1.25em;
+   padding: 2px;
+   margin: 2px;
+   }
 
+#about_content li a{
+   color: #000000;
+   }
+
+  
+h4 {
+   font-size: 1.5em;
+   font-weight: bold;
+   font-family: Helvetica, Arial, sans-serif;
+   color: #000000;
+   }
+   
+   
+#funder_name h4 a{
+  color: #c7b188;
+  font-weight: normal;
+  font-style: italic;
+  text-decoration: none;
+  }
+  
+#more_info a{
+  color: #000000;
+  }
+   
