@@ -4,9 +4,9 @@ from django.shortcuts import render_to_response
 
 def set_client(request):
     user_agent = request.META['HTTP_USER_AGENT']
-    if user_agent == 'com.sunlightfoundation.com.adhawk.android':
+    if user_agent == 'com.sunlightfoundation.adhawk.android':
         return 'android'
-    elif user_agent == 'com.sunlightfoundation.com.adhawk.ios':
+    elif user_agent == 'com.sunlightfoundation.adhawk.ios':
         return 'ios'
     else:
         return user_agent
