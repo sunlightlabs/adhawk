@@ -11,11 +11,12 @@
           {% endif %}</h4>
       </div> <!-- end div funder_name -->
       
+      {% if funder_family.description %}
       <div id="funder_description" class="line_a">
       <h3>About:</h3>
         <p>{{funder_family.description}}<p>
       </div> <!-- end div funder_description -->
-      
+      {% endif %}
       <div id="funder_activities" class="line_a">
         <h3>Activities:</h3>
         <p><ul>{% for committee_type in funder_family.committee_types.all %}
@@ -47,8 +48,8 @@
        <h3>Independent Expenditure Summary:</h3> 
          <div id="graph">
         <h3>
-	       <span class="left">Negative Spending</span>
-           <span class="right">Positive Spending</span>
+	       <span class="left">Oppose</span>
+           <span class="right">Support</span>
        </h3>
           <div class="section border">
                 <ul class="chartlist">
@@ -104,12 +105,12 @@
        </div>
 
      </div> <!-- end div funder_chart -->
-     
+      {% comment %}
      <div id="where_aired" class="line_a">
        <h3>Where it Aired:</h3> 
         <!-- code for where it aired goes here -->
      </div> <!-- end div where_aired -->
-     
+      {% endcomment %}
      <div id="more_info" class="line_a">
        <h3>More Information:</h3> 
          <ul>
