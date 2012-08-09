@@ -1,30 +1,33 @@
 {% extends "whopaid/base.html" %}
 {% block content %}
 
-  <div id="subhead">
-    <div id="topgrade"></div>
+  <div id="main">
+  <div id="gradient">
     <div id="title">
       <h1>Popular Ads</h1>
     
     <div id="top_ad_list">
       <ul>
         {% for media in medias %}
-          <div class="line_b">
-          <li>
+         <li>
+            <div class="line_b">
+
             <h2>
-              <a id="ad_profile_link" href="{{ EXTERNAL_URL }}/ad/top/{{ media.pk }}/">{{ media.ad.title }}</a>
+              <a href="{{ EXTERNAL_URL }}/ad/top/{{ media.pk }}/">{{ media.ad.title }}</a>
             </h2>
             
-            <h3>Sponsor: <span id="sponsor">{{ media.media_profile.funder.name|title }}</span></h3>
-                 <img class="strip" src="http://adhawk.sunlightfoundation.com/media/images/media_thumbnails/strips/Media_{{ media.pk|stringformat:"05i" }}_strip.jpg">
+            <h3>Sponsor: <span class="sponsor">{{ media.media_profile.funder.name|title }}</span></h3>
+                 <img class="strip" src="http://adhawk.sunlightfoundation.com/media/images/media_thumbnails/strips/Media_{{ media.pk|stringformat:"05i" }}_strip.jpg" alt="ad youtube thumbnail">
+            </div>
+
           </li>
-          </div>
 
         {% endfor %}
       </ul>
     </div> <!-- end div top_ad_list -->
     </div> <!-- end div title -->
   </div>
+</div>
   
   
 {% endblock %}

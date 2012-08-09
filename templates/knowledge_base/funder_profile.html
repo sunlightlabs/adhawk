@@ -19,10 +19,10 @@
       {% endif %}
       <div id="funder_activities" class="line_a">
         <h3>Activities:</h3>
-        <p><ul>{% for committee_type in funder_family.committee_types.all %}
+        <ul>{% for committee_type in funder_family.committee_types.all %}
             <li>{{ committee_type.name }}</li>
           {% endfor %}
-        </ul></p>
+        </ul>
       </div> <!-- end div funder_activites -->
       
       <div id="funder_received" class="line_a">
@@ -47,11 +47,12 @@
      <div id="funder_chart" class="line_a">
        <h3>Independent Expenditure Summary:</h3> 
          <div id="graph">
-        <h3>
-	       <span class="left">Oppose</span>
-           <span class="right">Support</span>
-       </h3>
-          <div class="section border">
+           <div class="clearfix">
+            <h3 class="left">Oppose</h3>
+            <h3 class="right">Support</h3>
+            </div>
+            
+              <div class="section border">
                 <ul class="chartlist">
                     <li>
                         <span class="count count-right">${{ funder_family.ie_opposes_dems|floatformat:0|intcomma }}</span>
@@ -114,9 +115,9 @@
      <div id="more_info" class="line_a">
        <h3>More Information:</h3> 
          <ul>
-            <li><a href="http://reporting.sunlightfoundation.com/">Follow the Unlimited Money</li></p>
-            <li><a href="http://influenceexplorer.com">Influence Explorer</li></p>
-            <li><a href="http://politicaladsleuth.sunlightfoundation.com/">Political Ad Sleuth</li></p>
+            <li><a href="http://reporting.sunlightfoundation.com/">Follow the Unlimited Money</a></li>
+            <li><a href="http://influenceexplorer.com">Influence Explorer</a></li>
+            <li><a href="http://politicaladsleuth.sunlightfoundation.com/">Political Ad Sleuth</a></li>
          </ul>
      </div> <!-- end div where_aired -->
      

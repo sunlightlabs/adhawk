@@ -1,9 +1,32 @@
 /*
  * FOUNDATION STYLES
  */
+ 
+ 
+ .wf-loading {
+   /* styles to use when web fonts are loading */
+   visibility: hidden;
+  }
+
+  .wf-active {
+   /* styles to use when web fonts are active */
+  font-family: "ltc-squareface-sc-n4","ltc-squareface-sc";
+  font-style: normal;
+  font-weight: 400;
+  }
+
+  .wf-inactive {
+   /* styles to use when web fonts are inactive */
+  font-family: "Arial Black", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  }
+  
+  
+   
 
 body {
-  background-color: #FFFFFF;
+  background-color: #666;
   color: #000000;
   font: normal 100% Helvetica, Arial, serif;
 }
@@ -21,13 +44,17 @@ p {
   margin-bottom: 1em;
 }
 
+
 h3 {
-  font-size: 1.25em;
+  font-size: .8em;
   color: #c7b188;
-  font-family: "ltc-squareface-sc",sans-serif;
+  font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
   font-style: normal;
   font-weight: 400;
+  filter:alpha(opacity=100);
+  opacity:1;
   }
+  
 
 /*
  * HEADER
@@ -88,23 +115,23 @@ h3 {
 /*
  * Content
  */
-#content {
-  width: 100%;
-}
 
+#content {
+   width: 100%
+   }
 
 
 /*
  * SUBHEAD
  */
 
-#subhead {
+#main {
   background-color: #cfbb98;
   display: inline-block;
   width: 100%;
 }
 
-#subhead h1 {
+#main h1 {
   font-size: 1.5em;
   width: 100%;
 }
