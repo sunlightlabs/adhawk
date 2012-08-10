@@ -1,6 +1,6 @@
 #page {
-  margin: 0 0 0 0;
-  padding: 0 0 0 0;
+  margin: 0;
+  padding: 0;
   max-width: 100%;
 }
 
@@ -20,7 +20,7 @@ header {
 
 
 .strip {
-  border: 3px white solid;
+  border: 3px #FFF solid;
   width: 99%;
   max-width: 366px; 
   display: block; 
@@ -82,7 +82,7 @@ padding-top: 1.5em;
 #funder {
   padding-left: 5%;
   padding-right: 5%;
-  background-color: #FFFFFF;
+  background-color: #FFF;
   padding-top: 1.5em;
   }  
 
@@ -179,7 +179,7 @@ list-style-type: none;
 
 .chartlist li h6 {
 display: block;
-padding: 0.4em 4.5em 0.4em 0.5em;
+padding: .4em 4.5em .4em .5em;
 position: relative;
 z-index: 2;
 }
@@ -191,7 +191,7 @@ position: absolute;
 top: 0;
 color: #000;
 font-weight: bold;
-font-size: 0.875em;
+font-size: .875em;
 line-height: 2em;
 z-index: 2;
 margin-left: 10px !important;  
@@ -269,7 +269,7 @@ background: #daa698;
 
 #graph .full-key{
   width: 100%;
-  padding: 20px 0 20px 0;
+  padding: 20px 0;
   clear: both;
   }    
    
@@ -298,7 +298,7 @@ background: #daa698;
  /* about */  
 
 #about_content {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   filter:alpha(opacity=60);
   opacity:.6;
   margin: 5%;
@@ -315,7 +315,7 @@ background: #daa698;
 .css3button {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 17px;
-	color: #ffffff;
+	color: #FFF;
 	padding: 10px 3px;
 	margin-top: .5em;
 	margin-bottom: 1.5em;
@@ -420,13 +420,13 @@ p a{
    font-weight: normal;
    font-style: normal;
    color: #000000;
-   margin: 0px;
-   padding: 0px;
+   margin: 0;
+   padding: 0;
    }
    
 #funder_activities ul{
-   margin: 0px;
-   padding: 0px;
+   margin: 0;
+   padding: 0;
    list-style-position: none;
    list-style-type: none;
    }
@@ -438,13 +438,13 @@ p a{
    font-weight: normal;
    font-style: normal;
    color: #000000;
-   margin: 0px;
-   padding: 0px;
+   margin: 0;
+   padding: 0;
    }
    
 #more_info ul, #no_match_info ul{
-   margin: 0px;
-   padding: 0px;
+   margin: 0;
+   padding: 0;
    list-style-position: none;
    list-style-type: none;
    }
@@ -512,7 +512,7 @@ h4 {
    font-weight: bold;
    font-family: Helvetica, Arial, sans-serif;
    color: #000000;
-   margin: 0px;
+   margin: 0;
    }
    
    
