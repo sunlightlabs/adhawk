@@ -1,6 +1,5 @@
 {% extends "whopaid/base.html" %}
 {% block content %}
-    <div id="subhead">
       {% if client != "ios" and client != "android" %}
         {% block subhead_nav %}
           {% include "knowledge_base/subhead_nav.html" %}
@@ -9,7 +8,6 @@
       {% block title_and_strip %}
         {% include "knowledge_base/title_and_strip.html" %}
       {% endblock %}
-    </div> <!-- end div subhead -->
     <div id="profile">
       {% block funder_profile %}
         {% include "knowledge_base/funder_profile.html" %}
