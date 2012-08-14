@@ -218,11 +218,11 @@ LOGGING = {
             'filename': os.path.join(
                 LOG_ROOT,'db_script/fec_importer.log'),
         },
-        'ie_id_importing' : {
+        'ie_importing' : {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': os.path.join(
-                LOG_ROOT,'db_script/ie_id_importer.log'),
+                LOG_ROOT,'db_script/ie_importer.log'),
         },
         'reporting_importing' : {
             'level': 'DEBUG',
@@ -297,8 +297,8 @@ LOGGING = {
             'propagate': True,
             'level': 'DEBUG',
         },
-        'db_script.ie_id_importer' : {
-            'handlers': ['ie_id_importing'],
+        'db_script.ie_importer' : {
+            'handlers': ['ie_importing'],
             'propagate': True,
             'level': 'DEBUG',
         },
