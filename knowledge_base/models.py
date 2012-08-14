@@ -287,6 +287,7 @@ class FunderFamily(models.Model):
 
 class Funder(models.Model):
     FEC_id = models.CharField(max_length=9)
+    IE_id = models.CharField(max_length=32,null=True,blank=True)
     name = models.CharField(max_length=200)
     ftum_url = models.URLField(null=True,blank=True)
     description = models.TextField(null=True,blank=True)
