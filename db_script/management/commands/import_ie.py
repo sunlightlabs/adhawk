@@ -9,7 +9,7 @@ class Command(BaseCommand):
     @transaction.commit_on_success
     def handle(self, *args, **options):
 
-        funders = Funder.objects.filter(IE_id=None)[:10]
+        funders = Funder.objects.filter(IE_id=None)
 
         count = len(funders)
 
