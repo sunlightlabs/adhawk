@@ -218,6 +218,12 @@ LOGGING = {
             'filename': os.path.join(
                 LOG_ROOT,'db_script/fec_importer.log'),
         },
+        'ie_id_importing' : {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(
+                LOG_ROOT,'db_script/ie_id_importer.log'),
+        },
         'reporting_importing' : {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
@@ -288,6 +294,11 @@ LOGGING = {
         },
         'db_script.fec_kb_updater' : {
             'handlers': ['fec_kb_updating'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'db_script.ie_id_importer' : {
+            'handlers': ['ie_id_importing'],
             'propagate': True,
             'level': 'DEBUG',
         },
