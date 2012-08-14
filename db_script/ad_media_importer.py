@@ -67,7 +67,11 @@ class YouTubeMediaCollector():
         uri = uri+'?start-index=%d&max-results=%d'
         self.youtube_medias = []
         while entries_len == 50:
-            video_feed = self.yts.GetYouTubeVideoFeed(uri%(start_index,50))
+            try:
+                video_feed = self.yts.GetYouTubeVideoFeed(uri%(start_index,50))
+            except RequestError as e:
+                log.error(e)
+                break
             for entry in video_feed.entry:
                 test_result = self.test_entry(entry)
                 if test_result:
