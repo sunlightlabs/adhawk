@@ -44,5 +44,3 @@ class IEDescriptionImporter():
         log.info('...saving new info for %s'%(self.funder.FEC_id,))
         self.funder.description = self.ie_description
         self.funder.save()
-
-        
