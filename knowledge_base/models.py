@@ -204,6 +204,10 @@ class FunderFamily(models.Model):
             max_digits=21,
             decimal_places=2,
             default=Decimal("0.00"))
+    total_disbursements = models.DecimalField(
+            max_digits=21,
+            decimal_places=2,
+            default=Decimal("0.00"))
     ie_negative_percent = models.FloatField(default=0.0)
     ie_positive_percent = models.FloatField(default=0.0)
     ie_opposes_dems = models.DecimalField(
@@ -258,6 +262,8 @@ class FunderFamily(models.Model):
                     Sum('total_contributions'))['total_contributions__sum']
             self.cash_on_hand = self.funder_set.aggregate(
                     Sum('cash_on_hand'))['cash_on_hand__sum']
+            self.total_disbursements = self.funder_set.aggregate(
+                    Sum('total_disbursements'))['total_disbursements__sum']
             self.total_independent_expenditures = self.funder_set.aggregate(
                     Sum('total_independent_expenditures'))['total_independent_expenditures__sum']
             self.ie_opposes_dems = self.funder_set.aggregate(
@@ -288,6 +294,8 @@ class FunderFamily(models.Model):
 class Funder(models.Model):
     FEC_id = models.CharField(max_length=9)
     IE_id = models.CharField(max_length=32,null=True,blank=True)
+    media_profile_assigned = models.BooleanField(default=False)
+    ignore = models.BooleanField(default=False)
     name = models.CharField(max_length=200)
     ftum_url = models.URLField(null=True,blank=True)
     description = models.TextField(null=True,blank=True)
@@ -308,6 +316,10 @@ class Funder(models.Model):
             decimal_places=2,
             default=Decimal("0.00"))
     total_independent_expenditures = models.DecimalField(
+            max_digits=21,
+            decimal_places=2,
+            default=Decimal("0.00"))
+    total_disbursements = models.DecimalField(
             max_digits=21,
             decimal_places=2,
             default=Decimal("0.00"))
@@ -361,7 +373,14 @@ class Funder(models.Model):
     def __unicode__(self):
         return self.name.title()
 
+    def media_profile_is_not_null(self):
+        if self.mediaprofile_set.all():
+            return True
+        else:
+            return False
+
     def save(self, *args, **kwargs): 
+        self.media_profile_assigned = self.media_profile_is_not_null()
         total_pos = float(self.ie_supports_dems + self.ie_supports_reps)
         total_neg = float(self.ie_opposes_dems + self.ie_opposes_reps)
         denom = total_pos + total_neg

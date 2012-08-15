@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+
 from knowledge_base.models import (Ad, 
 AdToCandidate,
 Author,
@@ -24,8 +25,10 @@ Stance,
 Tag)
 
 from django.contrib import admin
+from django.contrib.admin import BooleanFieldListFilter
 from django.forms import TextInput, Textarea
 from django.db import models
+from django.core import urlresolvers
 
 def set_checked(modeladmin, request, queryset):
     queryset.update(checked=True)
@@ -77,7 +80,16 @@ class FunderAdmin(admin.ModelAdmin):
     inlines = [
             MediaProfileInline,
             ]
-    search_fields = ['FEC_id','name','funder_family__name']
+    list_display = ('__unicode__',
+            'media_profile_assigned',
+            'ignore',
+            'total_contributions',
+            )
+    list_editable = ('ignore',)
+    list_per_page = 10
+    ordering = ('-total_contributions',)
+    list_filter = ('ignore','media_profile_assigned')
+    search_fields = ['FEC_id','name']
 
 class FunderFamilyAdmin(admin.ModelAdmin):
     model = FunderFamily
