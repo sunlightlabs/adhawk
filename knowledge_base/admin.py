@@ -145,6 +145,7 @@ class CandidateAdmin(admin.ModelAdmin):
 
 class MediaAdmin(admin.ModelAdmin):
     list_display = ('__unicode__',
+            'funder_name',
             'checked',
             'valid',
             'duration',
