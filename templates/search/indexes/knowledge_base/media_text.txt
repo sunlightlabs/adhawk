@@ -1,0 +1,3 @@
+{{ object.ad.title }}
+{{ object.curator_description }}
+{{ object.media_profile.funder.name }}
