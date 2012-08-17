@@ -2,6 +2,7 @@ import sys
 import os
 import collections
 import logging
+from decimal import Decimal
 
 from knowledge_base.models import Candidate, \
         CandidateStatus, \
@@ -20,6 +21,12 @@ from django.db import connections
 log = logging.getLogger('db_script.fec_kb_updater')
 
 CONN = connections['default']
+
+def str_or_zero(val):
+    if val:
+        return str(val)
+    else:
+        return "0"
 
 def make_result_object(executed_cursor):
     return collections.namedtuple('Result', 
@@ -141,6 +148,9 @@ def make_committee_object(cr):
             log.info("...created\tConnectedOrganization\t%s"%(unicode(co),))
     else:
         co = None
+    committee.total_contributions = Decimal(str_or_zero(cr.total_receipts))
+    committee.total_disbursements = Decimal(str_or_zero(cr.total_disbursements))
+    committee.cash_on_hand = Decimal(str_or_zero(cr.cash_close_of_period))
     committee = Funder()
     committee.FEC_id=cr.committee_id
     committee.name=cr.committee_name
@@ -235,6 +245,10 @@ def merge_committee_object(committee,cr):
             log.info("...created\tConnectedOrganization\t%s"%(unicode(co),))
     else:
         co = None
+    if not committee.ftum_url:
+        committee.total_contributions = Decimal(str_or_zero(cr.total_receipts))
+        committee.total_disbursements = Decimal(str_or_zero(cr.total_disbursements))
+        committee.cash_on_hand = Decimal(str_or_zero(cr.cash_close_of_period))
     committee.name=cr.committee_name
     committee.treasurer_name=cr.treasurers_name
     committee.street_one=cr.street1
@@ -265,7 +279,10 @@ class CommitteeQuery():
         self.id_list_string = self.make_id_list_string(fec_id_set)
         self.cursor = conn.cursor()
     def get_result_cursor(self):
-        quy = "select * from fec_committees WHERE committee_id in "
+        quy = """select fc.*, fcs.cash_close_of_period, fcs.total_receipts,
+        fcs.total_disbursements from fec_committees fc left join 
+        fec_committee_summaries fcs on fc.committee_id = fcs.committee_id 
+        WHERE fc.committee_id in """
         quy += self.id_list_string
         self.cursor.execute(quy)
         return self.cursor
