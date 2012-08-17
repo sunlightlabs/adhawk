@@ -473,6 +473,7 @@ class Media(models.Model):
     creator_description = models.TextField(default="No description available.")
     curator_description = models.TextField(blank=True,null=True)
     duration = models.IntegerField()
+    funder_name = models.CharField(max_length=200,blank=True,null=True)
     pub_date = models.DateTimeField()
     link_broken = models.BooleanField(default=False)
     downloaded = models.BooleanField(default=False)
@@ -521,6 +522,7 @@ class Media(models.Model):
         return "%s (%s)"%(self.ad.title,self.url)
     
     def save(self, *args, **kwargs):
+        self.funder_name = self.media_profile.funder.name
         sr = urlparse.urlsplit(self.url)
         if sr.netloc=='www.youtube.com':
             self.embed_code = '<iframe width="560" height="315" src="http://www.youtube.com/embed/%s" frameborder="0" allowfullscreen></iframe>'%sr.query.replace('v=','')
