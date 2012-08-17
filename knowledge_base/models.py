@@ -295,6 +295,7 @@ class Funder(models.Model):
     FEC_id = models.CharField(max_length=9)
     IE_id = models.CharField(max_length=32,null=True,blank=True)
     media_profile_assigned = models.BooleanField(default=False)
+    media_profile_url_input = models.URLField(blank=True,null=True)
     ignore = models.BooleanField(default=False)
     name = models.CharField(max_length=200)
     ftum_url = models.URLField(null=True,blank=True)
@@ -381,6 +382,17 @@ class Funder(models.Model):
 
     def save(self, *args, **kwargs): 
         self.media_profile_assigned = self.media_profile_is_not_null()
+        if self.media_profile_url_input and not self.media_profile_assigned:
+            mt = MediaType.objects.get(main_url='http://www.youtube.com')
+            mp = MediaProfile(url=self.media_profile_url_input,
+                                media_type=mt,
+                                funder=self)
+            mp.save()
+        super(Funder, self).save(*args,**kwargs)
+        self.media_profile_assigned = self.media_profile_is_not_null()
+        if self.media_profile_assigned:
+            input_url = self.mediaprofile_set.all()[0].url
+            self.media_profile_url_input = input_url
         total_pos = float(self.ie_supports_dems + self.ie_supports_reps)
         total_neg = float(self.ie_opposes_dems + self.ie_opposes_reps)
         denom = total_pos + total_neg
@@ -481,7 +493,6 @@ class Media(models.Model):
     checked = models.BooleanField(default=False)
     valid = models.BooleanField(default=True)
     rmse = models.FloatField(default=0.0)
-
     # FK relations
     media_profile = models.ForeignKey(MediaProfile,
             on_delete=models.PROTECT)
