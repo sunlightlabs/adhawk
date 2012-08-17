@@ -132,6 +132,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'search',
+    'haystack',
     'knowledge_base',
     'whopaid',
     'whopaid_api',
@@ -213,7 +215,7 @@ LOGGING = {
                 LOG_ROOT,'db_script/funder_family_initializer.log'),
         },
         'fec_importing' : {
-            'level': 'DEBUG',
+                'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': os.path.join(
                 LOG_ROOT,'db_script/fec_importer.log'),
