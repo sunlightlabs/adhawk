@@ -372,7 +372,7 @@ class Funder(models.Model):
             symmetrical=False)
 
     def __unicode__(self):
-        return self.name.title()
+        return '%s (%s)'%(self.name.title(),self.committee_type.code)
 
     def media_profile_is_not_null(self):
         if self.mediaprofile_set.all():

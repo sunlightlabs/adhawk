@@ -55,7 +55,12 @@ class FunderToFunderInline(admin.StackedInline):
 
 class MediaProfileInline(admin.StackedInline):
     model = MediaProfile
+    raw_id_fields = ('funder',)
     extra = 0
+
+class MediaProfileAdmin(admin.ModelAdmin):
+    model = MediaProfile
+    raw_id_fields = ('funder',)
 
 class FunderAdmin(admin.ModelAdmin):
     raw_id_fields = ('funder_family',)
@@ -176,7 +181,7 @@ admin.site.register(Issue)
 admin.site.register(IssueCategory)
 admin.site.register(Market)
 admin.site.register(Media,MediaAdmin)
-admin.site.register(MediaProfile)
+admin.site.register(MediaProfile,MediaProfileAdmin)
 admin.site.register(MediaType)
 admin.site.register(Source)
 admin.site.register(Stance)
