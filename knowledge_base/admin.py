@@ -84,11 +84,12 @@ class FunderAdmin(admin.ModelAdmin):
             'media_profile_assigned',
             'ignore',
             'total_contributions',
+            'party',
             )
-    list_editable = ('ignore',)
+    list_editable = ('ignore','party')
     list_per_page = 10
     ordering = ('-total_contributions',)
-    list_filter = ('ignore','media_profile_assigned')
+    list_filter = ('ignore','media_profile_assigned','party',)
     search_fields = ['FEC_id','name']
 
 class FunderFamilyAdmin(admin.ModelAdmin):
