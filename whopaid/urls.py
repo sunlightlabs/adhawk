@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.conf.urls.defaults import *
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -24,4 +25,5 @@ urlpatterns = patterns('',
     url(r'^ad/top/$','knowledge_base.views.top_ads'),
     url(r'^ad/top/(?P<path>.*)/$','knowledge_base.views.top_ad_select'),
     url(r'^ad/(?P<path>.*)/$','knowledge_base.views.ad_profile'),
+    url(r'^search/', include('search.urls')),
     )
