@@ -400,13 +400,12 @@ p a{
    }
    
 #about_intro p{
-  font-size: 1em;
+  font-size: .9em;
   color: #6e614b;
   font-family: Helvetica, Arial, sans-serif;
   font-style: italic;
   font-weight: normal;
-  padding-bottom: 5px;
-  line-height: 1.5em;
+  line-height: 1.4em;
   }
   
 #about_intro p a{
