@@ -61,6 +61,9 @@ class MediaProfileInline(admin.StackedInline):
 class MediaProfileAdmin(admin.ModelAdmin):
     model = MediaProfile
     raw_id_fields = ('funder',)
+    list_display = ('url','funder',)
+    list_editable = ('funder',)
+    search_fields = ['url','funder__name']
 
 class FunderAdmin(admin.ModelAdmin):
     raw_id_fields = ('funder_family',)
