@@ -496,6 +496,9 @@ class Media(models.Model):
         popup = u'<a href="%s" target="_blank" onclick="link_popup(this); return false">%s</a>'%(self.url,img_tag)
         return popup
 
+    def get_absolute_url(self):
+        return '/'.join([str(a) for a in EXTERNAL_URL,'ad',self.pk])+'/'
+
     def thumbvid(self):
         vid = urlparse.parse_qs(urlparse.urlsplit(self.url).query)['v'][0]
         embed = '<iframe width="120" height="90"'
