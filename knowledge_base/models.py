@@ -390,14 +390,14 @@ class Funder(models.Model):
                     self.media_profile_url_input[:-1]
 
     def save(self, *args, **kwargs): 
-        self.clean_media_profile_url_input()
         self.media_profile_assigned = self.media_profile_is_not_null()
         if self.media_profile_url_input and not self.media_profile_assigned:
+            self.clean_media_profile_url_input()
             try:
                 mp = MediaProfile.objects.get(url=self.media_profile_url_input)
                 if mp:
                     self.media_profile_assigned_elsewhere = True
-            except MediaProfile.DoesNotExist:
+            except MediaProfile.DoesNotExist
                 mt = MediaType.objects.get(main_url='http://www.youtube.com')
                 mp = MediaProfile(url=self.media_profile_url_input,
                                     media_type=mt,
