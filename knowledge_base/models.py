@@ -413,7 +413,8 @@ class Funder(models.Model):
                     input_url = mp.url
                 except UnboundLocalError:
                     input_url = ''
-            self.media_profile_url_input = input_url
+            if not self.media_profile_url_input:
+                self.media_profile_url_input = input_url
         total_pos = float(self.ie_supports_dems + self.ie_supports_reps)
         total_neg = float(self.ie_opposes_dems + self.ie_opposes_reps)
         denom = total_pos + total_neg
