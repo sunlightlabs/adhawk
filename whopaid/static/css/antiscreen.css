@@ -8,17 +8,17 @@
 #strip,
 #title,
 #profile {
-  float: none;
-}
+    float: none;
+    }
 
 
 #sunlight-logo {
- display: none;
- } 
+    display: none;
+    } 
  
 #search {
     display:none;
-} 
+    } 
 
 .searchmobile {
     display: inline;
@@ -33,22 +33,28 @@
 
 #breadcrumbs {
     padding-left: 5%;
+    width: 95%;
+    }
+
+.buffer {
+    padding-left: 0;
     }
 
 
-#logo {
-        padding: 2em 0 2em 5%;
-        }
+h1#logo{
+    margin: 2em 0 2em 5%;
+    }
 
 #funder_name {
-  width: 100%;
-  padding-bottom:  2em;
+    width: 100%;
+    padding-bottom:  2em;
     }
     
     
 .strip {
     float: none;
-    margin-top: 0;}
+    margin-top: 0;
+    }
 
 #graph {
     width: 100%;
@@ -56,14 +62,14 @@
     }
   
 #funder {
-  padding-left: 5%;
-  padding-right: 5%;
-  }  
+    padding-left: 5%;
+    padding-right: 5%;
+    }  
 
 #funder_received p,
 #financial_info p {
-  font-weight: bold;
-  }
+    font-weight: bold;
+    }
   
 #financial_info {
   -webkit-column-count: 2;
@@ -79,11 +85,11 @@
 	
    
  #title {
-    width: 90%;
-    padding-left: 5%;
-    padding-right: 5%;
-    clear: both;
-    float: none;
+     width: 90%;
+     padding-left: 5%;
+     padding-right: 5%;
+     clear: both;
+     float: none;
     }
   
 #title h2 {

@@ -30,8 +30,17 @@ body {
     font: normal 100% Helvetica, Arial, serif;
     }
 
+.clear{
+  clear: both;
+}
 
+.contentbox {
+    max-width: 1018px;
+}
 
+.buffer {
+   padding-left: 8%; 
+}
 
 
 
@@ -106,7 +115,17 @@ a:hover {
     list-style-position: none;
     list-style-type: none;
     }
-
+#top_ad_list .stripDescrip{
+  float: left;
+}
+#top_ad_list .strip{
+  float: right;
+  margin-top: 0;
+}
+#title #top_ad_list h2{
+  float: none;
+  max-width: none;
+}
 #top_ad_list h2 a{
       font-size: .8em;
       font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
@@ -315,14 +334,19 @@ header {
     top: 0;
     height: 140px;
     }    
-  
-#logo {
+
+h1#logo{
+  padding: 0;
+  margin: 2em 0;
+  float: left;
+}
+h1#logo a{
+    display: block;
     height: 48px;
     width: 269px;
-    padding: 2em 0 2em 8%;
-    display: block;
-    float: left;
-    }
+    background: url(http://design.sunlightlabs.com/AdHawk/adhawk-logo.png) left no-repeat;
+    text-indent: -9999em;
+}
   
 #sunlight-logo {
     padding: 5px;
@@ -756,19 +780,20 @@ nav li a:visited{
 
 #breadcrumbs {
   display: inline-block;
-  width: 100%;
+  width: 92%;
   background: #b7ae9d;
   border-bottom: 1px solid #796e57;
   border-top: 1px solid #796e57;
   padding-left: 8%;
-  margin-bottom:0;    
+  margin-bottom:0;
+  float:left; 
   
 }
 
 #breadcrumbs ul {
   list-style: none outside none;
   margin-left:0;
-  padding:0;
+  padding:0;  
   
 }
 
