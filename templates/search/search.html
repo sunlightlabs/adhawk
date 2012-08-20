@@ -59,5 +59,24 @@ Didn't find what you were looking for? Try again! Make sure to use full words (a
     {% empty %}
         <p>Sorry, no results found.</p>
     {% endfor %}
+    <!-- End Display results -->
+    
+    <!-- Begin Pagination -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if page.has_previous %}
+                <a href="?page={{ page.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page.number }} of {{ page.paginator.num_pages }}
+            </span>
+
+            {% if page.has_next %}
+                <a href="?page={{ page.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+    <!-- End pagination -->
 {% endif %}
 {% endblock %}
