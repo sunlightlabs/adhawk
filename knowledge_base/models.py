@@ -451,14 +451,14 @@ class MediaProfile(models.Model):
 
     def save(self, *args, **kwargs):
         self.clean_url()
-        sr = urlparse.urlsplit(self.url)
-        conn = httplib.HTTPConnection(sr.netloc)
-        conn.request("HEAD",sr.path)
-        status = conn.getresponse().status
-        if status == 200:
-            super(MediaProfile, self).save(*args, **kwargs)
-        else:
-            raise Exception('not a working url')
+        #sr = urlparse.urlsplit(self.url)
+        #conn = httplib.HTTPConnection(sr.netloc)
+        #conn.request("HEAD",sr.path)
+        #status = conn.getresponse().status
+        #if status == 200:
+        super(MediaProfile, self).save(*args, **kwargs)
+        #else:
+        #    raise Exception('not a working url')
 
 class FunderToFunder(models.Model):
     funder = models.ForeignKey(Funder,related_name="funder_has_relative")
