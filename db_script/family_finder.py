@@ -39,7 +39,6 @@ class FunderJaccardComparison():
         self.f1_set = set(self.clean_name(f1.name))
         self.f2_set = set(self.clean_name(f2.name))
         self.distance = jaccard_distance(self.f1_set,self.f2_set)
-        self.same_state = self.compare_state()
     def clean_name (self,name):
         tokens = wordpunct_tokenize(name)
         return [t for t in tokens if t.isalnum() and t not in STOPS]
@@ -48,7 +47,6 @@ class FunderIdentityComparison():
     def __init__(self,combo):
         self.f1,self.f2 = combo
         self.distance = self.identity()
-        self.same_state = self.compare_state()
     def identity(self):
         if self.f1.name == self.f2.name:
             return 0
