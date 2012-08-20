@@ -118,12 +118,13 @@ class Command(BaseCommand):
                     if other_funder:
                         self.other_funders.remove(other_funder)
                         self.fc = self.new_combo_list()
-                        kg = raw_input("Keep going? (y/n)")
-                        if kg.lower()[0] == 'y':
-                            continue
-                        else:
-                            keep_going = False
-                            continue
+                        continue
+                        #kg = raw_input("Keep going? (y/n)")
+                        #if kg.lower()[0] == 'y':
+                        #    continue
+                        #else:
+                        #    keep_going = False
+                        #    continue
                     else:
                         self.remove_set.add(self.current_combo)
                         continue
