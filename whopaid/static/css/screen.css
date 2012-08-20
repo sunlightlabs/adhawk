@@ -30,6 +30,9 @@ body {
     font: normal 100% Helvetica, Arial, serif;
     }
 
+.clear{
+  clear: both;
+}
 
 
 
@@ -106,7 +109,16 @@ a:hover {
     list-style-position: none;
     list-style-type: none;
     }
-
+#top_ad_list .stripDescrip{
+  float: left;
+}
+#top_ad_list .strip{
+  float: right;
+}
+#title #top_ad_list h2{
+  float: none;
+  max-width: none;
+}
 #top_ad_list h2 a{
       font-size: .8em;
       font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
