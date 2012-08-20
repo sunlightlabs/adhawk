@@ -25,7 +25,7 @@
   
 
 body {
-    background-color: #c0b49c;
+    background-color: #FFF;
     color: #000;
     font: normal 100% Helvetica, Arial, serif;
     }
@@ -376,7 +376,6 @@ header {
 #search input{
     width: 256px;
     height: 21px;
-    line-height: 0em;
     color: #b2b2b2;
     font-size: 12px;
     padding-left: 5px;
