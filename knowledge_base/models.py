@@ -295,6 +295,8 @@ class Funder(models.Model):
     FEC_id = models.CharField(max_length=9)
     IE_id = models.CharField(max_length=32,null=True,blank=True)
     media_profile_assigned = models.BooleanField(default=False)
+    media_profile_assigned_elsewhere = models.BooleanField(default=False)
+    media_profile_url_input = models.URLField(blank=True,null=True)
     ignore = models.BooleanField(default=False)
     name = models.CharField(max_length=200)
     ftum_url = models.URLField(null=True,blank=True)
@@ -371,16 +373,48 @@ class Funder(models.Model):
             symmetrical=False)
 
     def __unicode__(self):
-        return self.name.title()
+        return '%s (%s)'%(self.name.title(),self.committee_type.code)
 
     def media_profile_is_not_null(self):
-        if self.mediaprofile_set.all():
+        if self.mediaprofile_set.all() or self.media_profile_assigned_elsewhere:
             return True
         else:
             return False
 
+    def clean_media_profile_url_input(self):
+        if 'https' in self.media_profile_url_input:
+            self.media_profile_url_input = \
+                    self.media_profile_url_input.replace('https','http')
+        if self.media_profile_url_input[-1] == '/':
+            self.media_profile_url_input = \
+                    self.media_profile_url_input[:-1]
+
     def save(self, *args, **kwargs): 
         self.media_profile_assigned = self.media_profile_is_not_null()
+        if self.media_profile_url_input and not self.media_profile_assigned:
+            self.clean_media_profile_url_input()
+            try:
+                mp = MediaProfile.objects.get(url=self.media_profile_url_input)
+                if mp:
+                    self.media_profile_assigned_elsewhere = True
+            except MediaProfile.DoesNotExist:
+                mt = MediaType.objects.get(main_url='http://www.youtube.com')
+                mp = MediaProfile(url=self.media_profile_url_input,
+                                    media_type=mt,
+                                    funder=self)
+                mp.save()
+        super(Funder, self).save(*args,**kwargs)
+        self.media_profile_assigned = self.media_profile_is_not_null()
+        if self.media_profile_assigned:
+            try:
+                input_url = self.mediaprofile_set.all()[0].url
+            except IndexError:
+                try:
+                    input_url = mp.url
+                except UnboundLocalError:
+                    input_url = ''
+            if not self.media_profile_url_input:
+                self.media_profile_url_input = input_url
         total_pos = float(self.ie_supports_dems + self.ie_supports_reps)
         total_neg = float(self.ie_opposes_dems + self.ie_opposes_reps)
         denom = total_pos + total_neg
@@ -409,7 +443,14 @@ class MediaProfile(models.Model):
         else:
             return 'NO FUNDER ASSIGNED (%s)'%(self.url,)
 
+    def clean_url(self):
+        if 'https' in self.url:
+            self.url = self.url.replace('https','http')
+        if self.url[-1] == '/':
+            self.url = self.url[:-1]
+
     def save(self, *args, **kwargs):
+        self.clean_url()
         sr = urlparse.urlsplit(self.url)
         conn = httplib.HTTPConnection(sr.netloc)
         conn.request("HEAD",sr.path)
@@ -473,6 +514,7 @@ class Media(models.Model):
     creator_description = models.TextField(default="No description available.")
     curator_description = models.TextField(blank=True,null=True)
     duration = models.IntegerField()
+    funder_name = models.CharField(max_length=200,blank=True,null=True)
     pub_date = models.DateTimeField()
     link_broken = models.BooleanField(default=False)
     downloaded = models.BooleanField(default=False)
@@ -480,7 +522,6 @@ class Media(models.Model):
     checked = models.BooleanField(default=False)
     valid = models.BooleanField(default=True)
     rmse = models.FloatField(default=0.0)
-
     # FK relations
     media_profile = models.ForeignKey(MediaProfile,
             on_delete=models.PROTECT)
@@ -521,6 +562,7 @@ class Media(models.Model):
         return "%s (%s)"%(self.ad.title,self.url)
     
     def save(self, *args, **kwargs):
+        self.funder_name = self.media_profile.funder.name
         sr = urlparse.urlsplit(self.url)
         if sr.netloc=='www.youtube.com':
             self.embed_code = '<iframe width="560" height="315" src="http://www.youtube.com/embed/%s" frameborder="0" allowfullscreen></iframe>'%sr.query.replace('v=','')

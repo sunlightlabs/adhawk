@@ -55,7 +55,15 @@ class FunderToFunderInline(admin.StackedInline):
 
 class MediaProfileInline(admin.StackedInline):
     model = MediaProfile
+    raw_id_fields = ('funder',)
     extra = 0
+
+class MediaProfileAdmin(admin.ModelAdmin):
+    model = MediaProfile
+    raw_id_fields = ('funder',)
+    list_display = ('url','funder',)
+    list_editable = ('funder',)
+    search_fields = ['url','funder__name']
 
 class FunderAdmin(admin.ModelAdmin):
     raw_id_fields = ('funder_family',)
@@ -84,11 +92,13 @@ class FunderAdmin(admin.ModelAdmin):
             'media_profile_assigned',
             'ignore',
             'total_contributions',
+            'party',
+            'media_profile_url_input',
             )
-    list_editable = ('ignore',)
+    list_editable = ('ignore','party','media_profile_url_input')
     list_per_page = 10
     ordering = ('-total_contributions',)
-    list_filter = ('ignore','media_profile_assigned')
+    list_filter = ('ignore','media_profile_assigned','committee_type','party',)
     search_fields = ['FEC_id','name']
 
 class FunderFamilyAdmin(admin.ModelAdmin):
@@ -145,6 +155,7 @@ class CandidateAdmin(admin.ModelAdmin):
 
 class MediaAdmin(admin.ModelAdmin):
     list_display = ('__unicode__',
+            'funder_name',
             'checked',
             'valid',
             'duration',
@@ -173,7 +184,7 @@ admin.site.register(Issue)
 admin.site.register(IssueCategory)
 admin.site.register(Market)
 admin.site.register(Media,MediaAdmin)
-admin.site.register(MediaProfile)
+admin.site.register(MediaProfile,MediaProfileAdmin)
 admin.site.register(MediaType)
 admin.site.register(Source)
 admin.site.register(Stance)
