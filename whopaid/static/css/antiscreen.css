@@ -28,30 +28,7 @@
     }
 
 
-#title,
-#strip {
-  width: 90%;
-  }
-  
-.strip {
-    width: 99%;
-    max-width: 366px; 
-    display: block; 
-    float: none;
-    }  
 
-
-#title h2 {
-    max-width: 100%;
-    float: none;
-    }
-
-#title {
-  padding-left: 5%;
-  padding-right: 5%;
-  clear: both;
-  float: none;
-  }
 
 #graph {
     width: 100%;
@@ -81,17 +58,18 @@
  } 
 	
    
-
+ #title {
+    width: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
+    clear: both;
+    float: none;
+    }
   
-  
-/* top ads */
-   
-#top_ad_list ul{
-   margin: 0px;
-   padding: 0px;
-   list-style-position: none;
-   list-style-type: none;
-   }  
+#title h2 {
+     max-width: 100%;
+     float: none;
+     }
    
     
 /*

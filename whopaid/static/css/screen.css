@@ -32,13 +32,10 @@ body {
 
 
 
-#funder {
-      background-color: #FFF;
-      padding-top: 1.5em;
-  }
 
 
-/* type */
+
+/* TYPE */
 
 h1{
   font-size: 1.5em;
@@ -50,6 +47,25 @@ h1{
    
    }
 
+
+h3 {
+     font-size: .8em;
+     color: #c7b188;
+     font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
+     font-style: normal;
+     font-weight: 400;
+     filter:alpha(opacity=100);
+     opacity:1;
+     }
+
+h4 {
+        font-size: 1.5em;
+        font-weight: bold;
+        font-family: Helvetica, Arial, sans-serif;
+        color: #000000;
+        margin: 0;
+        }
+     
 p {
    font-size: .9em;
    font-family: Helvetica, Arial, sans-serif;
@@ -66,20 +82,48 @@ p a{
    color: #000000;
    }
    
-#about_intro p{
-  font-size: .9em;
-  color: #6e614b;
-  font-family: Helvetica, Arial, sans-serif;
-  font-style: italic;
-  font-weight: normal;
-  line-height: 1.4em;
-  }
-  
-#about_intro p a{
-  color: #6e614b;
-  }
+a {
+    color: #0000FF;
+   }
+
+a:hover {
+    color: #ab2e17;
+    text-decoration: none;
+   }
+
+
+
   
    
+
+  
+
+/* TOP ADS */
+
+#top_ad_list ul{
+    margin: 0px;
+    padding: 0px;
+    list-style-position: none;
+    list-style-type: none;
+    }
+
+#top_ad_list h2 a{
+      font-size: .8em;
+      font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      color: #564e3f;
+      }  
+       
+#top_ad_list h3, #no_match_info h3 {
+         color: #564e3f;
+         }
+
+
+
+
+/* RESULTS */
+
 #funder_activities li{
    font-size: .9em;
    font-family: Helvetica, Arial, sans-serif;
@@ -96,7 +140,32 @@ p a{
    list-style-position: none;
    list-style-type: none;
    }
+
+
+#title h2 {
+      font-size: 1.75em;
+      font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      max-width: 35%;
+      float: left;
+    }
+
+
+
+    
+#title {
+    padding-left: 8%;
+    padding-right: 8%;
+    clear: both;
+    }   
    
+
+
+#title a{
+      color: white;
+      font-size: .8em;
+      }   
    
 #more_info li{
    font-size: .9em;
@@ -115,73 +184,14 @@ p a{
    list-style-type: none;
    }
 
-  
-#title h2{
-  font-size: 1.5em;
-  font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  padding-top: 4px;
-  color: #564E3F;
-  } 
-  
-#top_ad_list h2 a{
-  font-size: .8em;
-  font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  color: #564e3f;
-  }
-  
-#title a{
-  color: white;
-  } 
 
-
-  
-#about_content h3{
-   color: #000000;
-   }
-   
-   
-   
-#top_ad_list h3, #no_match_info h3 {
-   color: #564e3f;
-   }
-   
-#about_content ul{
-   list-style-position: outside;
-   list-style-type: square;
-   padding-left: 10px;
-   }
-   
-#about_content li{
-   font-size: .9em;
-   font-family: Helvetica, Arial, sans-serif;
-   font-weight: normal;
-   font-style: normal;
-   color: #000000;
-   filter:alpha(opacity=100);
-   opacity:1;
-   line-height: 1.25em;
-   padding: 2px;
-   margin: 2px;
-   }
-
-#about_content li a{
-   color: #000000;
-   }
-
-  
-h4 {
-   font-size: 1.5em;
-   font-weight: bold;
-   font-family: Helvetica, Arial, sans-serif;
-   color: #000000;
-   margin: 0;
-   }
-   
-   
+#funder {
+       padding-left: 8%;
+       padding-right: 8%;
+       background-color: #FFF;
+       padding-top: 1.5em;
+       }
+      
 #funder_name h4 a{
   color: #c7b188;
   font-weight: normal;
@@ -189,9 +199,6 @@ h4 {
   text-decoration: none;
   }
   
-#more_info a{
-  color: #000000;
-  }
    
 .sponsor {
   color: #FFF;
@@ -199,29 +206,27 @@ h4 {
    font-family: Helvetica, Arial, sans-serif;
   }   
 
-a {
-  color: #0000FF;
-}
-
-a:hover {
-  color: #ab2e17;
-  text-decoration: none;
-}
-
-p {
-  margin-bottom: 1em;
-}
 
 
-h3 {
-  font-size: .8em;
-  color: #c7b188;
-  font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  filter:alpha(opacity=100);
-  opacity:1;
-  }
+/*
+ * YOUTUBE STRIP
+*/
+
+  .strip {
+      border: 3px #FFF solid;
+      max-width: 366px; 
+      display: block; 
+      float: none;
+      }  
+
+
+.strip img {
+      width: 100%;
+      max-width: 100%;
+      }
+
+
+
   
 
 .css3button {
@@ -260,9 +265,7 @@ h3 {
     }
 
 
-/*
- * HEADER
- */
+
 
 header {
     width: 100%;
@@ -403,12 +406,7 @@ nav li a:visited{
    width: 100%
    }  
    
-.strip {
-     border: 3px #FFF solid;
-     max-width: 366px; 
-     display: block;
-     float: left; 
-     }
+
 
 #main {
      background: url(http://design.sunlightlabs.com/AdHawk/exclusive_paper.png) repeat;
@@ -462,7 +460,7 @@ nav li a:visited{
     }   
 
 
-/* about */  
+/* ABOUT */  
 
 #about_content {
     background-color: #FFF;
@@ -479,6 +477,18 @@ nav li a:visited{
     padding: 5%;
     }
 
+#about_intro p{
+    font-size: .9em;
+     color: #6e614b;
+      font-family: Helvetica, Arial, sans-serif;
+      font-style: italic;
+      font-weight: normal;
+      line-height: 1.4em;
+      }
+
+#about_intro p a{
+      color: #6e614b;
+      }
 
 .join {
     margin-right: 3%;
@@ -509,19 +519,39 @@ nav li a:visited{
     }
  
 
-#title {
-    padding-left: 8%;
-    padding-right: 8%;
-    clear: both;
-    }
-    
-#funder {
-    padding-left: 8%;
-    padding-right: 8%;
-    }  
+#about_content ul{
+       list-style-position: outside;
+       list-style-type: square;
+       padding-left: 10px;
+       }
+
+#about_content li{
+       font-size: .9em;
+       font-family: Helvetica, Arial, sans-serif;
+       font-weight: normal;
+       font-style: normal;
+       color: #000000;
+       filter:alpha(opacity=100);
+       opacity:1;
+       line-height: 1.25em;
+       padding: 2px;
+       margin: 2px;
+       }
+
+#about_content li a, #more_info a{
+       color: #000000;
+       }
+
+#about_content h3{
+          color: #000000;
+          } 
+   
+   
+   
+   
     
 
-/* graph */ 
+/* GRAPH */ 
 
 #graph * {
     padding: 0;
@@ -685,7 +715,7 @@ nav li a:visited{
 
 
 /*
- * SUBHEAD
+ * BREADCRUMBS
  */
 
 #main {
@@ -722,53 +752,13 @@ nav li a:visited{
   color: #FFF;
 }
 
-
 #breadcrumbs a {
     color: #FFF;
     text-decoration: none;
 }
 
-#strip {
-  float: right;
-  width: 41.6667%;
-  display: inline-block;
-  margin-right: 1%;
-}
-
-#strip img {
-  width: 100%;
-  max-width: 100%;
-}
-
-#title {
-  display: inline-block;
-  float: left;
-  width: 53.1667%;
-}
-
-#title h2 {
-  font-size: 1.75em;
-  font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  max-width: 35%;
-  float: left;
-}
-
-#title a {
-  font-size: .8em;
-
-}
 
 
-
-/*
- * Margins and padding
- */
-
-#page {
- 
-}
 
 /* FOOTER */
 
