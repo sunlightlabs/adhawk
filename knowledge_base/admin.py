@@ -35,6 +35,11 @@ def set_checked(modeladmin, request, queryset):
 
 set_checked.short_description = "Mark selected as checked"
 
+def set_ignore(modeladmin, request, queryset):
+    queryset.update(ignore=True)
+
+set_ignore.short_description = "Ignore selected"
+
 class FunderInline(admin.StackedInline):
     model = Funder
     extra = 0
@@ -96,7 +101,8 @@ class FunderAdmin(admin.ModelAdmin):
             'media_profile_url_input',
             )
     list_editable = ('ignore','party','media_profile_url_input')
-    list_per_page = 10
+    list_per_page = 25
+    actions = [set_ignore]
     ordering = ('-total_contributions',)
     list_filter = ('ignore','media_profile_assigned','committee_type','party',)
     search_fields = ['FEC_id','name']
