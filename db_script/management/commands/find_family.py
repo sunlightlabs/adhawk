@@ -14,6 +14,12 @@ PROC_DIR = os.path.join(SITE_ROOT,'db_script/processing/family_finder')
 STATES = [line.strip() for line in 
                 open(os.path.join(PROC_DIR,'states.txt')).readlines()]
 
+def get_input(message):
+    i = None
+    while not i:
+        i = raw_input(message)
+    return i
+
 class Command(BaseCommand):
 
     def print_funder_info(self,f):
@@ -35,8 +41,8 @@ class Command(BaseCommand):
         print "Other Funder:"
         self.print_funder_info(other_funder)
         print "\n"
-        confirm = raw_input("Are these two the same? (y/n)")
-        if confirm.lower()[0] == "y":
+        confirm = get_input("Are these two the same? (y/n)")
+        if confirm.lower() == "y":
             other_funder.funder_family = funder_prime.funder_family
             other_funder.save()
             print "added",other_funder,"to",other_funder.funder_family
@@ -133,7 +139,7 @@ class Command(BaseCommand):
                         self.other_funders.remove(other_funder)
                         self.fc = self.new_combo_list()
                         continue
-                        #kg = raw_input("Keep going? (y/n)")
+                        #kg = get_input("Keep going? (y/n)")
                         #if kg.lower()[0] == 'y':
                         #    continue
                         #else:
