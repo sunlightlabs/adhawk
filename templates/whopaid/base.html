@@ -27,30 +27,32 @@
     {% if client != "ios" and client != "android" %}
     <header>
         <div class="gradient-header">
-            <div id="logo">
-                <img src="http://design.sunlightlabs.com/AdHawk/adhawk-logo.png" alt="Ad Hawk">
+            <div class="contentbox">
+                <div id="logo">
+                    <img src="http://design.sunlightlabs.com/AdHawk/adhawk-logo.png" alt="Ad Hawk">
+                </div>
+                <nav>
+                    <ul class="clearfix">
+                        <li class="nav-word"><a href="/ad/top/">Popular Ads</a></li>
+                        <li class="nav-word"><a href="/about">About</a></li>
+                        <li class="nav-word"> <a href="mailto:adhawk@sunlightfoundation.com">Contact</a></li>
+                        <li class="searchmobile"><a href="#">Search</a></li>
+                        <li id="sunlight-logo">
+                            <div>
+                                <a href="http://www.sunlightfoundation.com"><img src="http://design.sunlightlabs.com/AdHawk/AdHawk_sunlight-logo.jpg" alt="Sunlight Foundation Logo"></a>
+                            </div>                    
+                        </li>
+                    </ul>
+                </nav> 
+                <div id="search" class="clearfix">
+                    <form action="/search/" method="get">
+                        <input class="transparent" type="text" name="q" id="id_q" placeholder="Search ads by funder or keyword">
+                        <button class="css3button search-button" type="submit">
+                            <span>Search</span>
+                        </button>
+                    </form>
+                </div> 
             </div>
-            <nav>
-                <ul class="clearfix">
-                    <li class="nav-word"><a href="/ad/top/">Popular Ads</a></li>
-                    <li class="nav-word"><a href="/about">About</a></li>
-                    <li class="nav-word"> <a href="mailto:adhawk@sunlightfoundation.com">Contact</a></li>
-                    <li class="searchmobile"><a href="#">Search</a></li>
-                    <li id="sunlight-logo">
-                        <div>
-                            <a href="http://www.sunlightfoundation.com"><img src="http://design.sunlightlabs.com/AdHawk/AdHawk_sunlight-logo.jpg" alt="Sunlight Foundation Logo"></a>
-                        </div>                    
-                    </li>
-                </ul>
-            </nav> 
-            <div id="search" class="clearfix">
-                <form action="/search/" method="get">
-                    <input class="transparent" type="text" name="q" id="id_q" placeholder="Search ads by funder or keyword">
-                    <button class="css3button search-button" type="submit">
-                        <span>Search</span>
-                    </button>
-                </form>
-            </div> 
         </div>
       </header>
     {% endif %}
