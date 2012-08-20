@@ -27,8 +27,28 @@
     margin-right: none;
     }
 
+#title h2 {
+    padding-top: 1em;
+    }
+
+#breadcrumbs {
+    padding-left: 5%;
+    }
 
 
+#logo {
+        padding: 2em 0 2em 5%;
+        }
+
+#funder_name {
+  width: 100%;
+  padding-bottom:  2em;
+    }
+    
+    
+.strip {
+    float: none;
+    margin-top: 0;}
 
 #graph {
     width: 100%;
