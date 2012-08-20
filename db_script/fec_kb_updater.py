@@ -148,10 +148,10 @@ def make_committee_object(cr):
             log.info("...created\tConnectedOrganization\t%s"%(unicode(co),))
     else:
         co = None
+    committee = Funder()
     committee.total_contributions = Decimal(str_or_zero(cr.total_receipts))
     committee.total_disbursements = Decimal(str_or_zero(cr.total_disbursements))
     committee.cash_on_hand = Decimal(str_or_zero(cr.cash_close_of_period))
-    committee = Funder()
     committee.party = cr.committee_party
     committee.FEC_id=cr.committee_id
     committee.name=cr.committee_name
