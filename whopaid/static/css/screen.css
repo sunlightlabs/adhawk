@@ -337,8 +337,7 @@ header {
 
 h1#logo{
   padding: 0;
-
-  margin: 2em 0 2em 8%;
+  margin: 2em 0;
   float: left;
 }
 h1#logo a{
