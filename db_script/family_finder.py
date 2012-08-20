@@ -36,8 +36,8 @@ class FunderLevenshteinComparison():
 class FunderJaccardComparison():
     def __init__(self,combo):
         self.f1,self.f2 = combo
-        self.f1_set = set(self.clean_name(f1.name))
-        self.f2_set = set(self.clean_name(f2.name))
+        self.f1_set = set(self.clean_name(self.f1.name))
+        self.f2_set = set(self.clean_name(self.f2.name))
         self.distance = jaccard_distance(self.f1_set,self.f2_set)
     def clean_name (self,name):
         tokens = wordpunct_tokenize(name)
