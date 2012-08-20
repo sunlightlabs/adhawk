@@ -42,7 +42,11 @@
 
 
 h1#logo{
-    margin: 2em 0 2em 5%;
+    margin: 27px 0 27px 5%;
+    }
+
+nav {
+    padding-right: 0;
     }
 
 #funder_name {
@@ -54,6 +58,7 @@ h1#logo{
 .strip {
     float: none;
     margin-top: 0;
+    max-width: 100%;
     }
 
 #graph {
