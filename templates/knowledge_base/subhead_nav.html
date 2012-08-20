@@ -1,15 +1,17 @@
 {% block subhead_nav %}
         <div id="breadcrumbs" >
-          <ul class="clearfix">
-            <li>
-              <a href="http://adhawk.sunlightfoundation.com/ad/">All Ads </a>
-            </li>
+          <div class="contentbox">
+              <ul class="clearfix contentbox">
+                <li>
+                  <a href="http://adhawk.sunlightfoundation.com/ad/">All Ads </a>
+                </li>
             
-            <li>&#187;</li>
+                <li>&#187;</li>
             
-            <li>
-              <a href="http://adhawk.sunlightfoundation.com/ad/funder/{{ funder_family.pk}}">{{ funder_family.name|title|truncatechars:30 }}</a>
-            </li>
-          </ul>
+                <li>
+                  <a href="http://adhawk.sunlightfoundation.com/ad/funder/{{ funder_family.pk}}">{{ funder_family.name|title|truncatechars:30 }}</a>
+                </li>
+              </ul>
+            </div>
         </div> <!-- end div breadcrumbs -->
 {% endblock %}
