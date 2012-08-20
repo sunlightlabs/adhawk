@@ -49,7 +49,7 @@ class Command(BaseCommand):
         c = self.comparison(self.current_combo)
         if c.distance >= self.threshold:
             print c.distance
-            return False
+            return "ignore"
         else:
             print "compared using %s with threshold %f (score %f)"%(
                 self.method,self.threshold,c.distance)
@@ -62,6 +62,18 @@ class Command(BaseCommand):
     def get_funders_with_mp(self,state):
         return [mp.funder for mp in MediaProfile.objects.all() 
                 if mp.funder.state == state]
+
+    def initialize_remove_set(self):
+        self.remove_set = set()
+        rsf = os.path.join(PROC_DIR,'remove_set.txt')
+        if os.path.exists(rsf):
+            for line in open(rsf):
+                f1_id,f2_id = line.strip().split('\t')
+                f1 = Funder.objects.get(FEC_id=f1_id)
+                f2 = Funder.objects.get(FEC_id=f2_id)
+                self.remove_set.add((f1,f2))
+        else:
+            self.remove_set = set()
 
     def get_other_funders(self,state):
         funder_set = set()
@@ -94,7 +106,7 @@ class Command(BaseCommand):
         else:
             self.comparison = FunderIdentityComparison
         
-        self.remove_set = set()
+        self.initialize_remove_set()
 
         for state in STATES:
             self.funders_with_mp = self.get_funders_with_mp(state)
@@ -115,7 +127,9 @@ class Command(BaseCommand):
                     continue
                 else:
                     other_funder = self.compare_funders()
-                    if other_funder:
+                    if other_funder == "ignore":
+                        continue
+                    elif other_funder:
                         self.other_funders.remove(other_funder)
                         self.fc = self.new_combo_list()
                         continue
@@ -143,3 +157,8 @@ class Command(BaseCommand):
             else:
                 print "deleting orphan:",ff
                 ff.delete()
+
+        fout = open(os.path.join(PROC_DIR,'remove_set.txt'),'a')
+        for pair in self.remove_set:
+            fout.write('\t'.join([f.FEC_id for f in pair])+'\n')
+        fout.close()
