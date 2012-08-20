@@ -114,6 +114,7 @@ a:hover {
 }
 #top_ad_list .strip{
   float: right;
+  margin-top: 0;
 }
 #title #top_ad_list h2{
   float: none;
@@ -327,13 +328,18 @@ header {
     top: 0;
     height: 140px;
     }    
-  
-#logo {
-    height: 48px;
-    width: 269px;
-    padding: 2em 0 2em 8%;
+h1#logo{
+  padding: 0;
+
+  margin: 2em 0 2em 8%;
+  float: left;
+}
+h1#logo a{
     display: block;
-    float: left;
+   height: 48px;
+   width: 269px;
+    background: url(http://design.sunlightlabs.com/AdHawk/adhawk-logo.png) left no-repeat;
+    text-indent: -9999em;
     }
   
 #sunlight-logo {
