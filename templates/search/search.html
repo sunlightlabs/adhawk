@@ -14,50 +14,71 @@ Didn't find what you were looking for? Try again! Make sure to use full words (a
     </table>
 </form>
 -->
+<div id="main">
+    <div id="gradient">
+        <div id="title">
+        {% if query %}
 
-{% if query %}
-    <!-- Begin faceting. -->
-    <h2>By Funder</h2>
+            <!-- Begin faceting. -->
+            <div class="narrowCol">
+                <h2>By Funder</h2>
+                <p>Narrow your search results</p>
+                <div>
+                        {% if facets.fields.funder_name %}
+                            <h3>Funder</h3>
+                            <ul>
+                            {% for funder_name in facets.fields.funder_name %}
+                                <li>
+                                    <a href="{{ request.get_full_path }}&amp;selected_facets=funder_name_exact:{{ funder_name.0|urlencode }}">{{ funder_name.0 }}</a> ({{ funder_name.1 }})
+                                </li>
+                            {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>No funders.</p>
+                        {% endif %}
+                        {% if facets.fields.funder_party %}
+                            <h3>Funder Party</h3>
+                            <ul>
+                            {% for funder_party in facets.fields.funder_party %}
+                                <li>
+                                    <a href="{{ request.get_full_path }}&amp;selected_facets=funder_party_exact:{{ funder_party.0|urlencode }}">{{ funder_party.0 }}</a> ({{ funder_party.1 }})
+                                </li>
+                            {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>No funder parties.</p>
+                        {% endif %}
+                            <h3>Funder Type</h3>
+                        {% if facets.fields.funder_committee_type %}
+                            <ul>
+                            {% for funder_committee_type in facets.fields.funder_committee_type %}
+                                <li>
+                                    <a href="{{ request.get_full_path }}&amp;selected_facets=funder_committee_type_exact:{{ funder_committee_type.0|urlencode }}">{{ funder_committee_type.0 }}</a> ({{ funder_committee_type.1 }})
+                                </li>
+                            {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>No funder types.</p>
+                        {% endif %}
+                </div>
+            </div>
 
-    <div>
-        <dl>
-            {% if facets.fields.funder_name %}
-                <dt>Funder</dt>
-                {% for funder_name in facets.fields.funder_name %}
-                    <dd><a href="{{ request.get_full_path }}&amp;selected_facets=funder_name_exact:{{ funder_name.0|urlencode }}">{{ funder_name.0 }}</a> ({{ funder_name.1 }})</dd>
+            <!-- End faceting -->
+
+            <!-- Display results... -->
+            <div class="mainCol pluralResult">
+                {% for result in page.object_list %}
+                    <div class="search_result">
+                        <h3><a href="{{ result.object.get_absolute_url }}">{{ result.object.ad.title }}</a></h3>
+                        <p>{% autoescape off %}{{ result.object.thumbstrip }}{% endautoescape %}</p>
+                    </div>
+                {% empty %}
+                    <p>Sorry, no results found.</p>
                 {% endfor %}
-            {% else %}
-                <p>No funders.</p>
-            {% endif %}
-            {% if facets.fields.funder_party %}
-                <dt>Funder Party</dt>
-                {% for funder_party in facets.fields.funder_party %}
-                    <dd><a href="{{ request.get_full_path }}&amp;selected_facets=funder_party_exact:{{ funder_party.0|urlencode }}">{{ funder_party.0 }}</a> ({{ funder_party.1 }})</dd>
-                {% endfor %}
-            {% else %}
-                <p>No funder parties.</p>
-            {% endif %}
-                <dt>Funder Type</dt>
-            {% if facets.fields.funder_committee_type %}
-                {% for funder_committee_type in facets.fields.funder_committee_type %}
-                    <dd><a href="{{ request.get_full_path }}&amp;selected_facets=funder_committee_type_exact:{{ funder_committee_type.0|urlencode }}">{{ funder_committee_type.0 }}</a> ({{ funder_committee_type.1 }})</dd>
-                {% endfor %}
-            {% else %}
-                <p>No funder types.</p>
-            {% endif %}
-        </dl>
-    </div>
-
-    <!-- End faceting -->
-
-    <!-- Display results... -->
-    {% for result in page.object_list %}
-        <div class="search_result">
-            <h3><a href="{{ result.object.get_absolute_url }}">{{ result.object.ad.title }}</a></h3>
-            <p>{% autoescape off %}{{ result.object.thumbstrip }}{% endautoescape %}</p>
+           </div>
+           <div class="clear"></div>
+        {% endif %}
         </div>
-    {% empty %}
-        <p>Sorry, no results found.</p>
-    {% endfor %}
-{% endif %}
+    </div>
+</div>
 {% endblock %}

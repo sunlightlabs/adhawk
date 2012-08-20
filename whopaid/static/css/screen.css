@@ -925,3 +925,21 @@ nav li a:visited{
     max-width: 142px;
     width: 20%;
     }
+
+
+
+
+.narrowCol{
+  width: 32.1875%;
+  float: left;
+}
+.mainCol{
+  width: 67.8125%;
+  float: left;
+}
+
+
+
+
+
+
