@@ -34,7 +34,13 @@ body {
   clear: both;
 }
 
+.contentbox {
+    max-width: 1018px;
+}
 
+.buffer {
+   padding-left: 8%; 
+}
 
 
 
@@ -331,7 +337,7 @@ header {
 #logo {
     height: 48px;
     width: 269px;
-    padding: 2em 0 2em 8%;
+    padding: 2em 0;
     display: block;
     float: left;
     }
@@ -768,19 +774,20 @@ nav li a:visited{
 
 #breadcrumbs {
   display: inline-block;
-  width: 100%;
+  width: 92%;
   background: #b7ae9d;
   border-bottom: 1px solid #796e57;
   border-top: 1px solid #796e57;
   padding-left: 8%;
-  margin-bottom:0;    
+  margin-bottom:0;
+  float:left; 
   
 }
 
 #breadcrumbs ul {
   list-style: none outside none;
   margin-left:0;
-  padding:0;
+  padding:0;  
   
 }
 

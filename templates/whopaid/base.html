@@ -27,7 +27,7 @@
     {% if client != "ios" and client != "android" %}
     <header>
         <div class="gradient-header">
-            <div class="contentbox">
+            <div class="contentbox buffer">
                 <div id="logo">
                     <img src="http://design.sunlightlabs.com/AdHawk/adhawk-logo.png" alt="Ad Hawk">
                 </div>
@@ -60,8 +60,8 @@
       {% block content %}{% endblock %}
     </div> <!-- end div content -->
     {% if client != "ios" and client != "android" %}
-    <footer>
-        <div class="desktop-footer">
+    <footer class="desktop-footer">
+        <div class="contentbox">
             <div class="learnmore">
                 <img src="http://design.sunlightlabs.com/AdHawk/AdHawk_footer-product.png" alt="Product of the Sunlight Foundation">
                 <h5>Like this Project and Want to Discover Others Like It?</h5>
