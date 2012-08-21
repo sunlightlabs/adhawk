@@ -229,7 +229,23 @@ nav li a:visited{
 .phone-screenshot{
     display:none;
 }
-    
+
+.landing-splash-content{
+    width: 90%;
+    padding-left: 0;
+    float:left;
+}
+
+.landing-splash{
+    width: 90%;
+    padding: 2em 5% 1em 5%;
+}    
+  
+.hone-in{
+    max-width: 337px;
+    width: 100%;
+    height: 100%; 
+}
     
 /* FOOTER */
 

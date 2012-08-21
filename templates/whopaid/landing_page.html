@@ -1,14 +1,17 @@
 {% extends "whopaid/base.html"%}
 {% block content %}
 <div class="landing-splash">
-    <div class="contentbox">
+    <div class="contentbox clearfix">
         <img class="phone-screenshot" src="../static/img/AdHawk_phone_splash.png" width="300" height="339" alt="Phone screenshots">
         <div class="landing-splash-content">
-            <img src="../static/img/AdHawk_Hone-in.png" width="337" height="79" alt="Hone in on Political Ads">
+            <img class="hone-in" src="../static/img/AdHawk_Hone-in.png" width="337" height="79" alt="Hone in on Political Ads">
             <p>Ad Hawk is a free mobile app that allows you to identify political ads as they air and immediately learn about who is behind them. Want to know who is spending money to influence your vote? The app provides valuable contextual information about the candidate, super PAC and issues ads airing on TV and radio this election year.</p>
-            <div class="landing-app-btns">
-                <!-- App Buttons  -->
-                <!-- Gigya Buttons  -->
+            <div class="landing-app-btns clearfix">
+                <div class="mobilePrompt">
+					<a class="android" href="https://play.google.com/store/apps/details?id=com.sunlightfoundation.adhawk.android">Android app on Google play</a>
+					<a class="ios" href="http://itunes.com/apps/sunlightfoundation/adhawk">Available on the App Store</a>
+				</div>                
+				<!-- Gigya Buttons  -->
             </div>
         </div>
     </div>

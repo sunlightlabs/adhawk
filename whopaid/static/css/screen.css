@@ -910,6 +910,36 @@ nav li a:visited{
 	height: 100%;
 }
 
+.landing-main{
+    width:100%;
+}
+
+.landing-splash{
+    background-color: #c0b49c;
+    width: 84%;
+    padding: 2em 8% 1em 8%;
+}
+
+
+.landing-splash-content{
+    width: 50%;
+    padding-left: 5%;
+    float:left;
+}
+
+.landing-splash-content p{
+    font-family: Helvetica, Arial, sans-serif;
+    color: #FFF; 
+    font-size: 1.1em;
+    width:100%;
+    clear:both;
+    line-height: 1.4em;
+}
+
+.phone-screenshot{
+    float:left;
+    padding-left: 0%;
+}
 
 
 /* FOOTER */
@@ -1054,15 +1084,16 @@ nav li a:visited{
 .errorText{
   width: 40%;
 }
-
+.errorFour .mobilePrompt{
+    float: right;
+    margin-top: 60px;
+}
 
 
 /* Mobile Buttons */
 
 
 .mobilePrompt{
-  float: right;
-  margin-top: 60px;
   width: 329px;
 }
 .mobilePrompt .line-b{
