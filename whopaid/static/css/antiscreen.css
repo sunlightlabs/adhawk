@@ -205,9 +205,19 @@ nav li {
     padding: .8em 0;
     margin:0;
     border-right: 1px #564e3e solid;
-    width:24.7%;
+    width:25%;
     text-align: center;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     }
+
+
+nav ul.noSearch li {
+    width:33.333333333333%;
+    }
+
+
 
 nav li a{
     color: #d4d0c9;

@@ -40,9 +40,7 @@ body {
     background: ;
 }
 
-.buffer {
-   padding-left: 8%; 
-}
+
 
 
 
@@ -367,11 +365,8 @@ a:hover {
 header {
     width: 100%;
     height: 140px;
-    background: #94866a;
-    }
-header .contentbox{
-  background: url(http://design.sunlightlabs.com/AdHawk/AdHawk_stars.png) no-repeat top left;
-}   
+    background: #94866a url('../img/bg_stars.png') center -1px no-repeat;
+    }  
 .gradient-header{
     background-image: -moz-radial-gradient(center center , ellipse closest-side, transparent 70%, rgba(0, 0, 0, 0.5) 140%);
     background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0)), color-stop(38%,rgba(0,0,0,0)), color-stop(99%,rgba(0,0,0,0.28)), color-stop(100%,rgba(0,0,0,0.28))); /* Chrome,Safari4+ */
@@ -391,7 +386,7 @@ header .contentbox{
 
 h1#logo{
   padding: 0;
-  margin: 2em 0 44px 0;
+  margin: 2em 0 44px 8%;
   float: left;
 }
 
@@ -494,7 +489,6 @@ nav li a{
 
 .nav-word {
     padding-top: 20px;
-    
 }
 
 nav li a:visited{
@@ -1126,5 +1120,15 @@ nav li a:visited{
 
 
 
+/* Smaller than standard 960 (devices and browsers) */
+  @media only screen and (max-width: 959px) {
+    header .contentbox {
+      background: url(http://design.sunlightlabs.com/AdHawk/AdHawk_stars.png) no-repeat top left;
+    }
+    header{
+      background-image: none;
+    }
 
+
+  }
 
