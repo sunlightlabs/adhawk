@@ -54,6 +54,49 @@ nav {
     padding-bottom:  2em;
     }
     
+#funder_activities h3 {
+    width: 100%;
+    float: none; 
+    }    
+
+#funder_activities ul {
+   width: 100%;
+   float: none;
+   }
+
+#funder_received{
+    width: 100%;
+    float: left
+   }
+
+.main-results{
+    width:100%;
+    border:none;
+}
+
+#more_info {
+    width: 100%;
+    border:none;
+    float: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+#financial_info{
+    }  
+
+#total_spent{
+    width: 100%;
+    float: left
+       }
+
+#cash_hand{
+    width: 100%;
+    float: left
+    }
+
+
+
     
 .strip {
     float: none;
@@ -70,6 +113,11 @@ nav {
     padding-left: 5%;
     padding-right: 5%;
     }  
+
+#funder_description {
+    width: 100%;
+    float: none;
+    }
 
 #funder_received p,
 #financial_info p {

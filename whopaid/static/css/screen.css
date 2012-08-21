@@ -36,6 +36,7 @@ body {
 
 .contentbox {
     max-width: 1018px;
+    margin: 0 auto;
 }
 
 .buffer {
@@ -143,6 +144,15 @@ a:hover {
 
 /* RESULTS */
 
+.main-results{
+    width:49%;
+    float:left;
+    border-right: 1px solid #f3efe9;
+    padding-right: 5%;
+    margin-bottom: 2em;
+    
+}
+
 #funder_activities li{
    font-size: .9em;
    font-family: Helvetica, Arial, sans-serif;
@@ -153,13 +163,57 @@ a:hover {
    padding: 0;
    }
    
-#funder_activities ul{
+#funder_activities ul {
    margin: 0;
    padding: 0;
    list-style-position: none;
    list-style-type: none;
+   width: 100%;
+   float: none;
    }
 
+#funder_activities h3 {
+    width: 100%;
+    float: none; 
+}
+
+#funder_activities{
+    width: 100%;
+    float: left;
+}
+
+#funder_description {
+    float: left;
+    }
+
+#funder_name {
+    padding-bottom:  3em ;
+    }
+
+#funder_received{
+    width: 33%;
+    float: left
+}
+
+ 
+#financial_info{
+    
+}  
+
+#total_spent{
+    width: 33%;
+    float: left
+    }
+    
+#cash_hand{
+    width: 33%;
+    float: left
+    }
+
+#funder_chart h3 {
+    clear:both;
+    width: 100%;
+}     
 
 #title h2 {
       font-size: 1.5em;
@@ -187,7 +241,12 @@ a:hover {
       font-size: .8em;
       } 
       
-             
+#more_info {
+    width: 25%;
+    float: left;
+    margin-left: 5%;
+}
+            
    
 #more_info li{
    font-size: .9em;
@@ -236,11 +295,7 @@ a:hover {
   font-size: 1em;
     }
 
-#funder_name {
-    width: 35%;
-    padding-bottom:  3em ;
-    
-}  
+
    
 .sponsor {
   color: #FFF;
@@ -260,17 +315,13 @@ a:hover {
       display: block; 
       float: none;
       margin-top: 3em;
-      
       }  
 
 
 .strip img {
       width: 100%;
       max-width: 100%;
-      
       }
-
-
 
   
 
@@ -340,6 +391,7 @@ h1#logo{
   margin: 2em 0;
   float: left;
 }
+
 h1#logo a{
     display: block;
     height: 48px;
@@ -609,9 +661,8 @@ nav li a:visited{
 
 
 #graph {
-    width: 49%;
     list-style-type: none;
-    float: left;
+    float: none;
     }
 
 #graph body {
