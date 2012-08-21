@@ -217,7 +217,7 @@ nav ul.noSearch li {
     width:33.333333333333%;
 }
 
-nav li a{
+nav li a, nav li a:visited{
     color: #d4d0c9;
     text-decoration: none;
     font-weight: bold;
@@ -227,9 +227,12 @@ nav li a{
     padding-top: .8em;
     }
 
-nav li a:visited{
-    color: #d4d0c9;
-    }
+nav li:hover, nav li:active{
+    background-color: #6c614b;
+}
+nav li:hover a, nav:active li a{
+    color: #ffffff;
+}
     
 
 /* LANDING PAGE */
@@ -334,12 +337,17 @@ nav li a:visited{
 
 .errorText{
   width: 90%;
+}
 
+/* TOP ADS */
+#top_ad_list .strip{
+  float: none;
+}
 
-
-
-
-
+#top_ad_list .stripDescrip{
+  width: auto;
+  float: none;
+}
 
 
 
