@@ -211,6 +211,12 @@ nav li a:visited{
     color: #d4d0c9;
     }
     
+
+/* LANDING PAGE */
+
+.phone-screenshot{
+    display:none;
+}
     
     
 /* FOOTER */
