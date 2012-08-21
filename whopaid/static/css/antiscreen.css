@@ -5,6 +5,18 @@
 }
 
 
+header {
+    width: 100%;
+    height: 140px;
+    background: #94866a url(http://design.sunlightlabs.com/AdHawk/AdHawk_stars.png) no-repeat fixed top left;
+    }
+header .contentbox{
+  background: none;
+}   
+
+
+
+
 #strip,
 #title,
 #profile {
@@ -80,6 +92,7 @@ nav {
     float: none;
     margin-left: 0;
     padding-left: 0;
+    padding-bottom: 2em;
 }
 
 #financial_info{
@@ -192,9 +205,19 @@ nav li {
     padding: .8em 0;
     margin:0;
     border-right: 1px #564e3e solid;
-    width:24.7%;
+    width:25%;
     text-align: center;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     }
+
+
+nav ul.noSearch li {
+    width:33.333333333333%;
+    }
+
+
 
 nav li a{
     color: #d4d0c9;
@@ -210,6 +233,12 @@ nav li a:visited{
     color: #d4d0c9;
     }
     
+
+/* LANDING PAGE */
+
+.phone-screenshot{
+    display:none;
+}
     
     
 /* FOOTER */
@@ -221,7 +250,6 @@ nav li a:visited{
 .mobile-footer{
     display:block;
     background-color: #c0b49c;
-    margin-top:2em;
     padding:1em 5% 1em 5%;
     min-height: 30px;
 } 
@@ -232,6 +260,34 @@ nav li a:visited{
     width: 83px;
     
 }  
+
+
+/* Mobile Buttons */
+
+
+.mobilePrompt{
+  float: none;
+  margin-top: 0;
+  width: 90%;
+}
+
+
+
+/* 404 */
+
+.errorFour{
+    margin-right: 5%;
+    padding-top: 5em;
+}
+
+.errorText{
+  width: 90%;
+
+
+
+
+
+
 
 
 

@@ -37,11 +37,10 @@ body {
 .contentbox {
     max-width: 960px;
     margin: 0 auto;
+    background: ;
 }
 
-.buffer {
-   padding-left: 8%; 
-}
+
 
 
 
@@ -210,7 +209,7 @@ a:hover {
     float: left
     }
 
-#funder_chart h3 {
+#funder_chart > h3 {
     clear:both;
     width: 100%;
 }     
@@ -366,9 +365,8 @@ a:hover {
 header {
     width: 100%;
     height: 140px;
-    background: #94866a url(http://design.sunlightlabs.com/AdHawk/AdHawk_stars.png) no-repeat fixed top left;
-    }
-    
+    background: #94866a url('../img/bg_stars.png') center -1px no-repeat;
+    }  
 .gradient-header{
     background-image: -moz-radial-gradient(center center , ellipse closest-side, transparent 70%, rgba(0, 0, 0, 0.5) 140%);
     background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0)), color-stop(38%,rgba(0,0,0,0)), color-stop(99%,rgba(0,0,0,0.28)), color-stop(100%,rgba(0,0,0,0.28))); /* Chrome,Safari4+ */
@@ -388,7 +386,7 @@ header {
 
 h1#logo{
   padding: 0;
-  margin: 2em 0;
+  margin: 2em 0 44px 8%;
   float: left;
 }
 
@@ -491,7 +489,6 @@ nav li a{
 
 .nav-word {
     padding-top: 20px;
-    
 }
 
 nav li a:visited{
@@ -748,19 +745,20 @@ nav li a:visited{
     text-indent: -9999px;
     overflow: hidden;
     line-height: 2em;
+    text-align: left;
     }
 
 .right {
     right: 0;
     float: right;
-    width: 49%; !important
+    width: 49%;
+    text-align: right;
     }
 
 .left {
     left: 0;
     float: left;
-    width: 49%; !important
-    
+    width: 49%;
     }
 
 .count-left{
@@ -881,6 +879,31 @@ nav li a:visited{
 }
 
 
+/* LANDING PAGE */
+
+.video-wrapper {
+	width: 560px;
+	max-width: 100%;
+}
+
+.video-container {
+	position: relative;
+	padding-bottom: 56.25%;
+	padding-top: 30px;
+	height: 0;
+	overflow: hidden;
+}
+
+.video-container iframe,  
+.video-container object,  
+.video-container embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
 
 
 /* FOOTER */
@@ -989,7 +1012,9 @@ nav li a:visited{
     }
 
 
+/* Top-ads */
 
+/* Semi-generic column structure, will try to reconcile with the about columns. */
 
 .narrowCol{
   width: 32.1875%;
@@ -1002,6 +1027,77 @@ nav li a:visited{
 
 
 
+/* 404 */
+
+.errorFour{
+    background: url('../img/bg_404.png') no-repeat scroll top right;
+    height: 298px;
+    margin: 2em 0;
+    padding: 0 5% 2em 5%;  
+}
+.errorFour h1{
+  margin-bottom: 5px;
+}
+.errorFour p{
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.2em;
+  color: #564e3e;
+  margin-top: 0;
+}
+
+.errorText{
+  width: 40%;
+}
 
 
+
+/* Mobile Buttons */
+
+
+.mobilePrompt{
+  float: right;
+  margin-top: 60px;
+  width: 329px;
+}
+.mobilePrompt .line-b{
+  width: 40%;
+}
+.mobilePrompt a.android, .mobilePrompt a.ios{
+  background-image: url('../img/getMobile.png');
+  background-repeat: none;
+  width: 154px;
+  height: 54px;
+  display: block;
+  text-indent: -9999em;
+  float: left;
+  margin-top: 20px;
+}
+
+.mobilePrompt a.android{
+  background-position: right top;
+  margin-right: 20px;
+}
+.mobilePrompt a.android:hover{
+  background-position: right bottom;
+}
+.mobilePrompt a.ios{
+  background-position: left top;
+}
+.mobilePrompt a.ios:hover{
+  background-position: left bottom;
+}
+
+
+
+/* Smaller than standard 960 (devices and browsers) */
+  @media only screen and (max-width: 959px) {
+    header .contentbox {
+      background: url(http://design.sunlightlabs.com/AdHawk/AdHawk_stars.png) no-repeat top left;
+    }
+    header{
+      background-image: none;
+    }
+
+
+  }
 
