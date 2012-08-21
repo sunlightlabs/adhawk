@@ -1109,7 +1109,7 @@ nav li a:visited{
 
 
 .mobilePrompt{
-  width: 329px;
+  width: 334px;
 }
 .mobilePrompt .line-b{
   width: 40%;
@@ -1117,7 +1117,7 @@ nav li a:visited{
 .mobilePrompt a.android, .mobilePrompt a.ios{
   background-image: url('../img/getMobile.png');
   background-repeat: none;
-  width: 154px;
+  width: 157px;
   height: 54px;
   display: block;
   text-indent: -9999em;
