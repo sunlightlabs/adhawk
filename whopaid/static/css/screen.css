@@ -882,8 +882,10 @@ nav li a:visited{
 /* LANDING PAGE */
 
 .video-wrapper {
-	width: 560px;
+	width: 470px;
 	max-width: 100%;
+	width: 55%;
+	float: left;
 }
 
 .video-container {
@@ -905,7 +907,8 @@ nav li a:visited{
 }
 
 .landing-main{
-    width:100%;
+    width: 84%;
+    padding: 2em 8%;
 }
 
 .landing-splash{
@@ -917,7 +920,7 @@ nav li a:visited{
 
 .landing-splash-content{
     width: 50%;
-    padding-left: 5%;
+    padding-left: 4%;
     float:left;
 }
 
@@ -935,6 +938,60 @@ nav li a:visited{
     padding-left: 0%;
 }
 
+.landing-main .phone-screenshot{
+    padding-left: 5%;
+    max-width: 289px;
+    width: 30%;
+    height: 100%;
+    float:right;  
+}
+
+.landing-threecol{
+    width: 84%;
+    padding: 2em 8%;
+}
+
+.threecol {
+    float: left;
+}
+
+.first {
+    width: 32%;
+    padding-right: 2.5%;
+    border-right: 1px #c0b49c solid;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.middle{
+    width: 34%;
+    padding-right: 2.5%;
+    padding-left: 2.5%;
+    border-right: 1px #c0b49c solid;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.last{
+    width: 30%;
+    padding-left: 2.5%;
+}
+
+.threecol h3{
+    font-size: 1.5em;
+    color: #b8281d;
+    text-align: center;
+}
+
+.threecol p{
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1em;
+    color: #564e3e;
+    text-align: left;
+    line-height: 1.2em;
+}
 
 /* FOOTER */
 
