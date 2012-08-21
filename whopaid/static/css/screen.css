@@ -88,16 +88,15 @@ p {
    }
    
 p a{
-   color: #000000;
+   color: #931f0a;
    }
    
-a {
-    color: #0000FF;
+a, a:link, a:visited {
+    color: #931f0a;
    }
 
 a:hover {
     color: #ab2e17;
-    text-decoration: none;
    }
 
 
@@ -502,20 +501,19 @@ nav li {
     padding-left: 10px;
     }
 
-nav li a{
+nav li a, nav li a:visited{
     color: #FFF;
     text-decoration: none;
     font-weight: bold;
+}
+nav li a:hover, nav li a:active{
+    color: #e6e3de;
 }
 
 .nav-word {
     padding-top: 20px;
 }
 
-nav li a:visited{
-    color: #FFF;
-
-}
 
 /*
  * Content
