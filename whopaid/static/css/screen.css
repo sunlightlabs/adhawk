@@ -255,7 +255,7 @@ a:hover {
    font-style: normal;
    color: #000000;
    margin: 0;
-   padding: 0;
+   padding: .8em 0 0 0;
    }
    
 #more_info ul, #no_match_info ul{
@@ -753,11 +753,14 @@ nav li a:visited{
 .right {
     right: 0;
     float: right;
+    width: 49%; !important
     }
 
 .left {
     left: 0;
     float: left;
+    width: 49%; !important
+    
     }
 
 .count-left{
