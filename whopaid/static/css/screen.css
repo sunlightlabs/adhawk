@@ -449,7 +449,7 @@ h1#logo a{
     margin-left: 10px;
     } 
     
-#search input{
+input{
     width: 256px;
     height: 21px;
     color: #b2b2b2;

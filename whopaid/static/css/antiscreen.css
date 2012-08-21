@@ -173,8 +173,9 @@ nav li {
     float: left;
     font-size: 0.875em;
     padding: .8em 0;
+    margin:0;
     border-right: 1px #564e3e solid;
-    width:22%;
+    width:24.7%;
     text-align: center;
     }
 
