@@ -150,6 +150,23 @@ nav {
      float: none;
      }
    
+
+/* ABOUT */
+
+#about_content{
+    width:80%;
+    clear:both;
+    float:none;
+    margin: 5%;
+    padding: 5%;
+}
+#about_intro{
+    padding:5%;
+    float:none;
+    width:90%;
+    clear:both;
+}
+
     
 /*
 * NAV
@@ -201,7 +218,10 @@ nav li a:visited{
     display:none;
     }  
    
-   
+.mobile-footer{
+    display:block;
+    background-color: #00FF00;
+}   
 
 
 

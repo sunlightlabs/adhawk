@@ -35,7 +35,7 @@ body {
 }
 
 .contentbox {
-    max-width: 1018px;
+    max-width: 960px;
     margin: 0 auto;
 }
 
@@ -567,14 +567,22 @@ nav li a:visited{
     background-color: #FFF;
     filter:alpha(opacity=60);
     opacity:.6;
-    margin: 5%;
-    padding: 5%;
+    margin: 2em 5% 2em 5%;
+    padding: 2em 5%;
     border-top:2px solid #9e8d6e;
     border-bottom:2px solid #9e8d6e;
-    clear: both;
+    float:left;
+    width:45%;
     }
 
-#about_intro, #no_match_info{
+#about_intro{
+    padding: 2em 5% 2em 0;
+    float:right;
+    width:30%;
+} 
+
+
+#no_match_info{
     padding: 5%;
     }
 
