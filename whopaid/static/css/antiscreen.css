@@ -282,12 +282,17 @@ nav li a:visited{
 
 .errorText{
   width: 90%;
+}
 
+/* TOP ADS */
+#top_ad_list .strip{
+  float: none;
+}
 
-
-
-
-
+#top_ad_list .stripDescrip{
+  width: auto;
+  float: none;
+}
 
 
 

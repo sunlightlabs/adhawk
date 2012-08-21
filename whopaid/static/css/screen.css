@@ -117,6 +117,7 @@ a:hover {
     }
 #top_ad_list .stripDescrip{
   float: left;
+  width: 49%;
 }
 #top_ad_list .strip{
   float: right;
