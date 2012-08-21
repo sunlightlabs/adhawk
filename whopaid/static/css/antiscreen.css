@@ -210,16 +210,14 @@ nav li {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    }
+}
 
 
 nav ul.noSearch li {
     width:33.333333333333%;
-    }
+}
 
-
-
-nav li a{
+nav li a, nav li a:visited{
     color: #d4d0c9;
     text-decoration: none;
     font-weight: bold;
@@ -229,17 +227,74 @@ nav li a{
     padding-top: .8em;
     }
 
-nav li a:visited{
-    color: #d4d0c9;
-    }
+nav li:hover, nav li:active{
+    background-color: #6c614b;
+}
+nav li:hover a, nav:active li a{
+    color: #ffffff;
+}
     
 
 /* LANDING PAGE */
 
+
+.video-wrapper {
+	width: 100%;
+}
+
 .phone-screenshot{
     display:none;
 }
+
+.landing-splash-content{
+    width: 90%;
+    padding-left: 0;
+    float:left;
+}
+
+.landing-splash{
+    width: 90%;
+    padding: 2em 5% 1em 5%;
+}    
+  
+.hone-in{
+    max-width: 337px;
+    width: 100%;
+    height: 100%; 
+}
+
+.landing-main{
+    width: 90%;
+    padding: 2em 5%;
+}
+
+.threecol{
+    width: 90%;
+    float: none;
+    padding: 1em 5%;
+}
+
+.first {
+    padding-right: 0;
+    padding-left:0;
+    border-right: none;
+    padding-top: 0;
+}
+
+.middle{
+    padding-right: 0;
+    padding-left: 0;
+    border-right: none;
+    border-bottom: 1px solid #c0b49c;
+    border-top: 1px solid #c0b49c;
     
+}
+
+.last{
+    padding-left: 0;
+}
+
+
     
 /* FOOTER */
 
@@ -282,12 +337,17 @@ nav li a:visited{
 
 .errorText{
   width: 90%;
+}
 
+/* TOP ADS */
+#top_ad_list .strip{
+  float: none;
+}
 
-
-
-
-
+#top_ad_list .stripDescrip{
+  width: auto;
+  float: none;
+}
 
 
 
