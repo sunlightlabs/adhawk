@@ -17,3 +17,10 @@ def no_match(request):
             'client' : client,
             })
     return render_to_response('whopaid/no_match.html',c)
+
+def landing_page(request):
+    client = set_client(request)
+    c = RequestContext(request,{
+        'client' : client,
+        })
+    return render_to_response('whopaid/landing_page.html',c)
