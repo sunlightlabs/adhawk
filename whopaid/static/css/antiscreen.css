@@ -92,6 +92,7 @@ nav {
     float: none;
     margin-left: 0;
     padding-left: 0;
+    padding-bottom: 2em;
 }
 
 #financial_info{
@@ -222,6 +223,12 @@ nav li a:visited{
     color: #d4d0c9;
     }
     
+
+/* LANDING PAGE */
+
+.phone-screenshot{
+    display:none;
+}
     
     
 /* FOOTER */
@@ -232,8 +239,17 @@ nav li a:visited{
    
 .mobile-footer{
     display:block;
-    background-color: #00FF00;
-}   
+    background-color: #c0b49c;
+    padding:1em 5% 1em 5%;
+    min-height: 30px;
+} 
+
+.mobile-footer img{
+    float: right;
+    height:26px;
+    width: 83px;
+    
+}  
 
 
 /* Mobile Buttons */

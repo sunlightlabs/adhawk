@@ -211,7 +211,7 @@ a:hover {
     float: left
     }
 
-#funder_chart h3 {
+#funder_chart > h3 {
     clear:both;
     width: 100%;
 }     
@@ -256,7 +256,7 @@ a:hover {
    font-style: normal;
    color: #000000;
    margin: 0;
-   padding: 0;
+   padding: .8em 0 0 0;
    }
    
 #more_info ul, #no_match_info ul{
@@ -751,16 +751,20 @@ nav li a:visited{
     text-indent: -9999px;
     overflow: hidden;
     line-height: 2em;
+    text-align: left;
     }
 
 .right {
     right: 0;
     float: right;
+    width: 49%;
+    text-align: right;
     }
 
 .left {
     left: 0;
     float: left;
+    width: 49%;
     }
 
 .count-left{
@@ -880,6 +884,31 @@ nav li a:visited{
     text-decoration: none;
 }
 
+
+/* LANDING PAGE */
+
+.video-wrapper {
+	width: 560px;
+	max-width: 100%;
+}
+
+.video-container {
+	position: relative;
+	padding-bottom: 56.25%;
+	padding-top: 30px;
+	height: 0;
+	overflow: hidden;
+}
+
+.video-container iframe,  
+.video-container object,  
+.video-container embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
 
 
 

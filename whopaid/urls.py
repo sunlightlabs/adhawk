@@ -16,7 +16,9 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    url(r'^404/','django.views.defaults.page_not_found'),
+
+    url(r'','whopaid.views.landing_page'),
+    url(r'^400/','django.views.defaults.page_not_found'),
     url(r'^500/','django.views.defaults.server_error'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/',include('whopaid_api.urls')),
