@@ -1007,7 +1007,7 @@ nav li a:visited{
     background: url('../img/bg_404.png') no-repeat scroll top right;
     height: 298px;
     margin: 2em 0;
-    padding: 2em 5%;  
+    padding: 0 5% 2em 5%;  
 }
 .errorFour h1{
   margin-bottom: 5px;
@@ -1019,7 +1019,9 @@ nav li a:visited{
   margin-top: 0;
 }
 
-
+.errorText{
+  width: 40%;
+}
 
 
 
@@ -1028,8 +1030,11 @@ nav li a:visited{
 
 .mobilePrompt{
   float: right;
-  margin-top: 200px;
-  max-width: 329px;
+  margin-top: 60px;
+  width: 329px;
+}
+.mobilePrompt .line-b{
+  width: 40%;
 }
 .mobilePrompt a.android, .mobilePrompt a.ios{
   background-image: url('../img/getMobile.png');
@@ -1039,6 +1044,7 @@ nav li a:visited{
   display: block;
   text-indent: -9999em;
   float: left;
+  margin-top: 20px;
 }
 
 .mobilePrompt a.android{

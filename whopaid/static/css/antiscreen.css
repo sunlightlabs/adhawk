@@ -224,17 +224,27 @@ nav li a:visited{
 }   
 
 
-/* Mobbile Buttons */
+/* Mobile Buttons */
 
 
 .mobilePrompt{
   float: none;
-  margin-top: 200px;
+  margin-top: 0;
+  width: 90%;
 }
+
+
+
+/* 404 */
 
 .errorFour{
     margin-right: 5%;
+    padding-top: 5em;
 }
+
+.errorText{
+  width: 90%;
+
 
 
 
