@@ -329,18 +329,14 @@ a:hover {
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 17px;
 	color: #FFF;
-	background: -moz-linear-gradient(
-		top,
-		#dd7d4a 0%,
-		#da7a4a 45%,
-		#b1371c 75%,
-		#8f1f13);
-	background: -webkit-gradient(
-		linear, left top, left bottom, 
-		from(#dd7d4a),
-		color-stop(0.45, #da7a4a),
-		color-stop(0.75, #b1371c),
-		to(#8f1f13));
+  background: #dd7d4a; /* Old browsers */
+  background: -moz-linear-gradient(top, #dd7d4a 0%, #da7a4a 45%, #b1371c 75%, #8f1f13 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dd7d4a), color-stop(45%,#da7a4a), color-stop(75%,#b1371c), color-stop(100%,#8f1f13)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #dd7d4a 0%,#da7a4a 45%,#b1371c 75%,#8f1f13 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #dd7d4a 0%,#da7a4a 45%,#b1371c 75%,#8f1f13 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #dd7d4a 0%,#da7a4a 45%,#b1371c 75%,#8f1f13 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #dd7d4a 0%,#da7a4a 45%,#b1371c 75%,#8f1f13 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dd7d4a', endColorstr='#8f1f13',GradientType=0 ); /* IE6-9 */
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 5px;
@@ -357,6 +353,30 @@ a:hover {
 	text-shadow:
 		-1px -1px 0px rgba(000,000,000,0.5),
 		0px 0px 0px rgba(255,255,255,0.2);
+
+    }
+.css3button:hover {
+
+  background: #de6e32; /* Old browsers */
+  background: -moz-linear-gradient(top, #de6e32 0%, #db6a31 45%, #a73117 75%, #871b0f 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#de6e32), color-stop(45%,#db6a31), color-stop(75%,#a73117), color-stop(100%,#871b0f)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #de6e32 0%,#db6a31 45%,#a73117 75%,#871b0f 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #de6e32 0%,#db6a31 45%,#a73117 75%,#871b0f 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #de6e32 0%,#db6a31 45%,#a73117 75%,#871b0f 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #de6e32 0%,#db6a31 45%,#a73117 75%,#871b0f 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#de6e32', endColorstr='#871b0f',GradientType=0 ); /* IE6-9 */
+  -moz-box-shadow:
+    0px 1px 2px rgba(000,000,000,0.5),
+    inset 0px 0px 3px rgba(247,156,113,1);
+  -webkit-box-shadow:
+    0px 1px 2px rgba(000,000,000,0.5),
+    inset 0px 0px 3px rgba(247,156,113,1);
+  box-shadow:
+    0px 1px 2px rgba(000,000,000,0.5),
+    inset 0px 0px 3px rgba(247,156,113,1);
+  text-shadow:
+    -1px -1px 0px rgba(000,000,000,0.5),
+    0px 0px 0px rgba(255,255,255,0.2);
 
     }
 
