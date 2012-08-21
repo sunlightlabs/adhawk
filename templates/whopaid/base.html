@@ -4,7 +4,8 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Ad Hawk from the Sunlight Foundation</title>
-    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script src="http://assets.sunlightfoundation.com.s3.amazonaws.com/site/4.0/scripts/gigya.min.js"></script>
     <script type="text/javascript">
   (function() {
     var config = {
@@ -14,13 +15,24 @@
     var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/(\s|^)wf-loading(\s|$)/g," ");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script"),d=false;tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(d||a&&a!="complete"&&a!="loaded")return;d=true;clearTimeout(t);try{Typekit.load(config)}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
   })();
 </script>
-    
     <meta name="keywords" content="" />
     <meta name="description" content="Discover who is behind the super pacs and other groups buying the political ads you see during this election" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/core.css" type="text/css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}css/antiscreen.css" type="text/css" media="handheld,screen and (max-width: 800px)" />
+    <script type="text/javascript">
 
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22821126-22']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+    </script>
   </head>
   <body>
   <div id="page">
@@ -86,6 +98,13 @@
         
         <div class="mobile-footer">
             <!-- Gigya Things-->
+            <div    class="share-buttons"
+                    data-gigya="auto"
+                    data-services="twitter, twitter-tweet, facebook, reddit"
+                    data-options="linkBack=http%3A%2F%2Fadhawk.sunlightfoundation.com&amp;title=Ad%20Hawk%20from%20The%20Sunlight%20Foundation"
+                    data-twitter-tweet-options="defaultText=Check%20out%20Sunlight's%20new%20social%20media%20buttons!&amp;countURL=http%3A%2F%2Fwww.sunlightfoundation.com">
+            </div>
+            <!-- end Gigya Things -->
             <a href="http://sunlightfoundation.com/">
                 <img src="http://design.sunlightlabs.com/AdHawk/AdHawk_footer-sunlight-mobile.png" alt="Sunlight Foundation">
             </a>
