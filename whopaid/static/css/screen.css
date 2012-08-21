@@ -355,7 +355,7 @@ a:hover {
 		0px 0px 0px rgba(255,255,255,0.2);
 
     }
-.css3button:hover {
+.css3button:hover, .css3button:active {
 
   background: #de6e32; /* Old browsers */
   background: -moz-linear-gradient(top, #de6e32 0%, #db6a31 45%, #a73117 75%, #871b0f 100%); /* FF3.6+ */
