@@ -2,9 +2,17 @@
 
 <html lang="en">
   <head>
+    <script type='text/javascript' src='../static/js/jquery-1.7.2.min.js'></script>
+    <script type='text/javascript' src='../static/js/protoFluid3.02.js'></script>
+
+
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Ad Hawk from the Sunlight Foundation</title>
-    
+
+    <link rel="shortcut icon" href="../static/img/favicon.ico">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script src="http://assets.sunlightfoundation.com.s3.amazonaws.com/site/4.0/scripts/gigya.min.js"></script>
     <script type="text/javascript">
   (function() {
     var config = {
@@ -14,43 +22,61 @@
     var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/(\s|^)wf-loading(\s|$)/g," ");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script"),d=false;tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(d||a&&a!="complete"&&a!="loaded")return;d=true;clearTimeout(t);try{Typekit.load(config)}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
   })();
 </script>
-    
     <meta name="keywords" content="" />
     <meta name="description" content="Discover who is behind the super pacs and other groups buying the political ads you see during this election" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/core.css" type="text/css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}css/antiscreen.css" type="text/css" media="handheld,screen and (max-width: 800px)" />
+    <script type="text/javascript">
 
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22821126-22']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+    </script>
   </head>
   <body>
   <div id="page">
     {% if client != "ios" and client != "android" %}
     <header>
         <div class="gradient-header">
-            <div id="logo">
-                <img src="http://design.sunlightlabs.com/AdHawk/adhawk-logo.png" alt="Ad Hawk">
+            <div class="contentbox">
+                <h1 id="logo">
+                    <a href="/">Ad Hawk</a>
+                </h1>
+                <nav>
+                    <ul class="clearfix noSearch">
+                        <li class="nav-word"><a href="/ad/top/">Popular Ads</a></li>
+                        <li class="nav-word"><a href="/about">About</a></li>
+                        <li class="nav-word"> <a href="mailto:adhawk@sunlightfoundation.com">Contact</a></li>
+                        <!-- SEARCH BIZ FOR LATER TIMES [***note*** Remove noSearch class when this is added back in]
+                        <li class="searchmobile"><a href="#">Search</a></li>
+                       -->
+                        <li id="sunlight-logo">
+                            <div>
+                                <a href="http://www.sunlightfoundation.com"><img src="http://design.sunlightlabs.com/AdHawk/AdHawk_sunlight-logo.jpg" alt="Sunlight Foundation Logo"></a>
+                            </div>                    
+                        </li>
+                    </ul>
+                </nav> 
+                <!-- SEARCH BIZ FOR LATER TIMES
+                <div id="search" class="clearfix">
+                    <form action="/search/" method="get">
+                        <input class="transparent" type="text" name="q" id="id_q" placeholder="Search ads by funder or keyword">
+                        <button class="css3button search-button" type="submit">
+                            <span>Search</span>
+                        </button>
+                    </form>
+                </div>
+                --> 
+                <div class="clear"></div>
             </div>
-            <nav>
-                <ul class="clearfix">
-                    <li class="nav-word"><a href="/ad/top/">Popular Ads</a></li>
-                    <li class="nav-word"><a href="/about">About</a></li>
-                    <li class="nav-word"> <a href="mailto:adhawk@sunlightfoundation.com">Contact</a></li>
-                    <li class="searchmobile"><a href="#">Search</a></li>
-                    <li id="sunlight-logo">
-                        <div>
-                            <a href="http://www.sunlightfoundation.com"><img src="http://design.sunlightlabs.com/AdHawk/AdHawk_sunlight-logo.jpg" alt="Sunlight Foundation Logo"></a>
-                        </div>                    
-                    </li>
-                </ul>
-            </nav> 
-            <div id="search" class="clearfix">
-                <form action="/search/" method="get">
-                    <input class="transparent" type="text" name="q" id="id_q" placeholder="Search ads by funder or keyword">
-                    <button class="css3button search-button" type="submit">
-                        <span>Search</span>
-                    </button>
-                </form>
-            </div> 
         </div>
       </header>
     {% endif %}
@@ -60,6 +86,7 @@
     {% if client != "ios" and client != "android" %}
     <footer>
         <div class="desktop-footer">
+            <div class="contentbox">
             <div class="learnmore">
                 <img src="http://design.sunlightlabs.com/AdHawk/AdHawk_footer-product.png" alt="Product of the Sunlight Foundation">
                 <h5>Like this Project and Want to Discover Others Like It?</h5>
@@ -79,9 +106,17 @@
                 <p>Founded in 2006, the Sunlight Foundation is a non-partisan non-profit that uses cutting-edge technology and ideas to make government transparent and accountable. Visit <a href="http://sunlighfoundation.com">SunlightFoundation.com</a> to learn more.</p>
             </div>
         </div>
+        </div>
         
         <div class="mobile-footer">
             <!-- Gigya Things-->
+              <div    class="share-buttons"
+                    data-gigya="auto"
+                    data-services="twitter, facebook"
+                    data-options="linkBack={{ request.build_absolute_uri|urlencode:"" }}&amp;title={{ "Blah blah blah: "|urlencode:""}} {{ request.build_absolute_uri }}"
+                    data-twitter-tweet-options="defaultText={{ "Blah blah blah blah!"|urlencode:"" }}&amp;countURL={{ request.get_full_path|urlencode:"" }}">
+              </div>
+            <!-- end Gigya Things -->
             <a href="http://sunlightfoundation.com/">
                 <img src="http://design.sunlightlabs.com/AdHawk/AdHawk_footer-sunlight-mobile.png" alt="Sunlight Foundation">
             </a>
