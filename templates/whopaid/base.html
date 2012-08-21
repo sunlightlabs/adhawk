@@ -34,16 +34,18 @@
     {% if client != "ios" and client != "android" %}
     <header>
         <div class="gradient-header">
-            <div class="contentbox buffer">
+            <div class="contentbox">
                 <h1 id="logo">
                     <a href="/">Ad Hawk</a>
                 </h1>
                 <nav>
-                    <ul class="clearfix">
+                    <ul class="clearfix noSearch">
                         <li class="nav-word"><a href="/ad/top/">Popular Ads</a></li>
                         <li class="nav-word"><a href="/about">About</a></li>
                         <li class="nav-word"> <a href="mailto:adhawk@sunlightfoundation.com">Contact</a></li>
+                        <!-- SEARCH BIZ FOR LATER TIMES [***note*** Remove noSearch class when this is added back in]
                         <li class="searchmobile"><a href="#">Search</a></li>
+                       -->
                         <li id="sunlight-logo">
                             <div>
                                 <a href="http://www.sunlightfoundation.com"><img src="http://design.sunlightlabs.com/AdHawk/AdHawk_sunlight-logo.jpg" alt="Sunlight Foundation Logo"></a>
@@ -51,6 +53,7 @@
                         </li>
                     </ul>
                 </nav> 
+                <!-- SEARCH BIZ FOR LATER TIMES
                 <div id="search" class="clearfix">
                     <form action="/search/" method="get">
                         <input class="transparent" type="text" name="q" id="id_q" placeholder="Search ads by funder or keyword">
@@ -58,7 +61,8 @@
                             <span>Search</span>
                         </button>
                     </form>
-                </div> 
+                </div>
+                --> 
                 <div class="clear"></div>
             </div>
         </div>
