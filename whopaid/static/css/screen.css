@@ -210,7 +210,7 @@ a:hover {
     float: left
     }
 
-#funder_chart h3 {
+#funder_chart > h3 {
     clear:both;
     width: 100%;
 }     
@@ -748,19 +748,20 @@ nav li a:visited{
     text-indent: -9999px;
     overflow: hidden;
     line-height: 2em;
+    text-align: left;
     }
 
 .right {
     right: 0;
     float: right;
-    width: 49%; !important
+    width: 49%;
+    text-align: right;
     }
 
 .left {
     left: 0;
     float: left;
-    width: 49%; !important
-    
+    width: 49%;
     }
 
 .count-left{

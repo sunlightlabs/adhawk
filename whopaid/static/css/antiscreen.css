@@ -80,6 +80,7 @@ nav {
     float: none;
     margin-left: 0;
     padding-left: 0;
+    padding-bottom: 2em;
 }
 
 #financial_info{
@@ -221,7 +222,6 @@ nav li a:visited{
 .mobile-footer{
     display:block;
     background-color: #c0b49c;
-    margin-top:2em;
     padding:1em 5% 1em 5%;
     min-height: 30px;
 } 
