@@ -986,7 +986,9 @@ nav li a:visited{
     }
 
 
+/* Top-ads */
 
+/* Semi-generic column structure, will try to reconcile with the about columns. */
 
 .narrowCol{
   width: 32.1875%;
@@ -997,6 +999,61 @@ nav li a:visited{
   float: left;
 }
 
+
+
+/* 404 */
+
+.errorFour{
+    background: url('../img/bg_404.png') no-repeat scroll top right;
+    height: 298px;
+    margin: 2em 0;
+    padding: 2em 5%;  
+}
+.errorFour h1{
+  margin-bottom: 5px;
+}
+.errorFour p{
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.2em;
+  color: #564e3e;
+  margin-top: 0;
+}
+
+
+
+
+
+/* Mobbile Buttons */
+
+
+.mobilePrompt{
+  float: right;
+  margin-top: 200px;
+  max-width: 329px;
+}
+.mobilePrompt a.android, .mobilePrompt a.ios{
+  background-image: url('../img/getMobile.png');
+  background-repeat: none;
+  width: 154px;
+  height: 54px;
+  display: block;
+  text-indent: -9999em;
+  float: left;
+}
+
+.mobilePrompt a.android{
+  background-position: right top;
+  margin-right: 20px;
+}
+.mobilePrompt a.android:hover{
+  background-position: right bottom;
+}
+.mobilePrompt a.ios{
+  background-position: left top;
+}
+.mobilePrompt a.ios:hover{
+  background-position: left bottom;
+}
 
 
 
