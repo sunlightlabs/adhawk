@@ -37,6 +37,7 @@ body {
 .contentbox {
     max-width: 960px;
     margin: 0 auto;
+    background: ;
 }
 
 .buffer {
@@ -366,9 +367,11 @@ a:hover {
 header {
     width: 100%;
     height: 140px;
-    background: #94866a url(http://design.sunlightlabs.com/AdHawk/AdHawk_stars.png) no-repeat fixed top left;
+    background: #94866a;
     }
-    
+header .contentbox{
+  background: url(http://design.sunlightlabs.com/AdHawk/AdHawk_stars.png) no-repeat top left;
+}   
 .gradient-header{
     background-image: -moz-radial-gradient(center center , ellipse closest-side, transparent 70%, rgba(0, 0, 0, 0.5) 140%);
     background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0)), color-stop(38%,rgba(0,0,0,0)), color-stop(99%,rgba(0,0,0,0.28)), color-stop(100%,rgba(0,0,0,0.28))); /* Chrome,Safari4+ */
@@ -388,7 +391,7 @@ header {
 
 h1#logo{
   padding: 0;
-  margin: 2em 0;
+  margin: 2em 0 44px 0;
   float: left;
 }
 
@@ -1025,7 +1028,7 @@ nav li a:visited{
 
 
 
-/* Mobbile Buttons */
+/* Mobile Buttons */
 
 
 .mobilePrompt{
