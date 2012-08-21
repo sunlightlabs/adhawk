@@ -15,6 +15,7 @@ sqs =SearchQuerySet().facet(
 urlpatterns = patterns('haystack.views',
         url(r'^$', FacetedSearchView(form_class=FacetedSearchForm,
                                         template='search/search.html',
-                                        searchqueryset=sqs),
+                                        searchqueryset=sqs,
+                                        results_per_page=15),
                                         name='haystack_search'),
         )
