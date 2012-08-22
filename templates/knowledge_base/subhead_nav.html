@@ -1,6 +1,8 @@
 {% block subhead_nav %}
         <div id="breadcrumbs" >
-          <div class="contentbox">
+            <div class="contentbox">
+             
+             <!-- SEARCH BIZ FOR LATER TIMES
               <ul class="clearfix contentbox">
                 <li>
                   <a href="http://adhawk.sunlightfoundation.com/ad/">All Ads </a>
@@ -13,13 +15,15 @@
                 </li>
               </ul>
               
+              
+              -->
               <!-- Gigya Things-->
-              <div    class="share-buttons"
+              <div class="share-buttons"
                     data-gigya="auto"
                     data-services="twitter, facebook"
-                    data-options="linkBack={{ request.build_absolute_uri|urlencode:"" }}&amp;title={{ "Blah blah blah"|urlencode:""}}&amp;cid={{ "Ad-Hawk_ad_197"|urlencode:"" }}&amp;shortURLs=always&amp;"
+                    data-options="linkBack={{ request.build_absolute_uri|urlencode:"" }}&amp;title={{ "Blah blah blah"|urlencode:""}}&amp;cid={{ "Ad-Hawk_ad_197"|urlencode:"" }}&amp;shortURLs=always&amp;">
               </div>
               <!-- end Gigya Things -->
-            </div>
+          </div>
         </div> <!-- end div breadcrumbs -->
 {% endblock %}

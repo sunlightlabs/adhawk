@@ -46,7 +46,13 @@ header .contentbox{
 #breadcrumbs {
     padding-left: 5%;
     width: 95%;
+    padding-top:15px;
+    padding-bottom:15px;
     }
+    
+#breadcrumbs  img{
+    padding-right: 15px;
+        }    
 
 .buffer {
     padding-left: 0;
@@ -57,9 +63,6 @@ h1#logo{
     margin: 27px 0 27px 5%;
     }
 
-nav {
-    padding-right: 0;
-    }
 
 #funder_name {
     width: 100%;
@@ -94,23 +97,21 @@ nav {
     padding-left: 0;
     padding-bottom: 2em;
 }
-
-#financial_info{
-    }  
+ 
 
 #total_spent{
-    width: 100%;
-    float: left
+    width: 40%;
+    float: left;
        }
 
 #cash_hand{
-    width: 100%;
-    float: left
+    width: 40%;
+    float: left;
+    padding-left:5%;
+    border-left: 1px solid #f4eee3;;
     }
 
 
-
-    
 .strip {
     float: none;
     margin-top: 0;
@@ -132,22 +133,18 @@ nav {
     float: none;
     }
 
+#funder_received.line_c
+{
+    background: url("http://design.sunlightlabs.com/AdHawk/line_a.png") repeat-x bottom left;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+}
+
 #funder_received p,
 #financial_info p {
     font-weight: bold;
     }
   
-#financial_info {
-  -webkit-column-count: 2;
-  -webkit-column-gap: 30px; 
-  -webkit-column-rule: 1px solid #f4eee3;
-  -moz-column-count: 2;
-  -moz-column-gap: 30px;  
-  -moz-column-rule: 1px solid #f4eee3;
-  column-count: 2;
-  column-gap: 30px; 
-  column-rule: 1px solid #f4eee3;
- } 
 	
    
  #title {
@@ -185,8 +182,8 @@ nav {
 * NAV
 */
 
-
 nav {
+    padding-right: 0;
     float: none;
     clear: both;
     background-color: #7b705a;
@@ -202,7 +199,7 @@ nav ul {
 nav li {
     float: left;
     font-size: 0.875em;
-    padding: .8em 0;
+    padding: 1em 0;
     margin:0;
     border-right: 1px #564e3e solid;
     width:25%;
@@ -217,7 +214,7 @@ nav ul.noSearch li {
     width:33.333333333333%;
 }
 
-nav li a, nav li a:visited{
+nav li a, nav li a:link, nav li a:visited{
     color: #d4d0c9;
     text-decoration: none;
     font-weight: bold;
@@ -233,6 +230,8 @@ nav li:hover, nav li:active{
 nav li:hover a, nav:active li a{
     color: #ffffff;
 }
+ 
+ 
     
 
 /* LANDING PAGE */
@@ -307,15 +306,28 @@ nav li:hover a, nav:active li a{
     background-color: #c0b49c;
     padding:1em 5% 1em 5%;
     min-height: 30px;
+    width: 90%;
+    border-top: 1px solid #564e3e;
 } 
 
-.mobile-footer img{
+.sun-logo{
     float: right;
     height:26px;
     width: 83px;
     
 }  
 
+
+.mobile-footer .sharebuttons{
+    float:left;
+}
+
+
+#share_buttons_2 {
+    float: left;
+    padding-top: 5px;
+    width: 50%;
+    padding-right: 10px;
 
 /* Mobile Buttons */
 
