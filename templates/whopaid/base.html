@@ -110,12 +110,12 @@
         
         <div class="mobile-footer">
             <!-- Gigya Things-->
-            <div    class="share-buttons"
+              <div    class="share-buttons"
                     data-gigya="auto"
-                    data-services="twitter, twitter-tweet, facebook, reddit"
-                    data-options="linkBack=http%3A%2F%2Fadhawk.sunlightfoundation.com&amp;title=Ad%20Hawk%20from%20The%20Sunlight%20Foundation"
-                    data-twitter-tweet-options="defaultText=Check%20out%20Sunlight's%20new%20social%20media%20buttons!&amp;countURL=http%3A%2F%2Fwww.sunlightfoundation.com">
-            </div>
+                    data-services="twitter, facebook"
+                    data-options="linkBack={{ request.build_absolute_uri|urlencode:"" }}&amp;title={{ "Blah blah blah: "|urlencode:""}} {{ request.build_absolute_uri }}"
+                    data-twitter-tweet-options="defaultText={{ "Blah blah blah blah!"|urlencode:"" }}&amp;countURL={{ request.get_full_path|urlencode:"" }}">
+              </div>
             <!-- end Gigya Things -->
             <a href="http://sunlightfoundation.com/">
                 <img src="http://design.sunlightlabs.com/AdHawk/AdHawk_footer-sunlight-mobile.png" alt="Sunlight Foundation">
