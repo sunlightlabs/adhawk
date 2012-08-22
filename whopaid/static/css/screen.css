@@ -1135,6 +1135,15 @@ nav li a:hover, nav li a:active{
     clear: both;
 
     }
+    
+.signup-thanks{
+    font-family: Helvetica, Arial, sans-serif;
+    color: #564e3e;
+    font-weight:bold;
+    text-align: center;
+    line-height: 1.3em;
+    padding: 0 2em 2.5em 2em;
+}    
 
 
 /* Top-ads */
