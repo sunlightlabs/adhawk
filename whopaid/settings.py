@@ -134,6 +134,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'spammer',
     'search',
     'haystack',
     'knowledge_base',
@@ -142,7 +143,7 @@ INSTALLED_APPS = (
     'fts',
     'db_script',
     'south',
-    
+
     'debug_toolbar',
 )
 

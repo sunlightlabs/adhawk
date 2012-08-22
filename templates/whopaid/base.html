@@ -59,10 +59,10 @@
                         <li id="sunlight-logo">
                             <div>
                                 <a href="http://www.sunlightfoundation.com"><img src="http://design.sunlightlabs.com/AdHawk/AdHawk_sunlight-logo.jpg" alt="Sunlight Foundation Logo"></a>
-                            </div>                    
+                            </div>
                         </li>
                     </ul>
-                </nav> 
+                </nav>
                 <!-- SEARCH BIZ FOR LATER TIMES
                 <div id="search" class="clearfix">
                     <form action="/search/" method="get">
@@ -72,7 +72,7 @@
                         </button>
                     </form>
                 </div>
-                --> 
+                -->
                 <div class="clear"></div>
             </div>
         </div>
@@ -91,13 +91,17 @@
                 <p>Join the Sunlight Foundation's open government community to learn more.</p>
             </div>
             <div class="signup">
-                <form action="/search/" method="get">  <!-- make signup, not search-->
-                    <input class="transparent email" type="search" placeholder="Email Address">
-                    <input class="transparent zipcode" type="search" placeholder="Zip Code">
+                <form action="{% url mailinglist_subscribe %}" method="post" id="signup-form">  <!-- make signup, not search-->
+                    {% csrf_token %}
+                    <input class="transparent email" type="email" name="email" placeholder="Email Address">
+                    <input class="transparent zipcode" type="text" name="zipcode" placeholder="Zip Code">
                     <button class="css3button signup-button" type="submit">
                         <span>Sign Up</span>
                     </button>
                 </form>
+                <div class="signup-thanks" style="display: none;">
+                    Thanks for your high-flying interest in AdHawk!
+                </div>
             </div>
             <div class="sunlightinfo">
                 <a href="http://sunlightfoundation.com"><img src="http://design.sunlightlabs.com/AdHawk/AdHawk_footer-sunlight.png" alt="the Sunlight Foundation"></a>
@@ -105,7 +109,7 @@
             </div>
         </div>
         </div>
-        
+
         <div class="mobile-footer">
             <!-- Gigya Things-->
               <div class="share-buttons"
@@ -115,13 +119,51 @@
                     data-twitter-tweet-options="defaultText={{ "Blah blah blah blah!"|urlencode:"" }}&amp;countURL={{ request.get_full_path|urlencode:"" }}">
               </div>
             <!-- end Gigya Things -->
-            <a href="http://sunlightfoundation.com/">
+            <div class="sun-logo">
+                <a href="http://sunlightfoundation.com/">
                 <img src="http://design.sunlightlabs.com/AdHawk/AdHawk_footer-sunlight-mobile.png" alt="Sunlight Foundation">
-            </a>
+                </a>
+            </div>
         </div>
-        
+
     </footer>
     {% endif %}
   </div> <!-- end div page -->
+    <script>
+        $(document).ready(function() {
+
+            var $signupForm = $('#signup-form');
+
+            $signupForm.submit(function(ev) {
+
+                ev.preventDefault();
+
+                var params = {
+                    csrfmiddlewaretoken: $signupForm.find('input[name=csrfmiddlewaretoken]').val(),
+                    email: $signupForm.find('input[name=email]').val(),
+                    zipcode: $signupForm.find('input[name=zipcode]').val(),
+                    response: 'json'
+                };
+
+                $.post(
+                    $signupForm.attr('action'),
+                    params,
+                    function(data, status, xhr) {
+
+                        console.log(data);
+
+                        $signupForm.fadeOut(400, function() {
+                            $('.signup-thanks').fadeIn().css('display', 'inline-block');
+                        });
+
+                    }
+                );
+
+                $signupForm.find('button[type=submit]').fadeOut();
+
+            });
+
+        });
+    </script>
   </body>
 </html>
