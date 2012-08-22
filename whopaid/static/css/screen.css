@@ -17,7 +17,7 @@
 
 .wf-inactive {
    /* styles to use when web fonts are inactive */
-  font-family: "Arial Black", sans-serif;
+  font-family: "Arial Black", serif;
   font-style: normal;
   font-weight: bold;
   }
@@ -48,7 +48,7 @@ body {
 
 h1{
   font-size: 1.5em;
-  font-family: "ltc-squareface-sc-n4", "ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
+  font-family: "ltc-squareface-sc-n4", "ltc-squareface-sc", "Arial Black", Georgia, serif;
   font-style: normal;
   font-weight: 400;
   padding-top: 4px;
@@ -60,7 +60,7 @@ h1{
 h3 {
      font-size: .8em;
      color: #c7b188;
-     font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
+     font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, serif;
      font-style: normal;
      font-weight: 400;
      opacity:1;
@@ -76,7 +76,7 @@ h4 {
      
 p {
    font-size: .9em;
-   font-family: Helvetica, Arial, "helvetica neue", sans-serif;
+   font-family: Helvetica, Arial, sans-serif;
    font-weight: normal;
    font-style: normal;
    color: #000000;
@@ -123,7 +123,7 @@ a:hover {
 }
 #top_ad_list h2 a{
       font-size: .8em;
-      font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
+      font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, serif;
       font-style: normal;
       font-weight: 400;
       color: #564e3f;
@@ -207,7 +207,7 @@ a:hover {
 
 #title h2 {
       font-size: 1.5em;
-      font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
+      font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, serif;
       font-style: normal;
       font-weight: 400;
       max-width: 40%;
