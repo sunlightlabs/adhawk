@@ -4,118 +4,121 @@
 	
 <div id="funder">
 
+      <div class="contentbox clearfix">
+        <div class="main-results clearfix">
+              {% if funder_family.description %}
+              <div id="funder_description" class="line_c line_d">
+                  <h3>About:</h3>
+                  <p>{{funder_family.description}}<p>
+                </div> <!-- end div funder_description -->
+              {% endif %}
+              <div id="funder_activities" class="line_c clearfix">
+                <h3>Activities:</h3>
+                <ul>{% for committee_type in funder_family.committee_types.all %}
+                    <li>{{ committee_type.name }}</li>
+                  {% endfor %}
+                </ul>
+              </div> <!-- end div funder_activites -->
+           
+                {% comment %}
+                 <div id="where_aired" class="line_c">
+                   <h3>Where it Aired:</h3> 
+                    <!-- code for where it aired goes here -->
+                 </div> <!-- end div where_aired -->
+                  {% endcomment %}
       
-      
-      {% if funder_family.description %}
-      <div id="funder_description" class="line_a">
-      <h3>About:</h3>
-        <p>{{funder_family.description}}<p>
-      </div> <!-- end div funder_description -->
-      {% endif %}
-      <div id="funder_activities" class="line_a">
-        <h3>Activities:</h3>
-        <ul>{% for committee_type in funder_family.committee_types.all %}
-            <li>{{ committee_type.name }}</li>
-          {% endfor %}
-        </ul>
-      </div> <!-- end div funder_activites -->
-      
-      <div id="funder_received" class="line_a">
-        <h3>Total Received: </h3> 
-        <p>${{ funder_family.total_contributions|floatformat:0|intcomma }}</p>
-	  </div><!-- end div funder_received -->
+              {# <div id="" class="line_d"> #}
+                  <div id="funder_received" class="line_c clearfix">
+                      <h3>Total Received: </h3> 
+                      <p>${{ funder_family.total_contributions|floatformat:0|intcomma }}</p>
+        	      </div><!-- end div funder_received -->
 	 
-      <div id="financial_info" class="line_a">  
-        <div id="total_spent">
-          <h3>Total Spent:</h3> 
-          <p>${{ funder_family.total_independent_expenditures|floatformat:0|intcomma }}</p>
-        </div>
+                  <div id="financial_info" class="line_c clearfix">  
+                      <div id="total_spent" >
+                          <h3>Total Spent:</h3> 
+                          <p>${{ funder_family.total_independent_expenditures|floatformat:0|intcomma }}</p>
+                      </div>
         
-        <div id="cash_hand">
-          <h3>Cash on hand:</h3> 
-          <p>${{ funder_family.cash_on_hand|floatformat:0|intcomma }}<p>
-        </div>
+                      <div id="cash_hand">
+                          <h3>Cash on hand:</h3> 
+                          <p>${{ funder_family.cash_on_hand|floatformat:0|intcomma }}<p>
+                          </div>
 
-      </div> <!-- end div funder_financial_info -->
-
+                      </div> <!-- end div funder_financial_info -->
+                {# </div> #}
       
-     <div id="funder_chart" class="line_a">
-       <h3>Independent Expenditure Summary:</h3> 
-         <div id="graph">
-           <div class="clearfix">
-            <h3 class="left">Oppose</h3>
-            <h3 class="right">Support</h3>
-            </div>
+             <div id="funder_chart" class="line_c clearfix">
+               <h3>Independent Expenditure Summary:</h3> 
+                 <div id="graph">
+                   <div>
+                    <h3 class="left">Oppose</h3>
+                    <h3 class="right">Support</h3>
+                    </div>
             
-              <div class="section border">
-                <ul class="chartlist">
-                    <li>
-                        <span class="count count-right">${{ funder_family.ie_opposes_dems|floatformat:0|intcomma }}</span>
-                        <span class="bar right neg-dem" style="width: {% widthratio funder_family.ie_opposes_dems funder_family.total_independent_expenditures 100 %}%">({% widthratio funder_family.ie_opposes_dems funder_family.total_independent_expenditures 100 %}%)</span>
-                    </li>
+                      <div class="section border">
+                        <ul class="chartlist">
+                            <li>
+                                <span class="count count-right">${{ funder_family.ie_opposes_dems|floatformat:0|intcomma }}</span>
+                                <span class="bar right neg-dem" style="width: {% widthratio funder_family.ie_opposes_dems funder_family.total_independent_expenditures 100 %}%">({% widthratio funder_family.ie_opposes_dems funder_family.total_independent_expenditures 100 %}%)</span>
+                            </li>
 
-                    <li>
-                        <span class="count count-right">${{ funder_family.ie_opposes_reps|floatformat:0|intcomma }}</span>
-                        <span class="bar right neg-rep" style="width: {% widthratio funder_family.ie_opposes_reps funder_family.total_independent_expenditures 100 %}%">({% widthratio funder_family.ie_opposes_reps funder_family.total_independent_expenditures 100 %}%)</span>
-                    </li>
-                </ul>
-           </div>
+                            <li>
+                                <span class="count count-right">${{ funder_family.ie_opposes_reps|floatformat:0|intcomma }}</span>
+                                <span class="bar right neg-rep" style="width: {% widthratio funder_family.ie_opposes_reps funder_family.total_independent_expenditures 100 %}%">({% widthratio funder_family.ie_opposes_reps funder_family.total_independent_expenditures 100 %}%)</span>
+                            </li>
+                        </ul>
+                   </div>
 
-          <div class="section">
-               <ul class="chartlist">
-                    <li>
-                         <span class="count count-left">${{ funder_family.ie_supports_dems|floatformat:0|intcomma }}</span>
-                         <span class="bar left pro_dem" style="width: {% widthratio funder_family.ie_supports_dems funder_family.total_independent_expenditures 100 %}%">({% widthratio funder_family.ie_supports_dems funder_family.total_independent_expenditures 100 %}%)</span>
-                    </li>
+                  <div class="section">
+                       <ul class="chartlist">
+                            <li>
+                                 <span class="count count-left">${{ funder_family.ie_supports_dems|floatformat:0|intcomma }}</span>
+                                 <span class="bar left pro_dem" style="width: {% widthratio funder_family.ie_supports_dems funder_family.total_independent_expenditures 100 %}%">({% widthratio funder_family.ie_supports_dems funder_family.total_independent_expenditures 100 %}%)</span>
+                            </li>
 
-                    <li>
-                          <span class="count  count-left">${{ funder_family.ie_supports_reps|floatformat:0|intcomma }}</span>
-                          <span class="bar left pro-rep" style="width: {% widthratio funder_family.ie_supports_reps funder_family.total_independent_expenditures 100 %}%">({% widthratio funder_family.ie_supports_reps funder_family.total_independent_expenditures 100 %}%)</span>
-                    </li>
-                </ul>
+                            <li>
+                                  <span class="count  count-left">${{ funder_family.ie_supports_reps|floatformat:0|intcomma }}</span>
+                                  <span class="bar left pro-rep" style="width: {% widthratio funder_family.ie_supports_reps funder_family.total_independent_expenditures 100 %}%">({% widthratio funder_family.ie_supports_reps funder_family.total_independent_expenditures 100 %}%)</span>
+                            </li>
+                        </ul>
                
-          </div>
+                  </div>
           
-           <div class="lables">
-                <p class="lables-left">100%</p>
-                <p class="lables-center">50%</p>
-                <p class="lables-center">0</p>
-                <p class="lables-center">50%</p>
-                <p class="lables-right">100%</p>
-            </div>
+                   <div class="lables">
+                        <p class="lables-left">100%</p>
+                        <p class="lables-center">50%</p>
+                        <p class="lables-center">0</p>
+                        <p class="lables-center">50%</p>
+                        <p class="lables-right">100%</p>
+                    </div>
             
             
             
 
 	    
-	    <div class="full-key">
-                <div class="neg-dem key"></div>
-                <div class="pro_dem key"></div>
-                <div class="lables"><p>Democrat</p></div>
-                <div class="neg-rep key"></div>
-                <div class="pro-rep key"></div>
-                <div class="lables"><p>Republican</p></div>
+        	    <div class="full-key">
+                        <div class="neg-dem key"></div>
+                        <div class="pro_dem key"></div>
+                        <div class="lables"><p>Democrat</p></div>
+                        <div class="neg-rep key"></div>
+                        <div class="pro-rep key"></div>
+                        <div class="lables"><p>Republican</p></div>
 
-         </div>
+                 </div>
 
-       </div>
-
-     </div> <!-- end div funder_chart -->
-      {% comment %}
-     <div id="where_aired" class="line_a">
-       <h3>Where it Aired:</h3> 
-        <!-- code for where it aired goes here -->
-     </div> <!-- end div where_aired -->
-      {% endcomment %}
-     <div id="more_info" class="line_a">
-       <h3>More Information:</h3> 
-         <ul>
-            <li><a href="http://reporting.sunlightfoundation.com/">Follow the Unlimited Money</a></li>
-            <li><a href="http://influenceexplorer.com">Influence Explorer</a></li>
-            <li><a href="http://politicaladsleuth.sunlightfoundation.com/">Political Ad Sleuth</a></li>
-         </ul>
-     </div> <!-- end div where_aired -->
-     
+                </div>
+               </div>
+             </div> <!-- end div funder_chart -->
+          
+         <div id="more_info">
+           <h3>More Information:</h3> 
+             <ul>
+                <li><a href="http://reporting.sunlightfoundation.com/">Follow the Unlimited Money</a></li>
+                <li><a href="http://influenceexplorer.com">Influence Explorer</a></li>
+                <li><a href="http://politicaladsleuth.sunlightfoundation.com/">Political Ad Sleuth</a></li>
+             </ul>
+         </div> <!-- end div where_aired -->
+     </div>
 </div>   
       
 {% endblock %}

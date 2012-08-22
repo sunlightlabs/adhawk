@@ -95,6 +95,7 @@ TEMPLATE_LOADERS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.request',
     'django.core.context_processors.static',
 )
 
@@ -135,6 +136,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'spammer',
     'search',
     'haystack',
     'knowledge_base',
@@ -143,7 +145,7 @@ INSTALLED_APPS = (
     'fts',
     'db_script',
     'south',
-    
+
     'debug_toolbar',
 )
 

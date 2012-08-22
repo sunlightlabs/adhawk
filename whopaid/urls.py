@@ -15,10 +15,14 @@ urlpatterns = patterns('',
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-    # Uncomment the next line to enable the admin: 
+    # Uncomment the next line to enable the admin:
+    url(r'^$','whopaid.views.landing_page'),
+    url(r'^400/','django.views.defaults.page_not_found'),
+    url(r'^500/','django.views.defaults.server_error'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/',include('whopaid_api.urls')),
     url(r'^troubleshooting/','whopaid.views.no_match'),
+    url(r'^mailinglist/', include('spammer.urls')),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': settings.MEDIA_ROOT}),
     url(r'^about/$','whopaid.views.about'),
