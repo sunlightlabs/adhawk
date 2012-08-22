@@ -9,11 +9,13 @@ SITE_ROOT = os.path.realpath(
 
 POSTMARK_API_KEY = '***REMOVED***'
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+DEBUG = False
+TEMPLATE_DEBUG = False
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
+    ('timbal', 'timball@sunlightfoundation.com'),
+    ('bob pants', 'blannon@sunlightfoundation.com'),
 )
 
 MANAGERS = ADMINS
