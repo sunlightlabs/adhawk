@@ -87,9 +87,6 @@ p {
    margin-bottom: 1em;
    }
    
-p a{
-   color: #931f0a;
-   }
    
 a, a:link, a:visited {
     color: #931f0a;
@@ -499,7 +496,7 @@ nav li {
     padding-left: 10px;
     }
 
-nav li a, nav li a:visited{
+nav li a:link, nav li a, nav li a:visited{
     color: #FFF;
     text-decoration: none;
     font-weight: bold;
