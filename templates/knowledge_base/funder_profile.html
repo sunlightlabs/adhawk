@@ -27,7 +27,8 @@
                  </div> <!-- end div where_aired -->
                   {% endcomment %}
       
-              {# <div id="" class="line_d"> #}
+                  {# <div id="" class="line_d"> #}
+                    {% if funder_family.total_contributions > 0 or funder_family.total_independent_expenditures > 0 %}
                   <div id="funder_received" class="line_c clearfix">
                       <h3>Total Received: </h3> 
                       <p>${{ funder_family.total_contributions|floatformat:0|intcomma }}</p>
@@ -109,7 +110,7 @@
                 </div>
                </div>
              </div> <!-- end div funder_chart -->
-          
+             {% endif %} 
          <div id="more_info">
            <h3>More Information:</h3> 
              <ul>
