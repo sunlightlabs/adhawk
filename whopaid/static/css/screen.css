@@ -679,7 +679,10 @@ nav li a:hover, nav li a:active{
           color: #564e3e;
           } 
    
-   
+#funder_received p,
+#financial_info p {
+    font-weight: bold;
+}   
    
    
     
