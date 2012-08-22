@@ -10,7 +10,7 @@ class CachedS3BotoStorage(S3BotoStorage):
     def __init__(self, *args, **kwargs):
         super(CachedS3BotoStorage, self).__init__(*args, **kwargs)
         self.local_storage = get_storage_class(
-            "django.core.files.storage.FileSystemStorage")()
+            "django.contrib.staticfiles.storage.StaticFilesStorage")()
 
     def save(self, name, content):
         content.seek(0, os.SEEK_SET)
