@@ -60,7 +60,7 @@ header .contentbox{
 
 
 h1#logo{
-    margin: 27px 0 27px 5%;
+    margin: 26px 0 24px 5%;
     }
 
 
@@ -290,6 +290,10 @@ nav li:hover a, nav:active li a{
     padding-left: 0;
 }
 
+.hone-in {
+    max-height: 79px;
+    max-width: 337px;
+}
 
     
 /* FOOTER */
@@ -325,12 +329,12 @@ nav li:hover a, nav:active li a{
     padding-top: 5px;
     width: 50%;
     padding-right: 10px;
+}
 
 /* Mobile Buttons */
 
 
 .mobilePrompt{
-  float: none;
   margin-top: 0;
   width: 90%;
 }
