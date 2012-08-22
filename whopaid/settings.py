@@ -1,4 +1,7 @@
 # Django settings for whopaid project.
+DEBUG = False
+TEMPLATE_DEBUG = False
+
 from local_settings import *
 from logging.handlers import SMTPHandler
 import os.path
@@ -9,8 +12,6 @@ SITE_ROOT = os.path.realpath(
 
 POSTMARK_API_KEY = '***REMOVED***'
 
-DEBUG = False
-TEMPLATE_DEBUG = False
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
