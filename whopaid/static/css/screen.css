@@ -1234,7 +1234,7 @@ nav li a:hover, nav li a:active{
     header .contentbox {
       background: url(http://design.sunlightlabs.com/AdHawk/AdHawk_stars.png) no-repeat top left;
     }
-    header{
+    header, .header{
       background-image: none;
     }
 
