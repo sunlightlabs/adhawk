@@ -127,6 +127,10 @@ class AdAdmin(admin.ModelAdmin):
             'stances'
             ]
     search_fields = ['title','profile_url']
+    list_display = ('__unicode__',
+            'title',
+            'top_ad',)
+    list_editable = ('top_ad',)
 
 class CoverageAdmin(admin.ModelAdmin):
     fields = ('url',
