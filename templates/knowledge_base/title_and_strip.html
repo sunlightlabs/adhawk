@@ -5,7 +5,10 @@
       <div id="title" class="contentbox">
         <h2>{{ ad.title }}</h2>
         {% if client = "ios" or client = "android" %}
-        <p><a href="http://adhawk.sunlightfoundation.com/ad/nn/{{ media.pk}}">not your ad?</a></p>
+        <p>
+        <a href="http://adhawk.sunlightfoundation.com/troubleshooting/">not your ad?</a>
+        <!-- <a href="http://adhawk.sunlightfoundation.com/ad/nn/{{ media.pk}}">not your ad?</a> -->
+        </p>
         {% endif %}
       
         <a id="youtube_link" href="{{ media.url }}"><img class="strip" src="http://adhawk.sunlightfoundation.com/media/images/media_thumbnails/strips/Media_{{ media.pk|stringformat:"05i" }}_strip.jpg" alt="youtube thumbnail"></a>
