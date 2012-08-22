@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-
+{% load staticfiles %}
 <html lang="en">
   <head>
-    <script type='text/javascript' src='../static/js/jquery-1.7.2.min.js'></script>
-    <script type='text/javascript' src='../static/js/protoFluid3.02.js'></script>
+    <script type='text/javascript' src='{% static "js/jquery-1.7.2.min.js" %}'></script>
+    <script type='text/javascript' src='{% static "js/protoFluid3.02.js" %}'></script>
 
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Ad Hawk from the Sunlight Foundation</title>
 
-    <link rel="shortcut icon" href="../static/img/favicon.ico">
+    <link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <script src="http://assets.sunlightfoundation.com.s3.amazonaws.com/site/4.0/scripts/gigya.min.js"></script>
@@ -18,8 +18,8 @@
     <meta name="keywords" content="" />
     <meta name="description" content="Discover who is behind the super pacs and other groups buying the political ads you see during this election" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/core.css" type="text/css" />
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/antiscreen.css" type="text/css" media="handheld,screen and (max-width: 800px)" />
+    <link rel="stylesheet" href="{% static "css/core.css" %}" type="text/css" />
+    <link rel="stylesheet" href="{% static "css/antiscreen.css" %}" type="text/css" media="handheld,screen and (max-width: 800px)" />
     <script type="text/javascript">
 
   var _gaq = _gaq || [];

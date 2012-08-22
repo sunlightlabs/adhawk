@@ -9,6 +9,12 @@ SITE_ROOT = os.path.realpath(
 
 POSTMARK_API_KEY = '***REMOVED***'
 
+AWS_ACCESS_KEY_ID = '***REMOVED***'
+AWS_SECRET_ACCESS_KEY = '***REMOVED***'
+AWS_STORAGE_BUCKET_NAME = 'assets.adhawk'
+AWS_IS_GZIPPED = False
+AWS_S3_SECURE_URLS = False
+
 DEBUG = False
 TEMPLATE_DEBUG = False
 
@@ -59,11 +65,13 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = os.path.join(SITE_ROOT,'site_static')
+STATIC_ROOT = os.path.join(SITE_ROOT, 'site_static')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
+
+STATICFILES_STORAGE = 'whopaid.storage.CachedS3BotoStorage'
 
 ADMIIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
