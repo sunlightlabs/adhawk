@@ -14,3 +14,6 @@ python-dateutil==1.5
 wsgiref==0.1.2
 xlrd==0.7.1
 django-debug-toolbar==0.9.4
+
+django-storages
+boto
