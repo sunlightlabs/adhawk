@@ -328,7 +328,7 @@ nav li:hover a, nav:active li a{
     padding-top: 5px;
     width: 50%;
     padding-right: 10px;
-
+}
 /* Mobile Buttons */
 
 
@@ -351,15 +351,59 @@ nav li:hover a, nav:active li a{
   width: 90%;
 }
 
+
+
+
+
+
 /* TOP ADS */
+
+
 #top_ad_list .strip{
   float: none;
 }
 
-#top_ad_list .stripDescrip{
-  width: auto;
-  float: none;
+#top_ad_list .stripDescrip {
+    float: none;
+    width: auto;
 }
+
+#top_ad_list .strip {
+    float: none;
+    margin-top: 0;
+    max-width: 100%;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
