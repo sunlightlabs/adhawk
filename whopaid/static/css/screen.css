@@ -63,7 +63,6 @@ h3 {
      font-family: "ltc-squareface-sc-n4","ltc-squareface-sc", "Arial Black", Georgia, sans-serif;
      font-style: normal;
      font-weight: 400;
-     filter:alpha(opacity=100);
      opacity:1;
      }
 
@@ -77,11 +76,10 @@ h4 {
      
 p {
    font-size: .9em;
-   font-family: Helvetica, Arial, sans-serif;
+   font-family: Helvetica, Arial, "helvetica neue", sans-serif;
    font-weight: normal;
    font-style: normal;
    color: #000000;
-   filter: alpha(opacity=100);
    opacity: 1;
    line-height: 1.25em;
    margin-bottom: 1em;
@@ -590,17 +588,18 @@ nav li a:hover, nav li a:active{
 /* ABOUT */  
 
 #about_content {
-    background-color: #FFF;
-    filter:alpha(opacity=60);
-    opacity:.6;
+    background: url(../img/bg_content.png) top left repeat;
     margin: 2em 5% 2em 5%;
     padding: 2em 5%;
     border-top:2px solid #9e8d6e;
     border-bottom:2px solid #9e8d6e;
     float:left;
     width:45%;
+    color: #564e3e;
     }
-
+#about_content p{
+    color: #564e3e;
+    }
 #about_intro{
     padding: 2em 5% 2em 0;
     float:right;
@@ -614,7 +613,7 @@ nav li a:hover, nav li a:active{
 
 #about_intro p{
     font-size: .9em;
-     color: #6e614b;
+     color: #564e3e;
       font-family: Helvetica, Arial, sans-serif;
       font-style: italic;
       font-weight: normal;
@@ -665,8 +664,7 @@ nav li a:hover, nav li a:active{
        font-family: Helvetica, Arial, sans-serif;
        font-weight: normal;
        font-style: normal;
-       color: #000000;
-       filter:alpha(opacity=100);
+       color: #564e3e;
        opacity:1;
        line-height: 1.25em;
        padding: 2px;
@@ -678,7 +676,7 @@ nav li a:hover, nav li a:active{
        }
 
 #about_content h3{
-          color: #000000;
+          color: #564e3e;
           } 
    
    
