@@ -945,6 +945,9 @@ nav li a:hover, nav li a:active{
     background-color: #c0b49c;
     width: 84%;
     padding: 2em 8% 1em 8%;
+    border-bottom: 1px solid #564e3e;
+    border-top: 1px solid #564e3e;
+    
 }
 
 
@@ -1040,6 +1043,8 @@ nav li a:hover, nav li a:active{
     padding: 3em 8%;
     height: 12em;
     margin-top:0;
+    border-top: 1px solid #564e3e;
+    
     }
     
 .desktop-footer p{
