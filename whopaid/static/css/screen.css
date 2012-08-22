@@ -938,7 +938,7 @@ nav li a:hover, nav li a:active{
 
 .landing-main{
     width: 84%;
-    padding: 2em 8%;
+    padding: 4em 8%;
 }
 
 .landing-splash{
@@ -997,7 +997,7 @@ nav li a:hover, nav li a:active{
 .first {
     width: 32%;
     padding-right: 2.5%;
-    border-right: 1px #c0b49c solid;
+    border-right: 1px #f6f0e7 solid;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -1007,7 +1007,7 @@ nav li a:hover, nav li a:active{
     width: 34%;
     padding-right: 2.5%;
     padding-left: 2.5%;
-    border-right: 1px #c0b49c solid;
+    border-right: 1px #f6f0e7 solid;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -1044,7 +1044,6 @@ nav li a:hover, nav li a:active{
     height: 12em;
     margin-top:0;
     border-top: 1px solid #564e3e;
-    
     }
     
 .desktop-footer p{
@@ -1118,8 +1117,8 @@ nav li a:hover, nav li a:active{
 .sunlightinfo{
     border-top: 1px solid #d4cec4;
     clear: both;
-    padding-top: 10px;
-    margin-top: 10px;
+    padding-top: 30px;
+    margin-top: 30px;
 }
 
 .sunlightinfo p{
