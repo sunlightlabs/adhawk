@@ -301,14 +301,20 @@ nav li:hover a, nav:active li a{
     background-color: #c0b49c;
     padding:1em 5% 1em 5%;
     min-height: 30px;
+    width: 90%;
 } 
 
-.mobile-footer img{
+.sun-logo{
     float: right;
     height:26px;
     width: 83px;
     
 }  
+
+
+.mobile-footer .sharebuttons{
+    float:left;
+}
 
 
 /* Mobile Buttons */

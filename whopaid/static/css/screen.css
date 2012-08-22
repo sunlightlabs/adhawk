@@ -878,6 +878,8 @@ nav li a:hover, nav li a:active{
   padding-left: 8%;
   margin-bottom:0;
   float:left; 
+  padding-top:3px;
+  padding-bottom:3px;
   
 }
 
@@ -962,6 +964,12 @@ nav li a:hover, nav li a:active{
     width:100%;
     clear:both;
     line-height: 1.4em;
+}
+
+.landing-splash .share-buttons{
+    float:left;
+    margin-top: 20px;
+    padding-left: 1%;
 }
 
 .phone-screenshot{
