@@ -94,23 +94,21 @@ nav {
     padding-left: 0;
     padding-bottom: 2em;
 }
-
-#financial_info{
-    }  
+ 
 
 #total_spent{
-    width: 100%;
-    float: left
+    width: 40%;
+    float: left;
        }
 
 #cash_hand{
-    width: 100%;
-    float: left
+    width: 40%;
+    float: left;
+    padding-left:5%;
+    border-left: 1px solid #f4eee3;;
     }
 
 
-
-    
 .strip {
     float: none;
     margin-top: 0;
@@ -132,22 +130,18 @@ nav {
     float: none;
     }
 
+#funder_received.line_c
+{
+    background: url("http://design.sunlightlabs.com/AdHawk/line_a.png") repeat-x bottom left;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+}
+
 #funder_received p,
 #financial_info p {
     font-weight: bold;
     }
   
-#financial_info {
-  -webkit-column-count: 2;
-  -webkit-column-gap: 30px; 
-  -webkit-column-rule: 1px solid #f4eee3;
-  -moz-column-count: 2;
-  -moz-column-gap: 30px;  
-  -moz-column-rule: 1px solid #f4eee3;
-  column-count: 2;
-  column-gap: 30px; 
-  column-rule: 1px solid #f4eee3;
- } 
 	
    
  #title {

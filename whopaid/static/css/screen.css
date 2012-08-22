@@ -194,10 +194,6 @@ a:hover {
     float: left
 }
 
- 
-#financial_info{
-    
-}  
 
 #total_spent{
     width: 33%;
@@ -301,6 +297,8 @@ a:hover {
    font-weight: bold;
    font-family: Helvetica, Arial, sans-serif;
   }   
+
+
 
 
 
@@ -574,7 +572,21 @@ nav li a:hover, nav li a:active{
     margin-bottom: 30px;
     padding-bottom: 30px;
     width: 100%;
-    }   
+    }  
+
+.line_c {
+    background: url("http://design.sunlightlabs.com/AdHawk/line_a.png") repeat-x bottom left;  
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    width: 100%;
+}
+
+#funder_received
+{
+    background: none;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
 
 
 /* ABOUT */  
