@@ -211,7 +211,7 @@ nav ul.noSearch li {
     width:33.333333333333%;
 }
 
-nav li a, nav li a:visited{
+nav li a, nav li a:link, nav li a:visited{
     color: #d4d0c9;
     text-decoration: none;
     font-weight: bold;

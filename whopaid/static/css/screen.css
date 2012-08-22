@@ -377,25 +377,26 @@ a:hover {
 
 
 
-header {
+header, .header{
     width: 100%;
     height: 140px;
-    background: #94866a url('../img/bg_stars.png') center -1px no-repeat;
+    background-color: #94866a ;
+    background-image:  url(../img/bg_stars.png);
+    background-position: center -1px;
+    background-repeat: no-repeat;
+
     }  
 .gradient-header{
-    background-image: -moz-radial-gradient(center center , ellipse closest-side, transparent 70%, rgba(0, 0, 0, 0.5) 140%);
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0)), color-stop(38%,rgba(0,0,0,0)), color-stop(99%,rgba(0,0,0,0.28)), color-stop(100%,rgba(0,0,0,0.28))); /* Chrome,Safari4+ */
-    background: -webkit-radial-gradient(center, ellipse cover, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 38%,rgba(0,0,0,0.28) 99%,rgba(0,0,0,0.28) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-radial-gradient(center, ellipse cover, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 38%,rgba(0,0,0,0.28) 99%,rgba(0,0,0,0.28) 100%); /* Opera 12+ */
-    background: -ms-radial-gradient(center, ellipse cover, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 38%,rgba(0,0,0,0.28) 99%,rgba(0,0,0,0.28) 100%); /* IE10+ */
-    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 38%,rgba(0,0,0,0.28) 99%,rgba(0,0,0,0.28) 100%); /* W3C */
-    
+
+    background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.14) 38%, rgba(0,0,0,0.28) 99%, rgba(0,0,0,0.28) 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.05)), color-stop(38%,rgba(0,0,0,0.14)), color-stop(99%,rgba(0,0,0,0.28)), color-stop(100%,rgba(0,0,0,0.28))); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.14) 38%,rgba(0,0,0,0.28) 99%,rgba(0,0,0,0.28) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.14) 38%,rgba(0,0,0,0.28) 99%,rgba(0,0,0,0.28) 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.14) 38%,rgba(0,0,0,0.28) 99%,rgba(0,0,0,0.28) 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.14) 38%,rgba(0,0,0,0.28) 99%,rgba(0,0,0,0.28) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0d000000', endColorstr='#47000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     bottom: 0;
     content: "";
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
     height: 140px;
     }    
 
@@ -534,7 +535,7 @@ nav li a:hover, nav li a:active{
      background: -o-linear-gradient(top,  rgba(86,78,63,0.45) 0%,rgba(86,78,63,0) 3%,rgba(86,78,63,0) 96%,rgba(86,78,63,0.49) 99%,rgba(86,78,63,0.65) 100%); /* Opera 11.10+ */
      background: -ms-linear-gradient(top,  rgba(86,78,63,0.45) 0%,rgba(86,78,63,0) 3%,rgba(86,78,63,0) 96%,rgba(86,78,63,0.49) 99%,rgba(86,78,63,0.65) 100%); /* IE10+ */
      background: linear-gradient(to bottom,  rgba(86,78,63,0.45) 0%,rgba(86,78,63,0) 3%,rgba(86,78,63,0) 96%,rgba(86,78,63,0.49) 99%,rgba(86,78,63,0.65) 100%); /* W3C */
-     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#73564e3f', endColorstr='#a6564e3f',GradientType=0 ); /* IE6-8 */
+     filter: none; /* IE6-8 */
 
      padding-bottom: 1.5em;
      padding-top: 1.5em;
@@ -1122,8 +1123,7 @@ nav li a:hover, nav li a:active{
     
 .sunlightinfo img{
     clear: both;
-    max-width: 142px;
-    width: 20%;
+
     }
 
 
