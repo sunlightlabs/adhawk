@@ -352,15 +352,59 @@ nav li:hover a, nav:active li a{
   width: 90%;
 }
 
+
+
+
+
+
 /* TOP ADS */
+
+
 #top_ad_list .strip{
   float: none;
 }
 
-#top_ad_list .stripDescrip{
-  width: auto;
-  float: none;
+#top_ad_list .stripDescrip {
+    float: none;
+    width: auto;
 }
+
+#top_ad_list .strip {
+    float: none;
+    margin-top: 0;
+    max-width: 100%;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
