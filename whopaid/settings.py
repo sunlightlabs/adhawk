@@ -2,9 +2,11 @@
 DEBUG = False
 TEMPLATE_DEBUG = False
 
-from local_settings import *
 from logging.handlers import SMTPHandler
 import os.path
+
+# Django debug toolbar. We can add our ip range if we end up doing debugging on production
+INTERNAL_IPS = ('127.0.0.1',)
 
 SITE_ROOT = os.path.realpath(
         os.path.join(os.path.dirname(__file__),
@@ -159,6 +161,13 @@ INSTALLED_APPS = (
 
     'debug_toolbar',
 )
+
+# Import local settings before we set up logging. Yep.
+try:
+    from local_settings import *
+except ImportError:
+    print "There was a problem importing local settings. Please be sure the file exists and is free of errors."
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -380,5 +389,3 @@ LOGGING = {
     }
 }
 
-# Django debug toolbar. We can add our ip range if we end up doing debugging on production
-INTERNAL_IPS = ('127.0.0.1',)
