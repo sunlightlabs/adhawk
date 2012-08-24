@@ -6,7 +6,7 @@
 
 
 
- 
+
 
 /* HEADER */
 
@@ -23,12 +23,12 @@ header {
 
 h1#logo{
     margin: 26px 0 24px 5%;
-    }    
+    }
 
 #sunlight-logo {
     display: none;
-    } 
- 
+    }
+
 #search {
     display:none;
     }
@@ -107,7 +107,7 @@ nav li:hover a, nav:active li a{
     padding-top:15px;
     padding-bottom:15px;
     }
-    
+
 #breadcrumbs  img{
     padding-right: 15px;
         }
@@ -133,11 +133,11 @@ nav li:hover a, nav:active li a{
     width: 100%;
     padding-bottom:  2em;
     }
-    
+
 #funder_activities h3 {
     width: 100%;
-    float: none; 
-    }    
+    float: none;
+    }
 
 #funder_activities ul {
    width: 100%;
@@ -162,7 +162,7 @@ nav li:hover a, nav:active li a{
     padding-left: 0;
     padding-bottom: 2em;
 }
- 
+
 
 #total_spent{
     width: 40%;
@@ -187,11 +187,11 @@ nav li:hover a, nav:active li a{
     width: 100%;
     float: none;
     }
-  
+
 #funder {
     padding-left: 5%;
     padding-right: 5%;
-    }  
+    }
 
 #funder_description {
     width: 100%;
@@ -212,12 +212,12 @@ nav li:hover a, nav:active li a{
      clear: both;
      float: none;
     }
-  
+
 #title h2 {
      max-width: 100%;
      float: none;
      }
-   
+
 
 
 
@@ -237,11 +237,27 @@ nav li:hover a, nav:active li a{
     clear:both;
 }
 
-    
 
- 
- 
-    
+
+
+/* GLOSSARY */
+
+#glossary_content{
+    width:80%;
+    clear:both;
+    float:none;
+    margin: 5%;
+    padding: 5%;
+}
+#glossary_intro{
+    padding:5%;
+    float:none;
+    width:90%;
+    clear:both;
+}
+
+
+
 
 /* LANDING PAGE */
 
@@ -263,8 +279,8 @@ nav li:hover a, nav:active li a{
 .landing-splash{
     width: 90%;
     padding: 2em 5% 1em 5%;
-}    
-  
+}
+
 
 .landing-main{
     width: 90%;
@@ -290,7 +306,7 @@ nav li:hover a, nav:active li a{
     border-right: none;
     border-bottom: 1px solid #c0b49c;
     border-top: 1px solid #c0b49c;
-    
+
 }
 
 .last{
@@ -304,13 +320,13 @@ nav li:hover a, nav:active li a{
     max-width: 347px;
 }
 
-    
+
 /* FOOTER */
 
 .desktop-footer{
     display:none;
-    }  
-   
+    }
+
 .mobile-footer{
     display:block;
     background-color: #c0b49c;
@@ -318,14 +334,14 @@ nav li:hover a, nav:active li a{
     min-height: 30px;
     width: 90%;
     border-top: 1px solid #564e3e;
-} 
+}
 
 .sun-logo{
     float: right;
     height:26px;
     width: 83px;
-    
-}  
+
+}
 
 
 .mobile-footer .sharebuttons{
