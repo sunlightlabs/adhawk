@@ -26,7 +26,7 @@ class GlossarizeNode(template.Node):
         
         raw_output = self.nodelist.render(context)
         
-        glossary.helpers.glossarize_in_context(raw_output, context)
+        return glossary.helpers.glossarize(raw_output)
         
 
 
