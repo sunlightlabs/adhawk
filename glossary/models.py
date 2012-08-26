@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib import admin
 from django.template.defaultfilters import slugify
 
-from sectors.models import Sector
+#from sectors.models import Sector
 
 
 class Item(models.Model):
@@ -13,7 +13,7 @@ class Item(models.Model):
     definition  = models.TextField()
     term_length = models.IntegerField(db_index=True)
     
-    sectors = models.ManyToManyField(Sector, blank=True)
+    #sectors = models.ManyToManyField(Sector, blank=True)
     
     def __unicode__(self):  
         return u"%s" % self.term
@@ -28,4 +28,4 @@ class Item(models.Model):
 
     def autogenerate_slug_if_blank(self):
         if self.term and not self.slug:
-            self.slug = slugify(self.term)
+            self.slug = self.term[0:3]+"M"
