@@ -70,7 +70,7 @@
     <!-- modal definitions script -->
     <script type="text/javascript">
       $(document).ready(function() {
-        $('.modalBoxOverlay').height($('#page').scrollHeight);
+        $('.modalBoxOverlay').height(getDocumentHeight());
         //Show modal box
         $('.openModal').click(
           function() {
@@ -226,6 +226,15 @@
             });
 
         });
+    </script>
+    <script>
+    function getDocumentHeight() {
+        return Math.max(
+            Math.max(document.body.scrollHeight, document.documentElement.scrollHeight),
+            Math.max(document.body.offsetHeight, document.documentElement.offsetHeight),
+            Math.max(document.body.clientHeight, document.documentElement.clientHeight)
+        );
+    }
     </script>
   </body>
 </html>
