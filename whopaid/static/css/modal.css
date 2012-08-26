@@ -22,7 +22,7 @@
 }
 
 .modalBox { /* The actual box, centered in the fixed-position div */
-    width:45.54%; /* Whatever width you want the box to be */
+    width:60.54%; /* Whatever width you want the box to be */
     position:relative;
     margin:0 auto;
     /*Everything below is just visual styling */
