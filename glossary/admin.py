@@ -2,10 +2,11 @@ from django.contrib import admin
 from models import Item
 
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ('term', 'acronym', 'synonym', )
+    list_display = ('term', 'acronym', 'synonym', 'slug')
+    list_editable = ('acronym', 'synonym', 'slug')
     fieldsets = (
             (None, {
-                'fields': ('term', 'acronym', 'synonym', 'definition', 'sectors')
+                'fields': ('term', 'acronym', 'synonym', 'definition',)
             }),
         )
     
