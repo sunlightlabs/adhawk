@@ -1,0 +1,43 @@
+.modalBoxWrap { /* The div that shows/hides. */
+    display:none; /* starts out hidden */
+    z-index:40001; /* High z-index to ensure it appears above all content */
+}
+
+.modalBoxOverlay { /* Shades out background when selector is active */
+    position:fixed;
+    width:100%;
+    height:100%;
+    background-color:black;
+    opacity:.5; /* Sets opacity so it's partly transparent */
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; /* IE transparency */
+    filter:alpha(opacity=50); /* More IE transparency */
+    z-index:40001;
+}
+
+.modalVerticalOffset { /* Fixed position to provide the vertical offset */
+    position:fixed;
+    top:20%;
+    width:100%;
+    z-index:40002; /* ensures box appears above overlay */
+}
+
+.modalBox { /* The actual box, centered in the fixed-position div */
+    width:405px; /* Whatever width you want the box to be */
+    position:relative;
+    margin:0 auto;
+    /*Everything below is just visual styling */
+    background-color:white;
+    padding:10px;
+    border:1px solid black;
+}
+
+.definition {
+    display:none;
+  }
+  
+#closeModal {
+    position:absolute;
+    top:-22px; /* Half the icon's height */
+    right:-22px; /* half the icon's width */
+    z-index:50;
+  }
