@@ -20,8 +20,6 @@ AWS_STORAGE_BUCKET_NAME = 'assets.adhawk'
 AWS_IS_GZIPPED = False
 AWS_S3_SECURE_URLS = False
 
-DEBUG = False
-TEMPLATE_DEBUG = False
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -158,7 +156,7 @@ INSTALLED_APPS = (
     'fts',
     'db_script',
     'south',
-
+    'glossary',
     'debug_toolbar',
 )
 

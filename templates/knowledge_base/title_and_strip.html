@@ -1,5 +1,5 @@
 {% block title_and_strip %}
-      
+{% load glossary_tags %}      
    <div id="main">
    <div id="gradient2">
       <div id="title" class="contentbox">
@@ -13,9 +13,10 @@
       
         <a id="youtube_link" href="{{ media.url }}"><img class="strip" src="http://adhawk.sunlightfoundation.com/media/images/media_thumbnails/strips/Media_{{ media.pk|stringformat:"05i" }}_strip.jpg" alt="youtube thumbnail"></a>
             <div id="funder_name">
-                <h3>Sponsor:</h3> 
-                <h4>{{ funder_family.name|title }}
-                {% if funder_family.is_superpac %}<a href="#"><em>Super Pac</em></a>
+              <h3>Sponsor:</h3> 
+              <h4>
+                {{ funder_family.name|title }}
+                {% if funder_family.is_superpac %}<em>{% glossarize %}Super Pac{% endglossarize %}</em>
                 {% endif %}</h4>
             </div>     
         </div> <!-- end div funder_name --> 
