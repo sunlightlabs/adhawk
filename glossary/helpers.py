@@ -1,25 +1,34 @@
 from models import Item
 from django.core.urlresolvers import reverse
-from utils.msub import msub_first
-from utils.msub import msub_global
-from utils.pluralize import pluralize
+## These were imported, but i don't have them so I wrote them. -Bob
+#from utils.msub import msub_first
+#from utils.msub import msub_global
+#from utils.pluralize import pluralize
+#from utils.msub import msub_global
+from glossary.utils import pluralize,msub_global
+
+class Variation(object):
+    def __init__(self,string,is_acronym=False):
+        self.string = string
+        self.is_acronym = is_acronym
+
+    def __unicode__(self):
+        return self.string
 
 def glossarize_in_context(raw_output, context, sector=None):
     
-    if context.has_key('glossarize'):
-        id_list = context['glossarize']
-    else:
-        id_list = {}
+    #if context.has_key('glossarize'):
+    #    id_list = context['glossarize']
+    #else:
+    #    id_list = {}
         
-    processed_output, id_list = glossarize(raw_output, id_list, sector)
+    processed_output = glossarize(raw_output)
     
-    context['glossarize'] = id_list 
+    #context['glossarize'] = id_list 
     
     return processed_output
 
-
-
-def glossarize(plain, id_list=None, sector=None):
+def glossarize(plain):
     """
     Converts a string into a hyperlinked string.
 
@@ -29,23 +38,20 @@ def glossarize(plain, id_list=None, sector=None):
     * Longer glossary items match first.
     """
     
-    if not id_list: 
-        id_list = {} 
+    #if not id_list: 
+    #    id_list = {} 
 
-    base_url = reverse("glossary")
 
     # Do initial sort
-    if sector:
-        items = Item.objects.filter(sectors=sector)
-    else:
-        items = Item.objects.all()
+    #if sector:
+    #    items = Item.objects.filter(sectors=sector)
+    #else:
+    items = Item.objects.all()
             
-
-
     def link(item):
         # Note that the asterisk (*) has special meaning for msub_first and
         # msub_global.
-        return """<a href="%s#%s">*</a>""" % (base_url, item.slug)
+        return """<a class="openModal" definition="%s">*</a>""" % (item.slug,)
 
     mapping = []
     for item in items.order_by('-term_length'):
@@ -54,19 +60,20 @@ def glossarize(plain, id_list=None, sector=None):
         variations = []
         
         if item.term != '':
-            variations.append(item.term)
-            variations.append(pluralize(item.term))
+            variations.append(Variation(item.term))
+            variations.append(Variation(pluralize(item.term)))
         
         if item.acronym != '':
-            variations.append(item.acronym)
+            variations.append(Variation(item.acronym,is_acronym=True))
             
         if item.synonym != '':
-            variations.append(item.synonym)
-            variations.append(pluralize(item.synonym))
+            variations.append(Variation(item.synonym))
+            variations.append(Variation(pluralize(item.synonym)))
             
         for variant in variations:
             if variant:
-                mapping.append((r"\b%s\b" % variant, hyperlink, item.id))
+                mapping.append((variant, hyperlink, item.id))
+    #print variations            
 
-    text, id_list = msub_first(plain, mapping, id_list)
-    return text, id_list
+    text = msub_global(plain, mapping)
+    return text
