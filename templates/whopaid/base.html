@@ -99,6 +99,12 @@
           );
     });
     </script>
+    <script type="text/javascript">
+    window.onscroll = function() {
+      document.getElementById('modalBoxOverlay').style.top = '0px';
+      document.getElementById('modalVerticalOffset').style.top = '20%';
+    };
+    </script>
   </head>
   <body>
     {% include "whopaid/definitions.html" %}
