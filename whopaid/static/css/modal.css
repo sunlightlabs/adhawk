@@ -25,6 +25,7 @@
     width:85%; /* Whatever width you want the box to be */
     max-width: 600px;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     position:relative;
     margin:0 auto;
     /*Everything below is just visual styling */
