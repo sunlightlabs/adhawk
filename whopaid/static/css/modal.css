@@ -37,8 +37,8 @@
     width:85%; /* Whatever width you want the box to be */
     max-width: 600px;
     max-height: 300px;
-    overflow:hidden;
     position:relative;
+    overflow:auto;
     margin:0 auto;
     /*Everything below is just visual styling */
     background-color:white;
