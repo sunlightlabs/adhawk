@@ -3,9 +3,10 @@
 {% block content %}
 <script type="text/javascript">
 $(document).ready(function($) {
+ 
 	$(".scroll").click(function(event){		
 		event.preventDefault();
-		$('html,body').animate({scrollTop:$('[name="'+this.hash.substring(1)+'"]').offset().top}, 0);
+		$('html,body').animate({scrollTop:$(this.hash).offset().top}, 0);
 	});
 });
 </script>
@@ -15,7 +16,7 @@ $(document).ready(function($) {
                 <div id="glossary_intro">
                     <h1>Glossary Terms</h1>
                     <ul>
-                        <li><a href="#501" class="scroll">501(c) Organizations</a></li>
+                        <li><a href="#Fiv" class="scroll">501(c) Organizations</a></li>
                         <li><a href="#Aut" class="scroll">Authorized Committees</a></li>
                         <li><a href="#Cit" class="scroll">Citizens United</a></li>
                         <li><a href="#Dar" class="scroll">Dark Money</a></li>
@@ -32,51 +33,51 @@ $(document).ready(function($) {
 
                 <div id="glossary_content">
                     <div class="line_a">
-                        <h3><a name="501">501(c) Organizations:</a></h3>
+                        <h3 id="Fiv">501(c) Organizations:</h3>
                         <p>501(c) organizations are nonprofit, tax exempt organizations that are legally permitted to spend money to influence elections so long as politicking is not their primary purpose. The tax code defines different types of nonprofit group and the rules they must operate under. Section 501(c)(4) is for social welfare organizations--like Crossroads GPS and Priorities USA. Section 501(c)(5) is for labor unions, and section 501(c)(6) is for trade associations like the U.S. Chamber of Commerce and the American Petroleum Institute.</p>
                     </div>
                     <div class="line_a">
-                        <h3><a name="Aut">Authorized Committees:</a></h3>
+                        <h3 id="Aut">Authorized Committees:</h3>
                         <p>Federal candidates must authorize in writing their political committees, which receive contributions and spend money on their behalf. Also known as candidate committees or campaign committees, examples include Obama for America and Mitt Romney for President Inc. Candidates directly control the money they raise through their authorized committees, and have the maximum amount of flexibility election law allows in how they can spend it.</p>
                     </div>
                     <div class="line_a">
-                        <h3><a name="Cit">Citizens United:</a></h3>
+                        <h3 id="Cit">Citizens United:</h3>
                         <p>Shorthand for a series of court rulings in 2010 and 2011 that drastically loosened regulations on big campaign contributors. In Citizens United v. Federal Election Commission, the Supreme Court ruled that corporations and unions can make unlimited political contributions.</p>
                     </div>
                     <div class="line_a">
-                        <h3><a name="Dar">Dark Money:</a></h3>
+                        <h3 id="Dar">Dark Money:</h3>
                         <p>Dark money refers to political contributions that are not disclosed, generally made to or by groups organized under section 501(c) of the tax code. While the Federal Election Commission (FEC) does require super PACs to disclose their donors, the super PACs are permitted to take money from nonprofits that don’t have to reveal the sources of their money, leading to a phenomenon that the Sunlight Foundation has dubbed “dead-end disclosure.”</p>
                     </div>
                     <div class="line_a">
-                        <h3><a name="Ele">Electioneering Communications:</a></h3>
+                        <h3 id="Ele">Electioneering Communications:</h3>
                         <p>Also known as issue ads, are any broadcast cable, satellite or radio communications that refer to a clearly identified candidate for federal office (Congress or the White House). Electioneering communications are more subtle than traditional campaign ads and independent expenditures. They talk about issues and often times either bash or support the policies, records or positions of a candidate, and are a route for corporations, unions and other groups to spend large sums of money without having to report it publicly. Money spent on electioneering does not have to be reported to the FEC unless the activity occurs within 30 days of a primary election, nominating convention or primary runoff (for states that require primary winners in congressional races to get more than 50 percent of the vote) and 60 days of a general election or runoff (for states that require general election winners in congressional races to get more than 50 percent of the vote).</p>
                     </div>
                     <div class="line_a">
-                        <h3><a name="Exp">Express Advocacy:</a></h3>
+                        <h3 id="Exp">Express Advocacy:</h3>
                         <p>Express advocacy refers to the “magic words” (or images) that distinguish independent expenditures from electioneering communications. The FEC writes: “There are two ways that a communication can be defined as express advocacy (candidate advocacy): by use of certain ‘explicit words of advocacy of election or defeat’ and by the ‘only reasonable interpretation’ test.” But the FEC has also found some communications to be expressly political even if they don’t use the “vote for” or “vote against” formulation.</p>
                     </div>
                     <div class="line_a">
-                        <h3><a name="Fed">Federal Election Commission:</a></h3>
+                        <h3 id="Fed">Federal Election Commission:</h3>
                         <p>The Federal Election Commission (FEC) administers and enforces the Federal Election Campaign Act (FECA), the statute that governs the financing of federal elections. It is an independent regulatory agency, with six commissioners appointed by the president and congressional leaders of the opposite party. More recently, it is often politically deadlocked around campaign regulation decisions. The agency does, however, have a professional staff that helps journalists and the general public get access to and interpretations of campaign information.</p>
                     </div>
                     <div class="line_a">
-                        <h3><a name="Ind">Independent Expenditures (IEs):</a></h3>
+                        <h3 id="Ind">Independent Expenditures (IEs):</h3>
                         <p>An independent expenditure is any spending by any group to elect or defeat a federal candidate other than the campaigns of the candidates themselves. IE spending is disclosed to the FEC. Political parties, political action committees, PACs, super PACs, labor unions, corporations, nonprofit groups and individuals can make them, and they can include everything from paying salaries for door-to-door canvassers to printing bumper stickers to television commercials. In ads, independent expenditures expressly advocate the election or defeat of a clearly identified federal candidate. If a candidate’s name isn’t mentioned but his or her picture is used, it counts as an IE. So do terms that invoke a candidate or his policies (“Obamacare,” for instance). Groups and individuals making independent expenditures are not supposed to “coordinate” with the candidates they are benefiting, but if you don’t know what Stephen Colbert and Jon Stewart have to say about that, you should.</p>
                     </div>
                     <div class="line_a">
-                        <h3><a name="Pol">Political Action Committee:</a></h3>
+                        <h3 id="Pol">Political Action Committee:</h3>
                         <p>A political action committee (PAC) is a group formed for the purpose of raising and spending money to influence elections, usually by contributing directly to candidates. PACs remain important players in elections, and they must abide by strict limits on how much money they can raise from individuals and organizations and spend on campaign (unlike super PACs and 501(c)s). The FEC defines two types of PACs: separate segregated funds (SSFs) and nonconnected committees. SSFs are established by corporations, labor unions, membership organizations or trade associations and can only raise money from individuals associated with them. Nonconnected committees are free to raise money from the general public. All traditional PACs must disclose donors to the FEC and the contributions they make to candidates.</p>
                     </div>
                     <div class="line_a">
-                        <h3><a name="Par">Party Committee:</a></h3>
+                        <h3 id="Par">Party Committee:</h3>
                         <p>A political committee that represents a political party and is part of the official party structure at the national, state or local level. Examples include the Democratic National Committee, the Republican National Committee and related organizations such as the National Republican Senatorial Committee or the Democratic Congressional Campaign Committee.</p>
                     </div>
                     <div class="line_a">
-                        <h3><a name="Soc">Social Welfare Organization:</a></h3>
+                        <h3 id="Soc">Social Welfare Organization:</h3>
                         <p>Another term for nonprofits that are 501(c)(4) organizations. While the IRS has defined rules how these groups operate, many of the new, politically active players--like Crossroads GPS and Priorities USA--have taken advantage of this category to raise and spend money on campaigns without disclosing it. While the IRS rules does allow such organizations to be politically active, it has signalled that it will be investigating to ensure that political organizations are not masquerading as social welfare groups to shield their donors from disclosure.</p>
                     </div>
                     <div class="line_a">
-                        <h3><a name="Sup">Super PAC:</a></h3>
+                        <h3 id="Sup">Super PAC:</h3>
                         <p>Also known as “independent expenditure-only committees,” these groups can receive unlimited funds and spend that money to influence elections. Super PACs are not allowed to coordinate with campaigns on how to spend their money, but candidates can attendsuper PAC fundraisers.</p>
                     </div>
                 </div>
