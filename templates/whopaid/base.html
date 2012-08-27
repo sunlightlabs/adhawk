@@ -47,7 +47,7 @@
 <script type="text/javascript" src="{% static "js/iscroll.js" %}"></script>
     <meta name="keywords" content="" />
     <meta name="description" content="Discover who is behind the super pacs and other groups buying the political ads you see during this election" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="{% static "css/core.css" %}" type="text/css" />
     <link rel="stylesheet" href="{% static "css/antiscreen.css" %}" type="text/css" media="handheld,screen and (max-width: 800px)" />
     <link rel="stylesheet" href="{% static "css/modal.css" %}" type="text/css" />
@@ -69,6 +69,22 @@
     <![endif]-->
     <!-- modal definitions script -->
     <script type="text/javascript">
+    window.onscroll = function() {
+      document.getElementById('modalBoxOverlay').style.top = '0px';
+      document.getElementById('modalVerticalOffset').style.top = '10%';
+    };
+  </script>
+    <script type="text/javascript">
+    var myScroll;
+    function loaded() {
+      myScroll = new iScroll('wrapper');
+      document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 200); }, false);
+
+     </script>
+    <script type="text/javascript">
       $(document).ready(function() {
         $('.modalBoxOverlay').height(getDocumentHeight());
         //Show modal box
@@ -76,6 +92,7 @@
           function() {
             $('.modalBoxWrap').show();
             $('#'+$(this).attr("definition")).show();
+            myScroll.refresh();
             }
         );
         //Hide modal box
@@ -83,6 +100,7 @@
           function() {
             $('.modalBoxWrap').hide();
             $('.definition').hide();
+            myScroll.refresh();
             }
           );
         /* $('.modalBoxOverlay').click(
@@ -99,22 +117,6 @@
           ); */
     });
     </script>
-    
-    <script type="text/javascript">
-    window.onscroll = function() {
-      document.getElementById('modalBoxOverlay').style.top = '0px';
-      document.getElementById('modalVerticalOffset').style.top = '10%';
-    };
-    </script>
-    <script type="text/javascript">
-    var myScroll;
-    function loaded() {
-      myScroll = new iScroll('wrapper');
-    }
-
-    document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-    document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 200); }, false);
-     </script>
   </head>
   <body>
     {% include "whopaid/definitions.html" %}
