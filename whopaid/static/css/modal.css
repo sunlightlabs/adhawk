@@ -38,7 +38,7 @@
   
 #closeModal {
     position:absolute;
-    top:-22px; /* Half the icon's height */
-    right:-22px; /* half the icon's width */
+    top:-12px; /* Half the icon's height */
+    right:-12px; /* half the icon's width */
     z-index:50;
   }
