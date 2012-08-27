@@ -16,7 +16,7 @@
 
 .modalVerticalOffset { /* Fixed position to provide the vertical offset */
     position:fixed;
-    top:20%;
+    top:10%;
     width:100%;
     z-index:40002; /* ensures box appears above overlay */
 }
