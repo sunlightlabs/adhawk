@@ -34,6 +34,4 @@ class Command(BaseCommand):
                                         media_profile=media_profile)
             count += ytmi.upload()
 
-        amr = AdMediaReporter(count)
-        amr.send_emails()
 
