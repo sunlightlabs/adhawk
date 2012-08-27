@@ -74,24 +74,19 @@
       document.getElementById('modalVerticalOffset').style.top = '10%';
     };
   </script>
-    <script type="text/javascript">
-    var myScroll;
-    function loaded() {
-      myScroll = new iScroll('wrapper');
-      document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-    }
 
-    document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 200); }, false);
-
-     </script>
     <script type="text/javascript">
       $(document).ready(function() {
+        var iscroll_listener =  function (e) { e.preventDefault(); };
+        var myScroll;
         $('.modalBoxOverlay').height(getDocumentHeight());
         //Show modal box
         $('.openModal').click(
           function() {
             $('.modalBoxWrap').show();
             $('#'+$(this).attr("definition")).show();
+            document.addEventListener('touchmove', iscroll_listener, false);
+            myScroll = new iScroll('wrapper');
             //myScroll.refresh();
             }
         );
@@ -100,7 +95,7 @@
           function() {
             $('.modalBoxWrap').hide();
             $('.definition').hide();
-            //myScroll.refresh();
+            document.removeEventListener('touchmove',iscroll_listener,false);
             }
           );
         /* $('.modalBoxOverlay').click(

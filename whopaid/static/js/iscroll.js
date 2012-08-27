@@ -96,7 +96,7 @@ var m = Math,
 			vScroll: true,
 			x: 0,
 			y: 0,
-			bounce: true,
+			bounce: false,
 			bounceLock: false,
 			momentum: true,
 			lockDirection: true,
@@ -122,7 +122,7 @@ var m = Math,
 			wheelAction: 'scroll',
 
 			// Snap
-			snap: true,
+			snap: false,
 			snapThreshold: 1,
 
 			// Events
