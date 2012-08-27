@@ -24,6 +24,8 @@
 .modalBox { /* The actual box, centered in the fixed-position div */
     width:85%; /* Whatever width you want the box to be */
     max-width: 600px;
+    max-height: 400px;
+    overflow-y: auto;
     position:relative;
     margin:0 auto;
     /*Everything below is just visual styling */
@@ -38,7 +40,7 @@
   
 #closeModal {
     position:absolute;
-    top:-12px; /* Half the icon's height */
-    right:-12px; /* half the icon's width */
+    top:0px; /* Half the icon's height */
+    right:0px; /* half the icon's width */
     z-index:50;
   }
