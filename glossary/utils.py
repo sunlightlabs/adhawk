@@ -81,7 +81,7 @@ def msub_global(plain,mapping):
         skip = False
         variant,hyperlink,item_id = m
         for s in found_so_far:
-            if variant.string in s:
+            if variant.string.lower() in s:
                 skip = True
         if skip:
             continue
@@ -93,6 +93,6 @@ def msub_global(plain,mapping):
                 prog = re.compile(re.escape(variant.string),re.I)
             plain_split = prog.split(plain)
             if len(plain_split) > 1:
-                found_so_far.append(variant.string)
+                found_so_far.append(variant.string.lower())
             plain = hyperlink.join(plain_split)
     return plain
