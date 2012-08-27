@@ -1,24 +1,32 @@
 {% extends "whopaid/base.html" %}
 
 {% block content %}
+<script type="text/javascript">
+$(document).ready(function($) {
+	$(".scroll").click(function(event){		
+		event.preventDefault();
+		$('html,body').animate({scrollTop:$('[name="'+this.hash.substring(1)+'"]').offset().top}, 0);
+	});
+});
+</script>
     <div id="main">
         <div id="gradient"class="clearfix">
             <div class="contentbox">
                 <div id="glossary_intro">
                     <h1>Glossary Terms</h1>
                     <ul>
-                        <li><a href="#501">501(c) Organizations</a></li>
-                        <li><a href="#Aut">Authorized Committees</a></li>
-                        <li><a href="#Cit">Citizens United</a></li>
-                        <li><a href="#Dar">Dark Money</a></li>
-                        <li><a href="#Ele">Electioneering Communications</a></li>
-                        <li><a href="#Exp">Express Advocacy</a></li>
-                        <li><a href="#Fed">Federal Election Commission</a></li>
-                        <li><a href="#Ind">Independent Expenditures (IEs)</a></li>
-                        <li><a href="#Pol">Political Action Committee</a></li>
-                        <li><a href="#Par">Party Committee</a></li>
-                        <li><a href="#Soc">Social Welfare Organization</a></li>
-                        <li><a href="#Sup">Super PAC</a></li>
+                        <li><a href="#501" class="scroll">501(c) Organizations</a></li>
+                        <li><a href="#Aut" class="scroll">Authorized Committees</a></li>
+                        <li><a href="#Cit" class="scroll">Citizens United</a></li>
+                        <li><a href="#Dar" class="scroll">Dark Money</a></li>
+                        <li><a href="#Ele" class="scroll">Electioneering Communications</a></li>
+                        <li><a href="#Exp" class="scroll">Express Advocacy</a></li>
+                        <li><a href="#Fed" class="scroll">Federal Election Commission</a></li>
+                        <li><a href="#Ind" class="scroll">Independent Expenditures (IEs)</a></li>
+                        <li><a href="#Pol" class="scroll">Political Action Committee</a></li>
+                        <li><a href="#Par" class="scroll">Party Committee</a></li>
+                        <li><a href="#Soc" class="scroll">Social Welfare Organization</a></li>
+                        <li><a href="#Sup" class="scroll">Super PAC</a></li>
                     </ul>
                 </div>
 
