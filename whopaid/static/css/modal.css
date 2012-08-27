@@ -24,7 +24,6 @@
 .modalBox { /* The actual box, centered in the fixed-position div */
     width:85%; /* Whatever width you want the box to be */
     max-width: 600px;
-    max-height: 400px;
     overflow-y: auto;
     position:relative;
     margin:0 auto;
