@@ -773,7 +773,7 @@ a:hover {
     color: #000000;
     }
 
-#glossary_content h3 a{
+#glossary_content h3 {
     color: #564e3e;
     font-size: 1.4em;
     }
