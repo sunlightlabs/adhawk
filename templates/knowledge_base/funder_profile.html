@@ -40,8 +40,14 @@
 	 
                   <div id="financial_info" class="line_a clearfix">  
                       <div id="total_spent" >
-                          <h3>Total Spent:</h3> 
-                          <p>${{ funder_family.total_independent_expenditures|floatformat:0|intcomma }}</p>
+                        <h3>Total Spent:</h3>
+                        {% if funder_family.total_independent_expenditures > 0 %}
+                        <!-- independent expenditures -->
+                        <p>${{ funder_family.total_independent_expenditures|floatformat:0|intcomma }}</p>
+                        {% else %}
+                        <!-- total disbursements -->
+                        <p>${{ funder_family.total_disbursements|floatformat:0|intcomma }}</p>
+                        {% endif %}
                       </div>
         
                       <div id="cash_hand">
@@ -51,7 +57,7 @@
 
                       </div> <!-- end div funder_financial_info -->
                 {# </div> #}
-      
+              {% if funder_family.total_independent_expenditures > 0 %}
               <div id="funder_chart" class="line_a clearfix">
                 {% glossarize %}
                 <h3>Independent Expenditure Summary:</h3> 
@@ -116,6 +122,7 @@
                 </div>
                </div>
              </div> <!-- end div funder_chart -->
+             {% endif %}
              {% endif %} 
          <div id="more_info">
            <h3>More Information:</h3> 
