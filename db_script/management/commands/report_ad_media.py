@@ -6,5 +6,5 @@ from knowledge_base.models import Media
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        count = Media.objects.filter(checked=False)
+        count = len(Media.objects.filter(checked=False))
         amr = AdMediaReporter(count)
