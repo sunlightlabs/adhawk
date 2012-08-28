@@ -8,3 +8,4 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         count = len(Media.objects.filter(checked=False))
         amr = AdMediaReporter(count)
+        amr.send_emails()
