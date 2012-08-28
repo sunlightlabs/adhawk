@@ -21,18 +21,22 @@
     z-index:40002; /* ensures box appears above overlay */
 }
 
+.iscrollScroller {
+    padding: 10px;
+    z-index:40004;
+}
+
 .modalBox { /* The actual box, centered in the fixed-position div */
     width:85%; /* Whatever width you want the box to be */
     max-width: 600px;
     max-height: 300px;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
     position:relative;
     margin:0 auto;
     /*Everything below is just visual styling */
     background-color:white;
-    padding:10px;
+    padding:0;
     border:1px solid black;
+    z-index:40003;
 }
 
 .definition {
@@ -41,7 +45,7 @@
   
 #closeModal {
     position:absolute;
-    top:0px; /* Half the icon's height */
-    right:0px; /* half the icon's width */
-    z-index:50;
+    top: 0px; 
+    right:0px; 
+    z-index:50000;
   }
