@@ -390,6 +390,10 @@ a:hover {
     width: 100%;
 }
 
+h3 a{
+    color:#c3ac80;
+}
+
 #title h2 {
     font-size: 1.5em;
     font-family: "ltc-squareface-sc-n4", "ltc-squareface-sc", "Arial Black", "Futura-CondensedExtraBold", "DroidSans-Bold", Georgia-bold, serif;
@@ -473,6 +477,21 @@ a:hover {
 #funder_received p,
 #financial_info p {
     font-weight: bold;
+}
+
+.glossarybutton {
+	font-family: Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	font-size: 12px;
+	color: #931f0a;
+	padding: 5px 8px;
+	background-color: #ffffff;
+	-moz-border-radius: 33px;
+	-webkit-border-radius: 33px;
+	border-radius: 33px;
+	border: 2px solid #c3ac80;
+	margin-left:5px;
+
 }
 
 
