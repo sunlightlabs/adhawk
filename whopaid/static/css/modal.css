@@ -21,15 +21,9 @@
     z-index:40002; /* ensures box appears above overlay */
 }
 
-.iscrollWrapper {
-    padding: 0;
-    margin: 0;
-    z-index:40003;
-}
-
 .iscrollScroller {
-    padding: 0;
-    z-index:40003;
+    padding: 10px;
+    z-index:40004;
 }
 
 .modalBox { /* The actual box, centered in the fixed-position div */
@@ -37,22 +31,21 @@
     max-width: 600px;
     max-height: 300px;
     position:relative;
-    overflow:auto;
     margin:0 auto;
     /*Everything below is just visual styling */
     background-color:white;
-    padding:10px;
+    padding:0;
     border:1px solid black;
+    z-index:40003;
 }
 
 .definition {
     display:none;
-    margin:10px;
   }
   
 #closeModal {
     position:absolute;
     top: 0px; 
     right:0px; 
-    z-index:50;
+    z-index:50000;
   }

@@ -78,16 +78,18 @@
 
     <script type="text/javascript">
       $(document).ready(function() {
-        var iscroll_listener =  function (e) { e.preventDefault(); };
+        function iscroll_listener(e) { e.preventDefault(); };
         var myScroll;
         $('.modalBoxOverlay').height(getDocumentHeight());
         //Show modal box
         $('.openModal').click(
           function() {
-            $('.modalBoxWrap').show();
-            $('#'+$(this).attr("definition")).show();
             document.addEventListener('touchmove', iscroll_listener, false);
-            myScroll = new iScroll('wrapper');
+            $('.modalBoxWrap').show();
+            var def_id = '#'+$(this).attr("definition");
+            $('#scroller').html($(def_id).html());
+            //$('#'+$(this).attr("definition")).show();
+            myScroll = new iScroll('wrapper',{bounce:true});
             //myScroll.refresh();
             }
         );
