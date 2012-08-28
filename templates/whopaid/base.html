@@ -91,6 +91,12 @@
             //$('#'+$(this).attr("definition")).show();
             myScroll = new iScroll('wrapper');
             //myScroll.refresh();
+            $('.iscrollScroller .openModal').click(
+              function() {
+                  var def_id = '#'+$(this).attr("definition");
+                  $('#scroller').html($(def_id).html());
+                }
+            );
             }
         );
         //Hide modal box
