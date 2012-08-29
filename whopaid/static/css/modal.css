@@ -57,7 +57,9 @@
     z-index:50000;
   }
 
-#glossary_link {
-  display:block;
-  text-align:right;
+.modalGlossaryLink {
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 0.9em;
+    font-style: normal;
+    font-weight: normal;
 }
