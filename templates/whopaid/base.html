@@ -85,48 +85,49 @@
 
     <script type="text/javascript">
       $(document).ready(function() {
-        var myScroll;
-        function iscroll_listener(e) { e.preventDefault(); };
         $('.modalBoxOverlay').height(getDocumentHeight());
-        //Show modal box
-        $('.openModal').click(
-          function() {
-            var def_id = '#'+$(this).attr("definition");
-            if( $(".modalBoxWrap").is(':hidden') ){
+        var myScroll;
+        myScroll = new iScroll('wrapper');
+        function iscroll_listener(e) { e.preventDefault(); };
+        function clear_scroller() {
+            $('.iscrollScroller > p').remove();
+            $('.iscrollScroller > h3').remove();
+            myScroll.refresh();
+            };
+        function populate_scroller(link) {
+            var def_id = '#'+$(link).attr("definition");
+            $('.iscrollScroller').prepend($(def_id).html());
+            myScroll.refresh();
+            };
+        function modal_open() {
               document.addEventListener('touchmove', iscroll_listener, false);
               $('.modalBoxWrap').show();
-              myScroll = new iScroll('wrapper');
+              myScroll.refresh();
+            };
+        //Show modal box
+        $('.openModal').click(
+            function () {
+              clear_scroller();
+              populate_scroller(this);
+              if( $(".modalBoxWrap").is(':hidden') ){ modal_open() };
               }
-            $('#scroller').prepend($(def_id).html());
-            myScroll.refresh();
-            //$('.iscrollScroller .openModal').click(
-            //function() {
-            //    var def_id = '#'+$(this).attr("definition");
-            //    $('#scroller').html('');
-            //     $('#scroller').html($(def_id).html());
-            //  }
-            //);
-            }
           );
-        //$('#switchModal').click(
-            //function() {
-              //$('.iscrollScroller > p').remove();
-              //$('.iscrollScroller > h3').remove();
-              //$('#scroller').prepend($(def_id).html());
-              //myScroll.refresh();
-            //}
-          //);
-        //Hide modal box
+        $('.glossarybutton').click(
+            function () {
+              clear_scroller();
+              populate_scroller(this);
+              modal_open(this);
+              }
+          );
         $('#closeModal').click(
           function() {
             $('.modalBoxWrap').hide();
             $('.definition').hide();
             document.removeEventListener('touchmove',iscroll_listener,false);
-            $('.iscrollScroller > p').remove();
-            $('.iscrollScroller > h3').remove();
+            clear_scroller();
             }
           );
-        /* $('.modalBoxOverlay').click(
+        $('.modalBoxOverlay').click(
           function() {
             $('.modalBoxWrap').hide();
             $('.definition').hide();
@@ -137,7 +138,7 @@
             $('.modalBoxWrap').hide();
             $('.definition').hide();
             }
-          ); */
+          );
     });
     </script>
   </head>

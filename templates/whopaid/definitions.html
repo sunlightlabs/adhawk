@@ -1,5 +1,5 @@
 {% load staticfiles %}
-{# {% load glossary_tags %} #}
+{% load glossary_tags %}
 <div class="modalBoxWrap">
   <div class="modalBoxOverlay" id="modalBoxOverlay">
   </div>
@@ -7,15 +7,20 @@
   <div class="modalVerticalOffset" id="modalVerticalOffset">
     <div class="modalBox" id="wrapper">
         <div class="iscrollScroller" id="scroller">
-          <span id="glossary_link">
-            <a href="{% url glossary %}">Learn more in the glossary</a>
-          </span>
+          <a href="{% url glossary %}">Learn more in the glossary</a>
         </div>
       <a id="closeModal"><img src="{% static "img/modal_close.png" %}"/></a>
     </div>
   </div>
 </div>
 
+      <div class="definition" id="ActM">
+        <h3>Activites</h3>
+        {# {% glossarize %} #}
+        <p>The Federal Election Commission (FEC) categorizes committees by, among other things, the activities in which they are allowed to engage. Here we list the various activities that this sponsor is currently engaged in. Please click on any of the activity names for more information.
+        </p>
+        {# {% endglossarize %} #}
+      </div>
       <div class="definition" id="501M">
         <h3>501(c) Organizations</h3>
         {# {% glossarize %} #}
