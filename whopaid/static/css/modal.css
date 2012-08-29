@@ -56,3 +56,8 @@
     right: 5px;
     z-index:50000;
   }
+
+#glossary_link {
+  display:block;
+  text-align:right;
+}

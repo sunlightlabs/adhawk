@@ -85,33 +85,45 @@
 
     <script type="text/javascript">
       $(document).ready(function() {
-        function iscroll_listener(e) { e.preventDefault(); };
         var myScroll;
+        function iscroll_listener(e) { e.preventDefault(); };
         $('.modalBoxOverlay').height(getDocumentHeight());
         //Show modal box
         $('.openModal').click(
           function() {
-            document.addEventListener('touchmove', iscroll_listener, false);
-            $('.modalBoxWrap').show();
             var def_id = '#'+$(this).attr("definition");
-            $('#scroller').html($(def_id).html());
-            //$('#'+$(this).attr("definition")).show();
-            myScroll = new iScroll('wrapper');
-            //myScroll.refresh();
-            $('.iscrollScroller .openModal').click(
-              function() {
-                  var def_id = '#'+$(this).attr("definition");
-                  $('#scroller').html($(def_id).html());
-                }
-            );
+            if( $(".modalBoxWrap").is(':hidden') ){
+              document.addEventListener('touchmove', iscroll_listener, false);
+              $('.modalBoxWrap').show();
+              myScroll = new iScroll('wrapper');
+              }
+            $('#scroller').prepend($(def_id).html());
+            myScroll.refresh();
+            //$('.iscrollScroller .openModal').click(
+            //function() {
+            //    var def_id = '#'+$(this).attr("definition");
+            //    $('#scroller').html('');
+            //     $('#scroller').html($(def_id).html());
+            //  }
+            //);
             }
-        );
+          );
+        //$('#switchModal').click(
+            //function() {
+              //$('.iscrollScroller > p').remove();
+              //$('.iscrollScroller > h3').remove();
+              //$('#scroller').prepend($(def_id).html());
+              //myScroll.refresh();
+            //}
+          //);
         //Hide modal box
         $('#closeModal').click(
           function() {
             $('.modalBoxWrap').hide();
             $('.definition').hide();
             document.removeEventListener('touchmove',iscroll_listener,false);
+            $('.iscrollScroller > p').remove();
+            $('.iscrollScroller > h3').remove();
             }
           );
         /* $('.modalBoxOverlay').click(
