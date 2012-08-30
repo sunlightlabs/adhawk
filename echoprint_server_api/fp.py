@@ -272,8 +272,8 @@ def best_match_for_query(code_string, elbow=10, local=False):
         # If the actual score went down it still could be close enough, so check for that
         #if actual_score_top_score > (original_scores[actual_score_top_track_id] / 4): 
         if actual_score_top_score > 20: 
-            #if (actual_score_top_score - actual_score_2nd_score) >= (actual_score_top_score / 3):  # for examples [10,4], 10-4 = 6, which >= 5, so OK
-            if actual_score_top_score > 20:  # for examples [10,4], 10-4 = 6, which >= 5, so OK
+            if (actual_score_top_score - actual_score_2nd_score) >= 1:  # for examples [10,4], 10-4 = 6, which >= 5, so OK
+            #if actual_score_top_score > 20:  # for examples [10,4], 10-4 = 6, which >= 5, so OK
                 return Response(Response.MULTIPLE_GOOD_MATCH_HISTOGRAM_DECREASED, TRID=trackid, score=actual_score_top_score, qtime=response.header["QTime"], tic=tic, metadata=meta)
             else:
                 return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, qtime = response.header["QTime"], tic=tic)
