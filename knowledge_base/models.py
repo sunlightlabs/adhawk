@@ -223,6 +223,7 @@ class Candidate(models.Model):
 class FunderFamily(models.Model):
     primary_FEC_id = models.CharField(max_length=9)
     name = models.CharField(max_length=200)
+    slug = models.URLField(max_length=200,blank=True,null=True)
     ftum_url = models.URLField(blank=True,null=True)
     #IE_id = models.CharField(max_length=32,null=True,blank=True)
     description = models.TextField(blank=True,null=True)
@@ -325,6 +326,11 @@ class FunderFamily(models.Model):
             self.ie_opposes_reps_percent = (float(str(
                     self.ie_opposes_reps)) / denom)
         self.save()
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify_uniquely(self.name,self.__class__)
+        super(FunderFamily, self).save(*args,**kwargs)
+
 
 class Funder(models.Model):
     FEC_id = models.CharField(max_length=9)
@@ -604,7 +610,8 @@ class Media(models.Model):
     
     def save(self, *args, **kwargs):
         self.funder_name = self.media_profile.funder.name
-        self.slug = slugify_uniquely(self.ad.title, self.__class__)
+        if self.slug == "slug" or self.slug == None:
+            self.slug = slugify_uniquely(self.ad.title, self.__class__)
         sr = urlparse.urlsplit(self.url)
         if sr.netloc=='www.youtube.com':
             self.embed_code = '<iframe width="560" height="315" src="http://www.youtube.com/embed/%s" frameborder="0" allowfullscreen></iframe>'%sr.query.replace('v=','')
