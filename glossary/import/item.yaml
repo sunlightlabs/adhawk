@@ -1,0 +1,162 @@
+---
+- term: Asset-Backed Commercial Paper
+  acronym: ABCP
+  slug: asset-backed-commercial-paper
+  definition: "A corporate debt due within a year, and backed by assets such as real estate, autos and other commercial assets. Asset-backed commercial paper is similar to a mortgage-backed security; both are packages of loans resold to other investors. However, asset-backed commercial paper includes assets other than home mortgages."
+- term: Asset-Backed Commercial Paper Money Market Mutual Fund Liquidity Facility Facility
+  acronym: AMLF
+  slug: amlf
+  definition: "The AMLF provides funding to banks and bank holding companies to purchase high-quality asset-backed commercial paper from money market mutual funds."
+- term: Bank Holding Company
+  acronym: BHC
+  slug: bank-holding-company
+  definition: "A company that owns and/or controls one or more U.S. banks or one that owns, or has controlling interest in, one or more banks. A bank holding company may also own another bank holding company, which in turn owns or controls a bank; the company at the top of the ownership chain is called the top holder."
+- term: Call Option
+  definition: "An agreement that gives an investor the right (but not the obligation) to buy a stock, bond, commodity, or other instrument at a specified price within a specific time period. Call options give the holder the right to 'call in' and buy an asset. The holder profits on a call when the underlying asset increases in price."
+  slug: call-option
+- term: Certificate of Deposit
+  acronym: CD
+  slug: certificate-of-deposit
+  definition: "A short-term deposit offered by banks and thrifts where depositors agree to keep their money in the account for a specified amount of time in exchange for a specified interest rate. Depositors face a penalty if money is withdrawn before the CD matures."
+- term: Commercial Paper
+  slug: commercial-paper
+  definition: "Unsecured debt issued by a company or bank to cover short-term credit needs such as accounts receivable or inventory. The length of the debt can range from 2 to 270 days. Commercial paper can be discounted or interest-bearing."
+- term: Common Stock
+  slug: common-stock
+  definition: "Also called equity, is purchased, giving stockholders (shareholders) ownership and voting rights in a company, as well as entitlement to shares of the company's profits through dividends and/or capital appreciation."
+- term: Credit Default Swap
+  acronym: CDS
+  slug: credit-default-swap
+  definition: "A type of insurance arrangement in which the buyer pays a premium at periodic intervals in exchange for a contingent payment in the event that a third party defaults. The size of the premium paid relative to the contingent payment generally increases with the likelihood of default."
+- term: Credit Extended to AIG
+  slug: credit-extended-to-aig
+  definition: "In the fall of 2008, the Fed made two lines of credit available to AIG. The credit was intended to supply cash needed by AIG to compensate for a loss of liquidity due to devaluing assets."
+- term: Comma Separated Value
+  acronym: CSV
+  slug: csv
+  definition: "A CSV is a computer file format used for data tables that are in list form such as a financial spreadsheet. Each category is separated by commas and each line represents a row. CSVs help move such data between two different computer programs and can be opened in nearly all modern spreadsheet programs."
+- term: Currency Swap
+  slug: currency-swap
+  definition: "The Fed is contracting with 14 foreign central banks to make U.S. dollars available temporarily. After a set period of time the original amounts of the dollars will be exchanged for the foreign currency."
+- term: Daily Closing Price
+  slug: daily-closing-price
+  definition: "The price of the last transaction for a given stock or bond at the end of a daily trading session."
+- term: Deposit Insurance
+  slug: deposit-insurance
+  definition: "A federal guarantee that each depositor at participating banks and thrifts will receive the total amount of their deposit up to a certain level if the financial institution becomes insolvent. (That level is currently $250,000, which is a temporary increase that took place in October 2008 from the regular guarantee amount of $100,000. Pending legislation would make the temporary increase in the deposit insurance limit to $250,000 permanent beyond 2009)."
+- term: Dividend
+  slug: dividend
+  definition: "Earnings of a corporation that are distributed to stockholders, in proportion to the amount of stock owned, and usually paid on a quarterly basis."
+- term: Emergency Economic Stabilization Act
+  acronym: EESA
+  slug: eesa
+  definition: "The Emergency Economic Stabilization Act of 2008 (EESA) was signed into law on October 3, 2008.  See <a href='http://www.financialstability.gov/roadtostability/programs.htm'>www.financialstability.gov</a>."
+- term: Equity
+  slug: equity
+  synonym: Equity Share
+  definition: "Ownership interest of shareholders in a corporation.  Also called equity shares."
+- term: Exercise Price
+  slug: exercise-price
+  definition: "Also called strike price.  The specified price on an option contract at which the contract may be exercised, where the call option buyer has the right to buy the stock - and a put option buyer has the right to sell the stock-at the exercise price."
+- term: Federal Agency Debt Security
+  slug: federal-agency-debt-security
+  definition: "The Fed is purchasing up to $200 billion in debt issued by Fannie Mae, Freddie Mac and the Federal Home Loan Banks."
+- term: Federal Deposit Insurance Corporation
+  acronym: FDIC
+  slug: fdic
+  definition: "The Federal Deposit Insurance Corporation (FDIC) preserves and promotes public confidence in the U.S. financial system by insuring deposits in banks and thrift institutions for up to $250,000 (through December 31, 2009); by identifying, monitoring and addressing risks to the deposit insurance funds; and by limiting the effect on the economy and the financial system when a bank or thrift institution fails. (from <a href='http://www.fdic.gov/help/faq.html'>fdic.gov</a>) "
+- term: Federal Information Processing Standard
+  acronym: FIPS
+  slug: fips
+  definition: "A set of standards developed by the National Institute of Standards and Technology for encoding government data. Most commonly known for its numeric codes defining U.S. geographic locations (e.g. states, counties and cities)."
+- term: Insolvent
+  slug: insolvent
+  definition: "A firm whose liabilities exceed its assets."
+- term: Interest Rate
+  slug: interest-rate
+  definition: "A rate charged to a borrower for the use of loaned money."
+- term: In-the-Money Warrant
+  slug: in-the-money-warrant
+  definition: "In-the-money means that the current stock price is above the exercise (or strike) price of the warrant. (Also see: out-of-the-money warrant.)"
+- term: Legacy Loans Program
+  acronym: LLP
+  slug: legacy-loans-program
+  definition: "The Legacy Loans Program is a FDIC and Treasury Department program aimed at getting rid of troubled assets and loans held by banks across the country. It is one arm of the Public Private Investment Program announced in March 2009. Under the $500 billion to $1 trillion Legacy Loan Program, Treasury will partner with private investors and hedge funds by creating joint Public-Private Investment Funds that will buy pools of troubled assets at auction. The Treasury Department and private investors would contribute equal amounts of equity financing; the rest of the financing would come from debt that was guaranteed by the FDIC. If a fund turns a profit, its returns are split equally between private investors and the government. However, if a fund loses money, the loss is first absorbed by the equity contributed by the Treasury and the private investors, and if those contributions are insufficient to cover the loss, the remainder is absorbed by the FDIC. Although private investors fully share the potential profit gains with the government, any losses are only limited to their initial equity contribution. The government bears most of the downside risk."
+- term: Loan
+  slug: loan
+  definition: "A sum of money given from one party to another for use over a period of time. The money is paid back according to terms agreed upon by both parties, including the specified interest rates and the timeframe over which the loan will be repaid."
+- term: Loan Guarantee
+  slug: loan-guarantee
+  definition: "A commitment on the part of the guaranteeing agency or enterprise to pay off a loan if the borrower defaults."  
+- term: Maiden Lane LLC
+  slug: maiden-lane-i
+  definition: "The Fed created Maiden Lane and extended a $29 billion credit line to the LLC for JPMorgan Chase to acquire certain assets of Bear Stearns. The LLC will manage those assets to maximize the likelihood that the investment is repaid."
+- term: Maiden Lane II LLC
+  slug: maiden-lane-ii
+  definition: "The Fed created Maiden Lane II to purchase residential mortgage-backed securities from AIG."
+- term: Maiden Lane III LLC
+  slug: maiden-lane-iii
+  definition: "The Fed created Maiden Lane III to purchase multi-sector collateralized debt obligations on which AIG had written credit default swap contracts."
+- term: Money-Market Mutual Fund
+  slug: money-market-mutual-fund
+  definition: "An open-end mutual fund which invests only in money markets. Such funds invest in short term (one day to one year) debt such as Treasury bills, certificates of deposit, and commercial paper. The primary goal is the preservation of principal with modest dividends. Most deposits are not FDIC insured."
+- term: Mortgage-Backed Security
+  acronym: MBS
+  slug: mortgage-backed-security
+  definition: "Debt obligations that represent claims to the cash flows from pools of mortgage loans, most commonly on residential property. Mortgage loans are purchased from banks, mortgage companies, and other originators and then assembled into pools by a governmental, quasi-governmental, or private entity. The entity then issues securities that represent claims on the principal and interest payments made by borrowers on the loans in the pool, a process known as securitization."
+- term: Newly Issued Security
+  slug: newly-issued-security
+  definition: "A stock or bond publicly offered for the first time in an Initial Public Offering, or an additional issuance of stocks or bonds by a public company."
+- term: Non-Interest-Bearing Account
+  slug: non-interest-bearing-account
+  definition: "Accounts that do not earn interest."
+- term: Out-of-the-Money Warrant
+  slug: out-of-the-money-warrant
+  definition: "Out-of-the-money means that the current stock price is below the exercise (or strike) price. (Also see: in-the-money warrant.)"
+- term: Preferred Stock
+  slug: preferred-stock
+  definition: "Refers to shares of stock or equity in a company that provides a specific dividend to be paid before dividends are paid to common stockholders, and preferred stock shares take precedence over common stock shares if the company liquidates. While preferred stockholders typically receive fixed dividends, they do not usually have voting rights in the company."
+- term: Primary Dealer Credit Facility
+  slug: primary-dealer-credit-facility
+  definition: "The Fed issues one-day loans to the 16 financial institutions (primary dealers) that trade directly with the Fed in exchange for eligible collateral."
+- term: Put Option
+  slug: put-option
+  definition: "An option contract giving the owner the right, but not the obligation, to sell a specified amount of an underlying security at a specified price within a specified time. This is the opposite of a call option, which gives the holder the right to buy shares. A put becomes more valuable as the price of the underlying stock depreciates relative to the strike price."
+- term: Senior Unsecured Debt
+  slug: senior-unsecured-debt
+  definition: "Unsecured debt is debt that has no collateral, Senior unsecured debt ranks ahead of any unsecured debt in the right of repayment in the event of default."
+- term: Stock Price
+  slug: stock-price
+  synonym: Share Price
+  definition: "The price of a single share of a company's stock, the ownership of which makes the possessor a shareholder of the company.  Also called share price."
+- term: Strike Price
+  slug: strike-price
+  definition: "See exercise price."
+- term: Stock Option
+  slug: stock-option
+  definition: "An option in which the holder has the right to buy or sell its stock at a specified price by a specific date."
+- term: Subsidy Rate
+  slug: subsidy-rate
+  definition: "In the case of the financial bailout of banks, the ratio of the subsidy to the initial disbursement of government funds. The subsidy rate shows the share of the disbursement that reflects a true subsidy cost to the government after the return on the investment is taken into account."
+- term: Systemically Significant Failing Institution
+  acronym: SSFI
+  slug: ssfi
+  definition: "In determining whether an institution is an SSFI, Treasury considers: 1) the extent to which the failure could threaten the viability of its creditors and counterparties; 2) The number and size of financial institutions that are seen by investors or counterparties as similarly situated to the failing institution, or that would otherwise be likely to experience indirect contagion effects from the failure; 3) Whether the institution is sufficiently important to the nation's economy that a failure would cause major disruptions to credit markets or payments and settlement systems; or 4) The extent of the institution's ability to access alternative sources of capital and liquidity."
+- term: Term Asset-Backed Securities Loan Facility
+  acronym: TALF
+  slug: talf
+  definition: "<a href='http://www.treasury.gov/initiatives/eesa/docs/CBLI-Investment-Program-Guidelines.pdf'>Term Asset-Backed Securities Loan Facility</a> is a Federal Reserve loan program that is intended to assist the credit markets in accommodating the credit needs of consumers and small businesses by facilitating the issuance of asset-backed securities (ABS) and improving the market conditions for ABS more generally."
+- term: Troubled Asset Relief Program
+  acronym: TARP
+  slug: tarp
+  definition: "The Troubled Assets Relief Program (TARP) was established under the EESA with the specific goal of stabilizing the United States financial system and preventing a systemic collapse.  (See <a href='http://www.financialstability.gov/roadtostability/programs.htm'>www.financialstability.gov</a>)"
+- term: Term Securities Lending Facility
+  acronym: TSLF
+  slug: tslf
+  definition: "Created in March 2008, the TSLF lends Fed-held Treasury securities in exchange for other types of securities held by the 16 financial institutions (known as primary dealers) that trade directly with the Fed. The maximum lending amount under this program is $200 billion."
+- term: Troubled Asset
+  slug: troubled-asset
+  definition: "In relation to TARP, troubled assets are defined as any residential or commercial mortgages - or any stocks and bonds, debt or other instruments based on such mortgages - that originated or were issued on or before March 14, 2008, the purchase of which the Treasury Secretary determines promotes financial market stability. The term can also apply to any other financial instrument that the Secretary, after consulting with the Federal Reserve Chair, determines the purchase of which is necessary to promote financial market stability, but only after such determination is given in writing to appropriate Congressional committees."
+- term: Warrant
+  slug: warrant
+  definition: "An option to buy stock (equity) at a specific price within a certain time frame. In this case, the specific terms will be agreed upon between Treasury and the respective bank."

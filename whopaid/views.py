@@ -24,3 +24,10 @@ def landing_page(request):
         'client' : client,
         })
     return render_to_response('whopaid/landing_page.html',c)
+
+def glossary(request):
+    client = set_client(request)
+    c = RequestContext(request,{
+            'client' : client,
+            })
+    return render_to_response('whopaid/glossary.html',c)
