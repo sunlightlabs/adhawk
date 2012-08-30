@@ -22,7 +22,14 @@
   })();
     </script>
     <script type='text/javascript' src='{% static "js/jquery-1.7.2.min.js" %}'></script>
+<<<<<<< HEAD
+    <!--
+    <script type='text/javascript' src='{% static "js/protoFluid3.02.js" %}'></script>
+    -->
+=======
     {# // <script type='text/javascript' src='{% static "js/protoFluid3.02.js" %}'></script> #}
+
+>>>>>>> Changing glossary anchors.
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Ad Hawk from the Sunlight Foundation</title>
@@ -39,9 +46,15 @@
     {% endblock %}
 
     <link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
+<<<<<<< HEAD
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script src="http://assets.sunlightfoundation.com.s3.amazonaws.com/site/4.0/scripts/gigya.min.js"></script>
+<script type="text/javascript" src="//use.typekit.net/wgi6ubk.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<script type="text/javascript" src="{% static "js/iscroll.js" %}"></script>
+=======
 
     {# // <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script> #}
-    <script src={% static "js/iscroll.js" %}
     <script src="http://assets.sunlightfoundation.com.s3.amazonaws.com/site/4.0/scripts/gigya.min.js"></script>
     <script type="text/javascript" src="//use.typekit.net/wgi6ubk.js"></script>
     <script type="text/javascript">
@@ -53,6 +66,7 @@
         var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/(\s|^)wf-loading(\s|$)/g," ");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script"),d=false;tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(d||a&&a!="complete"&&a!="loaded")return;d=true;clearTimeout(t);try{Typekit.load(config)}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
       })();
     </script>
+>>>>>>> Changing glossary anchors.
     <meta name="keywords" content="" />
     <meta name="description" content="Discover who is behind the super pacs and other groups buying the political ads you see during this election" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
@@ -85,49 +99,36 @@
 
     <script type="text/javascript">
       $(document).ready(function() {
-        $('.modalBoxOverlay').height(getDocumentHeight());
-        var myScroll;
-        myScroll = new iScroll('wrapper');
         function iscroll_listener(e) { e.preventDefault(); };
-        function clear_scroller() {
-            $('.iscrollScroller > p').remove();
-            $('.iscrollScroller > h3').remove();
-            myScroll.refresh();
-            };
-        function populate_scroller(link) {
-            var def_id = '#'+$(link).attr("definition");
-            $('.iscrollScroller').prepend($(def_id).html());
-            myScroll.refresh();
-            };
-        function modal_open() {
-              document.addEventListener('touchmove', iscroll_listener, false);
-              $('.modalBoxWrap').show();
-              myScroll.refresh();
-            };
+        var myScroll;
+        $('.modalBoxOverlay').height(getDocumentHeight());
         //Show modal box
         $('.openModal').click(
-            function () {
-              clear_scroller();
-              populate_scroller(this);
-              if( $(".modalBoxWrap").is(':hidden') ){ modal_open() };
-              }
-          );
-        $('.glossarybutton').click(
-            function () {
-              clear_scroller();
-              populate_scroller(this);
-              modal_open(this);
-              }
-          );
+          function() {
+            document.addEventListener('touchmove', iscroll_listener, false);
+            $('.modalBoxWrap').show();
+            var def_id = '#'+$(this).attr("definition");
+            $('#scroller').html($(def_id).html());
+            //$('#'+$(this).attr("definition")).show();
+            myScroll = new iScroll('wrapper');
+            //myScroll.refresh();
+            $('.iscrollScroller .openModal').click(
+              function() {
+                  var def_id = '#'+$(this).attr("definition");
+                  $('#scroller').html($(def_id).html());
+                }
+            );
+            }
+        );
+        //Hide modal box
         $('#closeModal').click(
           function() {
             $('.modalBoxWrap').hide();
             $('.definition').hide();
             document.removeEventListener('touchmove',iscroll_listener,false);
-            clear_scroller();
             }
           );
-        $('.modalBoxOverlay').click(
+        /* $('.modalBoxOverlay').click(
           function() {
             $('.modalBoxWrap').hide();
             $('.definition').hide();
@@ -138,7 +139,7 @@
             $('.modalBoxWrap').hide();
             $('.definition').hide();
             }
-          );
+          ); */
     });
     </script>
   </head>

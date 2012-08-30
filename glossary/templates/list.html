@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load media %}
+{% load morsel_tags %}
+
+{% load menubuilder %}
+{% block content %}
+
+
+<div class="wrapper clearfix">
+	<div class="secondary-header">
+			<h3>Glossary of Terms</h3>		
+		</div>
+		{% include "includes/static_side_nav.html" %}
+		
+    <div class="page-content">
+
+            <dl id="glossary">
+                {% for item in glossary_items %}
+                {% spaceless %}
+                <dt>
+                    <a name="{{ item.slug }}" href="#{{ item.slug }}">
+                        {{ item.term }}
+                        {% if item.acronym %}({{ item.acronym }}){% endif %}
+                    </a>
+                </dt>
+                {% endspaceless %}
+                <dd>{{ item.definition|safe }}</dd>
+                {% endfor %}
+            </dl>
+            
+            {% morsel text1 %}
+            
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,65 @@
+.modalBoxWrap { /* The div that shows/hides. */
+    display:none; /* starts out hidden */
+    z-index:40001; /* High z-index to ensure it appears above all content */
+}
+
+.modalBoxOverlay { /* Shades out background when selector is active */
+    position:fixed;
+    width:100%;
+    height:100%;
+    background-color:black;
+    opacity:.5; /* Sets opacity so it's partly transparent */
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; /* IE transparency */
+    filter:alpha(opacity=50); /* More IE transparency */
+    z-index:40001;
+}
+
+.modalVerticalOffset { /* Fixed position to provide the vertical offset */
+    position:fixed;
+    top:10%;
+    width:100%;
+    z-index:40002; /* ensures box appears above overlay */
+}
+
+.iscrollScroller {
+    padding: 10px;
+    z-index:40004;
+}
+
+.modalBox { /* The actual box, centered in the fixed-position div */
+    width:85%; /* Whatever width you want the box to be */
+    max-width: 600px;
+    max-height: 300px;
+    position:relative;
+    margin:0 auto;
+    /*Everything below is just visual styling */
+    background-color:white;
+    padding:1%;
+    border:2px solid #666;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    z-index:40003;
+}
+
+.modalBox p{
+   line-height:1.6em;
+}
+
+.definition {
+    display:none;
+  }
+
+#closeModal {
+    position:absolute;
+    top: 5px;
+    right: 5px;
+    z-index:50000;
+  }
+
+.modalGlossaryLink {
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 0.9em;
+    font-style: normal;
+    font-weight: normal;
+}
