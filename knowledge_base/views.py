@@ -35,7 +35,7 @@ def ad_profile(request, path):
         user_agent = request.META['HTTP_USER_AGENT']
     print 'user agent is %s'%(user_agent,)
     #print request.META.keys()
-    media = Media.objects.get(pk=path)
+    media = Media.objects.get(slug=path)
     #pk_pad = str(media.pk).zfill(5)
     c = RequestContext(request, {
             'client' : client,
