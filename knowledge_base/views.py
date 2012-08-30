@@ -27,6 +27,26 @@ def set_client(request):
     else:
         return user_agent
 
+def funder_family_profile(request, path):
+    client = set_client(request)
+    funder_family = FunderFamily.objects.get(slug=path)
+    funders = funder_family.funder_set.all()
+    media_profiles = []
+    for funder in funders:
+        if funder.media_profile_assigned:
+            for media_profile in funder.mediaprofile_set.all()
+                media_profiles.append(media_profile)
+    medias = []
+    for media_profile in media_profiles:
+        for media in media_profile.media_set.filter(valid=True,checked=True):
+            medias.append(media)
+    c = RequestContext(request, {
+            'client'        : client,
+            'medias'        : medias,
+            'funder_family' : funder_family,
+            })
+    return render_to_response('knowledge_base/funder_family_profile.html',c)
+    
 def ad_profile(request, path):
     client = set_client(request)
     try:
