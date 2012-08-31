@@ -73,35 +73,35 @@ Didn't find what you were looking for? Try again! Make sure to use full words (a
             <!-- End faceting -->
 
             <!-- Display results... -->
-            <div class="mainCol pluralResult">
+            <div class="mainCol">
                 {% for result in page.object_list %}
-                    <div class="search_result">
+                    <div class="line_b">
                         <h3><a href="{{ result.object.get_absolute_url }}">{{ result.object.ad.title }}</a></h3>
                         <p>{% autoescape off %}{{ result.object.thumbstrip }}{% endautoescape %}</p>
                     </div>
                 {% empty %}
                     <p>Sorry, no results found.</p>
                 {% endfor %}
+
+                <!-- Begin Pagination -->
+                <div class="pagination">
+                    <p>
+                        {% if page.has_previous %}
+                        <a href="?q={{ query }}&page={{ page.previous_page_number }}">previous</a>
+                        {% endif %}
+
+                            Page {{ page.number }} of {{ page.paginator.num_pages }}
+
+                        {% if page.has_next %}
+                        <a href="?q={{ query }}&page={{ page.next_page_number }}">next</a>
+                        {% endif %}
+                    </p>
+                </div>
+                <!-- End pagination -->
            </div>
         {% endif %}
 
-        <!-- Begin Pagination -->
-        <div class="pagination">
-            <span class="step-links">
-                {% if page.has_previous %}
-                <a href="?q={{ query }}&page={{ page.previous_page_number }}">previous</a>
-                {% endif %}
 
-                <span class="current">
-                    Page {{ page.number }} of {{ page.paginator.num_pages }}
-                </span>
-
-                {% if page.has_next %}
-                <a href="?q={{ query }}&page={{ page.next_page_number }}">next</a>
-                {% endif %}
-            </span>
-        </div>
-        <!-- End pagination -->
         </div>
 
     <!-- End Display results -->

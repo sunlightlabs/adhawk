@@ -2,22 +2,22 @@
 
 
 .wf-loading {
-   /* styles to use when web fonts are loading */
-   visibility: hidden;
+    /* styles to use when web fonts are loading */
+    visibility: hidden;
   }
 
 .wf-active {
-   /* styles to use when web fonts are active */
-  font-family: "ltc-squareface-sc-n4","ltc-squareface-sc";
-  font-style: normal;
-  font-weight: 400;
+    /* styles to use when web fonts are active */
+    font-family: "ltc-squareface-sc-n4","ltc-squareface-sc";
+    font-style: normal;
+    font-weight: 400;
   }
 
 .wf-inactive {
-   /* styles to use when web fonts are inactive */
-  font-family: "Arial Black", "Futura-CondensedExtraBold", "DroidSans-Bold", Georgia-bold, serif;
-  font-style: normal;
-  font-weight: bold;
+    /* styles to use when web fonts are inactive */
+    font-family: "Arial Black", "Futura-CondensedExtraBold", "DroidSans-Bold", Georgia-bold, serif;
+    font-style: normal;
+    font-weight: bold;
   }
 
 
@@ -215,8 +215,13 @@ input{
     padding: 2em 5%;
     }
 
-
-
+.mainCol h3 a {
+    color: #564E3F;
+    font-family: "ltc-squareface-sc-n4","ltc-squareface-sc","Arial Black","Futura-CondensedExtraBold","DroidSans-Bold",Georgia-bold,serif;
+    font-size: 1.4em;
+    font-style: normal;
+    font-weight: 400;
+}
 
 /* BREADCRUMBS */
 
@@ -326,6 +331,31 @@ a, a:link, a:visited {
 a:hover {
     color: #ab2e17;
    }
+
+
+
+
+
+/* PAGINATION */
+
+.pagination {
+    font-size: .9em;
+    width: 100%;
+
+}
+
+.pagination p{
+    color: #FFF;
+    font-weight: bold;
+    float: right;
+}
+
+
+.pagination p a{
+    color: #931f0a;
+    font-weight: normal;
+}
+
 
 
 /* TOP ADS */
@@ -1250,55 +1280,55 @@ h3 a{
     padding: 0 5% 2em 5%;
 }
 .errorFour h1{
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 .errorFour p{
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 1.2em;
-  color: #564e3e;
-  margin-top: 0;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1.2em;
+    color: #564e3e;
+    margin-top: 0;
 }
 
 .errorText{
-  width: 40%;
+    width: 40%;
 }
 .errorFour .mobilePrompt{
     float: right;
     margin-top: 60px;
-}
+    }
 
 
 /* Mobile Buttons */
 
 
 .mobilePrompt{
-  width: 334px;
+    width: 334px;
 }
 .mobilePrompt .line-b{
-  width: 40%;
+    width: 40%;
 }
 .mobilePrompt a.android, .mobilePrompt a.ios{
-  background-image: url('../img/getMobile.png');
-  background-repeat: none;
-  width: 157px;
-  height: 54px;
-  display: block;
-  text-indent: -9999em;
-  float: left;
-  margin-top: 20px;
+    background-image: url('../img/getMobile.png');
+    background-repeat: none;
+    width: 157px;
+    height: 54px;
+    display: block;
+    text-indent: -9999em;
+    float: left;
+    margin-top: 20px;
 }
 .mobilePrompt a.android{
-  background-position: right top;
-  margin-right: 20px;
+    background-position: right top;
+    margin-right: 20px;
 }
 .mobilePrompt a.android:hover{
-  background-position: right bottom;
+    background-position: right bottom;
 }
 .mobilePrompt a.ios{
-  background-position: left top;
+    background-position: left top;
 }
 .mobilePrompt a.ios:hover{
-  background-position: left bottom;
+    background-position: left bottom;
 }
 
 

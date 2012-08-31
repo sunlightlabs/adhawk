@@ -193,7 +193,7 @@
                 <p>Join the Sunlight Foundation's open government community to learn more.</p>
             </div>
             <div class="signup">
-                <form action="{% url mailinglist_subscribe %}" method="post" id="signup-form">  <!-- make signup, not search-->
+                <form action="{% url mailinglist_subscribe %}" method="post" id="signup-form">
                     {% csrf_token %}
                     <input class="transparent email" type="email" name="email" placeholder="Email Address">
                     <input class="transparent zipcode" type="text" name="zipcode" placeholder="Zip Code">
