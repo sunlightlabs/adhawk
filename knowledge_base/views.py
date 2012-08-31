@@ -5,6 +5,7 @@ from django.template import Context,RequestContext
 from django.shortcuts import render_to_response,redirect
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from knowledge_base.models import Ad, \
                                   Media, \
@@ -36,10 +37,18 @@ def funder_family_profile(request, path):
         if funder.media_profile_assigned:
             for media_profile in funder.mediaprofile_set.all()
                 media_profiles.append(media_profile)
-    medias = []
+    media_list = []
     for media_profile in media_profiles:
         for media in media_profile.media_set.filter(valid=True,checked=True):
-            medias.append(media)
+            media_list.append(media)
+    paginator = Paginator(media_list,15)
+    page = request.GET.get('page')
+    try:
+        medias = paginator.page(page)
+    except PageNotAnInteger:
+        medias = paginator.page(1)
+    except EmptyPage:
+        medias = paginator.page(paginator.num_pages)
     c = RequestContext(request, {
             'client'        : client,
             'medias'        : medias,
