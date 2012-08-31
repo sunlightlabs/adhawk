@@ -580,7 +580,7 @@ class Media(models.Model):
         return popup
 
     def get_absolute_url(self):
-        return '/'.join([str(a) for a in EXTERNAL_URL,'ad',self.pk])+'/'
+        return '/'+'/'.join([str(a) for a in ['ad',self.slug]])+'/'
 
     def thumbvid(self):
         vid = urlparse.parse_qs(urlparse.urlsplit(self.url).query)['v'][0]
