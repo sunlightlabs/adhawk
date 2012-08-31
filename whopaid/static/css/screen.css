@@ -173,8 +173,47 @@ input{
     box-shadow:         5px 5px 5px rgba(50, 50, 50, 0.13);
     }
 
+.narrowCol{
+    background: url(../img/bg_content.png) top left repeat;
+    margin: 2em 0 2em 5%;
+    padding: 2em 5%;
+    border-top:2px solid #9e8d6e;
+    border-bottom:2px solid #9e8d6e;
+    float:left;
+    width:25%;
+}
+
+.narrowCol h3{
+    padding:0;
+    color: #564e3e;
+    font-size: 1.4em;
+}
 
 
+.narrowCol h5{
+    padding:0;
+    margin-bottom:0;
+    color: #564e3e;
+    font-size: 1em;
+}
+
+.narrowCol ul{
+    list-style: none outside none;
+    margin:0;
+    padding:0;
+}
+
+.narrowCol li{
+    padding:.4em 0;
+    font-size: .9em;
+
+}
+
+.mainCol{
+    float:right;
+    width:50%;
+    padding: 2em 5%;
+    }
 
 
 
@@ -1198,18 +1237,7 @@ h3 a{
 }
 
 
-/* Top-ads */
 
-/* Semi-generic column structure, will try to reconcile with the about columns. */
-
-.narrowCol{
-  width: 32.1875%;
-  float: left;
-}
-.mainCol{
-  width: 67.8125%;
-  float: left;
-}
 
 
 
