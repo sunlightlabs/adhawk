@@ -35,7 +35,7 @@ def funder_family_profile(request, path):
     media_profiles = []
     for funder in funders:
         if funder.media_profile_assigned:
-            for media_profile in funder.mediaprofile_set.all()
+            for media_profile in funder.mediaprofile_set.all():
                 media_profiles.append(media_profile)
     media_list = []
     for media_profile in media_profiles:
