@@ -572,10 +572,10 @@ class Media(models.Model):
 
     def thumbstrip(self):
         pad = str(self.pk).zfill(5)
-        loc = EXTERNAL_URL + MEDIA_URL
+        loc = MEDIA_URL
         loc += u'images/media_thumbnails/strips/'
         loc += u'Media_%s_strip.jpg'%(pad,)
-        img_tag = u'<img src="%s" />'%(loc,)
+        img_tag = u'<img class="strip" src="%s" />'%(loc,)
         popup = u'<a href="%s" target="_blank" onclick="link_popup(this); return false">%s</a>'%(self.url,img_tag)
         return popup
 
