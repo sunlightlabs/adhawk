@@ -6,5 +6,4 @@ class FpQuery(models.Model):
     lat = models.FloatField(null=True)
     lon = models.FloatField(null=True)
     result = models.IntegerField(null=True)
-    time =
-    models.DateTimeField(auto_now=True,auto_now_add=True,blank=True,null=True)
+    time = models.DateTimeField(auto_now=True,auto_now_add=True,blank=True,null=True)
