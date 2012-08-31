@@ -1,13 +1,13 @@
 {% block subhead_nav %}
         <div id="breadcrumbs" >
             <div class="contentbox">
-              <ul class="clearfix contentbox">
+              <ul class="contentbox">
                 <li>
                 <a href="/">Home</a>
                 </li>
-            
+
                 <li>&#187;</li>
-            
+
                 <li>
                 <a href="/sponsor/{{ funder_family.slug }}/">{{ funder_family.name|title|truncatechars:30 }}</a>
                 </li>
@@ -18,8 +18,8 @@
                   </li>
                 {% endif %}
               </ul>
-              
-              
+
+
               <!-- Gigya Things -->
               {% if ad %}
               <div class="share-buttons"
@@ -32,6 +32,6 @@
 
 
           </div>
-        </div> 
-        
+        </div>
+
 {% endblock %}

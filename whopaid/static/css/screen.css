@@ -194,11 +194,12 @@ input{
 
 #breadcrumbs {
   display: inline-block;
-  width: 92%;
+  width: 84%;
   background: #b7ae9d;
   border-bottom: 1px solid #796e57;
   border-top: 1px solid #796e57;
   padding-left: 8%;
+  padding-right: 8%;
   margin-bottom:0;
   float:left;
   padding-top:3px;
@@ -231,7 +232,10 @@ input{
     text-decoration: none;
 }
 
-
+#breadcrumbs .gig-bar-container{
+    float: right;
+    padding-right: 8%;
+}
 
 
 
