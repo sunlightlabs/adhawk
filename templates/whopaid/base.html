@@ -167,16 +167,14 @@
                         </li>
                     </ul>
                 </nav>
-                <!-- SEARCH BIZ FOR LATER TIMES
                 <div id="search" class="clearfix">
                     <form action="/search/" method="get">
-                        <input class="transparent" type="text" name="q" id="id_q" placeholder="Search ads by funder or keyword">
+                        <input class="transparent" type="text" name="q" id="id_q" placeholder="Search ads by sponsor or title">
                         <button class="css3button search-button" type="submit">
                             <span>Search</span>
                         </button>
                     </form>
                 </div>
-                -->
                 <div class="clear"></div>
             </div>
         </div>
@@ -195,7 +193,7 @@
                 <p>Join the Sunlight Foundation's open government community to learn more.</p>
             </div>
             <div class="signup">
-                <form action="{% url mailinglist_subscribe %}" method="post" id="signup-form">  <!-- make signup, not search-->
+                <form action="{% url mailinglist_subscribe %}" method="post" id="signup-form">
                     {% csrf_token %}
                     <input class="transparent email" type="email" name="email" placeholder="Email Address">
                     <input class="transparent zipcode" type="text" name="zipcode" placeholder="Zip Code">

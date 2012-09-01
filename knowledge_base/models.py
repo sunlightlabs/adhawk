@@ -1,44 +1,42 @@
 import urlparse,httplib
 from decimal import Decimal
+import requests
+import json
 
 from django.db import models
 from django.db.models import Sum
 from django.template.defaultfilters import slugify
 
 from whopaid.settings import EXTERNAL_URL,MEDIA_URL
+from whopaid.local_settings import GIGYA_ENDPOINT,GIGYA_API_KEY,GIGYA_SECRET
 
 def slugify_uniquely(value, model, slugfield="slug"):
-        """Returns a slug on a name which is unique within a model's table
-
-        This code suffers a race condition between when a unique
-        slug is determined and when the object with that slug is saved.
-        It's also not exactly database friendly if there is a high
-        likelyhood of common slugs being attempted.
-
-        A good usage pattern for this code would be to add a custom save()
-        method to a model with a slug field along the lines of:
-
-                from django.template.defaultfilters import slugify
-
-                def save(self):
-                    if not self.id:
-                        # replace self.name with your prepopulate_from field
-                        self.slug = SlugifyUniquely(self.name, self.__class__)
-                super(self.__class__, self).save()
-
-        Original pattern discussed at
-        http://www.b-list.org/weblog/2006/11/02/django-tips-auto-populated-fields
-        """
-        suffix = 0
-        potential = base = slugify(value)
-        while True:
-                if suffix:
-                        potential = "-".join([base, str(suffix)])
+    suffix = 0
+    potential = base = slugify(value)
+    while True:
+       if suffix:
+           potential = "-".join([base, str(suffix)])
                 
-                if not model.objects.filter(**{slugfield: potential}).count():
-                        return potential
-                # we hit a conflicting slug, so bump the suffix & try again
-                suffix += 1
+       if not model.objects.filter(**{slugfield: potential}).count():
+           return potential
+       # we hit a conflicting slug, so bump the suffix & try again
+       suffix += 1
+
+def gigya_url_request(media_object):
+    base_url = 'http://adhawk.sunlightfoundation.com/ad/'
+    url = base_url+media_object.slug
+    cid = '[Ad Hawk] /ad adprofile %d_%d'%(media_object.media_profile_id,media_object.pk)
+    payload = { 'apiKey'            :  GIGYA_API_KEY,
+                'secret'            :  GIGYA_SECRET,
+                'url'               :  url,
+                'cid'               :  cid,
+                'format'            : 'json',
+                'httpStatusCodes'   : 'false'}
+    d = requests.get(GIGYA_ENDPOINT,params=payload).json
+    if d['statusCode'] == 200:
+        return d['shortURL']
+    else:
+        return None
 
 # Create your models here.
 class Author(models.Model):
@@ -225,8 +223,9 @@ class Candidate(models.Model):
 class FunderFamily(models.Model):
     primary_FEC_id = models.CharField(max_length=9)
     name = models.CharField(max_length=200)
+    slug = models.URLField(max_length=200,blank=True,null=True)
     ftum_url = models.URLField(blank=True,null=True)
-    #IE_id = models.CharField(max_length=32,null=True,blank=True)
+    IE_id = models.CharField(max_length=32,null=True,blank=True)
     description = models.TextField(blank=True,null=True)
     total_contributions = models.DecimalField(
             max_digits=21,
@@ -288,7 +287,7 @@ class FunderFamily(models.Model):
                 if funder.FEC_id == self.primary_FEC_id:
                     self.description = funder.description
                     self.ftum_url = funder.ftum_url
-                    #self.IE_id = funder.IE_id
+                    self.IE_id = funder.IE_id
                 if funder.committee_type:
                     self.committee_types.add(funder.committee_type)
                     if funder.committee_type.code == "O":
@@ -327,6 +326,11 @@ class FunderFamily(models.Model):
             self.ie_opposes_reps_percent = (float(str(
                     self.ie_opposes_reps)) / denom)
         self.save()
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify_uniquely(self.name,self.__class__)
+        super(FunderFamily, self).save(*args,**kwargs)
+
 
 class Funder(models.Model):
     FEC_id = models.CharField(max_length=9)
@@ -547,6 +551,7 @@ class Ad(models.Model):
 class Media(models.Model):
     url = models.URLField()
     gigya_url = models.URLField(blank=True,null=True)
+    slug = models.SlugField(max_length=200,default="slug")
     embed_code = models.CharField(max_length=200,blank=True,null=True)
     creator_description = models.TextField(default="No description available.")
     curator_description = models.TextField(blank=True,null=True)
@@ -567,15 +572,15 @@ class Media(models.Model):
 
     def thumbstrip(self):
         pad = str(self.pk).zfill(5)
-        loc = EXTERNAL_URL + MEDIA_URL
+        loc = MEDIA_URL
         loc += u'images/media_thumbnails/strips/'
         loc += u'Media_%s_strip.jpg'%(pad,)
-        img_tag = u'<img src="%s" />'%(loc,)
+        img_tag = u'<img class="strip" src="%s" />'%(loc,)
         popup = u'<a href="%s" target="_blank" onclick="link_popup(this); return false">%s</a>'%(self.url,img_tag)
         return popup
 
     def get_absolute_url(self):
-        return '/'.join([str(a) for a in EXTERNAL_URL,'ad',self.pk])+'/'
+        return '/'+'/'.join([str(a) for a in ['ad',self.slug]])+'/'
 
     def thumbvid(self):
         vid = urlparse.parse_qs(urlparse.urlsplit(self.url).query)['v'][0]
@@ -597,9 +602,16 @@ class Media(models.Model):
     # tags = models.ManyToManyField(Tag)
     def __unicode__(self):
         return "%s (%s)"%(self.ad.title,self.url)
+
+    def request_gigya_url(self):
+        self.gigya_url = gigya_url_request(self)
+        #print self.gigya_url
+        self.save()
     
     def save(self, *args, **kwargs):
         self.funder_name = self.media_profile.funder.name
+        if self.slug == "slug" or self.slug == None:
+            self.slug = slugify_uniquely(self.ad.title, self.__class__)
         sr = urlparse.urlsplit(self.url)
         if sr.netloc=='www.youtube.com':
             self.embed_code = '<iframe width="560" height="315" src="http://www.youtube.com/embed/%s" frameborder="0" allowfullscreen></iframe>'%sr.query.replace('v=','')

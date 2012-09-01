@@ -5,6 +5,7 @@ from django.template import Context,RequestContext
 from django.shortcuts import render_to_response,redirect
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from knowledge_base.models import Ad, \
                                   Media, \
@@ -27,6 +28,34 @@ def set_client(request):
     else:
         return user_agent
 
+def funder_family_profile(request, path):
+    client = set_client(request)
+    funder_family = FunderFamily.objects.get(slug=path)
+    funders = funder_family.funder_set.all()
+    media_profiles = []
+    for funder in funders:
+        if funder.media_profile_assigned:
+            for media_profile in funder.mediaprofile_set.all():
+                media_profiles.append(media_profile)
+    media_list = []
+    for media_profile in media_profiles:
+        for media in media_profile.media_set.filter(valid=True,checked=True):
+            media_list.append(media)
+    paginator = Paginator(media_list,15)
+    page = request.GET.get('page')
+    try:
+        medias = paginator.page(page)
+    except PageNotAnInteger:
+        medias = paginator.page(1)
+    except EmptyPage:
+        medias = paginator.page(paginator.num_pages)
+    c = RequestContext(request, {
+            'client'        : client,
+            'medias'        : medias,
+            'funder_family' : funder_family,
+            })
+    return render_to_response('knowledge_base/funder_family_profile.html',c)
+    
 def ad_profile(request, path):
     client = set_client(request)
     try:
@@ -35,7 +64,7 @@ def ad_profile(request, path):
         user_agent = request.META['HTTP_USER_AGENT']
     print 'user agent is %s'%(user_agent,)
     #print request.META.keys()
-    media = Media.objects.get(pk=path)
+    media = Media.objects.get(slug=path)
     #pk_pad = str(media.pk).zfill(5)
     c = RequestContext(request, {
             'client' : client,

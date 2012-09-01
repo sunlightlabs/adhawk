@@ -5,6 +5,7 @@ local_settings*
 *.db
 *.dummy
 knowledge_base/migrations
+whopaid_api/migrations
 *.vim
 *.dta
 *.csv

@@ -1,37 +1,37 @@
 {% block subhead_nav %}
-<!-- COMMENTING OUT ALL
         <div id="breadcrumbs" >
             <div class="contentbox">
--->             
-             <!-- SEARCH BIZ FOR LATER TIMES
-              <ul class="clearfix contentbox">
+              <ul class="contentbox">
                 <li>
-                  <a href="http://adhawk.sunlightfoundation.com/ad/">All Ads </a>
+                <a href="/">Home</a>
                 </li>
-            
+
                 <li>&#187;</li>
-            
+
                 <li>
-                  <a href="http://adhawk.sunlightfoundation.com/ad/funder/{{ funder_family.pk}}">{{ funder_family.name|title|truncatechars:30 }}</a>
+                <a href="/sponsor/{{ funder_family.slug }}/">{{ funder_family.name|title|truncatechars:30 }}</a>
                 </li>
+                {% if ad %}
+                <li>&#187;</li>
+                <li>
+                  {{ ad.title|truncatechars:30 }}
+                  </li>
+                {% endif %}
               </ul>
-              
-              
-              -->
-              
-              
-              <!-- Gigya Things
+
+
+              <!-- Gigya Things -->
+              {% if ad %}
               <div class="share-buttons"
                     data-gigya="auto"
                     data-services="twitter, facebook"
-                    data-options="linkBack={{ request.build_absolute_uri|urlencode:"" }}&amp;title={{ "Blah blah blah"|urlencode:""}}&amp;cid={{ "Ad-Hawk_ad_"|urlencode:"" }}&amp;shortURLs=always&amp;">
-              </div>
-               end Gigya Things -->
+                    data-options="linkBack={{ request.build_absolute_uri|urlencode:"" }}&amp;title={{ "I just used Ad Hawk's Ad Explorer from @sunfoundation to discover the sponsor behind this ad!"|urlencode:"" }}&amp;userMessage={{ "I just used Ad Hawk's Ad Explorer from @sunfoundation to discover the sponsor behind this ad!"|urlencode:"" }}&amp;shortURLs=always"
+                    data-twitter-tweet-options="defaultText={{ "I just used Ad Hawk's Ad Explorer to discover the sponsor behind this ad!"|urlencode:"" }}">
+                  </div>
+              {% endif %}
 
 
-<!-- COMMENTING OUT ALL
           </div>
-        </div> 
-        
--->        
+        </div>
+
 {% endblock %}

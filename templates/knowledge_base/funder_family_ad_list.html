@@ -1,0 +1,45 @@
+{% block funder_family_ad_list %}
+
+<div id="main">
+  <div id="gradient">
+      <div class="contentbox clearfix">
+        <h1>Ads Paid for by {{ funder_family.name.title }}</h1>
+
+        <div id="top_ad_list">
+          <ul>
+            {% for media in medias %}
+            <li>
+              <div class="line_b clearfix">
+                <div class="stripDescrip">
+                  <h2 class="clearfix">
+                  <a href="/ad/{{ media.slug }}/">{{ media.ad.title }}</a>
+                  </h2>
+                </div>
+                <img class="strip" src="http://adhawk.sunlightfoundation.com/media/images/media_thumbnails/strips/Media_{{ media.pk|stringformat:"05i" }}_strip.jpg" alt="ad youtube thumbnail">
+              </div>
+
+            </li>
+
+            {% endfor %}
+          </ul>
+        </div> <!-- end div top_ad_list -->
+        <!-- Begin Pagination -->
+        <div class="pagination">
+            <p>
+                {% if medias.has_previous %}
+                    <a href="?page={{ medias.previous_page_number }}">previous</a>
+                {% endif %}
+
+                    Page {{ medias.number }} of {{ medias.paginator.num_pages }}
+
+                {% if medias.has_next %}
+                    <a href="?page={{ medias.next_page_number }}">next</a>
+                {% endif %}
+            </p>
+        </div>
+        <!-- End pagination -->
+      </div> <!-- end div title -->
+  </div>
+</div>
+
+{% endblock %}

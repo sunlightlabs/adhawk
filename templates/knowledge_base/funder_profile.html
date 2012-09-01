@@ -124,13 +124,24 @@
              </div> <!-- end div funder_chart -->
              {% endif %}
              {% endif %} 
-         <div id="more_info">
-           <h3>More Information:</h3>
-             <ul>
+        <div id="more_info">
+          {% if funder_family.ftum_url or funder_family.IE_id %}
+           <h3>Discover more about donors to this committee:</h3>
+           <ul>
+               {% if funder_family.ftum_url %}
                <li><a href="{{ funder_family.ftum_url  }}">Follow the Unlimited Money</a></li>
-                <li><a href="http://influenceexplorer.com">Influence Explorer</a></li>
+               {% endif %}
+               {% if funder_family.IE_id %}
+               <li><a href="http://influenceexplorer.com/organization/{{ funder_family.slug }}/{{ funder_family.IE_id }}">Influence Explorer</a></li>
+               {% else %}
+              <li><a href="http://influenceexplorer.com/">Influence Explorer</a></li>
+              {% endif %}
+            </ul>
+          {% endif %}
+           <h3>Help us better understand advertising in your area:</h3>
+           <ul>
                 <li><a href="http://politicaladsleuth.sunlightfoundation.com/">Political Ad Sleuth</a></li>
-             </ul>
+           </ul>
          </div> <!-- end div where_aired -->
      </div>
 </div>

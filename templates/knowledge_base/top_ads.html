@@ -2,9 +2,8 @@
 {% block content %}
 
 <div id="main">
-  <div id="gradient" class="clearfix">
-    <div class="contentbox">
-      <div id="title">
+  <div id="gradient">
+      <div id="title" class="contentbox clearfix">
         <h1>Popular Ads</h1>
 
         <div id="top_ad_list">
@@ -14,12 +13,12 @@
               <div class="line_b">
                 <div class="stripDescrip">
                   <h2 class="clearfix">
-                  <a href="{{ EXTERNAL_URL }}/ad/top/{{ media.pk }}/">{{ media.ad.title }}</a>
+                  <a href="/ad/top/{{ media.slug }}/">{{ media.ad.title }}</a>
                   </h2>
 
                   <h3>Sponsor: <span class="sponsor">{{ media.media_profile.funder.name|title }}</span></h3>
                 </div>
-                <img class="strip" src="http://adhawk.sunlightfoundation.com/media/images/media_thumbnails/strips/Media_{{ media.pk|stringformat:"05i" }}_strip.jpg" alt="ad youtube thumbnail">
+                <img class="strip" src="/media/images/media_thumbnails/strips/Media_{{ media.pk|stringformat:"05i" }}_strip.jpg" alt="ad youtube thumbnail">
                 <div class="clear"></div>
               </div>
 
@@ -29,9 +28,8 @@
           </ul>
         </div> <!-- end div top_ad_list -->
       </div> <!-- end div title -->
-    </div>
   </div>
 </div>
-  
-  
+
+
 {% endblock %}

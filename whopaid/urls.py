@@ -30,5 +30,6 @@ urlpatterns = patterns('',
     url(r'^ad/top/$','knowledge_base.views.top_ads'),
     url(r'^ad/top/(?P<path>.*)/$','knowledge_base.views.top_ad_select'),
     url(r'^ad/(?P<path>.*)/$','knowledge_base.views.ad_profile'),
+    url(r'^sponsor/(?P<path>.*)/$', 'knowledge_base.views.funder_family_profile'),
     url(r'^search/', include('search.urls')),
     )
