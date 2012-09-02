@@ -28,10 +28,10 @@ def lookup(fingerprint):
 
 def make_media_response_dict(media):
     response_data = {}
-    #result_url = BASE_URL %(str(media.pk),)
-    result_url = media.gigya_url
+    result_url = BASE_URL %(str(media.slug),)
+    share_url = media.gigya_url
     response_data['result_url'] = result_url
-    response_data['share_text'] = SHARE_TEXT%(result_url,)
+    response_data['share_text'] = SHARE_TEXT%(share_url,)
     return response_data
 
 
