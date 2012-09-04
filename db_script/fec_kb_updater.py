@@ -250,7 +250,12 @@ def merge_committee_object(committee,cr):
     else:
         co = None
     if not committee.ftum_url:
-        committee.total_contributions = Decimal(str_or_zero(cr.total_receipts))
+        repayments = Decimal(str_or_zero(cr.candidate_loan_repayments)) +
+                        Decimal(str_or_zero(cr.other_loan_repayments))
+        refunds = Decimal(str_or_zero(cr.refunds_to_individuals)) +
+                    Decimal(str_or_zero(cr.refunds_to_committees))
+        committee.total_contributions = Decimal(str_or_zero(cr.total_receipts)) - 
+                                            (repayments + refunds)
         committee.total_disbursements = Decimal(str_or_zero(cr.total_disbursements))
         committee.cash_on_hand = Decimal(str_or_zero(cr.cash_close_of_period))
     committee.name=cr.committee_name
@@ -276,6 +281,22 @@ class CandidateQuery():
         quy += self.id_list_string
         self.cursor.execute(quy)
         return self.cursor
+    def make_id_list_string(self,id_set):
+        return ' ('+','.join(["'"+str(a)+"'" for a in id_set])+') '
+
+class CandidateCommitteeQuery():
+    def __init__(self,conn,fec_id_set):
+        self.id_list_string = self.make_id_list_strip(fec_id_set)
+        self.cursor = conn.cursor()
+    def get_result_cursor(self):
+        quy = """select fcm.*, fcn.committee_id, fcns.candidate_id,
+        fcns.total_receipts, fcns.total_disbursements, fcns.ending_cash as
+        cash_close_of_period from fec_candidates fcn join 
+        fec_candidate_summaries fcns on fcn.candidate_id = 
+        fcns.candidate_id join fec_committees fcm on fcm.committee_id =
+        fcn.committee_id where fcn.committee_id in """
+        quy += self.id_list_string
+        self.cursor.execute(quy)
     def make_id_list_string(self,id_set):
         return ' ('+','.join(["'"+str(a)+"'" for a in id_set])+') '
 
@@ -391,11 +412,13 @@ class CommitteeImporter():
                 '\n'.join(['+'+str(a) for a in self.create_id_set]))
         if self.create_id_set:
             self.add_committees()
+            self.add_candidate_committees()
 
         log.info("Updating Committees...\n"+ \
                 '\n'.join(['++'+str(a) for a in self.update_id_set]))
         if self.update_id_set:
             self.update_committees()
+            self.update_candidate_committees()
 
         log.info(self.done_msg)
         #self.log.info("Deleting Candidates...\n"+ \
@@ -416,6 +439,34 @@ class CommitteeImporter():
     def update_committees(self):
         merged_entries = 0
         cq = CommitteeQuery(self.conn,self.update_id_set)
+        ec = cq.get_result_cursor()
+        CommitteeResult = make_result_object(ec)
+        for r in ec:
+            cr = CommitteeResult(*r)
+            old_c = Funder.objects.get(FEC_id=cr.committee_id)
+            if diff_committee(old_c,cr):
+                merged = merge_committee_object(old_c,cr)
+                merged.save()
+                merged_entries += 1
+                log.info("...updated\tCommittee\t%s"%(unicode(merged),))
+            else:
+                continue
+        self.done_msg += "...Merged %d new entries"%(merged_entries,)
+    def add_candidate_committees(self):
+        added_entries = 0
+        cq = CandidateCommitteeQuery(self.conn,self.create_id_set)
+        ec = cq.get_result_cursor()
+        CommitteeResult = make_result_object(ec)
+        for r in ec:
+            cr = CommitteeResult(*r)
+            committee = make_committee_object(cr)
+            committee.save()
+            log.info("...added\tCommittee\t%s"%(unicode(committee),))
+            added_entries += 1
+        self.done_msg += "Added %d new entries\n"%(added_entries,)
+    def update_candidate_committees(self):
+        merged_entries = 0
+        cq = CandidateCommitteeQuery(self.conn,self.update_id_set)
         ec = cq.get_result_cursor()
         CommitteeResult = make_result_object(ec)
         for r in ec:
