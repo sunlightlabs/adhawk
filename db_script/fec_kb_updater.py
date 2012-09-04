@@ -311,7 +311,7 @@ class CommitteeQuery():
     def get_result_cursor(self):
         quy = """select fc.*, fcs.cash_close_of_period, fcs.total_receipts,
         fcs.total_disbursements, fcs.candidate_loan_repayments,
-        fcs.other_loan_repayments, fcs.refunds_to_individuals,
+        fcs.loan_repayments, fcs.refunds_to_individuals,
         fcs.refunds_to_committees from fec_committees fc left join 
         fec_committee_summaries fcs on fc.committee_id = fcs.committee_id 
         WHERE fc.committee_id in """
