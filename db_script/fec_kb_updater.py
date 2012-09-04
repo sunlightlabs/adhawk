@@ -291,7 +291,7 @@ class CandidateCommitteeQuery():
         self.id_list_string = self.make_id_list_string(fec_id_set)
         self.cursor = conn.cursor()
     def get_result_cursor(self):
-        quy = """select fcm.*, fcn.committee_id, fcns.candidate_id,
+        quy = """select fcm.*,
         fcns.total_receipts, fcns.total_disbursements, fcns.ending_cash as
         cash_close_of_period, fcns.candidate_loan_repayments, 
         fcns.other_loan_repayments, fcns.refunds_to_individuals, 
