@@ -293,7 +293,9 @@ class CandidateCommitteeQuery():
     def get_result_cursor(self):
         quy = """select fcm.*, fcn.committee_id, fcns.candidate_id,
         fcns.total_receipts, fcns.total_disbursements, fcns.ending_cash as
-        cash_close_of_period from fec_candidates fcn join 
+        cash_close_of_period, fcns.candidate_loan_repayments, 
+        fcns.other_loan_repayments, fcns.refunds_to_individuals, 
+        fcns.refund_to_committees from fec_candidates fcn join 
         fec_candidate_summaries fcns on fcn.candidate_id = 
         fcns.candidate_id join fec_committees fcm on fcm.committee_id =
         fcn.committee_id where fcn.committee_id in """
@@ -308,7 +310,9 @@ class CommitteeQuery():
         self.cursor = conn.cursor()
     def get_result_cursor(self):
         quy = """select fc.*, fcs.cash_close_of_period, fcs.total_receipts,
-        fcs.total_disbursements from fec_committees fc left join 
+        fcs.total_disbursements, fcs.candidate_loan_repayments,
+        fcs.other_loan_repayments, fcs.refunds_to_individuals,
+        fcs.refunds_to_committees from fec_committees fc left join 
         fec_committee_summaries fcs on fc.committee_id = fcs.committee_id 
         WHERE fc.committee_id in """
         quy += self.id_list_string
