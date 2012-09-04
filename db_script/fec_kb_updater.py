@@ -301,6 +301,7 @@ class CandidateCommitteeQuery():
         fcn.committee_id where fcn.committee_id in """
         quy += self.id_list_string
         self.cursor.execute(quy)
+        return self.cursor
     def make_id_list_string(self,id_set):
         return ' ('+','.join(["'"+str(a)+"'" for a in id_set])+') '
 
