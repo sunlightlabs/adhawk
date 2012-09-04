@@ -1,6 +1,6 @@
 # Django settings for whopaid project.
-DEBUG = True
-TEMPLATE_DEBUG = True
+DEBUG = False
+TEMPLATE_DEBUG = False
 
 from logging.handlers import SMTPHandler
 import os.path
