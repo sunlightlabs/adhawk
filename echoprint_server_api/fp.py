@@ -257,29 +257,84 @@ def best_match_for_query(code_string, elbow=10, local=False):
     (actual_score_top_track_id, actual_score_top_score) = sorted_actual_scores[0]
     # Get the 2nd top one (we know there is always at least 2 matches)
     (actual_score_2nd_track_id, actual_score_2nd_score) = sorted_actual_scores[1]
+    # get the 4th top one (it helps, apparently!)
+    (actual_score_4th_track_id, actual_score_4th_score) = sorted_actual_scores[3]
 
     trackid = actual_score_top_track_id.split("-")[0]
     meta = metadata_for_track_id(trackid, local=local)
     
-    #if actual_score_top_score < code_len * 0.05:
-    if actual_score_top_score < 15:
-        match_report_logger.debug("actual_score_top_score < 15")
-        #logger.debug("actual_score_top_score = %d < code_len * 0.05 = %d"%(
-        #                                actual_score_top_score,
-        #                                code_len))
-        return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, qtime = response.header["QTime"], tic=tic)
+#    #if actual_score_top_score < code_len * 0.05:
+#    if actual_score_top_score < 15:
+#        match_report_logger.debug("actual_score_top_score < 15")
+#        #logger.debug("actual_score_top_score = %d < code_len * 0.05 = %d"%(
+#        #                                actual_score_top_score,
+#        #                                code_len))
+#        return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, qtime = response.header["QTime"], tic=tic)
+#    else:
+#        # If the actual score went down it still could be close enough, so check for that
+#        #if actual_score_top_score > (original_scores[actual_score_top_track_id] / 4): 
+#        if actual_score_top_score > 20: 
+#            if (actual_score_top_score - actual_score_2nd_score) >= 1:  # for examples [10,4], 10-4 = 6, which >= 5, so OK
+#            #if actual_score_top_score > 20:  # for examples [10,4], 10-4 = 6, which >= 5, so OK
+#                return Response(Response.MULTIPLE_GOOD_MATCH_HISTOGRAM_DECREASED, TRID=trackid, score=actual_score_top_score, qtime=response.header["QTime"], tic=tic, metadata=meta)
+#            else:
+#                return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, qtime = response.header["QTime"], tic=tic)
+#        else:
+#            # If the actual score was not close enough, then no match.
+#            return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, qtime=response.header["QTime"], tic=tic)
+#
+    diff_one_two = actual_score_top_score - actual_score_2nd_score
+    diff_one_two_over_one = float(diff_one_two) / float(actual_score_top_score)
+    if diff_one_two > 7:
+        return Response(Response.MULTIPLE_GOOD_MATCH_HISTOGRAM_DECREASED,
+                TRID=trackid, score=actual_score_top_score,
+                qtime=response.header["QTime"], tic=tic, metadata=meta) 
     else:
-        # If the actual score went down it still could be close enough, so check for that
-        #if actual_score_top_score > (original_scores[actual_score_top_track_id] / 4): 
-        if actual_score_top_score > 20: 
-            if (actual_score_top_score - actual_score_2nd_score) >= 1:  # for examples [10,4], 10-4 = 6, which >= 5, so OK
-            #if actual_score_top_score > 20:  # for examples [10,4], 10-4 = 6, which >= 5, so OK
-                return Response(Response.MULTIPLE_GOOD_MATCH_HISTOGRAM_DECREASED, TRID=trackid, score=actual_score_top_score, qtime=response.header["QTime"], tic=tic, metadata=meta)
+        if actual_score_top_score > 23:
+            if diff_one_two_over_one > 0.10:
+                return Response(Response.MULTIPLE_GOOD_MATCH_HISTOGRAM_DECREASED,
+                                TRID=trackid, score=actual_score_top_score,
+                                qtime=response.header["QTime"], tic=tic, metadata=meta) 
             else:
-                return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, qtime = response.header["QTime"], tic=tic)
+                if actual_score_4th_score > 19:
+                    return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, 
+                                    qtime=response.header["QTime"], tic=tic)
+                else:
+                    if actual_score_top_score > 25:
+                        return Response(Response.MULTIPLE_GOOD_MATCH_HISTOGRAM_DECREASED,
+                                        TRID=trackid, score=actual_score_top_score,
+                                        qtime=response.header["QTime"], tic=tic, metadata=meta) 
+                    else:
+                        return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, 
+                                        qtime=response.header["QTime"], tic=tic)
         else:
-            # If the actual score was not close enough, then no match.
-            return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, qtime=response.header["QTime"], tic=tic)
+            if diff_one_two_over_one > 0.10:
+                return Response(Response.MULTIPLE_GOOD_MATCH_HISTOGRAM_DECREASED,
+                                TRID=trackid, score=actual_score_top_score,
+                                qtime=response.header["QTime"], tic=tic, metadata=meta) 
+            else:
+                if actual_score_4th_score > 19:
+                    return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, 
+                                    qtime=response.header["QTime"], tic=tic)
+                else:
+                    if actual_score_top_score > 25:
+                        return Response(Response.MULTIPLE_GOOD_MATCH_HISTOGRAM_DECREASED,
+                                        TRID=trackid, score=actual_score_top_score,
+                                        qtime=response.header["QTime"], tic=tic, metadata=meta) 
+                    else:
+                        return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, 
+                                        qtime=response.header["QTime"], tic=tic)
+                            
+
+
+
+
+
+
+
+
+
+
 
 def actual_matches(code_string_query, code_string_match, slop = 2, elbow = 10):
     code_query = code_string_query.split(" ")
