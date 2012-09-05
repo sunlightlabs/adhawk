@@ -100,6 +100,7 @@ SECRET_KEY = 'y=r5im3zl3*7g-f-6dx6^58y@4)%ufsup!w^96uayyp#16q$yw'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
+    #'django.template.loaders.app_directories.load_template_source',
 #     'django.template.loaders.eggs.Loader',
 )
 
@@ -132,7 +133,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(SITE_ROOT,'templates')
+    os.path.join(SITE_ROOT,'templates'),
 )
 
 INSTALLED_APPS = (
@@ -142,6 +143,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
     'django.contrib.humanize',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
