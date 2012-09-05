@@ -257,7 +257,8 @@ def best_match_for_query(code_string, elbow=10, local=False):
     (actual_score_top_track_id, actual_score_top_score) = sorted_actual_scores[0]
     # Get the 2nd top one (we know there is always at least 2 matches)
     (actual_score_2nd_track_id, actual_score_2nd_score) = sorted_actual_scores[1]
-    # get the 4th top one (it helps, apparently!)
+    # get the 3rd and 4th top one (it helps, apparently!)
+    (actual_score_3rd_track_id, actual_score_3rd_score) = sorted_actual_scores[2]
     (actual_score_4th_track_id, actual_score_4th_score) = sorted_actual_scores[3]
 
     trackid = actual_score_top_track_id.split("-")[0]
@@ -290,50 +291,57 @@ def best_match_for_query(code_string, elbow=10, local=False):
                 TRID=trackid, score=actual_score_top_score,
                 qtime=response.header["QTime"], tic=tic, metadata=meta) 
     else:
-        if actual_score_top_score > 23:
-            if diff_one_two_over_one > 0.10:
-                return Response(Response.MULTIPLE_GOOD_MATCH_HISTOGRAM_DECREASED,
-                                TRID=trackid, score=actual_score_top_score,
-                                qtime=response.header["QTime"], tic=tic, metadata=meta) 
-            else:
-                if actual_score_4th_score > 19:
-                    return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, 
-                                    qtime=response.header["QTime"], tic=tic)
-                else:
-                    if actual_score_top_score > 25:
-                        return Response(Response.MULTIPLE_GOOD_MATCH_HISTOGRAM_DECREASED,
-                                        TRID=trackid, score=actual_score_top_score,
-                                        qtime=response.header["QTime"], tic=tic, metadata=meta) 
-                    else:
-                        return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, 
-                                        qtime=response.header["QTime"], tic=tic)
+        if diff_one_two_over_one > 0.10:
+            return Response(Response.MULTIPLE_GOOD_MATCH_HISTOGRAM_DECREASED,
+                            TRID=trackid, score=actual_score_top_score,
+                            qtime=response.header["QTime"], tic=tic, metadata=meta) 
         else:
-            if diff_one_two_over_one > 0.10:
-                return Response(Response.MULTIPLE_GOOD_MATCH_HISTOGRAM_DECREASED,
-                                TRID=trackid, score=actual_score_top_score,
-                                qtime=response.header["QTime"], tic=tic, metadata=meta) 
-            else:
-                if actual_score_4th_score > 19:
-                    return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, 
-                                    qtime=response.header["QTime"], tic=tic)
-                else:
-                    if actual_score_top_score > 25:
+            if actual_score_4th_score > 19:
+                if actual_score_top_score > 26:
+                    if actual_score_3rd_score > 23:
+                        if actual_score_2nd_score > 29:
+                            if actual_score_4th_score > 25:
+                                return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, 
+                                                qtime=response.header["QTime"], tic=tic)
+                            else:
+                                return Response(Response.MULTIPLE_GOOD_MATCH_HISTOGRAM_DECREASED,
+                                                TRID=trackid, score=actual_score_top_score,
+                                                qtime=response.header["QTime"], tic=tic, 
+                                                metadata=meta) 
+                        else:
+                            return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, 
+                                        qtime=response.header["QTime"], tic=tic)
+
+                    else:
                         return Response(Response.MULTIPLE_GOOD_MATCH_HISTOGRAM_DECREASED,
                                         TRID=trackid, score=actual_score_top_score,
-                                        qtime=response.header["QTime"], tic=tic, metadata=meta) 
-                    else:
+                                        qtime=response.header["QTime"], tic=tic, 
+                                        metadata=meta) 
+                        
+                else:
+                    if actual_score_4th_score > 20:
                         return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, 
                                         qtime=response.header["QTime"], tic=tic)
-                            
-
-
-
-
-
-
-
-
-
+                    else:
+                        if actual_score_3rd_score > 23:
+                            return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, 
+                                        qtime=response.header["QTime"], tic=tic)
+                        else:
+                            if diff_one_two_over_one > 0.08:
+                                return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, 
+                                        qtime=response.header["QTime"], tic=tic)
+                            else:
+                                return Response(Response.MULTIPLE_GOOD_MATCH_HISTOGRAM_DECREASED,
+                                                TRID=trackid, score=actual_score_top_score,
+                                                qtime=response.header["QTime"], tic=tic, metadata=meta) 
+            else:
+                if actual_score_top_score > 25:
+                    return Response(Response.MULTIPLE_GOOD_MATCH_HISTOGRAM_DECREASED,
+                                    TRID=trackid, score=actual_score_top_score,
+                                    qtime=response.header["QTime"], tic=tic, metadata=meta) 
+                else:
+                    return Response(Response.MULTIPLE_BAD_HISTOGRAM_MATCH, 
+                                    qtime=response.header["QTime"], tic=tic)
 
 
 def actual_matches(code_string_query, code_string_match, slop = 2, elbow = 10):
