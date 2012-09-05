@@ -6,6 +6,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 import settings
+from whopaid.sitemap import AdProfileSitemap, FunderFamilyProfileSitemap,\
+                            StaticSitemap
 
 urlpatterns = patterns('',
     # Examples:
@@ -35,12 +37,15 @@ urlpatterns = patterns('',
     )
 
 my_staticsites = (('/','monthly','whopaid/landing_page.html'),
-               ('about/','monthly','whopaid/about.html'),
-               ('glossary/','monthly','whopaid/glossary.html'),
-               ('ad/top/','daily','knowledge_base/top_ads.html'),)
+               ('/about/','monthly','whopaid/about.html'),
+               ('/glossary/','monthly','whopaid/glossary.html'),
+               ('/ad/top/','daily','knowledge_base/top_ads.html'),)
 
 sitemaps = {
-        'ad_profiles': AdProfileSiteMap,
-        'funder_family_profiles': FunderFamilyProfileSiteMap,
+        'ad_profiles': AdProfileSitemap,
+        'funder_family_profiles': FunderFamilyProfileSitemap,
         'static':StaticSitemap(my_staticsites)
         }
+
+urlpatterns += patterns('django.contrib.sitemaps.views',
+        (r'^sitemap\.xml$','sitemap',{'sitemaps':sitemaps}),)
