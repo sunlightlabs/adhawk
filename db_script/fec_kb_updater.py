@@ -251,15 +251,15 @@ def merge_committee_object(committee,cr):
             log.info("...created\tConnectedOrganization\t%s"%(unicode(co),))
     else:
         co = None
-    if not committee.ftum_url:
-        repayments = Decimal(str_or_zero(cr.candidate_loan_repayments)) + \
+    #if not committee.ftum_url:
+    repayments = Decimal(str_or_zero(cr.candidate_loan_repayments)) + \
                         Decimal(str_or_zero(cr.other_loan_repayments))
-        refunds = Decimal(str_or_zero(cr.refunds_to_individuals)) + \
+    refunds = Decimal(str_or_zero(cr.refunds_to_individuals)) + \
                     Decimal(str_or_zero(cr.refunds_to_committees))
-        committee.total_contributions = Decimal(str_or_zero(cr.total_receipts)) - \
-                                            (repayments + refunds)
-        committee.total_disbursements = Decimal(str_or_zero(cr.total_disbursements))
-        committee.cash_on_hand = Decimal(str_or_zero(cr.cash_close_of_period))
+    committee.total_contributions = max(committee.total_conributions,Decimal(str_or_zero(cr.total_receipts)) - \
+                                            (repayments + refunds))
+    committee.total_disbursements = max(committee.total_contributions, Decimal(str_or_zero(cr.total_disbursements)))
+    committee.cash_on_hand = max(committee.cash_on_hand, Decimal(str_or_zero(cr.cash_close_of_period)))
     committee.name=cr.committee_name
     committee.treasurer_name=cr.treasurers_name
     committee.street_one=cr.street1
