@@ -69,10 +69,13 @@ def site_mapping(request):
     funder_families = FunderFamily.objects.exclude(ftum_url=None)
     response_data = {'committees': [] }
     for ff in funder_families:
-        ff_data = { 'fec_id': ff.primary_FEC_id, 
+        ff_data = { 'primary_fec_id': ff.primary_FEC_id,
+                    'fec_ids': [], 
                     'name': ff.name,
                     'ftum_url': ff.ftum_url,
                     'adhawk_url': base_ah_url%(ff.slug,) }
+        for f in ff.funder_set.all():
+            ff_data['fec_ids'].append(f.FEC_id)
         if ff.IE_id:
             ff_data['ie_url'] = base_ie_url%(ff.slug,ff.IE_id)
         response_data['committees'].append(ff_data)
