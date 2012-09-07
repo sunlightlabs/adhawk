@@ -123,7 +123,15 @@
                </div>
              </div> <!-- end div funder_chart -->
              {% endif %}
-             {% endif %} 
+             {% endif %}
+             {% if top_contribs %}
+             <ol>
+               {% for contrib in top_contribs %}
+               <li>{{contrib.name}} ({{contrib.amount|floatformat:0|intcomma}})</li>
+               {% endfor %}
+             </ol>
+             {% endif %}
+          
         <div id="more_info">
           {% if funder_family.ftum_url or funder_family.IE_id %}
            <h3>Discover more about donors to this committee:</h3>
