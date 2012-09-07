@@ -286,14 +286,20 @@ input{
 /* TYPE */
 
 h1{
-  font-size: 1.5em;
-  font-family: "ltc-squareface-sc-n4", "ltc-squareface-sc", "Arial Black", "Futura-CondensedExtraBold", "DroidSans-Bold", Georgia-bold, serif;
-  font-style: normal;
-  font-weight: 400;
-  padding-top: 4px;
-  color: #FFF;
-   }
+    font-size: 1.5em;
+    font-family: "ltc-squareface-sc-n4", "ltc-squareface-sc", "Arial Black", "Futura-CondensedExtraBold", "DroidSans-Bold", Georgia-bold, serif;
+    font-style: normal;
+    font-weight: 400;
+    padding-top: 4px;
+    color: #FFF;
+}
 
+h2 {
+    font-family: "ltc-squareface-sc-n4", "ltc-squareface-sc", "Arial Black", "Futura-CondensedExtraBold", "DroidSans-Bold", Georgia-bold, serif;
+    font-style: normal;
+    font-weight: 400;
+    color: #564e3f;
+}
 
 h3 {
      font-size: .8em;
@@ -383,10 +389,6 @@ a:hover {
 
 #top_ad_list h2 a{
       font-size: .8em;
-      font-family: "ltc-squareface-sc-n4", "ltc-squareface-sc", "Arial Black", "Futura-CondensedExtraBold", "DroidSans-Bold", Georgia-bold, serif;
-      font-style: normal;
-      font-weight: 400;
-      color: #564e3f;
       }
 
 #top_ad_list h3, #no_match_info h3 {
@@ -469,13 +471,9 @@ h3 a{
 
 #title h2 {
     font-size: 1.5em;
-    font-family: "ltc-squareface-sc-n4", "ltc-squareface-sc", "Arial Black", "Futura-CondensedExtraBold", "DroidSans-Bold", Georgia-bold, serif;
-    font-style: normal;
-    font-weight: 400;
     max-width: 40%;
     float: left;
     padding-right: 5%;
-    color: #564e3e;
     margin-top:0;
     }
 
@@ -1117,13 +1115,13 @@ h3 a{
 }
 .landing-threecol{
     width: 84%;
-    padding: 2em 8%;
+    padding: 0em 8%;
 }
 .threecol {
     float: left;
 }
 .first {
-    width: 32%;
+    width: 30%;
     padding-right: 2.5%;
     border-right: 1px #f6f0e7 solid;
     box-sizing: border-box;
@@ -1131,17 +1129,17 @@ h3 a{
     -webkit-box-sizing: border-box;
 }
 .middle{
-    width: 34%;
+    width: 30%;
     padding-right: 2.5%;
     padding-left: 2.5%;
-    border-right: 1px #f6f0e7 solid;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
 }
 .last{
     width: 30%;
     padding-left: 2.5%;
+    border-left: 1px #f6f0e7 solid;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }
 .threecol h3{
     font-size: 1.5em;
@@ -1156,11 +1154,33 @@ h3 a{
     line-height: 1.2em;
 }
 
+.landing-press img{
+    display: block;
+    float: left;
+    padding-left: 17px;
+    vertical-align: bottom;
+}
+
+.landing-press{
+    width: 84%;
+    padding: 6em 8% 2em 8%;
+}
+
+.press {
+    float: right;
+}
+
+.landing-press h3{
+    float:left;
+    margin-bottom:0;
+    padding-bottom:0;
+    padding-top:44px;
+    }
 
 
-
-
-
+.featured {
+    width:100%;
+}
 
 /* FOOTER */
 

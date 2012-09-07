@@ -311,6 +311,7 @@ nav li:hover a, nav:active li a{
 
 .last{
     padding-left: 0;
+    border-left: none;
 }
 
 .hone-in {
@@ -320,6 +321,19 @@ nav li:hover a, nav:active li a{
     max-width: 347px;
 }
 
+.press {
+    float: none;
+}
+
+.landing-press h3{
+    float:none;
+    padding:0;
+    }
+
+.landing-press img{
+    float: none;
+    padding: 0 0 1em 0;
+}
 
 /* FOOTER */
 
