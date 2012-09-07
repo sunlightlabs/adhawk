@@ -83,10 +83,10 @@ def ad_profile(request, path):
     #print request.META.keys()
     media = Media.objects.get(slug=path)
     funder_family = media.media_profile.funder.funder_family
-    #try:
-    top_contribs = get_top_contribs(funder_family)
-    #except:
-    #    top_contribs = None
+    try:
+        top_contribs = get_top_contribs(funder_family)
+    except:
+        top_contribs = None
     #pk_pad = str(media.pk).zfill(5)
     c = RequestContext(request, {
             'client' : client,
