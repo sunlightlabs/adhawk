@@ -1,5 +1,5 @@
 from whopaid_api.models import FpQuery
-from knowledge_base.models import Media
+from knowledge_base.models import Media,FunderFamily
 from echoprint_server_api import fp
 
 from django.http import HttpResponse
@@ -61,3 +61,20 @@ def fp_search(request):
         response_data['share_text'] = None
         return HttpResponse(json.dumps(response_data),
                 mimetype="application/json")
+
+@csrf_exempt
+def site_mapping(request):
+    base_ah_url = '/sponsor/%s/'
+    base_ie_url = '/organization/%s/%s/'
+    funder_families = FunderFamily.objects.exclude(ftum_url=None)
+    response_data = {'committees': [] }
+    for ff in funder_families:
+        ff_data = { 'fec_id': ff.primary_FEC_id, 
+                    'name': ff.name,
+                    'ftum_url': ff.ftum_url,
+                    'adhawk_url': base_ah_url%(ff.slug,) }
+        if ff.IE_id:
+            ff_data['ie_url'] = base_ie_url%(ff.slug,ff.IE_id)
+        response_data['committees'].append(ff_data)
+    return HttpResponse(json.dumps(response_data,sort_keys=True,indent=4),
+                        mimetype="application/json")
