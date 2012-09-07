@@ -62,15 +62,19 @@ def fp_search(request):
         return HttpResponse(json.dumps(response_data),
                 mimetype="application/json")
 
-def ftum_mapping(request):
-    base_url = '/sponsor/%s/'
+@csrf_exempt
+def site_mapping(request):
+    base_ah_url = '/sponsor/%s/'
+    base_ie_url = '/organization/%s/%s/'
     funder_families = FunderFamily.objects.exclude(ftum_url=None)
     response_data = {'committees': [] }
     for ff in funder_families:
         ff_data = { 'fec_id': ff.primary_FEC_id, 
                     'name': ff.name,
                     'ftum_url': ff.ftum_url,
-                    'adhawk_url': base_url%(ff.slug,) }
+                    'adhawk_url': base_ah_url%(ff.slug,) }
+        if ff.IE_id:
+            ff_data['ie_url'] = base_ie_url%(ff.slug,ff.IE_id)
         response_data['committees'].append(ff_data)
-    return HttpResponse(json.dumps(response_data),
+    return HttpResponse(json.dumps(response_data,sort_keys=True,indent=4),
                         mimetype="application/json")
