@@ -15,6 +15,7 @@ class Command(BaseCommand):
 
         media_objects = Media.objects.filter(downloaded=False,
                                              valid=True,
+                                             link_broken=False,
                                              checked=True)
         
         if media_objects:
