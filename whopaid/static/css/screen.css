@@ -302,7 +302,7 @@ h2 {
 }
 
 h3 {
-     font-size: .8em;
+     font-size: .9em;
      color: #c7b188;
      font-family: "ltc-squareface-sc-n4", "ltc-squareface-sc", "Arial Black", "Futura-CondensedExtraBold", "DroidSans-Bold", Georgia-bold, serif;
      font-style: normal;
@@ -548,6 +548,30 @@ h3 a{
 #funder_received p,
 #financial_info p {
     font-weight: bold;
+}
+
+#top-contrib ol{
+    padding-left: 20px;
+}
+
+#top-contrib ol li{
+    font-size: .9em;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    color: #000000;
+    margin: 0;
+    padding: 0 0 .8em 0;
+}
+
+
+#top-contrib ol li a{
+    font-size: .9em;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    margin: 0;
+    padding: 0 0 .8em 0;
 }
 
 .glossarybutton {
