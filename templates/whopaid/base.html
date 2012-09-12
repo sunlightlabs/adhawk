@@ -143,7 +143,6 @@
     </script>
   </head>
   <body>
-    {% include "whopaid/definitions.html" %}
   <div id="page">
     {% if client != "ios" and client != "android" %}
     <header class="header">
@@ -275,6 +274,7 @@
             Math.max(document.body.clientHeight, document.documentElement.clientHeight)
         );
     }
-    </script>
+  </script>
+    {% include "whopaid/definitions.html" %}
   </body>
 </html>
