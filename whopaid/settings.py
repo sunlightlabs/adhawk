@@ -1,6 +1,6 @@
 # Django settings for whopaid project.
-DEBUG = False
-TEMPLATE_DEBUG = False
+DEBUG = True
+TEMPLATE_DEBUG = True
 
 from logging.handlers import SMTPHandler
 import os.path
@@ -14,11 +14,11 @@ SITE_ROOT = os.path.realpath(
 
 POSTMARK_API_KEY = '***REMOVED***'
 
-AWS_ACCESS_KEY_ID = '***REMOVED***'
-AWS_SECRET_ACCESS_KEY = '***REMOVED***'
-AWS_STORAGE_BUCKET_NAME = 'assets.adhawk'
-AWS_IS_GZIPPED = False
-AWS_S3_SECURE_URLS = False
+#AWS_ACCESS_KEY_ID = '***REMOVED***'
+#AWS_SECRET_ACCESS_KEY = '***REMOVED***'
+#AWS_STORAGE_BUCKET_NAME = 'assets.adhawk'
+#AWS_IS_GZIPPED = False
+#AWS_S3_SECURE_URLS = False
 
 
 ADMINS = (
@@ -57,7 +57,7 @@ USE_TZ = False
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-#MEDIA_ROOT = os.path.join(SITE_ROOT,'media')
+MEDIA_ROOT = os.path.join(SITE_ROOT,'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -74,7 +74,7 @@ STATIC_ROOT = os.path.join(SITE_ROOT, 'site_static')
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
-STATICFILES_STORAGE = 'whopaid.storage.CachedS3BotoStorage'
+#STATICFILES_STORAGE = 'whopaid.storage.CachedS3BotoStorage'
 
 ADMIIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 

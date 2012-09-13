@@ -1,5 +1,8 @@
 import urlparse
 import json
+from collections import defaultdict
+
+from influenceexplorer import InfluenceExplorer
 
 from django.template import Context,RequestContext
 from django.shortcuts import render_to_response,redirect
@@ -15,6 +18,12 @@ from knowledge_base.models import Ad, \
 
 from whopaid_api.views import make_media_response_dict,BASE_URL,SHARE_TEXT
 
+API = InfluenceExplorer('***REMOVED***')
+
+class Contributor():
+    def __init__(self,name,amount):
+        self.name = name
+        self.amount = amount
 
 def set_client(request):
     try:
@@ -27,6 +36,14 @@ def set_client(request):
         return 'ios'
     else:
         return user_agent
+    
+def get_top_contribs(funder_family):
+    contrib_data = defaultdict(float)
+    for f in funder_family.funder_set.all():
+        for e in API.org.fec_top_contribs(f.IE_id):
+            contrib_data[e['contributor_name']] += float(e['amount'])
+    return sorted([Contributor(name,amount) for name,amount in
+        contrib_data.items()],key=lambda x: x.amount, reverse=True)
 
 def funder_family_profile(request, path):
     client = set_client(request)
@@ -65,12 +82,18 @@ def ad_profile(request, path):
     print 'user agent is %s'%(user_agent,)
     #print request.META.keys()
     media = Media.objects.get(slug=path)
+    funder_family = media.media_profile.funder.funder_family
+    #try:
+    top_contribs = get_top_contribs(funder_family)
+    #except:
+    #    top_contribs = None
     #pk_pad = str(media.pk).zfill(5)
     c = RequestContext(request, {
             'client' : client,
             'media' : media,
             'ad' : media.ad,
-            'funder_family' : media.media_profile.funder.funder_family,
+            'funder_family' : funder_family,
+            'top_contribs' : top_contribs,
             #'pk_pad' : pk_pad
             })
     return render_to_response('knowledge_base/ad_profile.html',c)

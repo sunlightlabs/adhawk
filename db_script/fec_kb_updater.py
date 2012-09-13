@@ -263,7 +263,7 @@ def merge_committee_object(committee,cr):
     except AttributeError:
         committee.total_contributions = total_contributions
     try:
-        committee.total_disbursements = max(committee.total_contributions, Decimal(str_or_zero(cr.total_disbursements)))
+        committee.total_disbursements = max(committee.total_disbursements, Decimal(str_or_zero(cr.total_disbursements)))
     except AttributeError:
         committee.total_disbursements = Decimal(str_or_zero(cr.total_disbursements))
     try:

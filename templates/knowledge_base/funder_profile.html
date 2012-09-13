@@ -120,10 +120,26 @@
                  </div>
 
                 </div>
+
                </div>
+
+
+               <div id="top-contrib">
+                    {% endif %}
+                    {% endif %}
+                    {% if top_contribs %}
+                    <h3>Top Contributors</h3>
+                    <ol>
+                      {% for contrib in top_contribs %}
+                      <li><strong>{{contrib.name|title}}</strong> <em>(${{contrib.amount|floatformat:0|intcomma}})</em></li>
+                      {% endfor %}
+                    </ol>
+                    {% endif %}
+               </div>
+
+
              </div> <!-- end div funder_chart -->
-             {% endif %}
-             {% endif %} 
+
         <div id="more_info">
           {% if funder_family.ftum_url or funder_family.IE_id %}
            <h3>Discover more about donors to this committee:</h3>
@@ -137,7 +153,7 @@
               <li><a href="http://influenceexplorer.com/">Influence Explorer</a></li>
               {% endif %}
             </ul>
-          {% endif %}
+          {% endif %}<br>
            <h3>Help us better understand advertising in your area:</h3>
            <ul>
                 <li><a href="http://politicaladsleuth.sunlightfoundation.com/">Political Ad Sleuth</a></li>
