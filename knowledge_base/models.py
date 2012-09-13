@@ -569,6 +569,12 @@ class Media(models.Model):
             on_delete=models.PROTECT)
     ad = models.ForeignKey(Ad,
             on_delete=models.PROTECT)
+    # MTM relations
+    near_neighbors = models.ManyToManyField("self",
+            through="MediaNearNeighbor",
+            blank=True,
+            null=True,
+            symmetrical=False)
 
     def thumbstrip(self):
         pad = str(self.pk).zfill(5)
@@ -637,6 +643,15 @@ class AdToCandidate(models.Model):
         return "%s -> %s (%s)"%(self.ad.title,
                 self.candidate.name.title(),
                 self.CHOICES_DICT[self.portrayal])
+
+class MediaNearNeighbor(models.Model):
+    media = models.ForeignKey(Media,related_name="media_has_neighbor")
+    neighbor = models.ForeignKey(Media,related_name="media_neighbor")
+    rank = models.IntegerField()
+    cookie_cutter = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return ('%s -> %s (%s)'%(media,neighbor,rank))
 
 class Coverage(models.Model):
     url = models.URLField()
