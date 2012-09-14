@@ -223,7 +223,7 @@ class Candidate(models.Model):
 class FunderFamily(models.Model):
     primary_FEC_id = models.CharField(max_length=9)
     name = models.CharField(max_length=200)
-    slug = models.URLField(max_length=200,blank=True,null=True)
+    slug = models.SlugField(max_length=200,blank=True,null=True)
     ftum_url = models.URLField(blank=True,null=True)
     IE_id = models.CharField(max_length=32,null=True,blank=True)
     description = models.TextField(blank=True,null=True)
