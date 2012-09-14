@@ -40,10 +40,16 @@ def set_client(request):
 def get_top_contribs(funder_family):
     contrib_data = defaultdict(float)
     for f in funder_family.funder_set.all():
-        for e in API.org.fec_top_contribs(f.IE_id):
-            contrib_data[e['contributor_name']] += float(e['amount'])
-    return sorted([Contributor(name,amount) for name,amount in
-        contrib_data.items()],key=lambda x: x.amount, reverse=True)
+        if f.IE_id:
+            for e in API.org.fec_top_contribs(f.IE_id):
+                contrib_data[e['contributor_name']] += float(e['amount'])
+        else:
+            continue
+    if contrib_data:
+        return sorted([Contributor(name,amount) for name,amount in
+            contrib_data.items()],key=lambda x: x.amount, reverse=True)
+    else:
+        return None
 
 def funder_family_profile(request, path):
     client = set_client(request)
@@ -83,10 +89,10 @@ def ad_profile(request, path):
     #print request.META.keys()
     media = Media.objects.get(slug=path)
     funder_family = media.media_profile.funder.funder_family
-    #try:
-    top_contribs = get_top_contribs(funder_family)
-    #except:
-    #    top_contribs = None
+    try:
+        top_contribs = get_top_contribs(funder_family)
+    except:
+        top_contribs = None
     #pk_pad = str(media.pk).zfill(5)
     c = RequestContext(request, {
             'client' : client,
