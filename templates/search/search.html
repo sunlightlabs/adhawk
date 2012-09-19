@@ -59,7 +59,6 @@ Didn't find what you were looking for? Try again! Make sure to use full words (a
                             <ul>
                             {% for funder_committee_type in facets.fields.funder_committee_type %}
                                 <li>
-                                {% if request.GET.selected_facets %}
                                     <a href="{{ request.get_full_path }}&amp;selected_facets=funder_committee_type_exact:{{ funder_committee_type.0|urlencode }}&amp;page=1">{{ funder_committee_type.0 }}</a> ({{ funder_committee_type.1 }})
                                 </li>
                             {% endfor %}
