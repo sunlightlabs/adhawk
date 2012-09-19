@@ -29,7 +29,7 @@ Didn't find what you were looking for? Try again! Make sure to use full words (a
                             <ul>
                             {% for funder_name in facets.fields.funder_name %}
                                 <li>
-                                    <a href="{{ request.get_full_path }}&amp;selected_facets=funder_name_exact:{{ funder_name.0|urlencode }}">{{ funder_name.0 }}</a> ({{ funder_name.1 }})
+                                    <a href="{{ request.get_full_path }}&amp;selected_facets=funder_name_exact:{{ funder_name.0|urlencode }}&amp;page=1">{{ funder_name.0 }}</a> ({{ funder_name.1 }})
                                 </li>
                             {% endfor %}
                             </ul>
@@ -44,7 +44,7 @@ Didn't find what you were looking for? Try again! Make sure to use full words (a
                             <ul>
                             {% for funder_party in facets.fields.funder_party %}
                                 <li>
-                                    <a href="{{ request.get_full_path }}&amp;selected_facets=funder_party_exact:{{ funder_party.0|urlencode }}">{{ funder_party.0 }}</a> ({{ funder_party.1 }})
+                                    <a href="{{ request.get_full_path }}&amp;selected_facets=funder_party_exact:{{ funder_party.0|urlencode }}&amp;page=1">{{ funder_party.0 }}</a> ({{ funder_party.1 }})
                                 </li>
                             {% endfor %}
                             </ul>
@@ -59,7 +59,8 @@ Didn't find what you were looking for? Try again! Make sure to use full words (a
                             <ul>
                             {% for funder_committee_type in facets.fields.funder_committee_type %}
                                 <li>
-                                    <a href="{{ request.get_full_path }}&amp;selected_facets=funder_committee_type_exact:{{ funder_committee_type.0|urlencode }}">{{ funder_committee_type.0 }}</a> ({{ funder_committee_type.1 }})
+                                {% if request.GET.selected_facets %}
+                                    <a href="{{ request.get_full_path }}&amp;selected_facets=funder_committee_type_exact:{{ funder_committee_type.0|urlencode }}&amp;page=1">{{ funder_committee_type.0 }}</a> ({{ funder_committee_type.1 }})
                                 </li>
                             {% endfor %}
                             </ul>
@@ -77,7 +78,7 @@ Didn't find what you were looking for? Try again! Make sure to use full words (a
                 {% for result in page.object_list %}
                     <div class="line_b">
                         <h3><a href="{{ result.object.get_absolute_url }}">{{ result.object.ad.title }}</a></h3>
-                        <p>{% autoescape off %}{{ result.object.thumbstrip }}{% endautoescape %}</p>
+                        <p><a href="{{ result.object.url }}">{% autoescape off %}{{ result.object.thumbstrip }}{% endautoescape %}</a></p>
                     </div>
                 {% empty %}
                     <p>Sorry, no results found.</p>
@@ -87,13 +88,13 @@ Didn't find what you were looking for? Try again! Make sure to use full words (a
                 <div class="pagination">
                     <p>
                         {% if page.has_previous %}
-                        <a href="?q={{ query }}&page={{ page.previous_page_number }}">previous</a>
+                        <a href="{{ request.get_full_path }}&page={{ page.previous_page_number }}">previous</a>
                         {% endif %}
 
                             Page {{ page.number }} of {{ page.paginator.num_pages }}
 
                         {% if page.has_next %}
-                        <a href="?q={{ query }}&page={{ page.next_page_number }}">next</a>
+                        <a href="{{ request.get_full_path }}&page={{ page.next_page_number }}">next</a>
                         {% endif %}
                     </p>
                 </div>
