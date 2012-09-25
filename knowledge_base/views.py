@@ -142,6 +142,7 @@ def near_neighbors(request,path):
 def near_neighbor_select(request,path):
     client = set_client(request)
     if client in ['android','ios']:
+        print "identified request from mobile app"
         media = Media.objects.get(slug=path)
         response_data = make_media_response_dict(media)
         return HttpResponse(json.dumps(response_data),
