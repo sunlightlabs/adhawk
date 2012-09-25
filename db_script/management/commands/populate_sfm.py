@@ -21,7 +21,7 @@ for fn in fns:
     try:
         media_object = Media.objects.get(id=media_id)
     except Media.DoesNotExist:
-        print '% has no media object!'%(fn,)
+        print '%s has no media object!'%(fn,)
         continue
     dd = eval(open(os.path.join(d,fn)).read())
     try:
