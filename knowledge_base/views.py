@@ -122,9 +122,29 @@ def top_ads(request):
 def top_ad_select(request,path):
     client = set_client(request)
     if client in ['android','ios']:
-        media = Media.objects.get(pk=path)
+        media = Media.objects.get(slug=path)
         response_data = make_media_response_dict(media)
         return HttpResponse(json.dumps(response_data),
                 mimetype="application/json")
     else:
         return redirect('/ad/%s/'%(path))
+
+def near_neighbors(request,path):
+    client = set_client(request)
+    media = Media.objects.get(slug=path)
+    near_neighbors = media.near_neighbors.all()
+    c = RequestContext(request,{
+            'client' : client,
+            'near_neighbors' : near_neighbors,
+            })
+    return render_to_response('knowledge_base/near_neighbors.html',c)
+
+def near_neighbor_select(request,path):
+    client = set_client(request)
+    if client in ['android','ios']:
+        media = Media.objects.get(slug=path)
+        response_data = make_media_response_dict(media)
+        return HttpResponse(json.dumps(response_data),
+                mimetype="application/json")
+    else:
+        return redirect('/ad/%s/'%(path,))
