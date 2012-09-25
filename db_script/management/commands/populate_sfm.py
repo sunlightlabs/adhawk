@@ -18,7 +18,11 @@ w = os.walk(CODEGEN_DIR)
 d,dns,fns = w.next()
 for fn in fns:
     media_id = int(fn.split('_')[1])
-    media_object = Media.objects.get(id=media_id)
+    try:
+        media_object = Media.objects.get(id=media_id)
+    except Media.DoesNotExist:
+        print '% has no media object!'%(fn,)
+        continue
     dd = eval(open(os.path.join(d,fn)).read())
     try:
         code_string = ' '.join(fp.decode_code_string(dd['code']).split()[::2])
