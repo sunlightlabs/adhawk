@@ -13,8 +13,9 @@ VIDEO_DIR = os.path.join(os.path.abspath(MEDIA_ROOT),'videos')
 CODEGEN_DIR = os.path.join(os.path.abspath(MEDIA_ROOT),'codegens')
 
 class FingerprintIngester():
-    def __init__(self,loc):
+    def __init__(self,loc,sfm_client):
         self.loc = loc
+        self.sfm_client = sfm_client
         self.video_fname = self.get_video_fname()
         self.codegen_fname = self.get_codegen_fname()
         self.pk = self.get_pk()
@@ -31,6 +32,10 @@ class FingerprintIngester():
         fout = open(os.path.join(CODEGEN_DIR,self.codegen_fname),'w')
         fout.write(json.dumps(j))
         fout.close()
+        self.sfm_client.add(1,
+                            self.media.id,
+                            fp.decode_code_string(j['code']),
+                            title=self.media.ad.title)
     def build_ingest_dict(self,j):
         i = {   "track_id"  : self.pk,
                 "fp"        : fp.decode_code_string(j['code']),
