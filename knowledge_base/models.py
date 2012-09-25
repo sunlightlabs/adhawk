@@ -651,7 +651,7 @@ class MediaNearNeighbor(models.Model):
     cookie_cutter = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return ('%s -> %s (%s)'%(media,neighbor,rank))
+        return ('%s -> %s (%s)'%(self.media,self.neighbor,self.rank))
 
 class Coverage(models.Model):
     url = models.URLField()
