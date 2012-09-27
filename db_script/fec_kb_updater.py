@@ -159,6 +159,8 @@ def make_committee_object(cr):
     committee.cash_on_hand = Decimal(str_or_zero(cr.cash_close_of_period))
     committee.party = cr.committee_party
     committee.FEC_id=cr.committee_id
+    if cr.candidate_id:
+        committee.candidate_id = cr.candidate_id
     committee.name=cr.committee_name
     committee.treasurer_name=cr.treasurers_name
     committee.street_one=cr.street1
@@ -272,6 +274,8 @@ def merge_committee_object(committee,cr):
         committee.cash_on_hand = Decimal(str_or_zero(cr.cash_close_of_period))
     committee.name=cr.committee_name
     committee.treasurer_name=cr.treasurers_name
+    if cr.candidate_id:
+        committee.candidate_id = cr.candidate_id
     committee.street_one=cr.street1
     committee.street_two=cr.street2
     committee.party=cr.committee_party

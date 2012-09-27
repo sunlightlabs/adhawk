@@ -187,6 +187,7 @@ class Tag(models.Model):
 
 class Candidate(models.Model):
     FEC_id = models.CharField(max_length=9)
+    candidate_id = models.CharField(max_length=9,null=True,blank=True)
     name = models.CharField(max_length=200)
     party = models.CharField(max_length=3,null=True,blank=True)
     year_of_election = models.IntegerField(max_length=4,null=True,blank=True)
