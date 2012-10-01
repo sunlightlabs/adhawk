@@ -23,13 +23,16 @@ class Command(BaseCommand):
         for m in Media.objects.filter(ingested=True):
             doc = eval(sfm_client.get(1,m.id))
             comp_list = []
-            for other_doc in doc['documents']['rows']:
-                shared = 0
-                for frag in other_doc['fragments']:
-                    shared += frag[2]
-                comp_list.append((other_doc['docid'],shared))
-                #out.write('\t'.join([str(a) for a in [m.id,other_doc['docid'],shared]]))
-                #out.write('\n')
+            try:
+                for other_doc in doc['documents']['rows']:
+                    shared = 0
+                    for frag in other_doc['fragments']:
+                        shared += frag[2]
+                    comp_list.append((other_doc['docid'],shared))
+                    #out.write('\t'.join([str(a) for a in [m.id,other_doc['docid'],shared]]))
+                    #out.write('\n')
+            except KeyError:
+                continue
             comp_list = sorted(comp_list,key=lambda x: x[1],reverse=True)[0:10]
             l = min([len(comp_list),10])
             for i in range(l):
