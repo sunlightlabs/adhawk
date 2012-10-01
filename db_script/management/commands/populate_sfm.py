@@ -16,6 +16,8 @@ CODEGEN_DIR = os.path.join(settings.MEDIA_ROOT,'codegens')
 
 sfm_client = client.Client(url='http://127.0.0.1:9000/')
 
+true = True
+
 class Command(BaseCommand):
     def handle(self, *args, **options):
         w = os.walk(CODEGEN_DIR)
@@ -32,7 +34,7 @@ class Command(BaseCommand):
                 code_string = ' '.join(fp.decode_code_string(dd['code']).split()[::2])
             except KeyError:
                 print '%s has no code!'%(fn,)
-            res = sfm_client.add(1,media_id,code_string,title=media_object.ad.title)
+            res = eval(sfm_client.add(1,media_id,code_string,title=media_object.ad.title))
             if res['success']:
                 continue
             else:
