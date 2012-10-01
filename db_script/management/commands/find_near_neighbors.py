@@ -8,7 +8,7 @@ from superfastmatch import client
 from knowledge_base.models import Media,MediaNearNeighbor
 
 
-sfm_client = client.Client()
+sfm_client = client.Client(url='http://127.0.0.1:9000')
 
 #out = open('sfm_results.csv','w')
 

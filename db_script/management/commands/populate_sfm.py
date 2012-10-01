@@ -14,7 +14,7 @@ from knowledge_base.models import Media
 CODEGEN_DIR = os.path.join(settings.MEDIA_ROOT,'codegens')
 #CODEGEN_DIR = '/home/blannon/test_set/codegens'
 
-sfm_client = client.Client()
+sfm_client = client.Client(url='http://127.0.0.1:9000/')
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
