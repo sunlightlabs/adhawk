@@ -222,6 +222,7 @@ class Candidate(models.Model):
 
 class FunderFamily(models.Model):
     primary_FEC_id = models.CharField(max_length=9)
+    candidate_id = models.CharField(max_length=9,null=True,blank=True)
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200,blank=True,null=True)
     ftum_url = models.URLField(blank=True,null=True)
@@ -285,6 +286,7 @@ class FunderFamily(models.Model):
         if self.funder_set:
             for funder in self.funder_set.all():
                 if funder.FEC_id == self.primary_FEC_id:
+                    self.candidate_id = funder.candidate_id
                     self.description = funder.description
                     self.ftum_url = funder.ftum_url
                     self.IE_id = funder.IE_id
@@ -334,6 +336,7 @@ class FunderFamily(models.Model):
 
 class Funder(models.Model):
     FEC_id = models.CharField(max_length=9)
+    candidate_id = models.CharField(max_length=9,null=True,blank=True)
     IE_id = models.CharField(max_length=32,null=True,blank=True)
     media_profile_assigned = models.BooleanField(default=False)
     media_profile_assigned_elsewhere = models.BooleanField(default=False)
@@ -651,7 +654,7 @@ class MediaNearNeighbor(models.Model):
     cookie_cutter = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return ('%s -> %s (%s)'%(media,neighbor,rank))
+        return ('%s -> %s (%s)'%(self.media,self.neighbor,self.rank))
 
 class Coverage(models.Model):
     url = models.URLField()

@@ -3,6 +3,8 @@ import os
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
+from superfastmatch import client
+
 from db_script.fingerprint_ingester import FingerprintIngester
 #from db_script.log import set_up_logger
 from whopaid.settings import MEDIA_ROOT
@@ -17,6 +19,8 @@ class Command(BaseCommand):
 
         #log = set_up_logger('fingerprinter','db_script/processing')
 
+        sfm_client = client.Client()
+
         w = os.walk(VIDEO_DIR)
         medias = Media.objects.filter(ingested=False)
         pks = [m.pk for m in medias]
@@ -29,7 +33,7 @@ class Command(BaseCommand):
         if loc_dic:
             for media_pk,loc in loc_dic.items():
                 print "fingerprinting %s"%loc
-                f = FingerprintIngester(loc)
+                f = FingerprintIngester(loc,sfm_client)
                 f.get_codegen()
                 #log.info(f.get_codegen())
         else:

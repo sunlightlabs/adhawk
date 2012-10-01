@@ -27,13 +27,17 @@ class Contributor():
 
 def set_client(request):
     try:
+        version = request.META['HTTP_X_CLIENT_VERSION']
+    except KeyError:
+        version = "1.0"
+    try:
         user_agent = request.META['HTTP_X_CLIENT_APP']
     except KeyError:
-        return request.META['HTTP_USER_AGENT']
+        return (request.META['HTTP_USER_AGENT'],None)
     if 'com.sunlightfoundation.adhawk.android' in user_agent:
-        return 'android'
+        return ('android',version)
     elif 'com.sunlightfoundation.adhawk.ios' in user_agent:
-        return 'ios'
+        return ('ios',version)
     else:
         return user_agent
     
@@ -80,13 +84,7 @@ def funder_family_profile(request, path):
     return render_to_response('knowledge_base/funder_family_profile.html',c)
     
 def ad_profile(request, path):
-    client = set_client(request)
-    try:
-        user_agent = request.META['HTTP_X_CLIENT_APP']
-    except KeyError:
-        user_agent = request.META['HTTP_USER_AGENT']
-    print 'user agent is %s'%(user_agent,)
-    #print request.META.keys()
+    client,version = set_client(request)
     media = Media.objects.get(slug=path)
     funder_family = media.media_profile.funder.funder_family
     try:
@@ -96,6 +94,7 @@ def ad_profile(request, path):
     #pk_pad = str(media.pk).zfill(5)
     c = RequestContext(request, {
             'client' : client,
+            'client_version': version,
             'media' : media,
             'ad' : media.ad,
             'funder_family' : funder_family,
@@ -109,22 +108,43 @@ def ad_profile(request, path):
 #    return render_to_response('knowledge_base/not_found.html')
 
 def top_ads(request):
-    client = set_client(request)
+    client,version = set_client(request)
     ads = Ad.objects.filter(top_ad=True)
     medias = [a.media_set.get() for a in ads]
     c = RequestContext(request,{
             'client' : client,
+            'client_version': version,
             'medias' : medias,
             })
     return render_to_response('knowledge_base/top_ads.html',c)
 
 #@csrf_exempt
 def top_ad_select(request,path):
-    client = set_client(request)
+    client,version = set_client(request)
     if client in ['android','ios']:
-        media = Media.objects.get(pk=path)
+        media = Media.objects.get(slug=path)
         response_data = make_media_response_dict(media)
         return HttpResponse(json.dumps(response_data),
                 mimetype="application/json")
     else:
         return redirect('/ad/%s/'%(path))
+
+def near_neighbors(request,path):
+    client,version = set_client(request)
+    media = Media.objects.get(slug=path)
+    near_neighbors = media.near_neighbors.all()
+    c = RequestContext(request,{
+            'client' : client,
+            'near_neighbors' : near_neighbors,
+            })
+    return render_to_response('knowledge_base/near_neighbors.html',c)
+
+def near_neighbor_select(request,path):
+    client,version = set_client(request)
+    if client in ['android','ios'] and version != "1.0":
+        media = Media.objects.get(slug=path)
+        response_data = make_media_response_dict(media)
+        return HttpResponse(json.dumps(response_data),
+                mimetype="application/json")
+    else:
+        return redirect('/ad/%s/'%(path,))
