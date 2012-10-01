@@ -8,9 +8,11 @@ from superfastmatch import client
 from knowledge_base.models import Media,MediaNearNeighbor
 
 
-sfm_client = client.Client(url='http://127.0.0.1:9000')
+sfm_client = client.Client(url='http://127.0.0.1:9000/')
 
 #out = open('sfm_results.csv','w')
+true = True
+false = False
 
 class Command(BaseCommand):
 
@@ -19,7 +21,7 @@ class Command(BaseCommand):
             mmn.delete()
 
         for m in Media.objects.filter(ingested=True):
-            doc = sfm_client.get(1,m.id)
+            doc = eval(sfm_client.get(1,m.id))
             comp_list = []
             for other_doc in doc['documents']['rows']:
                 shared = 0
