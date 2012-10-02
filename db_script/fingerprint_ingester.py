@@ -55,13 +55,16 @@ class FingerprintIngester():
         exit_code = process.wait()
         out,err = process.communicate()
         if exit_code == 0:
-            j = json.loads(out)[0]
-            self.write_codegen_file(j)
-            self.ingest_fingerprint(j)
-            self.media.ingested = True
-            self.media.save()
-            log.info('Media %s ingested as %s'%(str(self.pk).zfill(5),
-                                                self.codegen_fname))
+            try:
+                j = json.loads(out)[0]
+                self.write_codegen_file(j)
+                self.ingest_fingerprint(j)
+                self.media.ingested = True
+                self.media.save()
+                log.info('Media %s ingested as %s'%(str(self.pk).zfill(5),
+                                                    self.codegen_fname))
+            except KeyError:
+                log.info('Media %s has no code!'%(str(self.pk).zfill(5),)
         else:
             log.info('Media %s ERROR %s'%(str(self.pk).zfill(5),
                                             err))
