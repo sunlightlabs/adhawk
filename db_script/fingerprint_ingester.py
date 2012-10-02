@@ -64,7 +64,7 @@ class FingerprintIngester():
                 log.info('Media %s ingested as %s'%(str(self.pk).zfill(5),
                                                     self.codegen_fname))
             except KeyError:
-                log.info('Media %s has no code!'%(str(self.pk).zfill(5),)
+                log.info('Media %s has no code!'%(str(self.pk).zfill(5),))
         else:
             log.info('Media %s ERROR %s'%(str(self.pk).zfill(5),
                                             err))
