@@ -48,7 +48,7 @@ class FingerprintIngester():
         fp.ingest(i)
     def get_codegen(self):
         process = subprocess.Popen(
-            ['echoprint-codegen',self.loc],
+            ['/usr/local/bin/echoprint-codegen',self.loc],
             shell=False,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE)
