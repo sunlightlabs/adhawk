@@ -2,6 +2,8 @@ from influenceexplorer import InfluenceExplorer
 import urllib2
 import logging
 
+from knowledge_base.models import CommitteeType
+
 API = InfluenceExplorer('***REMOVED***')
 
 log = logging.getLogger('db_script.ie_importer')
