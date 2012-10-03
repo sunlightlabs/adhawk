@@ -6,6 +6,8 @@ API = InfluenceExplorer('***REMOVED***')
 
 log = logging.getLogger('db_script.ie_importer')
 
+cts = [ct for ct in CommitteeType.objects.all() if ct.code in ['H','S','P']]
+
 class IEIDImporter():
     def __init__(self,funder_object,ie_api):
         self.api = ie_api
@@ -13,19 +15,12 @@ class IEIDImporter():
         self.ie_id = self.get_ie_id()
     def get_ie_id(self):
         FEC_id = self.funder.FEC_id
-        if self.funder.candidate_id:
+        if self.funder.candidate_id and self.funder.committee_type in cts:
             try: 
                 ie_cand_id = self.api.entities.id_lookup(
                         namespace='urn:fec:candidate',
                         id=self.funder.candidate_id)[0]['id']
-                ie_cand_exids = self.api.entities.metadata(
-                                    ie_cand_id)['external_ids']
-                for exid in ie_cand_exids:
-                    if exid['namespace'] == 'urn:fec:committee':
-                        if exid['id'] == self.funder.FEC_id:
-                            log.info('%s will link to candidate page for %s'%(
-                                self.funder.FEC_id,self.funder.candidate_id))
-                            return ie_cand_id
+                return ie_cand_id
             except IndexError:
                 log.error("Candidate (%s): not found"%(
                                 self.funder.candidate_id,))
