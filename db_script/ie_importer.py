@@ -37,7 +37,7 @@ class IEIDImporter():
     def save_to_funder(self):
         log.info('...saving %s'%(self.funder.FEC_id,))
         self.funder.IE_id = self.ie_id
-        self.funder.IE_id_type self.ie_id_type
+        self.funder.IE_id_type = self.ie_id_type
         self.funder.save()
 
 class IEDescriptionImporter():
