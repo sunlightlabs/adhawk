@@ -17,6 +17,7 @@ from knowledge_base.models import Candidate, \
         FunderToCandidate
 #from db_script.log import set_up_logger
 from django.db import connections
+from django.db.utils import IntegrityError
 
 log = logging.getLogger('db_script.fec_kb_updater')
 
@@ -383,9 +384,13 @@ class CandidateImporter():
         for r in ec:
             cr = CandidateResult(*r)
             candidate = make_candidate_object(cr)
-            candidate.save()
-            log.info("...added\tCandidate\t%s"%(unicode(candidate),))
-            added_entries += 1
+            try:
+                candidate.save()
+                log.info("...added\tCandidate\t%s"%(unicode(candidate),))
+                added_entries += 1
+            except IntegrityError e:
+                log.error(e)
+                continue
         self.done_msg += "Added %d new entries\n"%(added_entries,)
 
     def update_candidates(self):
