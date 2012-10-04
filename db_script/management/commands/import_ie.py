@@ -25,8 +25,8 @@ class Command(BaseCommand):
         funders = Funder.objects.exclude(
                     IE_id=None
                 ).filter(
-                    description=None)
-                 .filter(
+                    description=None
+                ).filter(
                     IE_id_type="organization")
 
         for f in funders:
