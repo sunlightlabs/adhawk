@@ -294,7 +294,8 @@ class CandidateQuery():
         self.id_list_string = self.make_id_list_string(fec_id_set)
         self.cursor = conn.cursor()
     def get_result_cursor(self):
-        quy = "select * from fec_candidates WHERE candidate_id in "
+        quy = "select * from fec_candidates WHERE candidate_name 
+        is not null and candidate_id in "
         quy += self.id_list_string
         self.cursor.execute(quy)
         return self.cursor
