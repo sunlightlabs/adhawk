@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
-from knowledge_base.models import Funder
+from knowledge_base.models import Funder,FunderFamily
 from db_script.ie_importer import IEDescriptionImporter,IEIDImporter,API
 
 class Command(BaseCommand):
@@ -31,3 +31,7 @@ class Command(BaseCommand):
             d = IEDescriptionImporter(f,ie_api=API)
             if d.ie_description:
                 d.save_to_funder()
+
+        print "updating Funder Families"
+        for ff in FunderFamily.objects.all():
+            ff.update_values()
