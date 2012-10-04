@@ -291,6 +291,7 @@ class FunderFamily(models.Model):
                     self.description = funder.description
                     self.ftum_url = funder.ftum_url
                     self.IE_id = funder.IE_id
+                    self.IE_id_type = funder.IE_id_type
                 if funder.committee_type:
                     self.committee_types.add(funder.committee_type)
                     if funder.committee_type.code == "O":
