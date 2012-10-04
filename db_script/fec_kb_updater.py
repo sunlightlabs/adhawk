@@ -388,8 +388,8 @@ class CandidateImporter():
                 candidate.save()
                 log.info("...added\tCandidate\t%s"%(unicode(candidate),))
                 added_entries += 1
-            except IntegrityError e:
-                log.error(e)
+            except IntegrityError:
+                log.error('Candidate %s incomplete entry'%(candidate.FEC_id,))
                 continue
         self.done_msg += "Added %d new entries\n"%(added_entries,)
 
