@@ -26,6 +26,8 @@ class Command(BaseCommand):
                     IE_id=None
                 ).filter(
                     description=None)
+                 .filter(
+                    IE_id_type="organization")
 
         for f in funders:
             d = IEDescriptionImporter(f,ie_api=API)
