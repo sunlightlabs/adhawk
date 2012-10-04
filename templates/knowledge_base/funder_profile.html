@@ -148,7 +148,7 @@
                <li><a href="{{ funder_family.ftum_url  }}">Follow the Unlimited Money</a></li>
                {% endif %}
                {% if funder_family.IE_id %}
-               <li><a href="http://influenceexplorer.com/organization/{{ funder_family.slug }}/{{ funder_family.IE_id }}">Influence Explorer</a></li>
+               <li><a href="http://influenceexplorer.com/{{funder_family.IE_id_type}}/{{ funder_family.slug }}/{{ funder_family.IE_id }}">Influence Explorer</a></li>
                {% else %}
               <li><a href="http://influenceexplorer.com/">Influence Explorer</a></li>
               {% endif %}
