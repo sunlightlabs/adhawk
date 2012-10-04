@@ -223,6 +223,7 @@ class Candidate(models.Model):
 class FunderFamily(models.Model):
     primary_FEC_id = models.CharField(max_length=9)
     candidate_id = models.CharField(max_length=9,null=True,blank=True)
+    IE_id_type = models.CharField(max_length=12,null=True,blank=True)
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200,blank=True,null=True)
     ftum_url = models.URLField(blank=True,null=True)
@@ -338,6 +339,7 @@ class Funder(models.Model):
     FEC_id = models.CharField(max_length=9)
     candidate_id = models.CharField(max_length=9,null=True,blank=True)
     IE_id = models.CharField(max_length=32,null=True,blank=True)
+    IE_id_type = models.CharField(max_length=12,null=True,blank=True)
     media_profile_assigned = models.BooleanField(default=False)
     media_profile_assigned_elsewhere = models.BooleanField(default=False)
     media_profile_url_input = models.URLField(blank=True,null=True)

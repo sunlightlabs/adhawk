@@ -14,7 +14,7 @@ class IEIDImporter():
     def __init__(self,funder_object,ie_api):
         self.api = ie_api
         self.funder = funder_object
-        self.ie_id = self.get_ie_id()
+        self.ie_id,self.ie_id_type = self.get_ie_id()
     def get_ie_id(self):
         FEC_id = self.funder.FEC_id
         if self.funder.candidate_id and self.funder.committee_type in cts:
@@ -22,7 +22,7 @@ class IEIDImporter():
                 ie_cand_id = self.api.entities.id_lookup(
                         namespace='urn:fec:candidate',
                         id=self.funder.candidate_id)[0]['id']
-                return ie_cand_id
+                return (ie_cand_id,'politician')
             except IndexError:
                 log.error("Candidate (%s): not found"%(
                                 self.funder.candidate_id,))
@@ -30,13 +30,14 @@ class IEIDImporter():
         try:
             ie_id = self.api.entities.id_lookup(
                     namespace='urn:fec:committee',id=FEC_id)[0]['id']
-            return ie_id
+            return (ie_id,'organization')
         except IndexError:
             log.error("%s (%s): not found"%(self.funder.name,FEC_id))
             return False
     def save_to_funder(self):
         log.info('...saving %s'%(self.funder.FEC_id,))
         self.funder.IE_id = self.ie_id
+        self.funder.IE_id_type self.ie_id_type
         self.funder.save()
 
 class IEDescriptionImporter():
