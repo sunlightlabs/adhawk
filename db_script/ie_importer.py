@@ -33,7 +33,7 @@ class IEIDImporter():
             return (ie_id,'organization')
         except IndexError:
             log.error("%s (%s): not found"%(self.funder.name,FEC_id))
-            return False
+            return (False,False)
     def save_to_funder(self):
         log.info('...saving %s'%(self.funder.FEC_id,))
         self.funder.IE_id = self.ie_id
