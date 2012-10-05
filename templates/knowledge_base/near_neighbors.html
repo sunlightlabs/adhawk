@@ -10,16 +10,15 @@
           <ul>
             {% for media in near_neighbors %}
             <li>
-              <div class="line_b">
+              <div class="line_b clearfix">
                 <div class="stripDescrip">
                   <h2 class="clearfix">
                   <a href="/ad/nn/{{ media.slug }}/">{{ media.ad.title }}</a>
                   </h2>
 
-                  <h3>Sponsor: <span class="sponsor">{{ media.media_profile.funder.name|title }}</span></h3>
+                  <h3>Sponsor:&ensp;<span class="sponsor">{{ media.media_profile.funder.name|title }}</span></h3>
                 </div>
                 <img class="strip" src="/media/images/media_thumbnails/strips/Media_{{ media.pk|stringformat:"05i" }}_strip.jpg" alt="ad youtube thumbnail">
-                <div class="clear"></div>
               </div>
 
               </li>

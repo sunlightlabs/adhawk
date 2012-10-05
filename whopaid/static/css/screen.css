@@ -234,6 +234,7 @@ input{
 #main h1 {
   font-size: 1.5em;
   width: 100%;
+  padding-bottom:2em;
 }
 
 #breadcrumbs {
@@ -291,7 +292,7 @@ h1{
     font-style: normal;
     font-weight: 400;
     padding-top: 4px;
-    color: #FFF;
+    color: #FFFFFF;
 }
 
 h2 {
@@ -388,11 +389,12 @@ a:hover {
 }
 
 #top_ad_list h2 a{
-      font-size: .8em;
+      font-size: .9em;
+      color: #564e3f;
       }
 
 #top_ad_list h3, #no_match_info h3 {
-     color: #564e3f;
+     color: #FFF;
      }
 
 
@@ -543,7 +545,7 @@ h3 a{
     }
 
 .sponsor {
-    color: #FFF;
+    color: #564e3e;
     font-weight: bold;
     font-family: Helvetica, Arial, sans-serif;
     }

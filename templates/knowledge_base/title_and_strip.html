@@ -11,11 +11,11 @@
             </p>
             {% endif %}
             <div id="funder_name">
-              <h3>Sponsor:</h3>
-              <h4>
+              <h3>Sponsor:&ensp;
+              <span class="sponsor">
                 {{ funder_family.name|title }}
-                {% if funder_family.is_superpac %}<em>{% glossarize %}Super Pac{% endglossarize %}</em>
-                {% endif %}</h4>
+                {% if funder_family.is_superpac %}&ensp;<em>{% glossarize %}Super Pac{% endglossarize %}</em>
+                {% endif %}</span></h3>
             </div>
 
             <a id="youtube_link" href="{{ media.url }}"><img class="strip" src="http://adhawk.sunlightfoundation.com/media/images/media_thumbnails/strips/Media_{{ media.pk|stringformat:"05i" }}_strip.jpg" alt="youtube thumbnail"></a>
