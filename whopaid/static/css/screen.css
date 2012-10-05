@@ -302,7 +302,7 @@ h2 {
 }
 
 h3 {
-     font-size: .9em;
+     font-size: 1em;
      color: #c7b188;
      font-family: "ltc-squareface-sc-n4", "ltc-squareface-sc", "Arial Black", "Futura-CondensedExtraBold", "DroidSans-Bold", Georgia-bold, serif;
      font-style: normal;
@@ -415,7 +415,7 @@ a:hover {
    font-style: normal;
    color: #000000;
    margin: 0;
-   padding: 0;
+   padding: 0 0 1em 0;
    }
 
 #funder_activities ul {
@@ -442,7 +442,9 @@ a:hover {
     }
 
 #funder_name {
-    padding-bottom:  3em ;
+    float:left;
+    max-width:40%;
+    clear:both;
     }
 
 #funder_received{
@@ -475,6 +477,7 @@ h3 a{
     float: left;
     padding-right: 5%;
     margin-top:0;
+    margin-bottom:0;
     }
 
 #title {
@@ -488,14 +491,14 @@ h3 a{
     font-size: .8em;
     }
 
-#more_info {
+.more_info {
     width: 25%;
     float: left;
     margin-left: 5%;
 }
 
 
-#more_info li{
+.more_info li{
     font-size: .9em;
     font-family: Helvetica, Arial, sans-serif;
     font-weight: normal;
@@ -505,7 +508,7 @@ h3 a{
     padding: .8em 0 0 0;
     }
 
-#more_info ul, #no_match_info ul{
+.more_info ul, #no_match_info ul{
     margin: 0;
     padding: 0;
     list-style-position: none;
@@ -600,7 +603,6 @@ h3 a{
     max-width: 366px;
     display: block;
     float: none;
-    margin-top: 3em;
     }
 
 .strip img {
@@ -703,8 +705,8 @@ h3 a{
     background: -ms-linear-gradient(top,  rgba(86,78,63,0.65) 0%,rgba(86,78,63,0) 5%,rgba(86,78,63,0) 95%,rgba(86,78,63,0.52) 99%,rgba(86,78,63,0.65) 100%); /* IE10+ */
     background: linear-gradient(to bottom,  rgba(86,78,63,0.65) 0%,rgba(86,78,63,0) 5%,rgba(86,78,63,0) 95%,rgba(86,78,63,0.52) 99%,rgba(86,78,63,0.65) 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6564e3f', endColorstr='#a6564e3f',GradientType=0 ); /* IE6-8 */
-    padding-bottom: 1.5em;
-    padding-top: 1.5em;
+    padding-bottom: 4em;
+    padding-top: 4em;
     }
 
 .line_a {
@@ -811,7 +813,7 @@ h3 a{
     margin: 2px;
     }
 
-#about_content li a, #more_info a{
+#about_content li a, .more_info a{
     color: #000000;
     }
 

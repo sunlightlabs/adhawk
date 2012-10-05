@@ -130,8 +130,9 @@ nav li:hover a, nav:active li a{
 
 
 #funder_name {
-    width: 100%;
+    max-width: 100%;
     padding-bottom:  2em;
+    float:none;
     }
 
 #funder_activities h3 {
@@ -154,7 +155,7 @@ nav li:hover a, nav:active li a{
     border:none;
 }
 
-#more_info {
+.more_info {
     width: 100%;
     border:none;
     float: none;

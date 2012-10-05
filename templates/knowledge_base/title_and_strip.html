@@ -1,25 +1,26 @@
 {% block title_and_strip %}
-{% load glossary_tags %}      
+{% load glossary_tags %}
    <div id="main">
-   <div id="gradient2">
-      <div id="title" class="contentbox">
-        <h2>{{ ad.title }}</h2>
-        {% if client = "ios" or client = "android" %}
-        <p>
-        <!-- <a href="http://adhawk.sunlightfoundation.com/troubleshooting/">not your ad?</a> -->
-        <a href="/ad/nns/{{ media.slug}}/">not your ad?</a>
-        </p>
-        {% endif %}
-      
-        <a id="youtube_link" href="{{ media.url }}"><img class="strip" src="http://adhawk.sunlightfoundation.com/media/images/media_thumbnails/strips/Media_{{ media.pk|stringformat:"05i" }}_strip.jpg" alt="youtube thumbnail"></a>
+       <div id="gradient2" class="clearfix">
+          <div id="title" class="contentbox">
+            <h2>{{ ad.title }}</h2>
+            {% if client = "ios" or client = "android" %}
+            <p>
+            <!-- <a href="http://adhawk.sunlightfoundation.com/troubleshooting/">not your ad?</a> -->
+            <a href="/ad/nns/{{ media.slug}}/">not your ad?</a>
+            </p>
+            {% endif %}
             <div id="funder_name">
-              <h3>Sponsor:</h3> 
+              <h3>Sponsor:</h3>
               <h4>
                 {{ funder_family.name|title }}
                 {% if funder_family.is_superpac %}<em>{% glossarize %}Super Pac{% endglossarize %}</em>
                 {% endif %}</h4>
-            </div>     
-        </div> <!-- end div funder_name --> 
+            </div>
+
+            <a id="youtube_link" href="{{ media.url }}"><img class="strip" src="http://adhawk.sunlightfoundation.com/media/images/media_thumbnails/strips/Media_{{ media.pk|stringformat:"05i" }}_strip.jpg" alt="youtube thumbnail"></a>
+
+            </div> <!-- end div funder_name -->
+       </div>
    </div>
-   </div>       
 {% endblock %}

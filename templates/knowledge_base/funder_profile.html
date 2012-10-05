@@ -126,7 +126,7 @@
                {% endif %}
                {% endif %}
 
-               <div id="top-contrib">
+               <div id="top-contrib" class="line_a">
                     {% if top_contribs %}
                     <h3>Top Contributors</h3>
                     <ol>
@@ -140,24 +140,29 @@
 
              </div> <!-- end div funder_chart -->
 
-        <div id="more_info">
-          {% if funder_family.ftum_url or funder_family.IE_id %}
-           <h3>Discover more about donors to this committee:</h3>
-           <ul>
-               {% if funder_family.ftum_url %}
-               <li><a href="{{ funder_family.ftum_url  }}">Follow the Unlimited Money</a></li>
-               {% endif %}
-               {% if funder_family.IE_id %}
-               <li><a href="http://influenceexplorer.com/{{funder_family.IE_id_type}}/{{ funder_family.slug }}/{{ funder_family.IE_id }}">Influence Explorer</a></li>
-               {% else %}
-              <li><a href="http://influenceexplorer.com/">Influence Explorer</a></li>
-              {% endif %}
-            </ul>
-          {% endif %}<br>
+        <div class="more_info">
+            <div class="line_a">
+              {% if funder_family.ftum_url or funder_family.IE_id %}
+               <h3>Discover more about donors to this committee:</h3>
+               <ul>
+                   {% if funder_family.ftum_url %}
+                   <li><a href="{{ funder_family.ftum_url  }}">Follow the Unlimited Money</a></li>
+                   {% endif %}
+                   {% if funder_family.IE_id %}
+                   <li><a href="http://influenceexplorer.com/{{funder_family.IE_id_type}}/{{ funder_family.slug }}/{{ funder_family.IE_id }}">Influence Explorer</a></li>
+                   {% else %}
+                  <li><a href="http://influenceexplorer.com/">Influence Explorer</a></li>
+                  {% endif %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+        <div class="more_info">
            <h3>Help us better understand advertising in your area:</h3>
            <ul>
                 <li><a href="http://politicaladsleuth.sunlightfoundation.com/">Political Ad Sleuth</a></li>
            </ul>
+         </div>
          </div> <!-- end div where_aired -->
      </div>
 </div>
