@@ -280,7 +280,8 @@ def merge_committee_object(committee,cr):
         committee.candidate_id = cr.candidate_id
     committee.street_one=cr.street1
     committee.street_two=cr.street2
-    committee.party=cr.committee_party
+    if cr.committee_party:
+        committee.party=cr.committee_party
     committee.city=cr.city
     committee.state=cr.state
     committee.zip_code=cr.zipcode
