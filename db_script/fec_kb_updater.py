@@ -115,7 +115,8 @@ def merge_candidate_object(candidate,cr):
     candidate.city=cr.city
     candidate.state=cr.state
     candidate.zip_code=cr.zipcode
-    candidate.party=cr.party
+    if cr.party:
+        candidate.party=cr.party
     candidate.incumbent_challenger_status=ics
     candidate.candidate_status=cs
     return candidate
