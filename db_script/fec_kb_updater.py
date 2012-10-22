@@ -115,8 +115,7 @@ def merge_candidate_object(candidate,cr):
     candidate.city=cr.city
     candidate.state=cr.state
     candidate.zip_code=cr.zipcode
-    if cr.party:
-        candidate.party=cr.party
+    candidate.party=cr.party
     candidate.incumbent_challenger_status=ics
     candidate.candidate_status=cs
     return candidate
@@ -159,7 +158,8 @@ def make_committee_object(cr):
                                         (repayments + refunds)
     committee.total_disbursements = Decimal(str_or_zero(cr.total_disbursements))
     committee.cash_on_hand = Decimal(str_or_zero(cr.cash_close_of_period))
-    committee.party = cr.committee_party
+    if cr.committee_party:
+        committee.party = cr.committee_party
     committee.FEC_id=cr.committee_id
     if cr.candidate_id:
         committee.candidate_id = cr.candidate_id
