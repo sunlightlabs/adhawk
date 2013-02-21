@@ -10,6 +10,8 @@ sqs =SearchQuerySet().facet(
                       'funder_party'
                     ).facet(
                       'funder_committee_type'
+                    ).order_by(
+                      '-pub_date'
                     )
 
 urlpatterns = patterns('haystack.views',
