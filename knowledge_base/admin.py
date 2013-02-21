@@ -170,10 +170,11 @@ class MediaAdmin(admin.ModelAdmin):
             'valid',
             'duration',
             'thumbstrip',
-            'thumbvid',)
+            'thumbvid',
+            'pub_date')
     list_editable = ('checked','valid',)
     list_per_page = 10
-    ordering = ('rmse',)
+    ordering = ('pub_date',)
     actions = [set_checked]
     list_filter = ('checked','valid',)
     search_fields = ['ad__title','url','media_profile__funder__funder_family__name']
