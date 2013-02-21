@@ -209,7 +209,8 @@ LOGGING = {
             'credentials': (POSTMARK_API_KEY,POSTMARK_API_KEY),
             'fromaddr': 'blannon@sunlightfoundation.com',
             'toaddrs': ['jhatch@sunlightfoundation.com',
-                        'blannon@sunlightfoundation.com'],
+                        'blannon@sunlightfoundation.com',
+                        'kkiely@sunlightfoundation.com'],
             'subject': '[Ad Hawk] New videos added',
         },
         'ad_media_reporting_log' : {
