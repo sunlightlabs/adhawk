@@ -5,24 +5,12 @@ logger -t "adhawk.morning" "============ STARTING adhawk.morning.sh  $(date --rf
 MY_PYTHON=/home/blannon/.virtualenvs/whopaid/bin/python
 DJANGO_PROJECT=/home/blannon/whopaid
 
-unbuffer $MY_PYTHON $DJANGO_PROJECT/manage.py import_ad_media 2> $TMP_LOG
-if [ "$?" -eq 1 ]; then
-    logger -t "import_ad_media" "$(cat $TMP_LOG)"
-fi
+$MY_PYTHON $DJANGO_PROJECT/manage.py import_ad_media 2>&1 | logger -t "import_ad_media"
 
-unbuffer $MY_PYTHON $DJANGO_PROJECT/manage.py get_thumbs 2> $TMP_LOG
-if [ "$?" -eq 1 ]; then
-    logger -t "get_thumbs" "$(cat $TMP_LOG)"
-fi
+$MY_PYTHON $DJANGO_PROJECT/manage.py get_thumbs 2>&1 | logger -t "get_thumbs"
 
-unbuffer /home/blannon/make_strips.sh 2> $TMP_LOG
-if [ "$?" -eq 1 ]; then
-    logger -t "make_strips" "$(cat $TMP_LOG)"
-fi
+/home/blannon/make_strips.sh 2>&1 | logger -t "make_strips"
 
-$MY_PYTHON $DJANGO_PROJECT/manage.py report_ad_media 2> $TMP_LOG
-if [ "$?" -eq 1 ]; then
-    logger -t "report_ad_media" "$(cat $TMP_LOG)"
-fi
+$MY_PYTHON $DJANGO_PROJECT/manage.py report_ad_media 2>&1 | logger -t "report_ad_media"
 
-logger -t "adhawk.morning" "---- end adhawk.morning.sh $(date --rfc-3339=seconds) -----"
+logger -t "adhawk.morning" "======== end adhawk.morning.sh $(date --rfc-3339=seconds) ======"
