@@ -28,5 +28,8 @@ class VideoDownloader():
             log.info("...Media\t%s\tdownloaded to\t%s"%(
                                             self.pk,self.output_file))
         else:
-            log.error("...Media\t%s\terror\t%s"%(
-                                            self.pk,self.error.replace('\n','')))
+            log.error("...Media\t%s\terror\t%s"%(self.pk,self.error.replace('\n','')))
+            if ('does not exist' in self.error) or ('video is private' in self.error):
+                log.error("...Media\t%s\tmarked as broken")
+                self.media_object.link_broken = True
+                self.media_object.save()
