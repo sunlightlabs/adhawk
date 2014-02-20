@@ -1,5 +1,5 @@
 from knowledge_base.models import Media
-from django.util.feedgenerator import Atom1Feed
+from django.utils.feedgenerator import Atom1Feed
 
 
 @csrf_exempt
