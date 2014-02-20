@@ -8,6 +8,7 @@ admin.autodiscover()
 import settings
 from whopaid.sitemap import AdProfileSitemap, FunderFamilyProfileSitemap,\
                             StaticSitemap
+from whopaid.feeds import LatestValidAdsFeed, LatestUncheckedAdsFeed
 
 urlpatterns = patterns('',
     # Examples:
@@ -36,6 +37,8 @@ urlpatterns = patterns('',
     url(r'^ad/(?P<path>.*)/$','knowledge_base.views.ad_profile'),
     url(r'^sponsor/(?P<path>.*)/$', 'knowledge_base.views.funder_family_profile'),
     url(r'^search/', include('search.urls')),
+    url(r'^latest/', LatestValidAdsFeed()),
+    url(r'^unchecked/', LatestUncheckedAdsFeed())
     )
 
 my_staticsites = (('/','monthly','whopaid/landing_page.html'),
