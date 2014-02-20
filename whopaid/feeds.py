@@ -15,13 +15,19 @@ class LatestValidAdsFeed(Feed):
     def items(self):
         for obj in Media.objects.filter(checked=True, valid=True) \
                                 .order_by('-pub_date')[:50]:
-            item = {}
-            item['title'] = obj.ad.title
-            item['description'] = obj.thumbstrip
-            item['unique_id'] = obj.pk
-            item['pubdate'] = obj.pub_date
-            item['link'] = obj.get_absolute_url()
-            yield item
+            yield obj
+
+    def item_title(self, obj): 
+        return obj.ad.title
+    
+    def item_description(self, obj):
+        return obj.thumbstrip()
+
+    def item_pubdate(self, obj):
+        return obj.pub_date
+    
+    def item_link(self, obj):
+        return obj.get_absolute_url()
 
 
 class LatestUncheckedAdsFeed(Feed):
@@ -32,14 +38,20 @@ class LatestUncheckedAdsFeed(Feed):
     author_name = "Ad Hawk, by Sunlight Foundation"
     author_link = "http://adhawk.sunlightfoundation.com"
     author_email = "adhawk@sunlightfoundation.com"
-
+ 
     def items(self):
-        for obj in Media.objects.filter(checked=False, downloaded=True) \
+        for obj in Media.objects.filter(checked=True, valid=True) \
                                 .order_by('-pub_date')[:50]:
-            item = {}
-            item['title'] = obj.ad.title
-            item['description'] = obj.thumbstrip
-            item['unique_id'] = obj.pk
-            item['pubdate'] = obj.pub_date
-            item['link'] = obj.get_absolute_url()
-            yield item
+            yield obj
+
+    def item_title(self, obj): 
+        return obj.ad.title
+
+    def item_description(self, obj):
+        return obj.thumbstrip()
+
+    def item_pubdate(self, obj):
+        return obj.pub_date
+
+    def item_link(self, obj):
+        return obj.get_absolute_url()
