@@ -1,8 +1,10 @@
 from knowledge_base.models import Media
+from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Atom1Feed
 
 
-class LatestValidAdsFeed(Atom1Feed):
+class LatestValidAdsFeed(Feed):
+    feed_type = Atom1Feed
     
     def __init__(self):
         super(LatestValidAdsFeed, self).__init__(
@@ -26,7 +28,8 @@ class LatestValidAdsFeed(Atom1Feed):
             yield item
 
 
-class LatestUncheckedAdsFeed(Atom1Feed):
+class LatestUncheckedAdsFeed(Feed):
+    feed_type = Atom1Feed
 
     def __init__(self):
         super(LatestUncheckedAdsFeed, self).__init__(
