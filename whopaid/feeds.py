@@ -2,7 +2,6 @@ from knowledge_base.models import Media
 from django.utils.feedgenerator import Atom1Feed
 
 
-@csrf_exempt
 class LatestValidAdsFeed(Atom1Feed):
     title = "Ad Hawk latest ads"
     link = "/latest/"
@@ -23,7 +22,6 @@ class LatestValidAdsFeed(Atom1Feed):
             yield item
 
 
-@csrf_exempt
 class LatestUncheckedAdsFeed(Atom1Feed):
     title = "Ad Hawk latest unchecked"
     link = "/unchecked/"
