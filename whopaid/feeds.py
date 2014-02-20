@@ -3,12 +3,16 @@ from django.utils.feedgenerator import Atom1Feed
 
 
 class LatestValidAdsFeed(Atom1Feed):
-    title = "Ad Hawk latest ads"
-    link = "/latest/"
-    description = "Latest Campaign Ads Discovered by Ad Hawk"
-    author_name = "Ad Hawk, by Sunlight Foundation"
-    author_link = "http://adhawk.sunlightfoundation.com"
-    author_email = "adhawk@sunlightfoundation.com"
+    
+    def __init__(self):
+        super(LatestValidAdsFeed, self).__init__(
+                title = "Ad Hawk latest ads",
+                link = "/latest/",
+                description = "Latest Campaign Ads Discovered by Ad Hawk",
+                author_name = "Ad Hawk, by Sunlight Foundation",
+                author_link = "http://adhawk.sunlightfoundation.com",
+                author_email = "adhawk@sunlightfoundation.com",
+        )
 
     def items(self):
         for obj in Media.objects.filter(checked=True, valid=True) \
@@ -23,12 +27,16 @@ class LatestValidAdsFeed(Atom1Feed):
 
 
 class LatestUncheckedAdsFeed(Atom1Feed):
-    title = "Ad Hawk latest unchecked"
-    link = "/unchecked/"
-    description = "Latest Campaign Ads to be Validated"
-    author_name = "Ad Hawk, by Sunlight Foundation"
-    author_link = "http://adhawk.sunlightfoundation.com"
-    author_email = "adhawk@sunlightfoundation.com"
+
+    def __init__(self):
+        super(LatestUncheckedAdsFeed, self).__init__(
+                title = "Ad Hawk latest unchecked",
+                link = "/unchecked/",
+                description = "Latest Campaign Ads to be Validated",
+                author_name = "Ad Hawk, by Sunlight Foundation",
+                author_link = "http://adhawk.sunlightfoundation.com",
+                author_email = "adhawk@sunlightfoundation.com",
+        )
 
     def items(self):
         for obj in Media.objects.filter(checked=False, downloaded=True) \
