@@ -12,15 +12,6 @@ SITE_ROOT = os.path.realpath(
         os.path.join(os.path.dirname(__file__),
             os.path.pardir))
 
-POSTMARK_API_KEY = '***REMOVED***'
-
-AWS_ACCESS_KEY_ID = '***REMOVED***'
-AWS_SECRET_ACCESS_KEY = '***REMOVED***'
-AWS_STORAGE_BUCKET_NAME = 'assets.adhawk'
-AWS_IS_GZIPPED = False
-AWS_S3_SECURE_URLS = False
-
-
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
     ('timbal', 'timball@sunlightfoundation.com'),

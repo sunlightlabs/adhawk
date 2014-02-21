@@ -9,6 +9,7 @@ from django.shortcuts import render_to_response,redirect
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.conf.settings import IE_API
 
 from knowledge_base.models import Ad, \
                                   Media, \
@@ -18,7 +19,7 @@ from knowledge_base.models import Ad, \
 
 from whopaid_api.views import make_media_response_dict,BASE_URL,SHARE_TEXT
 
-API = InfluenceExplorer('***REMOVED***')
+API = IE_API
 
 class Contributor():
     def __init__(self,name,amount):

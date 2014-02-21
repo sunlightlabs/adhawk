@@ -3,8 +3,9 @@ import urllib2
 import logging
 
 from knowledge_base.models import CommitteeType
+from django.conf.settings import IE_API
 
-API = InfluenceExplorer('***REMOVED***')
+API = IE_API
 
 log = logging.getLogger('db_script.ie_importer')
 
