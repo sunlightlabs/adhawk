@@ -13,6 +13,8 @@ import logging
 
 from knowledge_base.models import Ad,Media,MediaProfile,MediaType,Tag
 
+from django.conf.settings import yt_developer_key, yt_email, yt_password
+
 log = logging.getLogger('db_script.ad_media_importer')
 
 URI = 'http://gdata.youtube.com/feeds/api/users/%s/uploads'
@@ -21,9 +23,9 @@ EARLIEST = datetime.strptime('2011-09-01','%Y-%m-%d')
 
 def init_yt_service():
     yt_service = gdata.youtube.service.YouTubeService()
-    yt_service.developer_key = '***REMOVED***'
-    yt_service.email = 'blannon@gmail.com'
-    yt_service.password = '***REMOVED***'
+    yt_service.developer_key = yt_developer_key 
+    yt_service.email = yt_email
+    yt_service.password = yt_password
     yt_service.ProgrammaticLogin()
     return yt_service
 
