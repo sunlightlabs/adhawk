@@ -1,4 +1,4 @@
-from collections import defaultdict
+from collections import defaultdict, Counter
 import datetime
 
 from whopaid_api.models import FpQuery,TopAdsSnapshot
@@ -8,20 +8,20 @@ class TopAdsRanker():
     def __init__(self):
         self.today = datetime.datetime.combine(datetime.date.today(),
                                                 datetime.time(0,0,0))
-        self.week_ago = self.today - datetime.timedelta(days=7)
+        #self.week_ago = self.today - datetime.timedelta(days=7)
         #self.month_ago = self.today - datetime.timedelta(weeks=4)
-        self.queries = FpQuery.objects.all()
+        #self.queries = FpQuery.objects.all()
     def get_top(self,num):
-        result_count = defaultdict(int)
-        # all time top ten
-        for q in self.queries:
-            result_count[q.result] += 1
-        sorted_list =  sorted([(k,v) for k,v in result_count.items()],
-                            key=lambda x: x[1],reverse=True)
-        for entry in sorted_list:
-            tas = TopAdsSnapshot(media_id=entry[0],
-                                 score=entry[1],
-                                 rank=sorted_list.index(entry)+1)
+        month_ago = self.today() - datetime.timedelta(days=30)
+        sorted_list = Counter([fpq.result for fpq in FpQuery.objects.filter(
+                              time__gt=month_ago)])
+
+        rank = 0
+        for entry, score in sorted_list.iteritems():
+            rank += 1
+            tas = TopAdsSnapshot(media_id=entry.result.id,
+                                 score=score,
+                                 rank=rank)
             tas.save()
         return sorted_list[0:num]
 
