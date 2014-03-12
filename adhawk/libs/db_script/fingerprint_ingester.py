@@ -4,7 +4,7 @@ import json
 import logging
 
 from knowledge_base.models import Media
-from whopaid.settings import MEDIA_ROOT
+from adhawk.settings import MEDIA_ROOT
 from echoprint_server_api import fp
 
 log = logging.getLogger('db_script.fingerprint_ingester')

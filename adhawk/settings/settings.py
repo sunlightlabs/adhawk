@@ -1,4 +1,4 @@
-# Django settings for whopaid project.
+# Django settings for adhawk project.
 DEBUG = False
 TEMPLATE_DEBUG = False
 
@@ -65,7 +65,7 @@ STATIC_ROOT = os.path.join(SITE_ROOT, 'site_static')
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
-STATICFILES_STORAGE = 'whopaid.storage.CachedS3BotoStorage'
+STATICFILES_STORAGE = 'adhawk.storage.CachedS3BotoStorage'
 
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
@@ -115,10 +115,10 @@ MIDDLEWARE_CLASSES = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
-ROOT_URLCONF = 'whopaid.urls'
+ROOT_URLCONF = 'adhawk.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'whopaid.wsgi.application'
+WSGI_APPLICATION = 'adhawk.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -144,8 +144,8 @@ INSTALLED_APPS = (
     'search',
     'haystack',
     'knowledge_base',
-    'whopaid',
-    'whopaid_api',
+    'adhawk',
+    'adhawk_api',
     'fts',
     'db_script',
     'south',

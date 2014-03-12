@@ -7,7 +7,7 @@ from django.db import transaction
 from db_script.family_finder import FunderLevenshteinComparison, \
                                     FunderJaccardComparison, \
                                     FunderIdentityComparison
-from whopaid.settings import SITE_ROOT
+from adhawk.settings import SITE_ROOT
 from knowledge_base.models import Funder,MediaProfile,FunderFamily
 
 PROC_DIR = os.path.join(SITE_ROOT,'db_script/processing/family_finder')

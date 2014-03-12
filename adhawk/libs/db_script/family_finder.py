@@ -4,7 +4,7 @@ from itertools import combinations
 from nltk import wordpunct_tokenize
 from nltk.metrics.distance import jaccard_distance,edit_distance
 
-from whopaid.settings import SITE_ROOT
+from adhawk.settings import SITE_ROOT
 PROC_DIR = os.path.join(SITE_ROOT,'db_script/processing/family_finder')
 
 from knowledge_base.models import Funder

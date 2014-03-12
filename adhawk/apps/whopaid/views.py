@@ -9,25 +9,25 @@ def about(request):
     c = RequestContext(request,{
             'client' : client,
             })
-    return render_to_response('whopaid/about.html',c)
+    return render_to_response('adhawk/about.html',c)
 
 def no_match(request):
     client = set_client(request)
     c = RequestContext(request,{
             'client' : client,
             })
-    return render_to_response('whopaid/no_match.html',c)
+    return render_to_response('adhawk/no_match.html',c)
 
 def landing_page(request):
     client = set_client(request)
     c = RequestContext(request,{
         'client' : client,
         })
-    return render_to_response('whopaid/landing_page.html',c)
+    return render_to_response('adhawk/landing_page.html',c)
 
 def glossary(request):
     client = set_client(request)
     c = RequestContext(request,{
             'client' : client,
             })
-    return render_to_response('whopaid/glossary.html',c)
+    return render_to_response('adhawk/glossary.html',c)

@@ -17,7 +17,7 @@ from knowledge_base.models import Ad, \
                                   FunderFamily, \
                                   CommitteeType
 
-from whopaid_api.views import make_media_response_dict,BASE_URL,SHARE_TEXT
+from adhawk_api.views import make_media_response_dict,BASE_URL,SHARE_TEXT
 
 API = IE_API
 

@@ -4,7 +4,7 @@ import urlparse
 import time
 
 from knowledge_base.models import *
-import whopaid.settings as settings
+import adhawk.settings as settings
 
 YTIMG = "http://img.youtube.com/vi/%s/"
 thumbs_dir = settings.MEDIA_ROOT+"/images/media_thumbnails/"

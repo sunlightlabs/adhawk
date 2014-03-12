@@ -1,7 +1,7 @@
 from collections import defaultdict, Counter
 import datetime
 
-from whopaid_api.models import FpQuery,TopAdsSnapshot
+from adhawk_api.models import FpQuery,TopAdsSnapshot
 from knowledge_base.models import Media
 
 class TopAdsRanker():

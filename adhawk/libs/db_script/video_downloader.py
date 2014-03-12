@@ -3,7 +3,7 @@ import os
 import subprocess
 
 from knowledge_base.models import Media
-from whopaid.settings import MEDIA_ROOT
+from adhawk.settings import MEDIA_ROOT
 
 log = logging.getLogger('db_script.video_downloader')
 

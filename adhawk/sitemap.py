@@ -3,7 +3,7 @@ import datetime
 
 from django.contrib.sitemaps import Sitemap
 
-from whopaid import settings
+from adhawk import settings
 from knowledge_base.models import Media,FunderFamily,Funder
 
 

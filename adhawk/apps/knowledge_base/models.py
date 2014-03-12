@@ -7,8 +7,8 @@ from django.db import models
 from django.db.models import Sum
 from django.template.defaultfilters import slugify
 
-from whopaid.settings import EXTERNAL_URL,MEDIA_URL
-from whopaid.local_settings import GIGYA_ENDPOINT,GIGYA_API_KEY,GIGYA_SECRET
+from adhawk.settings import EXTERNAL_URL,MEDIA_URL
+from adhawk.local_settings import GIGYA_ENDPOINT,GIGYA_API_KEY,GIGYA_SECRET
 
 def slugify_uniquely(value, model, slugfield="slug"):
     suffix = 0

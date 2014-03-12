@@ -7,7 +7,7 @@ from django.core.management.base import BaseCommand
 
 from superfastmatch import client
 
-from whopaid import settings
+from adhawk import settings
 from echoprint_server_api import fp
 from knowledge_base.models import Media
 

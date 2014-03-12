@@ -7,7 +7,7 @@ from superfastmatch import client
 
 from db_script.fingerprint_ingester import FingerprintIngester
 #from db_script.log import set_up_logger
-from whopaid.settings import MEDIA_ROOT
+from adhawk.settings import MEDIA_ROOT
 from knowledge_base.models import Media
 
 VIDEO_DIR = os.path.join(MEDIA_ROOT,'videos')
